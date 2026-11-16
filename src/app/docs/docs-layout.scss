@@ -1,0 +1,25 @@
+:host {
+  display: block;
+}
+
+.gm-docs {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--gm-space-2);
+  padding: var(--gm-space-2) var(--gm-space-3);
+}
+
+@media (min-width: 900px) {
+  .gm-docs {
+    grid-template-columns: 260px 1fr;
+  }
+}
+
+.gm-docs-sidebar {
+  color: var(--gm-text-muted);
+  font-size: 0.85rem;
+}
+
+.gm-docs-content {
+  min-width: 0;
+}

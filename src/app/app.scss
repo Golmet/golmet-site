@@ -1,0 +1,43 @@
+:host {
+  display: flex;
+  flex-direction: column;
+  min-height: 100dvh;
+}
+
+.gm-header {
+  align-items: center;
+  display: flex;
+  gap: var(--gm-space-3);
+  padding: var(--gm-space-2) var(--gm-space-3);
+}
+
+.gm-brand {
+  color: var(--gm-ouro);
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-decoration: none;
+}
+
+.gm-nav a {
+  color: var(--gm-text);
+  text-decoration: none;
+}
+
+.gm-nav a:hover {
+  color: var(--gm-amber);
+}
+
+.gm-main {
+  flex: 1;
+}
+
+.gm-footer {
+  border-top: 1px solid var(--gm-border);
+  color: var(--gm-text-muted);
+  font-size: 0.85rem;
+  padding: var(--gm-space-2) var(--gm-space-3);
+}
+
+.gm-footer a {
+  color: var(--gm-text-muted);
+}
