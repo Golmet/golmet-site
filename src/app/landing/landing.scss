@@ -2,9 +2,9 @@
   display: block;
 }
 
-.gm-home {
+.gm-landing {
   display: grid;
-  min-height: 100dvh;
+  min-height: 70dvh;
   place-content: center;
   gap: var(--gm-space-2);
   padding: var(--gm-space-3);

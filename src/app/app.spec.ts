@@ -4,7 +4,7 @@ import { RouterTestingHarness } from '@angular/router/testing';
 import { App } from './app';
 import { routes } from './app.routes';
 
-describe('App', () => {
+describe('App (RN-016-2 — rotas da única app)', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [App],
@@ -18,11 +18,21 @@ describe('App', () => {
     expect(app).toBeTruthy();
   });
 
-  it('should render the home route in the outlet', async () => {
+  it('renders the landing on the root route', async () => {
     await TestBed.createComponent(App).whenStable();
     const harness = await RouterTestingHarness.create();
     await harness.navigateByUrl('/');
     const compiled = harness.fixture.nativeElement as HTMLElement;
-    expect(compiled.querySelector('app-home h1')?.textContent).toContain('GOLMET');
+    expect(compiled.querySelector('app-landing h1')?.textContent).toContain('GOLMET');
+  });
+
+  it('navigates to /docs within the same app (landing → portal)', async () => {
+    await TestBed.createComponent(App).whenStable();
+    const harness = await RouterTestingHarness.create();
+    await harness.navigateByUrl('/');
+    await harness.navigateByUrl('/docs');
+    const compiled = harness.fixture.nativeElement as HTMLElement;
+    expect(compiled.querySelector('app-docs-layout')).toBeTruthy();
+    expect(compiled.querySelector('app-docs-index h2')?.textContent).toContain('Documentação');
   });
 });
