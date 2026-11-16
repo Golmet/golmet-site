@@ -1,0 +1,27 @@
+:host {
+  display: block;
+}
+
+.gm-home {
+  display: grid;
+  min-height: 100dvh;
+  place-content: center;
+  gap: var(--gm-space-2);
+  padding: var(--gm-space-3);
+  text-align: center;
+}
+
+h1 {
+  color: var(--gm-ouro);
+  font-size: clamp(2.5rem, 8vw, 4.5rem);
+  letter-spacing: 0.08em;
+}
+
+.gm-tagline {
+  color: var(--gm-text);
+}
+
+.gm-note {
+  color: var(--gm-text-muted);
+  font-size: 0.9rem;
+}

@@ -1,0 +1,28 @@
+name: CI
+
+# GolmetSite — gates de qualidade (RN-017): build SSG + Lighthouse >= 90 mobile.
+# Os gates de docs (strict FORMAT — RN-008) entram com o pipeline de conteúdo
+# (feature RN-007). Maturação dos gates: task RN-016-5.
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  build-lighthouse:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 26
+          cache: npm
+      - name: Install
+        run: npm ci
+      - name: Build (SSG production)
+        run: npm run build
+      - name: Unit tests
+        run: npm test -- --watch=false
+      - name: Lighthouse (mobile — RN-017)
+        run: npx -y @lhci/cli@0.14.x autorun
