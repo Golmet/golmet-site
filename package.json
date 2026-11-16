@@ -5,6 +5,7 @@
     "ng": "ng",
     "start": "ng serve",
     "build": "ng build && node tools/generate-sitemap.mjs",
+    "check:metas": "node tools/check-metas.mjs",
     "watch": "ng build --watch --configuration development",
     "test": "ng test"
   },
