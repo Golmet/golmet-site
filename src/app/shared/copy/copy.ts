@@ -8,6 +8,13 @@
 // Arki NUNCA é retratado criando conteúdo — só diagnostica, cita
 // evidência e bloqueia.
 
+export interface QuickstartStep {
+  readonly title: string;
+  /** comando copiável — passos narrados (ações) não o têm */
+  readonly command?: string;
+  readonly text: string;
+}
+
 export const COPY = {
   landing: {
     hero: {
@@ -32,16 +39,14 @@ export const COPY = {
           text: 'Wizard guia: engine, repos e layout do FORMATO.',
         },
         {
-          title: 'Converse com o agente',
-          command: 'abrir o agente na pasta do workspace',
+          title: 'Abra o agente na pasta',
           text: 'Charter, requisitos e specs — o humano confirma os gates.',
         },
         {
           title: 'A verdade fica versionada',
-          command: 'markdown versionado no seu git',
-          text: 'O que você decidiu sobrevive a engines, kits e releases.',
+          text: 'Markdown no seu git — sobrevive a engines, kits e releases.',
         },
-      ],
+      ] as readonly QuickstartStep[],
     },
     paths: {
       heading: 'Escolha seu caminho',
