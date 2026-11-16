@@ -1,6 +1,45 @@
 <main class="gm-landing">
-  <h1>{{ copy.title }}</h1>
-  <p class="gm-tagline">{{ copy.tagline }}</p>
-  <p class="gm-value">{{ copy.valueProposal }}</p>
-  <p class="gm-note">{{ copy.statusNote }}</p>
+  <section class="gm-hero">
+    <div class="gm-hero-copy">
+      <h1>{{ copy.title }}</h1>
+      <p class="gm-tagline">{{ copy.tagline }}</p>
+      <p class="gm-value">{{ copy.valueProposal }}</p>
+    </div>
+    <img
+      class="gm-hero-arki"
+      src="branding/arki-hero.webp"
+      width="640"
+      height="640"
+      alt="Arki, o golem guardião de obsidiana — mascote do GOLMET"
+      loading="eager"
+      decoding="async"
+      fetchpriority="high"
+    />
+  </section>
+
+  <section class="gm-quickstart" aria-label="Quickstart">
+    <h2>{{ quickstart.heading }}</h2>
+    <ol class="gm-steps">
+      @for (step of quickstart.steps; track step.title) {
+        <li class="gm-step">
+          <div class="gm-step-head">
+            <span class="gm-step-title">{{ step.title }}</span>
+            @if (step.command) {
+              <code class="gm-step-command">{{ step.command }}</code>
+              <button
+                type="button"
+                class="gm-copy"
+                (click)="copyStep(step)"
+                [attr.aria-label]="'Copiar: ' + step.command"
+              >
+                {{ copiedStep() === step.title ? 'Copiado' : 'Copiar' }}
+              </button>
+            }
+          </div>
+          <p class="gm-step-text">{{ step.text }}</p>
+        </li>
+      }
+    </ol>
+    <p class="gm-note">{{ copy.statusNote }}</p>
+  </section>
 </main>
