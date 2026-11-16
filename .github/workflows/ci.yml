@@ -1,8 +1,9 @@
 name: CI
 
-# GolmetSite — gates de qualidade (RN-017): build SSG + Lighthouse >= 90 mobile.
-# Os gates de docs (strict FORMAT — RN-008) entram com o pipeline de conteúdo
-# (feature RN-007). Maturação dos gates: task RN-016-5.
+# GolmetSite — gates de qualidade (RN-017): build SSG + metas + Lighthouse >= 90 mobile.
+# Falha em qualquer gate bloqueia o merge (branch protection na main — SECURITY §2).
+# A validação strict dos .md (RN-008) entra como etapa própria quando o pipeline
+# de conteúdo existir (feature RN-007 — RN-007-1).
 
 on:
   push:
@@ -22,6 +23,8 @@ jobs:
         run: npm ci
       - name: Build (SSG production)
         run: npm run build
+      - name: Metas check (RN-017 — bloqueia o merge em falha)
+        run: npm run check:metas
       - name: Unit tests
         run: npm test -- --watch=false
       - name: Lighthouse (mobile — RN-017)
