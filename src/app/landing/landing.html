@@ -40,8 +40,9 @@
       <span class="gm-badge">{{ quickstart.badge }}</span>
     </div>
     <ol class="gm-steps">
-      @for (step of quickstart.steps; track step.title) {
+      @for (step of quickstart.steps; track step.title; let i = $index) {
         <li class="gm-step">
+          <span class="gm-step-number">0{{ i + 1 }}</span>
           <p class="gm-step-title">{{ step.title }}</p>
           @if (step.command) {
             <div class="gm-command-row">
