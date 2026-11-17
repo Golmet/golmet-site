@@ -34,8 +34,8 @@ describe('Landing — primeira dobra (RN-001-1)', () => {
     expect(compiled.querySelector('.gm-value')?.textContent).toContain('requisito versionado');
     expect(compiled.querySelector('.gm-quickstart h2')?.textContent).toContain(COPY.landing.quickstart.heading);
     expect(compiled.querySelectorAll('.gm-step').length).toBe(COPY.landing.quickstart.steps.length);
-    // passos 3-4 são ações narradas — sem botão de copiar
-    expect(compiled.querySelectorAll('.gm-copy').length).toBe(2);
+    // 2 botões no quickstart + 1 no CTA final (CR-004)
+    expect(compiled.querySelectorAll('.gm-copy').length).toBe(3);
   });
 
   it('copia o comando com feedback "Copiado" (RN-002)', async () => {
@@ -68,25 +68,50 @@ describe('Landing — primeira dobra (RN-001-1)', () => {
     expect(compiled.querySelector('.gm-path-card h3')?.textContent).toContain('Produto novo');
   });
 
-  it('renderiza somente os 18 comandos lançados do release 0.3.0 (RN-004, CR-001)', () => {
+  it('renderiza somente os 18 comandos lançados do release 0.3.0, agrupados (RN-004, CR-001)', () => {
     const fixture = TestBed.createComponent(Landing);
     fixture.detectChanges();
     const compiled = fixture.nativeElement as HTMLElement;
 
-    const rows = compiled.querySelectorAll('.gm-cap-table tbody tr');
-    expect(rows.length).toBe(18);
+    expect(compiled.querySelectorAll('.gm-cap-group').length).toBe(3);
+    expect(compiled.querySelectorAll('.gm-cap-list li').length).toBe(18);
     // comando não lançado não aparece (ex.: golmet contribute — v1+)
     expect(compiled.textContent).not.toContain('golmet contribute');
   });
 
-  it('renderiza CTAs para a org GitHub e o npm (RN-005)', () => {
+  it('renderiza CTAs para a org GitHub e o npm no hero e no CTA final (RN-005)', () => {
     const fixture = TestBed.createComponent(Landing);
     fixture.detectChanges();
     const compiled = fixture.nativeElement as HTMLElement;
 
-    const ctas = compiled.querySelectorAll<HTMLAnchorElement>('.gm-ctas a');
-    expect(ctas.length).toBe(2);
-    expect(ctas[0].href).toContain('github.com/Golmet');
-    expect(ctas[1].href).toContain('npmjs.com/package/golmet-cli');
+    const heroCtas = compiled.querySelectorAll<HTMLAnchorElement>('.gm-hero .gm-ctas a');
+    expect(heroCtas.length).toBe(2);
+    expect(heroCtas[0].href).toContain('github.com/Golmet');
+    expect(heroCtas[1].href).toContain('npmjs.com/package/golmet-cli');
+    const finalCtas = compiled.querySelectorAll<HTMLAnchorElement>('.gm-final-cta .gm-ctas a');
+    expect(finalCtas.length).toBe(2);
+  });
+
+  it('narrativa CR-004: problema, tese e como funciona', () => {
+    const fixture = TestBed.createComponent(Landing);
+    fixture.detectChanges();
+    const compiled = fixture.nativeElement as HTMLElement;
+
+    expect(compiled.querySelectorAll('.gm-problem-card').length).toBe(4);
+    expect(compiled.querySelectorAll('.gm-layer').length).toBe(3);
+    expect(compiled.querySelector('.gm-layer-name')?.textContent).toContain('FORMATO');
+    expect(compiled.querySelectorAll('.gm-how-step').length).toBe(5);
+    expect(compiled.textContent).not.toContain('estrelas');
+  });
+
+  it('CR-004: CTA final copiável e capacidades agrupadas (18 comandos em 3 grupos)', () => {
+    const fixture = TestBed.createComponent(Landing);
+    fixture.detectChanges();
+    const compiled = fixture.nativeElement as HTMLElement;
+
+    expect(compiled.querySelectorAll('.gm-cap-group').length).toBe(3);
+    expect(compiled.querySelectorAll('.gm-cap-list li').length).toBe(18);
+    expect(compiled.querySelector('.gm-final-cta')?.textContent).toContain('Comece hoje');
+    expect(compiled.querySelector('.gm-final-command code')?.textContent).toContain('npm i -g golmet-cli');
   });
 });
