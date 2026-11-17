@@ -1,0 +1,16 @@
+<div class="gm-terminal" role="img" aria-label="Terminal mostrando saída real dos comandos golmet init, status e validate">
+  <div class="gm-terminal-bar">
+    <span class="gm-dot gm-dot-r"></span>
+    <span class="gm-dot gm-dot-y"></span>
+    <span class="gm-dot gm-dot-g"></span>
+    <span class="gm-terminal-title">golmet — saída real</span>
+  </div>
+  <pre class="gm-terminal-body"><code>@for (line of lines; track $index) {<span
+      [class.gm-t-prompt]="line.kind === 'prompt'"
+      [class.gm-t-success]="line.kind === 'success'"
+      [class.gm-t-error]="line.kind === 'error'"
+      [class.gm-t-fix]="line.kind === 'fix'"
+      [class.gm-t-blank]="line.kind === 'blank'"
+    >{{ line.text || ' ' }}</span>
+}</code></pre>
+</div>
