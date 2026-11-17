@@ -1,13 +1,15 @@
 import { Component, signal } from '@angular/core';
+import { RouterLink } from '@angular/router';
 
-import { CAPABILITIES } from './capabilities.data';
+import { CAPABILITY_GROUPS } from './capabilities.data';
 import { COPY } from '../shared/copy/copy';
 
-// RN-001 — landing promocional: hero + quickstart (RN-001-1), escolha seu
-// caminho (RN-001-2), capacidades (RN-001-3) e CTAs (RN-001-4).
+// RN-001 — landing promocional, estrutura narrativa (CR-004): hero +
+// quickstart (dobra) → problema → tese → como funciona → caminhos →
+// capacidades agrupadas → CTA final.
 // Copy vem do deck único (RN-014-3); asset do Arki da RN-014-2.
 @Component({
-  imports: [],
+  imports: [RouterLink],
   selector: 'app-landing',
   styleUrl: './landing.scss',
   templateUrl: './landing.html',
@@ -15,10 +17,14 @@ import { COPY } from '../shared/copy/copy';
 export class Landing {
   protected readonly copy = COPY.landing.hero;
   protected readonly quickstart = COPY.landing.quickstart;
+  protected readonly problem = COPY.landing.problem;
+  protected readonly thesis = COPY.landing.thesis;
+  protected readonly howItWorks = COPY.landing.howItWorks;
   protected readonly paths = COPY.landing.paths;
   protected readonly capabilitiesCopy = COPY.landing.capabilities;
   protected readonly ctas = COPY.landing.ctas;
-  protected readonly capabilities = CAPABILITIES;
+  protected readonly finalCta = COPY.landing.finalCta;
+  protected readonly capabilityGroups = CAPABILITY_GROUPS;
 
   /** título do passo copiado (feedback "Copiado") — null quando nenhum */
   protected readonly copiedStep = signal<string | null>(null);

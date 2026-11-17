@@ -59,11 +59,51 @@
     <p class="gm-note">{{ copy.statusNote }}</p>
   </section>
 
+  <section class="gm-problem" aria-label="O problema">
+    <h2>{{ problem.heading }}</h2>
+    <p class="gm-section-note">{{ problem.note }}</p>
+    <div class="gm-problem-cards">
+      @for (card of problem.cards; track card.title) {
+        <article class="gm-problem-card">
+          <h3>{{ card.title }}</h3>
+          <p>{{ card.text }}</p>
+        </article>
+      }
+    </div>
+  </section>
+
+  <section class="gm-thesis" aria-label="A tese">
+    <h2>{{ thesis.heading }}</h2>
+    <p class="gm-section-note">{{ thesis.note }}</p>
+    <div class="gm-thesis-layers">
+      @for (layer of thesis.layers; track layer.name) {
+        <article class="gm-layer">
+          <p class="gm-layer-name">{{ layer.name }}</p>
+          <p class="gm-layer-role">{{ layer.role }}</p>
+          <p class="gm-layer-text">{{ layer.text }}</p>
+        </article>
+      }
+    </div>
+  </section>
+
+  <section class="gm-how" aria-label="Como funciona">
+    <h2>{{ howItWorks.heading }}</h2>
+    <ol class="gm-how-steps">
+      @for (step of howItWorks.steps; track step.name; let i = $index) {
+        <li class="gm-how-step">
+          <span class="gm-how-number">{{ i + 1 }}</span>
+          <p class="gm-how-name">{{ step.name }}</p>
+          <p class="gm-how-text">{{ step.text }}</p>
+        </li>
+      }
+    </ol>
+  </section>
+
   <section class="gm-paths" aria-label="Escolha seu caminho">
     <h2>{{ paths.heading }}</h2>
     <div class="gm-path-cards">
       @for (item of paths.items; track item.title) {
-        <a class="gm-path-card" [href]="item.docPath">
+        <a class="gm-path-card" [routerLink]="item.docPath">
           <h3>{{ item.title }}</h3>
           <p>{{ item.text }}</p>
           <span class="gm-path-link">Ver na documentação →</span>
@@ -74,22 +114,35 @@
 
   <section class="gm-capabilities" aria-label="Capacidades do kit">
     <h2>{{ capabilitiesCopy.heading }}</h2>
-    <table class="gm-cap-table">
-      <thead>
-        <tr>
-          <th scope="col">Comando</th>
-          <th scope="col">Descrição</th>
-        </tr>
-      </thead>
-      <tbody>
-        @for (cap of capabilities; track cap.command) {
-          <tr>
-            <td><code>{{ cap.command }}</code></td>
-            <td>{{ cap.description }}</td>
-          </tr>
-        }
-      </tbody>
-    </table>
+    @for (group of capabilityGroups; track group.name) {
+      <div class="gm-cap-group">
+        <h3>{{ group.name }}</h3>
+        <p class="gm-cap-group-note">{{ group.description }}</p>
+        <ul class="gm-cap-list">
+          @for (cap of group.capabilities; track cap.command) {
+            <li>
+              <code>{{ cap.command }}</code>
+              <span>{{ cap.description }}</span>
+            </li>
+          }
+        </ul>
+      </div>
+    }
     <p class="gm-cap-note">{{ capabilitiesCopy.note }}</p>
+  </section>
+
+  <section class="gm-final-cta" aria-label="Comece hoje">
+    <h2>{{ finalCta.heading }}</h2>
+    <p>{{ finalCta.text }}</p>
+    <div class="gm-final-command">
+      <code>{{ finalCta.command }}</code>
+      <button type="button" class="gm-copy" (click)="copyStep({ title: 'final', command: finalCta.command })" aria-label="Copiar comando de instalação">
+        {{ copiedStep() === 'final' ? 'Copiado' : 'Copiar' }}
+      </button>
+    </div>
+    <div class="gm-ctas">
+      <a class="gm-cta gm-cta-primary" href="https://github.com/Golmet" target="_blank" rel="noopener">{{ ctas.github }}</a>
+      <a class="gm-cta" href="https://www.npmjs.com/package/golmet-cli" target="_blank" rel="noopener">{{ ctas.npm }}</a>
+    </div>
   </section>
 </main>

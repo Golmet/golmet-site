@@ -132,6 +132,221 @@
   margin: var(--gm-space-2) 0 0;
 }
 
+// CR-004 — ritmo narrativo: seções de conteúdo com fundo alternado
+.gm-problem,
+.gm-how {
+  background: rgba(35, 39, 44, 0.45);
+  border-radius: var(--gm-radius);
+  margin-top: var(--gm-space-2);
+  padding: var(--gm-space-3);
+}
+
+.gm-problem h2,
+.gm-thesis h2,
+.gm-how h2 {
+  color: var(--gm-text);
+  font-size: clamp(1.4rem, 3vw, 1.9rem);
+  margin: 0 0 var(--gm-space-1);
+}
+
+.gm-section-note {
+  color: var(--gm-text-muted);
+  margin: 0 0 var(--gm-space-2);
+  max-width: 52rem;
+}
+
+.gm-problem-cards {
+  display: grid;
+  gap: var(--gm-space-2);
+  grid-template-columns: 1fr;
+}
+
+@media (min-width: 900px) {
+  .gm-problem-cards {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+.gm-problem-card {
+  background: var(--gm-obsidiana);
+  border: 1px solid var(--gm-border);
+  border-radius: var(--gm-radius);
+  padding: var(--gm-space-2);
+}
+
+.gm-problem-card h3 {
+  color: var(--gm-amber);
+  font-size: 0.95rem;
+  margin: 0 0 var(--gm-space-1);
+}
+
+.gm-problem-card p {
+  color: var(--gm-text);
+  font-size: 0.88rem;
+  margin: 0;
+}
+
+.gm-thesis-layers {
+  display: grid;
+  gap: var(--gm-space-2);
+  grid-template-columns: 1fr;
+}
+
+@media (min-width: 900px) {
+  .gm-thesis-layers {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+.gm-layer {
+  border: 1px solid var(--gm-border);
+  border-radius: var(--gm-radius);
+  padding: var(--gm-space-2);
+}
+
+.gm-layer-name {
+  color: var(--gm-ouro);
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  margin: 0;
+}
+
+.gm-layer-role {
+  color: var(--gm-amber);
+  font-size: 0.85rem;
+  margin: 2px 0 var(--gm-space-1);
+}
+
+.gm-layer-text {
+  color: var(--gm-text);
+  font-size: 0.9rem;
+  margin: 0;
+}
+
+.gm-how-steps {
+  display: grid;
+  gap: var(--gm-space-2);
+  grid-template-columns: 1fr;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+@media (min-width: 900px) {
+  .gm-how-steps {
+    grid-template-columns: repeat(5, 1fr);
+  }
+}
+
+.gm-how-step {
+  border-top: 2px solid var(--gm-ouro);
+  padding-top: var(--gm-space-1);
+}
+
+.gm-how-number {
+  color: var(--gm-ouro);
+  font-size: 0.8rem;
+  font-weight: 700;
+}
+
+.gm-how-name {
+  color: var(--gm-text);
+  font-weight: 600;
+  margin: 2px 0;
+}
+
+.gm-how-text {
+  color: var(--gm-text-muted);
+  font-size: 0.85rem;
+  margin: 0;
+}
+
+.gm-final-cta {
+  border: 1px solid var(--gm-border);
+  border-radius: var(--gm-radius);
+  display: grid;
+  gap: var(--gm-space-2);
+  justify-items: center;
+  margin-top: var(--gm-space-2);
+  padding: var(--gm-space-3);
+  text-align: center;
+}
+
+.gm-final-cta h2 {
+  color: var(--gm-text);
+  font-size: clamp(1.4rem, 3vw, 1.9rem);
+  margin: 0;
+}
+
+.gm-final-cta > p {
+  color: var(--gm-text-muted);
+  margin: 0;
+}
+
+.gm-final-command {
+  align-items: center;
+  background: #141518;
+  border: 1px solid var(--gm-border);
+  border-radius: var(--gm-radius);
+  display: flex;
+  gap: var(--gm-space-2);
+  padding: var(--gm-space-1) var(--gm-space-2);
+}
+
+.gm-final-command code {
+  color: var(--gm-amber);
+  font-size: 1rem;
+}
+
+.gm-cap-group {
+  margin-top: var(--gm-space-2);
+}
+
+.gm-cap-group h3 {
+  color: var(--gm-ouro);
+  font-size: 1rem;
+  margin: 0;
+}
+
+.gm-cap-group-note {
+  color: var(--gm-text-muted);
+  font-size: 0.8rem;
+  margin: 2px 0 var(--gm-space-1);
+}
+
+.gm-cap-list {
+  columns: 1;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+@media (min-width: 900px) {
+  .gm-cap-list {
+    columns: 2;
+  }
+}
+
+.gm-cap-list li {
+  break-inside: avoid;
+  color: var(--gm-text);
+  display: grid;
+  font-size: 0.88rem;
+  gap: 2px 12px;
+  grid-template-columns: minmax(140px, auto) 1fr;
+  padding: 4px 0;
+}
+
+.gm-cap-list code {
+  background: #141518;
+  border: 1px solid var(--gm-border);
+  border-radius: 4px;
+  color: var(--gm-amber);
+  font-size: 0.82rem;
+  padding: 2px 8px;
+  white-space: nowrap;
+}
+
 .gm-ctas {
   display: flex;
   gap: var(--gm-space-2);
