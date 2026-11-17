@@ -50,23 +50,23 @@ export const COPY = {
     },
     paths: {
       heading: 'Escolha seu caminho',
-      items: {
-        novo: {
+      items: [
+        {
           title: 'Produto novo',
           text: 'Charter, requisitos e specs do zero — kit e agente na mesma pasta.',
           docPath: '/docs',
         },
-        legado: {
+        {
           title: 'Repo legado',
           text: 'O guardião lê o código e propõe as regras; você confirma o que é verdade.',
           docPath: '/docs',
         },
-        org: {
+        {
           title: 'Org multi-dev',
           text: 'Onboarding do dev #2: clone, doctor, pack sync — checklist sem manual.',
           docPath: '/docs',
         },
-      },
+      ],
     },
     capabilities: {
       heading: 'O que o kit faz',

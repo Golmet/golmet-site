@@ -53,4 +53,40 @@ describe('Landing — primeira dobra (RN-001-1)', () => {
     expect(written).toContain(COPY.landing.quickstart.steps[0].command);
     expect(compiled.querySelector<HTMLButtonElement>('.gm-copy')?.textContent).toContain('Copiado');
   });
+
+  it('renderiza os 3 caminhos com links para a documentação (RN-003)', () => {
+    const fixture = TestBed.createComponent(Landing);
+    fixture.detectChanges();
+    const compiled = fixture.nativeElement as HTMLElement;
+
+    const cards = compiled.querySelectorAll('.gm-path-card');
+    expect(cards.length).toBe(3);
+    const links = compiled.querySelectorAll<HTMLAnchorElement>('.gm-path-card');
+    for (const link of links) {
+      expect(link.getAttribute('href')).toBe('/docs');
+    }
+    expect(compiled.querySelector('.gm-path-card h3')?.textContent).toContain('Produto novo');
+  });
+
+  it('renderiza somente os 18 comandos lançados do release 0.3.0 (RN-004, CR-001)', () => {
+    const fixture = TestBed.createComponent(Landing);
+    fixture.detectChanges();
+    const compiled = fixture.nativeElement as HTMLElement;
+
+    const rows = compiled.querySelectorAll('.gm-cap-table tbody tr');
+    expect(rows.length).toBe(18);
+    // comando não lançado não aparece (ex.: golmet contribute — v1+)
+    expect(compiled.textContent).not.toContain('golmet contribute');
+  });
+
+  it('renderiza CTAs para a org GitHub e o npm (RN-005)', () => {
+    const fixture = TestBed.createComponent(Landing);
+    fixture.detectChanges();
+    const compiled = fixture.nativeElement as HTMLElement;
+
+    const ctas = compiled.querySelectorAll<HTMLAnchorElement>('.gm-ctas a');
+    expect(ctas.length).toBe(2);
+    expect(ctas[0].href).toContain('github.com/Golmet');
+    expect(ctas[1].href).toContain('npmjs.com/package/golmet-cli');
+  });
 });

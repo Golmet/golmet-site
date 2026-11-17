@@ -132,6 +132,131 @@
   margin: var(--gm-space-2) 0 0;
 }
 
+.gm-ctas {
+  display: flex;
+  gap: var(--gm-space-2);
+  margin-top: var(--gm-space-2);
+  flex-wrap: wrap;
+}
+
+.gm-cta {
+  border: 1px solid var(--gm-border);
+  border-radius: var(--gm-radius);
+  color: var(--gm-text);
+  font-size: 0.9rem;
+  padding: 6px 14px;
+  text-decoration: none;
+}
+
+.gm-cta:hover {
+  border-color: var(--gm-ouro);
+  color: var(--gm-ouro);
+}
+
+.gm-cta-primary {
+  background: var(--gm-ouro);
+  border-color: var(--gm-ouro);
+  color: var(--gm-obsidiana);
+  font-weight: 600;
+}
+
+.gm-cta-primary:hover {
+  background: #f0c262;
+  color: var(--gm-obsidiana);
+}
+
+.gm-paths h2,
+.gm-capabilities h2 {
+  color: var(--gm-text);
+  font-size: 1.15rem;
+  margin: 0 0 var(--gm-space-2);
+}
+
+.gm-path-cards {
+  display: grid;
+  gap: var(--gm-space-2);
+  grid-template-columns: 1fr;
+}
+
+@media (min-width: 900px) {
+  .gm-path-cards {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+.gm-path-card {
+  background: var(--gm-surface);
+  border: 1px solid var(--gm-border);
+  border-radius: var(--gm-radius);
+  color: inherit;
+  display: block;
+  padding: var(--gm-space-2);
+  text-decoration: none;
+  transition: border-color 0.15s ease;
+}
+
+.gm-path-card:hover {
+  border-color: var(--gm-ouro);
+}
+
+.gm-path-card h3 {
+  color: var(--gm-ouro);
+  font-size: 1rem;
+  margin: 0 0 var(--gm-space-1);
+}
+
+.gm-path-card p {
+  color: var(--gm-text);
+  font-size: 0.9rem;
+  margin: 0 0 var(--gm-space-2);
+}
+
+.gm-path-link {
+  color: var(--gm-amber);
+  font-size: 0.85rem;
+}
+
+.gm-cap-table {
+  border-collapse: collapse;
+  width: 100%;
+}
+
+.gm-cap-table th {
+  color: var(--gm-text-muted);
+  font-size: 0.8rem;
+  text-align: left;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+.gm-cap-table th,
+.gm-cap-table td {
+  border-bottom: 1px solid var(--gm-border);
+  padding: var(--gm-space-1) var(--gm-space-2) var(--gm-space-1) 0;
+  vertical-align: top;
+}
+
+.gm-cap-table code {
+  background: #141518;
+  border: 1px solid var(--gm-border);
+  border-radius: 4px;
+  color: var(--gm-amber);
+  font-size: 0.85rem;
+  padding: 2px 8px;
+  white-space: nowrap;
+}
+
+.gm-cap-table td:last-child {
+  color: var(--gm-text);
+  font-size: 0.9rem;
+}
+
+.gm-cap-note {
+  color: var(--gm-text-muted);
+  font-size: 0.8rem;
+  margin: var(--gm-space-2) 0 0;
+}
+
 @media (min-width: 900px) {
   .gm-hero {
     grid-template-columns: 1.4fr 1fr;

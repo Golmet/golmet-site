@@ -4,6 +4,22 @@
       <h1>{{ copy.title }}</h1>
       <p class="gm-tagline">{{ copy.tagline }}</p>
       <p class="gm-value">{{ copy.valueProposal }}</p>
+      <div class="gm-ctas">
+        <a
+          class="gm-cta gm-cta-primary"
+          href="https://github.com/Golmet"
+          target="_blank"
+          rel="noopener"
+          >{{ ctas.github }}</a
+        >
+        <a
+          class="gm-cta"
+          href="https://www.npmjs.com/package/golmet-cli"
+          target="_blank"
+          rel="noopener"
+          >{{ ctas.npm }}</a
+        >
+      </div>
     </div>
     <img
       class="gm-hero-arki"
@@ -41,5 +57,39 @@
       }
     </ol>
     <p class="gm-note">{{ copy.statusNote }}</p>
+  </section>
+
+  <section class="gm-paths" aria-label="Escolha seu caminho">
+    <h2>{{ paths.heading }}</h2>
+    <div class="gm-path-cards">
+      @for (item of paths.items; track item.title) {
+        <a class="gm-path-card" [href]="item.docPath">
+          <h3>{{ item.title }}</h3>
+          <p>{{ item.text }}</p>
+          <span class="gm-path-link">Ver na documentação →</span>
+        </a>
+      }
+    </div>
+  </section>
+
+  <section class="gm-capabilities" aria-label="Capacidades do kit">
+    <h2>{{ capabilitiesCopy.heading }}</h2>
+    <table class="gm-cap-table">
+      <thead>
+        <tr>
+          <th scope="col">Comando</th>
+          <th scope="col">Descrição</th>
+        </tr>
+      </thead>
+      <tbody>
+        @for (cap of capabilities; track cap.command) {
+          <tr>
+            <td><code>{{ cap.command }}</code></td>
+            <td>{{ cap.description }}</td>
+          </tr>
+        }
+      </tbody>
+    </table>
+    <p class="gm-cap-note">{{ capabilitiesCopy.note }}</p>
   </section>
 </main>
