@@ -64,28 +64,41 @@
 
 .gm-steps {
   display: grid;
-  gap: var(--gm-space-1);
+  gap: var(--gm-space-2);
+  grid-template-columns: 1fr;
   list-style: none;
   margin: 0;
   padding: 0;
 }
 
-.gm-step {
-  border-top: 1px solid var(--gm-border);
-  padding: var(--gm-space-1) 0;
+@media (min-width: 900px) {
+  .gm-steps {
+    grid-template-columns: 1fr 1fr;
+  }
 }
 
-.gm-step:first-child {
-  border-top: none;
+.gm-step {
+  background: var(--gm-obsidiana);
+  border: 1px solid var(--gm-border);
+  border-radius: var(--gm-radius);
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding: var(--gm-space-2);
+}
+
+.gm-step-number {
+  color: var(--gm-ouro);
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
 }
 
 .gm-step-title {
   color: var(--gm-text);
-  font-size: 0.8rem;
+  font-size: 0.9rem;
   font-weight: 600;
-  letter-spacing: 0.04em;
-  margin: 0 0 6px;
-  text-transform: uppercase;
+  margin: 0;
 }
 
 .gm-command-row {
