@@ -1,4 +1,4 @@
-// RN-014-3 — copy base no tom "Guardião Estoico" (RN-015).
+// RN-014-3 / CR-005 — copy base no tom "Guardião Estoico" (RN-015).
 //
 // Fonte da landing = PT-BR (RN-013, ADR-009); fonte da docs técnica = EN.
 // O EN é derivado e revisado na feature RN-011 — este módulo é a única
@@ -7,6 +7,10 @@
 // Regras da voz: frases curtas, zero hype, sempre cita evidência.
 // Arki NUNCA é retratado criando conteúdo — só diagnostica, cita
 // evidência e bloqueia.
+//
+// CR-005 (17/11/2026): linguagem simples no hero para quem chega frio,
+// coerência de pré-lançamento (sem jargão de fase interno), engines
+// nomeados, diferenciação e terminal com saída real do kit.
 
 export interface QuickstartStep {
   readonly title: string;
@@ -15,15 +19,53 @@ export interface QuickstartStep {
   readonly text: string;
 }
 
+export interface ProblemCard {
+  readonly title: string;
+  readonly text: string;
+}
+
+export interface ThesisLayer {
+  readonly name: string;
+  readonly role: string;
+  readonly text: string;
+}
+
+export interface FlowStep {
+  readonly name: string;
+  readonly text: string;
+}
+
+export interface PathCard {
+  readonly title: string;
+  readonly text: string;
+  readonly docPath: string;
+}
+
+export interface FeatureCommand {
+  readonly command: string;
+  readonly description: string;
+}
+
+export interface DiffItem {
+  readonly title: string;
+  readonly text: string;
+}
+
 export const COPY = {
   landing: {
     hero: {
       title: 'GOLMET',
       tagline: 'Requisitos versionados. Docs que não apodrecem.',
+      plainLine:
+        'GOLMET é uma CLI que transforma requisitos em markdown versionado no seu git — ' +
+        'e avisa quando código e doc divergem.',
       valueProposal:
         'O combinado com o cliente vira requisito versionado. O requisito vira spec. ' +
         'A spec vira código rastreável — e o documento continua verdadeiro depois do deploy.',
-      statusNote: 'Site em construção — primeiro release na fase F2.',
+      statusNote: 'Pré-lançamento — o release funcional chega em breve.',
+    },
+    terminal: {
+      title: 'Saída real — golmet init · status · validate',
     },
     problem: {
       heading: 'Todo mundo de software já viveu',
@@ -45,7 +87,7 @@ export const COPY = {
           title: 'A doc apodreceu',
           text: 'Mudou o requisito, ninguém atualizou o documento. Doc velha é doc que ninguém confia.',
         },
-      ],
+      ] as readonly ProblemCard[],
     },
     thesis: {
       heading: 'Uma máquina de estados documental',
@@ -66,7 +108,7 @@ export const COPY = {
           role: 'A camada agêntica',
           text: 'O julgamento por capacidades — em qualquer engine dos padrões abertos.',
         },
-      ],
+      ] as readonly ThesisLayer[],
     },
     howItWorks: {
       heading: 'Como funciona',
@@ -76,10 +118,34 @@ export const COPY = {
         { name: 'Specs', text: 'Modelo de dados, contratos e telas derivados das regras.' },
         { name: 'Código', text: 'Tasks com critérios de aceitação e evidência citada.' },
         { name: 'Verdade viva', text: 'Mudou o requisito? O kit aponta exatamente o que ficou desatualizado.' },
-      ],
+      ] as readonly FlowStep[],
+    },
+    engines: {
+      heading: 'Funciona com o seu agente',
+      note: 'Via os padrões abertos do ecossistema — AGENTS.md, SKILL.md e MCP. Sem lock-in de engine.',
+      engines: ['OpenCode', 'Claude Code', 'Cursor', 'Codex', 'Gemini CLI', 'Copilot CLI', 'VS Code Copilot'],
+    },
+    differentiation: {
+      heading: 'Por que não é só mais um spec-tool',
+      items: [
+        {
+          title: 'Markdown no seu git',
+          text: 'Requisitos são arquivos simples que qualquer engine lê. Sem formato proprietário, sem lock-in.',
+        },
+        {
+          title: 'Evidência parseável',
+          text: 'Cada regra cita `[caminho:linha @hash]` — a conexão docs ↔ código é verificável por máquina.',
+        },
+        {
+          title: 'O kit é o árbitro',
+          text: 'Um binário determinístico valida estados e evidência. A verdade não depende só do prompt.',
+        },
+      ] as readonly DiffItem[],
     },
     quickstart: {
       heading: 'Comece pelo combinado',
+      badge: 'pré-lançamento',
+      note: 'Os comandos acima são o fluxo definitivo. O release público do kit chega em breve.',
       steps: [
         {
           title: 'Instale o kit',
@@ -93,7 +159,8 @@ export const COPY = {
         },
         {
           title: 'Abra o agente na pasta',
-          text: 'Charter, requisitos e specs — o humano confirma os gates.',
+          command: 'opencode',
+          text: 'Ou o engine que você escolheu no install — o init já deixou o MCP do kit configurado.',
         },
         {
           title: 'A verdade fica versionada',
@@ -119,11 +186,18 @@ export const COPY = {
           text: 'Onboarding do dev #2: clone, doctor, pack sync — checklist sem manual.',
           docPath: '/docs',
         },
-      ],
+      ] as readonly PathCard[],
     },
     capabilities: {
       heading: 'O que o kit faz',
+      docLink: 'todos os 18 comandos na documentação →',
       note: 'Somente o que está lançado no release vigente — o guardião não promete o que não existe.',
+      featured: [
+        { command: 'golmet init', description: 'Cria o workspace do produto (wizard interativo)' },
+        { command: 'golmet validate', description: 'Valida o workspace contra o FORMATO v1' },
+        { command: 'golmet status', description: 'Dashboard de estados das entidades' },
+        { command: 'golmet next', description: 'Recomenda a próxima ação sobre o workspace' },
+      ] as readonly FeatureCommand[],
     },
     ctas: {
       github: 'Ver no GitHub',
@@ -133,6 +207,7 @@ export const COPY = {
       heading: 'Comece hoje',
       text: 'Um comando. Um workspace. A verdade versionada no seu git.',
       command: 'npm i -g golmet-cli',
+      preLaunch: 'Pré-lançamento — o release funcional do kit chega em breve.',
     },
   },
   portal: {
@@ -153,6 +228,7 @@ export const COPY = {
       github: 'https://github.com/Golmet',
       npm: 'https://www.npmjs.com/package/golmet-cli',
     },
-    status: 'F2 em andamento — primeiro release público em breve.',
+    license: 'Licença MIT',
+    status: 'Pré-lançamento — primeiro release público em breve.',
   },
-} as const;
+};

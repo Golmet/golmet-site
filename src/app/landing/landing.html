@@ -3,6 +3,7 @@
     <div class="gm-hero-copy">
       <h1>{{ copy.title }}</h1>
       <p class="gm-tagline">{{ copy.tagline }}</p>
+      <p class="gm-plain">{{ copy.plainLine }}</p>
       <p class="gm-value">{{ copy.valueProposal }}</p>
       <div class="gm-ctas">
         <a
@@ -34,7 +35,10 @@
   </section>
 
   <section class="gm-quickstart" aria-label="Quickstart">
-    <h2>{{ quickstart.heading }}</h2>
+    <div class="gm-quickstart-head">
+      <h2>{{ quickstart.heading }}</h2>
+      <span class="gm-badge">{{ quickstart.badge }}</span>
+    </div>
     <ol class="gm-steps">
       @for (step of quickstart.steps; track step.title) {
         <li class="gm-step">
@@ -57,6 +61,11 @@
       }
     </ol>
     <p class="gm-note">{{ copy.statusNote }}</p>
+  </section>
+
+  <section class="gm-terminal-section" aria-label="O produto em ação">
+    <app-terminal />
+    <p class="gm-terminal-note">{{ terminal.title }} — capturado em 17/11/2026.</p>
   </section>
 
   <section class="gm-problem" aria-label="O problema">
@@ -99,6 +108,28 @@
     </ol>
   </section>
 
+  <section class="gm-engines" aria-label="Engines suportados">
+    <h2>{{ engines.heading }}</h2>
+    <p class="gm-section-note">{{ engines.note }}</p>
+    <div class="gm-engine-chips">
+      @for (engine of engines.engines; track engine) {
+        <span class="gm-engine-chip">{{ engine }}</span>
+      }
+    </div>
+  </section>
+
+  <section class="gm-differentiation" aria-label="Diferenciação">
+    <h2>{{ differentiation.heading }}</h2>
+    <div class="gm-diff-items">
+      @for (item of differentiation.items; track item.title) {
+        <article class="gm-diff-item">
+          <h3>{{ item.title }}</h3>
+          <p>{{ item.text }}</p>
+        </article>
+      }
+    </div>
+  </section>
+
   <section class="gm-paths" aria-label="Escolha seu caminho">
     <h2>{{ paths.heading }}</h2>
     <div class="gm-path-cards">
@@ -114,21 +145,17 @@
 
   <section class="gm-capabilities" aria-label="Capacidades do kit">
     <h2>{{ capabilitiesCopy.heading }}</h2>
-    @for (group of capabilityGroups; track group.name) {
-      <div class="gm-cap-group">
-        <h3>{{ group.name }}</h3>
-        <p class="gm-cap-group-note">{{ group.description }}</p>
-        <ul class="gm-cap-list">
-          @for (cap of group.capabilities; track cap.command) {
-            <li>
-              <code>{{ cap.command }}</code>
-              <span>{{ cap.description }}</span>
-            </li>
-          }
-        </ul>
-      </div>
-    }
-    <p class="gm-cap-note">{{ capabilitiesCopy.note }}</p>
+    <div class="gm-featured-caps">
+      @for (cap of capabilitiesCopy.featured; track cap.command) {
+        <div class="gm-featured-cap">
+          <code>{{ cap.command }}</code>
+          <span>{{ cap.description }}</span>
+        </div>
+      }
+    </div>
+    <p class="gm-cap-note">
+      {{ capabilitiesCopy.note }} <a class="gm-cap-doc-link" href="/docs">{{ capabilitiesCopy.docLink }}</a>
+    </p>
   </section>
 
   <section class="gm-final-cta" aria-label="Comece hoje">
@@ -140,6 +167,7 @@
         {{ copiedStep() === 'final' ? 'Copiado' : 'Copiar' }}
       </button>
     </div>
+    <p class="gm-prelaunch">{{ finalCta.preLaunch }}</p>
     <div class="gm-ctas">
       <a class="gm-cta gm-cta-primary" href="https://github.com/Golmet" target="_blank" rel="noopener">{{ ctas.github }}</a>
       <a class="gm-cta" href="https://www.npmjs.com/package/golmet-cli" target="_blank" rel="noopener">{{ ctas.npm }}</a>

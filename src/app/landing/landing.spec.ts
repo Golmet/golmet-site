@@ -34,8 +34,8 @@ describe('Landing — primeira dobra (RN-001-1)', () => {
     expect(compiled.querySelector('.gm-value')?.textContent).toContain('requisito versionado');
     expect(compiled.querySelector('.gm-quickstart h2')?.textContent).toContain(COPY.landing.quickstart.heading);
     expect(compiled.querySelectorAll('.gm-step').length).toBe(COPY.landing.quickstart.steps.length);
-    // 2 botões no quickstart + 1 no CTA final (CR-004)
-    expect(compiled.querySelectorAll('.gm-copy').length).toBe(3);
+    // 3 botões no quickstart (install, init, agente) + 1 no CTA final
+    expect(compiled.querySelectorAll('.gm-copy').length).toBe(4);
   });
 
   it('copia o comando com feedback "Copiado" (RN-002)', async () => {
@@ -68,13 +68,14 @@ describe('Landing — primeira dobra (RN-001-1)', () => {
     expect(compiled.querySelector('.gm-path-card h3')?.textContent).toContain('Produto novo');
   });
 
-  it('renderiza somente os 18 comandos lançados do release 0.3.0, agrupados (RN-004, CR-001)', () => {
+  it('RN-004/CR-005: os 18 comandos vivem na documentação, não na landing', () => {
     const fixture = TestBed.createComponent(Landing);
     fixture.detectChanges();
     const compiled = fixture.nativeElement as HTMLElement;
 
-    expect(compiled.querySelectorAll('.gm-cap-group').length).toBe(3);
-    expect(compiled.querySelectorAll('.gm-cap-list li').length).toBe(18);
+    // a landing mostra 4 em destaque; a lista completa fica na docs (RN-007-9)
+    expect(compiled.querySelectorAll('.gm-featured-cap').length).toBe(4);
+    expect(compiled.querySelector('.gm-cap-doc-link')?.getAttribute('href')).toBe('/docs');
     // comando não lançado não aparece (ex.: golmet contribute — v1+)
     expect(compiled.textContent).not.toContain('golmet contribute');
   });
@@ -104,14 +105,57 @@ describe('Landing — primeira dobra (RN-001-1)', () => {
     expect(compiled.textContent).not.toContain('estrelas');
   });
 
-  it('CR-004: CTA final copiável e capacidades agrupadas (18 comandos em 3 grupos)', () => {
+  it('CR-005: linha simples no hero e coerência de pré-lançamento', () => {
     const fixture = TestBed.createComponent(Landing);
     fixture.detectChanges();
     const compiled = fixture.nativeElement as HTMLElement;
 
-    expect(compiled.querySelectorAll('.gm-cap-group').length).toBe(3);
-    expect(compiled.querySelectorAll('.gm-cap-list li').length).toBe(18);
-    expect(compiled.querySelector('.gm-final-cta')?.textContent).toContain('Comece hoje');
-    expect(compiled.querySelector('.gm-final-command code')?.textContent).toContain('npm i -g golmet-cli');
+    expect(compiled.querySelector('.gm-plain')?.textContent).toContain('CLI que transforma requisitos');
+    expect(compiled.textContent).toContain('Pré-lançamento');
+    expect(compiled.textContent).not.toContain('fase F2');
+  });
+
+  it('CR-005: terminal com saída real do kit (init, status, validate)', () => {
+    const fixture = TestBed.createComponent(Landing);
+    fixture.detectChanges();
+    const compiled = fixture.nativeElement as HTMLElement;
+
+    expect(compiled.querySelector('app-terminal')).toBeTruthy();
+    expect(compiled.textContent).toContain('golmet init');
+    expect(compiled.textContent).toContain('Feature ancorada em PEND');
+    expect(compiled.textContent).toContain('fix:');
+  });
+
+  it('CR-005: engines nomeados e diferenciação', () => {
+    const fixture = TestBed.createComponent(Landing);
+    fixture.detectChanges();
+    const compiled = fixture.nativeElement as HTMLElement;
+
+    expect(compiled.querySelectorAll('.gm-engine-chip').length).toBe(7);
+    expect(compiled.querySelector('.gm-engine-chip')?.textContent).toContain('OpenCode');
+    expect(compiled.querySelectorAll('.gm-diff-item').length).toBe(3);
+    expect(compiled.querySelector('.gm-diff-item')?.textContent).toContain('Markdown no seu git');
+  });
+
+  it('RN-004/CR-005: 4 comandos em destaque + link para a documentação', () => {
+    const fixture = TestBed.createComponent(Landing);
+    fixture.detectChanges();
+    const compiled = fixture.nativeElement as HTMLElement;
+
+    const featured = compiled.querySelectorAll('.gm-featured-cap');
+    expect(featured.length).toBe(4);
+    expect(compiled.querySelector('.gm-cap-doc-link')?.textContent).toContain('todos os 18 comandos');
+    expect(compiled.textContent).not.toContain('golmet contribute');
+  });
+
+  it('RN-004/CR-005: passo do agente com comando concreto', () => {
+    const fixture = TestBed.createComponent(Landing);
+    fixture.detectChanges();
+    const compiled = fixture.nativeElement as HTMLElement;
+
+    const agentStep = Array.from(compiled.querySelectorAll('.gm-step')).find((step) =>
+      step.textContent?.includes('Abra o agente'),
+    );
+    expect(agentStep?.querySelector('code')?.textContent).toContain('opencode');
   });
 });

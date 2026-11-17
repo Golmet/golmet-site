@@ -1,30 +1,33 @@
 import { Component, signal } from '@angular/core';
 import { RouterLink } from '@angular/router';
 
-import { CAPABILITY_GROUPS } from './capabilities.data';
+import { Terminal } from '../shared/terminal/terminal';
 import { COPY } from '../shared/copy/copy';
 
-// RN-001 — landing promocional, estrutura narrativa (CR-004): hero +
-// quickstart (dobra) → problema → tese → como funciona → caminhos →
-// capacidades agrupadas → CTA final.
+// RN-001 — landing promocional, estrutura narrativa (CR-004) + credibilidade
+// de pré-lançamento (CR-005): hero + terminal real (dobra) → problema →
+// tese → como funciona → engines → diferenciação → caminhos → capacidades
+// em destaque → CTA final.
 // Copy vem do deck único (RN-014-3); asset do Arki da RN-014-2.
 @Component({
-  imports: [RouterLink],
+  imports: [RouterLink, Terminal],
   selector: 'app-landing',
   styleUrl: './landing.scss',
   templateUrl: './landing.html',
 })
 export class Landing {
   protected readonly copy = COPY.landing.hero;
+  protected readonly terminal = COPY.landing.terminal;
   protected readonly quickstart = COPY.landing.quickstart;
   protected readonly problem = COPY.landing.problem;
   protected readonly thesis = COPY.landing.thesis;
   protected readonly howItWorks = COPY.landing.howItWorks;
+  protected readonly engines = COPY.landing.engines;
+  protected readonly differentiation = COPY.landing.differentiation;
   protected readonly paths = COPY.landing.paths;
   protected readonly capabilitiesCopy = COPY.landing.capabilities;
   protected readonly ctas = COPY.landing.ctas;
   protected readonly finalCta = COPY.landing.finalCta;
-  protected readonly capabilityGroups = CAPABILITY_GROUPS;
 
   /** título do passo copiado (feedback "Copiado") — null quando nenhum */
   protected readonly copiedStep = signal<string | null>(null);
