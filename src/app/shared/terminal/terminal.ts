@@ -1,7 +1,7 @@
-// CR-005 — bloco de terminal com SAÍDA REAL do kit (capturada em 17/11/2026:
-// `golmet init` em workspace novo, `golmet status` e `golmet validate` num
-// workspace com violação H1). A marca cita evidência — o terminal mostra o
-// comportamento verdadeiro, não texto inventado.
+// CR-005/CR-006 — bloco de terminal com SAÍDA REAL do kit v1.1.1 (capturada
+// em 20/11/2026: `golmet init` em workspace novo, `golmet status` e
+// `golmet validate` num workspace com violação H1). A marca cita evidência —
+// o terminal mostra o comportamento verdadeiro, não texto inventado.
 import { Component } from '@angular/core';
 
 interface TermLine {
@@ -11,6 +11,7 @@ interface TermLine {
 
 const LINES: readonly TermLine[] = [
   { kind: 'prompt', text: '$ npm i -g golmet-cli' },
+  { kind: 'output', text: '+ golmet-cli@1.1.1' },
   { kind: 'prompt', text: '$ golmet init meu-produto' },
   { kind: 'output', text: '  criou: golmet.yaml · PROJECT_CHARTER.md · REQUIREMENTS.md' },
   { kind: 'output', text: '  criou: DECISIONS.md · reverse/CANDIDATES.md · specs/ · .golmet/' },
@@ -18,6 +19,7 @@ const LINES: readonly TermLine[] = [
   { kind: 'blank', text: '' },
   { kind: 'prompt', text: '$ golmet status' },
   { kind: 'output', text: 'RN 22 (active 7, draft 15) · PEND 2 (resolved 2)' },
+  { kind: 'output', text: 'CR 5 (implemented 5) · ADR 14 (accepted 14)' },
   { kind: 'output', text: 'Feature 6 (done 1, draft 5) · Task 35 (done 13, todo 22)' },
   { kind: 'blank', text: '' },
   { kind: 'prompt', text: '$ golmet validate' },
