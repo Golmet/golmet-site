@@ -62,7 +62,7 @@ export const COPY = {
       valueProposal:
         'O combinado com o cliente vira requisito versionado. O requisito vira spec. ' +
         'A spec vira código rastreável — e o documento continua verdadeiro depois do deploy.',
-      statusNote: 'Pré-lançamento — o release funcional chega em breve.',
+      statusNote: 'Site em construção — o kit v1.1.1 já está estável no npm.',
     },
     terminal: {
       title: 'Saída real — golmet init · status · validate',
@@ -144,8 +144,8 @@ export const COPY = {
     },
     quickstart: {
       heading: 'Comece pelo combinado',
-      badge: 'pré-lançamento',
-      note: 'Os comandos acima são o fluxo definitivo. O release público do kit chega em breve.',
+      badge: 'v1.1.1',
+      note: 'Release v1.1.1 estável no npm — os comandos acima já funcionam.',
       steps: [
         {
           title: 'Instale o kit',
@@ -207,14 +207,14 @@ export const COPY = {
       heading: 'Comece hoje',
       text: 'Um comando. Um workspace. A verdade versionada no seu git.',
       command: 'npm i -g golmet-cli',
-      preLaunch: 'Pré-lançamento — o release funcional do kit chega em breve.',
+      preLaunch: 'v1.1.1 estável — instalação funcional pelo npm.',
     },
   },
   portal: {
     sidebarTitle: 'Documentação',
     searchPlaceholder: 'Buscar na documentação…',
     notTranslated: 'Página não traduzida — exibindo a versão em inglês.',
-    indexNote: 'Em construção — primeiro release na fase F2.',
+    indexNote: 'Documentação em evolução — renderizada da main do repo.',
   },
   notFound: {
     title: 'Página não encontrada',
@@ -229,6 +229,6 @@ export const COPY = {
       npm: 'https://www.npmjs.com/package/golmet-cli',
     },
     license: 'Licença MIT',
-    status: 'Pré-lançamento — primeiro release público em breve.',
+    status: 'Kit v1.1.1 estável no npm · site em construção.',
   },
 };

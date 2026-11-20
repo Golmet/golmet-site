@@ -105,23 +105,25 @@ describe('Landing — primeira dobra (RN-001-1)', () => {
     expect(compiled.textContent).not.toContain('estrelas');
   });
 
-  it('CR-005: linha simples no hero e coerência de pré-lançamento', () => {
+  it('CR-006: coerência de lançamento — badge v1.1.1, sem pré-lançamento nem jargão de fase', () => {
     const fixture = TestBed.createComponent(Landing);
     fixture.detectChanges();
     const compiled = fixture.nativeElement as HTMLElement;
 
-    expect(compiled.querySelector('.gm-plain')?.textContent).toContain('CLI que transforma requisitos');
-    expect(compiled.textContent).toContain('Pré-lançamento');
+    expect(compiled.querySelector('.gm-badge')?.textContent).toContain('v1.1.1');
+    expect(compiled.textContent).not.toContain('Pré-lançamento');
+    expect(compiled.textContent).not.toContain('pré-lançamento');
     expect(compiled.textContent).not.toContain('fase F2');
+    expect(compiled.querySelector('.gm-final-command code')?.textContent).toContain('npm i -g golmet-cli');
   });
 
-  it('CR-005: terminal com saída real do kit (init, status, validate)', () => {
+  it('CR-006: terminal com saída real da v1.1.1 (install, init, status, validate)', () => {
     const fixture = TestBed.createComponent(Landing);
     fixture.detectChanges();
     const compiled = fixture.nativeElement as HTMLElement;
 
     expect(compiled.querySelector('app-terminal')).toBeTruthy();
-    expect(compiled.textContent).toContain('golmet init');
+    expect(compiled.textContent).toContain('+ golmet-cli@1.1.1');
     expect(compiled.textContent).toContain('Feature ancorada em PEND');
     expect(compiled.textContent).toContain('fix:');
   });
