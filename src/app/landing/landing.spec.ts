@@ -26,7 +26,7 @@ describe('Landing — primeira dobra (RN-001-1)', () => {
     expect(img!.getAttribute('alt')).toContain('Arki');
   });
 
-  it('renderiza proposta de valor e quickstart narrado do deck (4 passos)', () => {
+  it('renderiza proposta de valor e quickstart narrado do deck (5 passos)', () => {
     const fixture = TestBed.createComponent(Landing);
     fixture.detectChanges();
 
@@ -34,8 +34,8 @@ describe('Landing — primeira dobra (RN-001-1)', () => {
     expect(compiled.querySelector('.gm-value')?.textContent).toContain('requisito versionado');
     expect(compiled.querySelector('.gm-quickstart h2')?.textContent).toContain(COPY.landing.quickstart.heading);
     expect(compiled.querySelectorAll('.gm-step').length).toBe(COPY.landing.quickstart.steps.length);
-    // 3 botões no quickstart (install, init, agente) + 1 no CTA final
-    expect(compiled.querySelectorAll('.gm-copy').length).toBe(4);
+    // 4 botões no quickstart (npm, install, init, agente) + 1 no CTA final
+    expect(compiled.querySelectorAll('.gm-copy').length).toBe(5);
   });
 
   it('copia o comando com feedback "Copiado" (RN-002)', async () => {

@@ -148,19 +148,24 @@ export const COPY = {
       note: 'Release v1.1.1 estável no npm — os comandos acima já funcionam.',
       steps: [
         {
-          title: 'Instale o kit',
+          title: 'Instale o binário',
           command: 'npm i -g golmet-cli',
-          text: 'Binário nativo, zero dependência de runtime.',
+          text: 'Nativo, zero dependência de runtime.',
+        },
+        {
+          title: 'Configure o kit',
+          command: 'golmet install',
+          text: 'Wizard configura engine, skills gm-* e MCPs do kit.',
         },
         {
           title: 'Inicie o workspace',
           command: 'golmet init NomeDoProduto',
-          text: 'Wizard guia: engine, repos e layout do FORMATO.',
+          text: 'Wizard cria o workspace: golmet.yaml, charter e zonas do FORMATO.',
         },
         {
           title: 'Abra o agente na pasta',
           command: 'opencode',
-          text: 'Ou o engine que você escolheu no install — o init já deixou o MCP do kit configurado.',
+          text: 'Ou o engine que você escolheu no install — o MCP do kit já está configurado.',
         },
         {
           title: 'A verdade fica versionada',
