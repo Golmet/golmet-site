@@ -4,7 +4,8 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
-    "build": "ng build && node tools/generate-sitemap.mjs",
+    "build": "npm run docs:pipeline && ng build && node tools/generate-sitemap.mjs",
+    "docs:pipeline": "node tools/build-docs.mjs",
     "check:metas": "node tools/check-metas.mjs",
     "watch": "ng build --watch --configuration development",
     "test": "ng test"
@@ -21,6 +22,8 @@
     "@angular/router": "^22.2.0",
     "@angular/ssr": "^22.2.7",
     "express": "^5.1.0",
+    "marked": "^18.2.1",
+    "minisearch": "^7.2.0",
     "rxjs": "~7.8.0",
     "tslib": "^2.3.0"
   },

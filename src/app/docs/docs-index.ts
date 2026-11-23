@@ -1,10 +1,17 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
+import { RouterLink } from '@angular/router';
 
-// Índice do portal (rota /docs). As páginas reais vêm do prerender dos
-// `.md` canônicos (feature RN-007 — RN-007-2).
+import { COPY } from '../shared/copy/copy';
+import { DocsContentService } from './docs-content.service';
+
+// Índice do portal: lista as páginas geradas dos .md canônicos (RN-007).
 @Component({
+  imports: [RouterLink],
   selector: 'app-docs-index',
   styleUrl: './docs-index.scss',
   templateUrl: './docs-index.html',
 })
-export class DocsIndex {}
+export class DocsIndex {
+  protected readonly copy = COPY.portal;
+  protected readonly toc = inject(DocsContentService).toc;
+}

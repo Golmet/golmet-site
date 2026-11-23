@@ -1,0 +1,41 @@
+.gm-notfound {
+  display: grid;
+  gap: var(--gm-space-1);
+  min-height: 60dvh;
+  place-content: center;
+  text-align: center;
+}
+
+.gm-notfound-code {
+  color: var(--gm-ouro);
+  font-size: clamp(3rem, 10vw, 5rem);
+  font-weight: 700;
+  margin: 0;
+}
+
+h1 {
+  color: var(--gm-text);
+  font-size: 1.3rem;
+  margin: 0;
+}
+
+.gm-notfound-message {
+  color: var(--gm-text);
+  margin: var(--gm-space-1) 0 0;
+}
+
+.gm-notfound-hint {
+  color: var(--gm-text-muted);
+  font-size: 0.9rem;
+  margin: 0;
+}
+
+.gm-notfound-link {
+  color: var(--gm-ouro);
+  margin-top: var(--gm-space-2);
+  text-decoration: none;
+}
+
+.gm-notfound-link:hover {
+  text-decoration: underline;
+}

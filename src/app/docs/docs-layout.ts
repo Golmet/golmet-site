@@ -1,12 +1,18 @@
-import { Component } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
+import { Component, inject } from '@angular/core';
+import { RouterLink, RouterOutlet } from '@angular/router';
 
-// Shell do portal de documentação (RN-016-2). A sidebar real com a árvore
-// dos `.md`, a busca e a página renderizada são tasks da feature RN-007.
+import { DocsContentService } from './docs-content.service';
+import { DocsSearch } from './docs-search';
+
+// RN-007 — shell do portal: sidebar com TOC gerado dos .md (RN-010),
+// busca (RN-009) e outlet das páginas. As variantes PT-BR ligam na
+// RN-011-1 (build por locale).
 @Component({
-  imports: [RouterOutlet],
+  imports: [RouterLink, RouterOutlet, DocsSearch],
   selector: 'app-docs-layout',
   styleUrl: './docs-layout.scss',
   templateUrl: './docs-layout.html',
 })
-export class DocsLayout {}
+export class DocsLayout {
+  protected readonly toc = inject(DocsContentService).toc;
+}
