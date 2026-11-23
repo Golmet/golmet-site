@@ -1,6 +1,16 @@
 <div class="gm-docs">
   <aside class="gm-docs-sidebar">
-    <p class="gm-docs-sidebar-note">Sumário — implementação na feature RN-007 (RN-010).</p>
+    <app-docs-search />
+    @for (group of toc; track group.group) {
+      <p class="gm-toc-group">{{ group.group }}</p>
+      <ul class="gm-toc">
+        @for (item of group.items; track item.slug) {
+          <li>
+            <a [routerLink]="['/docs', item.slug]">{{ item.title }}</a>
+          </li>
+        }
+      </ul>
+    }
   </aside>
   <main class="gm-docs-content">
     <router-outlet />

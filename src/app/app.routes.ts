@@ -2,7 +2,10 @@ import { Routes } from '@angular/router';
 
 import { DocsIndex } from './docs/docs-index';
 import { DocsLayout } from './docs/docs-layout';
+import { DocsPage } from './docs/docs-page';
+import { GENERATED_DOCS } from './docs/docs-content.generated';
 import { Landing } from './landing/landing';
+import { NotFound } from './not-found';
 import { PageMeta } from './site.config';
 
 // RN-016-2 — rotas da única app: landing na raiz, portal sob /docs.
@@ -28,6 +31,20 @@ export const routes: Routes = [
     path: 'docs',
     component: DocsLayout,
     data: { meta: docsMeta },
-    children: [{ path: '', component: DocsIndex }],
+    children: [
+      { path: '', component: DocsIndex, data: { meta: docsMeta } },
+      // RN-007 — página de docs por slug: rotas concretas geradas do conteúdo
+      // (prerender por página — RN-007-2); conteúdo resolvido pelo componente
+      // a partir do .md canônico (docs-as-code, RN-008 strict).
+      ...GENERATED_DOCS.map((page) => ({
+        path: page.slug,
+        component: DocsPage,
+        data: { slug: page.slug },
+      })),
+      // Rotas desconhecidas sob /docs caem no fallback da própria página
+      // (NotFound renderizado dentro do shell do portal).
+      { path: '**', component: DocsPage },
+    ],
   },
+  { path: '**', component: NotFound },
 ];

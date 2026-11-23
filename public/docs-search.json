@@ -1,0 +1,22 @@
+[
+  {
+    "slug": "faq",
+    "title": "FAQ",
+    "text": "FAQ Is it open source? MIT licensed. v1.1.1 is published on npm; the source repository opens at the public launch. Which agents work with it? OpenCode, Claude Code, Cursor, Codex, Gemini CLI, Copilot CLI and VS Code Copilot — through the open standards: AGENTS.md, SKILL.md and MCP. Does it need a server? No. The kit is a local native binary; the artifacts live in your own git. What is a RN? A numbered business rule — the versioned agreement between you and your client. Example: RN-007 — corrida só pode ser aceita pelo motorista dentro de 60 segundos . Rules are written in plain language, approved by humans, and cited as evidence by the code that implements them. How is this different from prompt-only tools? The truth is not the prompt — it is the versioned state. A deterministic binary validates it; agents only propose. When code and documentation diverge, the kit names the exact rule and the exact file."
+  },
+  {
+    "slug": "quickstart",
+    "title": "Quickstart",
+    "text": "Quickstart 1. Install 2. Initialize a workspace The wizard asks for your agent, your repositories and creates the workspace layout. 3. Open your agent in the folder Or the engine you picked during install — the MCP server of the kit is already configured. 4. Talk Describe the product. The workflow produces charter → requirements RNs → specs → tasks — all markdown, all versioned in your git. 5. Keep it true The guardian blocks anything that drifted."
+  },
+  {
+    "slug": "the-format",
+    "title": "The FORMAT",
+    "text": "The FORMAT The FORMAT is the versioned contract of a GOLMET workspace: directory layout, artifact grammar and legal state transitions. It is the layer that survives engines, kits and releases. Entities | Entity | What it holds | |---|---| | RN | A numbered business rule — the versioned agreement with your client | | PEND | An open question that never silently becomes scope | | CR | A change request against an already-approved requirement | | Feature / Task | Delivery units anchored on an active RN | | Spec | Technical translation of the rules data model, contracts, screens | | ADR | The reason behind each decision | Evidence Every requirement cites its implementation: src/path/file.ts:42 @1ed8b81 . The grammar is parseable by machine — the kit compares the hash against the repository HEAD and reports exactly what drifted. Hard rules Ten invariants H1–H10 keep the workspace honest: a PEND never anchors a Feature, IDs are immutable, evidence must be parseable. golmet validate enforces them — exit code non-zero blocks CI."
+  },
+  {
+    "slug": "what-is-golmet",
+    "title": "What is GOLMET",
+    "text": "What is GOLMET GOLMET is a CLI and a workflow that turn client agreements into versioned requirements — plain markdown files in your own git — and keep the documentation true after the code ships. The problem it solves Teams lose decisions in meetings. Tribal knowledge lives in the heads of the people who leave. Documentation rots after the sprint ends. GOLMET stores the normative state of the product as numbered, versioned requirements, with specs derived from them and code citations as evidence. Three layers - FORMATO — the contract: workspace layout, artifact schemas and legal state transitions. - KIT — the deterministic engine: golmet validate , status , doctor — no LLM, no surprises. - RUNTIME — the agentic layer: judgment through capabilities, on any engine that speaks the open standards AGENTS.md, SKILL.md, MCP . Evidence, not vibes Every requirement cites its code: src/app/landing/landing.ts:9 @1ed8b81 . The kit parses that grammar, compares the hash against the repository HEAD and tells you exactly what drifted."
+  }
+]
