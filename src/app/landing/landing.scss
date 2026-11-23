@@ -1,39 +1,64 @@
-:host {
-  display: block;
-}
+// Landing — estilo consolidado (CR-004 narrativa + CR-005/006 pré-lançamento
+// + auditoria visual rodada 1: tokens de cor/escala h2/foco visível).
+// Tokens da marca: src/styles.scss
 
 .gm-landing {
   display: grid;
-  gap: var(--gm-space-3);
+  gap: var(--gm-space-1);
   margin: 0 auto;
   max-width: 1120px;
-  padding: var(--gm-space-2) var(--gm-space-3);
+  padding: var(--gm-space-1) var(--gm-space-3) var(--gm-space-2);
   width: 100%;
 }
 
-// Dobra: hero (texto | Arki) + quickstart todos visíveis em desktop sem scroll
+.gm-landing > * {
+  min-width: 0;
+}
+
+.gm-landing h2 {
+  color: var(--gm-text);
+  font-size: var(--gm-h2);
+  margin: 0 0 var(--gm-space-2);
+}
+
+.gm-section-note {
+  color: var(--gm-text-muted);
+  margin: 0 0 var(--gm-space-2);
+  max-width: 52rem;
+}
+
+// ── Hero (primeira dobra — RN-001) ──────────────────────────────
+
 .gm-hero {
   align-items: center;
   display: grid;
-  gap: var(--gm-space-3);
+  gap: var(--gm-space-1);
   grid-template-columns: 1fr;
 }
 
 .gm-hero-copy h1 {
   color: var(--gm-ouro);
-  font-size: clamp(2.5rem, 7vw, 4rem);
+  font-size: clamp(2.3rem, 5.5vw, 3.1rem);
   letter-spacing: 0.08em;
   margin: 0 0 var(--gm-space-1);
 }
 
 .gm-hero-copy .gm-tagline {
   color: var(--gm-text);
-  font-size: clamp(1.1rem, 2.4vw, 1.5rem);
-  margin: 0 0 var(--gm-space-2);
+  font-size: clamp(1.05rem, 2.2vw, 1.35rem);
+  margin: 0 0 var(--gm-space-1);
+}
+
+.gm-hero-copy .gm-plain {
+  color: var(--gm-text);
+  font-size: clamp(1rem, 2vw, 1.15rem);
+  margin: 0 0 var(--gm-space-1);
+  max-width: 44rem;
 }
 
 .gm-hero-copy .gm-value {
-  color: var(--gm-text);
+  color: var(--gm-text-muted);
+  font-size: 0.92rem;
   margin: 0;
   max-width: 44rem;
 }
@@ -43,37 +68,96 @@
   filter: drop-shadow(0 16px 36px rgba(255, 107, 53, 0.22));
   height: auto;
   justify-self: center;
-  width: clamp(200px, 22vw, 300px);
+  width: clamp(180px, 20vw, 250px);
 }
+
+@media (min-width: 900px) {
+  .gm-hero {
+    grid-template-columns: 1.4fr 1fr;
+  }
+}
+
+.gm-ctas {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--gm-space-2);
+  margin-top: var(--gm-space-1);
+}
+
+.gm-cta {
+  border: 1px solid var(--gm-border);
+  border-radius: var(--gm-radius);
+  color: var(--gm-text);
+  font-size: 0.9rem;
+  padding: 6px 14px;
+  text-decoration: none;
+}
+
+.gm-cta:hover {
+  border-color: var(--gm-ouro);
+  color: var(--gm-ouro);
+}
+
+.gm-cta-primary {
+  background: var(--gm-ouro);
+  border-color: var(--gm-ouro);
+  color: var(--gm-obsidiana);
+  font-weight: 600;
+}
+
+.gm-cta-primary:hover {
+  background: #f0c262;
+  color: var(--gm-obsidiana);
+}
+
+// ── Quickstart (dobra — painel) ─────────────────────────────────
 
 .gm-quickstart {
   background: var(--gm-surface);
   border: 1px solid var(--gm-border);
   border-left: 3px solid var(--gm-ouro);
   border-radius: var(--gm-radius);
-  padding: var(--gm-space-2);
+  padding: var(--gm-space-1) var(--gm-space-2) 0;
 }
 
-.gm-quickstart h2 {
+.gm-quickstart-head {
+  align-items: center;
+  display: flex;
+  gap: var(--gm-space-2);
+  margin-bottom: var(--gm-space-1);
+}
+
+.gm-quickstart-head h2 {
   color: var(--gm-ouro);
   font-size: 1rem;
-  margin: 0 0 var(--gm-space-2);
-  text-transform: uppercase;
   letter-spacing: 0.06em;
+  margin: 0;
+  text-transform: uppercase;
+}
+
+.gm-badge {
+  background: rgba(255, 107, 53, 0.12);
+  border: 1px solid var(--gm-amber);
+  border-radius: 999px;
+  color: var(--gm-amber);
+  font-size: 0.72rem;
+  letter-spacing: 0.05em;
+  padding: 2px 10px;
+  text-transform: uppercase;
 }
 
 .gm-steps {
   display: grid;
-  gap: var(--gm-space-2);
-  grid-template-columns: 1fr;
+  gap: var(--gm-space-1);
+  grid-template-columns: minmax(0, 1fr);
   list-style: none;
   margin: 0;
-  padding-top: 20px;
+  padding: 20px 0 0;
 }
 
 @media (min-width: 900px) {
   .gm-steps {
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 }
 
@@ -83,8 +167,8 @@
   border-radius: var(--gm-radius);
   display: flex;
   flex-direction: column;
-  gap: 6px;
-  padding: var(--gm-space-2);
+  gap: 4px;
+  padding: 10px 14px;
 }
 
 .gm-step-number {
@@ -107,7 +191,7 @@
 }
 
 .gm-step-command {
-  background: #0f1114;
+  background: var(--gm-code-bg);
   border: 1px solid var(--gm-border);
   border-radius: 6px 0 0 6px;
   color: var(--gm-amber);
@@ -120,7 +204,7 @@
 }
 
 .gm-copy {
-  background: #141518;
+  background: var(--gm-code-chip);
   border: 1px solid var(--gm-border);
   border-left: none;
   border-radius: 0 6px 6px 0;
@@ -137,37 +221,18 @@
 
 .gm-step-text {
   color: var(--gm-text-muted);
-  font-size: 0.85rem;
-  margin: 2px 0 0;
+  font-size: 0.88rem;
+  margin: 0;
 }
 
-.gm-note {
-  color: var(--gm-text-muted);
-  font-size: 0.8rem;
-  margin: var(--gm-space-2) 0 0;
-}
+// ── Problema (CR-004) ───────────────────────────────────────────
 
-// CR-004 — ritmo narrativo: seções de conteúdo com fundo alternado
 .gm-problem,
 .gm-how {
   background: rgba(35, 39, 44, 0.45);
   border-radius: var(--gm-radius);
   margin-top: var(--gm-space-2);
   padding: var(--gm-space-3);
-}
-
-.gm-problem h2,
-.gm-thesis h2,
-.gm-how h2 {
-  color: var(--gm-text);
-  font-size: clamp(1.4rem, 3vw, 1.9rem);
-  margin: 0 0 var(--gm-space-1);
-}
-
-.gm-section-note {
-  color: var(--gm-text-muted);
-  margin: 0 0 var(--gm-space-2);
-  max-width: 52rem;
 }
 
 .gm-problem-cards {
@@ -200,6 +265,8 @@
   font-size: 0.88rem;
   margin: 0;
 }
+
+// ── Tese: 3 camadas (CR-004) ────────────────────────────────────
 
 .gm-thesis-layers {
   display: grid;
@@ -237,6 +304,8 @@
   font-size: 0.9rem;
   margin: 0;
 }
+
+// ── Como funciona (stepper CR-004) ──────────────────────────────
 
 .gm-how-steps {
   display: grid;
@@ -276,171 +345,11 @@
   margin: 0;
 }
 
-.gm-final-cta {
-  border: 1px solid var(--gm-border);
-  border-radius: var(--gm-radius);
-  display: grid;
-  gap: var(--gm-space-2);
-  justify-items: center;
+// ── Engines (CR-005) ────────────────────────────────────────────
+
+.gm-engines,
+.gm-differentiation {
   margin-top: var(--gm-space-2);
-  padding: var(--gm-space-3);
-  text-align: center;
-}
-
-.gm-final-cta h2 {
-  color: var(--gm-text);
-  font-size: clamp(1.4rem, 3vw, 1.9rem);
-  margin: 0;
-}
-
-.gm-final-cta > p {
-  color: var(--gm-text-muted);
-  margin: 0;
-}
-
-.gm-final-command {
-  align-items: center;
-  background: #141518;
-  border: 1px solid var(--gm-border);
-  border-radius: var(--gm-radius);
-  display: flex;
-  gap: var(--gm-space-2);
-  padding: var(--gm-space-1) var(--gm-space-2);
-}
-
-.gm-final-command code {
-  color: var(--gm-amber);
-  font-size: 1rem;
-}
-
-.gm-cap-group {
-  margin-top: var(--gm-space-2);
-}
-
-.gm-cap-group h3 {
-  color: var(--gm-ouro);
-  font-size: 1rem;
-  margin: 0;
-}
-
-.gm-cap-group-note {
-  color: var(--gm-text-muted);
-  font-size: 0.8rem;
-  margin: 2px 0 var(--gm-space-1);
-}
-
-.gm-cap-list {
-  columns: 1;
-  list-style: none;
-  margin: 0;
-  padding: 0;
-}
-
-@media (min-width: 900px) {
-  .gm-cap-list {
-    columns: 2;
-  }
-}
-
-.gm-cap-list li {
-  break-inside: avoid;
-  color: var(--gm-text);
-  display: grid;
-  font-size: 0.88rem;
-  gap: 2px 12px;
-  grid-template-columns: minmax(140px, auto) 1fr;
-  padding: 4px 0;
-}
-
-.gm-cap-list code {
-  background: #141518;
-  border: 1px solid var(--gm-border);
-  border-radius: 4px;
-  color: var(--gm-amber);
-  font-size: 0.82rem;
-  padding: 2px 8px;
-  white-space: nowrap;
-}
-
-.gm-ctas {
-  display: flex;
-  gap: var(--gm-space-2);
-  margin-top: var(--gm-space-2);
-  flex-wrap: wrap;
-}
-
-.gm-cta {
-  border: 1px solid var(--gm-border);
-  border-radius: var(--gm-radius);
-  color: var(--gm-text);
-  font-size: 0.9rem;
-  padding: 6px 14px;
-  text-decoration: none;
-}
-
-.gm-cta:hover {
-  border-color: var(--gm-ouro);
-  color: var(--gm-ouro);
-}
-
-.gm-cta-primary {
-  background: var(--gm-ouro);
-  border-color: var(--gm-ouro);
-  color: var(--gm-obsidiana);
-  font-weight: 600;
-}
-
-.gm-cta-primary:hover {
-  background: #f0c262;
-  color: var(--gm-obsidiana);
-}
-
-.gm-terminal-section {
-  margin-top: var(--gm-space-2);
-}
-
-.gm-terminal-note {
-  color: var(--gm-text-muted);
-  font-size: 0.78rem;
-  margin: 6px 0 0;
-}
-
-.gm-plain {
-  color: var(--gm-text);
-  font-size: clamp(1rem, 2vw, 1.15rem);
-  margin: 0 0 var(--gm-space-2);
-  max-width: 44rem;
-}
-
-.gm-quickstart-head {
-  align-items: center;
-  display: flex;
-  gap: var(--gm-space-2);
-}
-
-.gm-quickstart-head h2 {
-  margin: 0;
-}
-
-.gm-badge {
-  background: rgba(255, 107, 53, 0.12);
-  border: 1px solid var(--gm-amber);
-  border-radius: 999px;
-  color: var(--gm-amber);
-  font-size: 0.72rem;
-  letter-spacing: 0.05em;
-  padding: 2px 10px;
-  text-transform: uppercase;
-}
-
-.gm-engines {
-  margin-top: var(--gm-space-2);
-}
-
-.gm-engines h2 {
-  color: var(--gm-text);
-  font-size: 1.15rem;
-  margin: 0 0 var(--gm-space-1);
 }
 
 .gm-engine-chips {
@@ -457,15 +366,7 @@
   padding: 4px 14px;
 }
 
-.gm-differentiation {
-  margin-top: var(--gm-space-2);
-}
-
-.gm-differentiation h2 {
-  color: var(--gm-text);
-  font-size: 1.15rem;
-  margin: 0 0 var(--gm-space-2);
-}
+// ── Diferenciação (CR-005) ──────────────────────────────────────
 
 .gm-diff-items {
   display: grid;
@@ -497,53 +398,7 @@
   margin: 0;
 }
 
-.gm-featured-caps {
-  display: grid;
-  gap: var(--gm-space-2);
-  grid-template-columns: 1fr;
-}
-
-@media (min-width: 900px) {
-  .gm-featured-caps {
-    grid-template-columns: repeat(4, 1fr);
-  }
-}
-
-.gm-featured-cap {
-  background: var(--gm-surface);
-  border: 1px solid var(--gm-border);
-  border-radius: var(--gm-radius);
-  display: grid;
-  gap: 6px;
-  padding: var(--gm-space-2);
-}
-
-.gm-featured-cap code {
-  color: var(--gm-amber);
-  font-size: 0.88rem;
-}
-
-.gm-featured-cap span {
-  color: var(--gm-text);
-  font-size: 0.85rem;
-}
-
-.gm-cap-doc-link {
-  color: var(--gm-ouro);
-}
-
-.gm-prelaunch {
-  color: var(--gm-amber);
-  font-size: 0.85rem;
-  margin: 0;
-}
-
-.gm-paths h2,
-.gm-capabilities h2 {
-  color: var(--gm-text);
-  font-size: 1.15rem;
-  margin: 0 0 var(--gm-space-2);
-}
+// ── Caminhos (RN-003) ───────────────────────────────────────────
 
 .gm-path-cards {
   display: grid;
@@ -589,57 +444,97 @@
   font-size: 0.85rem;
 }
 
-.gm-cap-table {
-  border-collapse: collapse;
-  width: 100%;
+// ── Capacidades em destaque (RN-004 / CR-005) ───────────────────
+
+.gm-featured-caps {
+  display: grid;
+  gap: var(--gm-space-2);
+  grid-template-columns: 1fr;
 }
 
-.gm-cap-table th {
-  color: var(--gm-text-muted);
-  font-size: 0.8rem;
-  text-align: left;
-  text-transform: uppercase;
-  letter-spacing: 0.06em;
+@media (min-width: 900px) {
+  .gm-featured-caps {
+    grid-template-columns: repeat(4, 1fr);
+  }
 }
 
-.gm-cap-table th,
-.gm-cap-table td {
-  border-bottom: 1px solid var(--gm-border);
-  padding: var(--gm-space-1) var(--gm-space-2) var(--gm-space-1) 0;
-  vertical-align: top;
-}
-
-.gm-cap-table code {
-  background: #141518;
+.gm-featured-cap {
+  background: var(--gm-surface);
   border: 1px solid var(--gm-border);
-  border-radius: 4px;
-  color: var(--gm-amber);
-  font-size: 0.85rem;
-  padding: 2px 8px;
-  white-space: nowrap;
+  border-radius: var(--gm-radius);
+  display: grid;
+  gap: 6px;
+  padding: var(--gm-space-2);
 }
 
-.gm-cap-table td:last-child {
+.gm-featured-cap code {
+  color: var(--gm-amber);
+  font-size: 0.88rem;
+}
+
+.gm-featured-cap span {
   color: var(--gm-text);
-  font-size: 0.9rem;
+  font-size: 0.85rem;
 }
 
 .gm-cap-note {
   color: var(--gm-text-muted);
-  font-size: 0.8rem;
+  font-size: 0.85rem;
   margin: var(--gm-space-2) 0 0;
 }
 
-@media (min-width: 900px) {
-  .gm-hero {
-    grid-template-columns: 1.4fr 1fr;
-  }
+.gm-cap-doc-link {
+  color: var(--gm-ouro);
+}
 
-  .gm-steps {
-    grid-template-columns: 1fr 1fr;
-  }
+// ── CTA final (CR-004) ──────────────────────────────────────────
 
-  .gm-step:nth-child(3) {
-    border-top: none;
-  }
+.gm-final-cta {
+  border: 1px solid var(--gm-border);
+  border-radius: var(--gm-radius);
+  display: grid;
+  gap: var(--gm-space-2);
+  justify-items: center;
+  margin-top: var(--gm-space-2);
+  padding: var(--gm-space-3);
+  text-align: center;
+}
+
+.gm-final-cta > p {
+  color: var(--gm-text-muted);
+  margin: 0;
+}
+
+.gm-final-command {
+  align-items: center;
+  background: var(--gm-code-bg);
+  border: 1px solid var(--gm-border);
+  border-radius: var(--gm-radius);
+  display: flex;
+  gap: var(--gm-space-2);
+  padding: var(--gm-space-1) var(--gm-space-2);
+}
+
+.gm-final-command code {
+  color: var(--gm-amber);
+  font-size: 1rem;
+}
+
+.gm-prelaunch {
+  color: var(--gm-amber);
+  font-size: 0.85rem;
+  margin: 0;
+}
+
+// ── Terminal (CR-005/006 — saída real) ──────────────────────────
+
+.gm-terminal-section {
+  margin-top: var(--gm-space-2);
+  min-width: 0;
+}
+
+.gm-terminal-note {
+  color: var(--gm-text-muted);
+  font-size: 0.78rem;
+  margin: 6px 0 0;
 }

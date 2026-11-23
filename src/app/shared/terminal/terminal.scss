@@ -1,8 +1,15 @@
+:host {
+  display: block;
+  max-width: 100%;
+  min-width: 0;
+}
+
 .gm-terminal {
   background: #0d0f12;
   border: 1px solid var(--gm-border);
   border-radius: var(--gm-radius);
   box-shadow: 0 16px 40px rgba(0, 0, 0, 0.45);
+  min-width: 0;
   overflow: hidden;
 }
 
@@ -22,15 +29,15 @@
 }
 
 .gm-dot-r {
-  background: #ff5f56;
+  background: var(--gm-dot-r);
 }
 
 .gm-dot-y {
-  background: #ffbd2e;
+  background: var(--gm-dot-y);
 }
 
 .gm-dot-g {
-  background: #27c93f;
+  background: var(--gm-dot-g);
 }
 
 .gm-terminal-title {
@@ -46,7 +53,6 @@
   overflow-x: auto;
   padding: var(--gm-space-2);
 }
-
 .gm-t-prompt {
   color: var(--gm-text);
   font-weight: 600;
@@ -58,11 +64,11 @@
 }
 
 .gm-t-success {
-  color: #4ade80;
+  color: var(--gm-success);
 }
 
 .gm-t-error {
-  color: #f87171;
+  color: var(--gm-error);
 }
 
 .gm-t-fix {
