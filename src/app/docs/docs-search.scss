@@ -1,0 +1,44 @@
+.gm-docs-search {
+  position: relative;
+}
+
+.gm-docs-search-input {
+  background: var(--gm-obsidiana);
+  border: 1px solid var(--gm-border);
+  border-radius: 6px;
+  color: var(--gm-text);
+  font-size: 0.88rem;
+  padding: 6px 10px;
+  width: 100%;
+}
+
+.gm-docs-search-input:focus {
+  border-color: var(--gm-ouro);
+  outline: none;
+}
+
+.gm-docs-search-results {
+  background: var(--gm-surface);
+  border: 1px solid var(--gm-border);
+  border-radius: 6px;
+  left: 0;
+  list-style: none;
+  margin: 4px 0 0;
+  padding: 4px 0;
+  position: absolute;
+  right: 0;
+  top: 100%;
+  z-index: 10;
+}
+
+.gm-docs-search-results a {
+  color: var(--gm-text);
+  display: block;
+  font-size: 0.88rem;
+  padding: 6px 12px;
+  text-decoration: none;
+}
+
+.gm-docs-search-results a:hover {
+  color: var(--gm-ouro);
+}
