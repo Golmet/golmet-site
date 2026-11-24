@@ -65,7 +65,16 @@ export class DocsPage {
     }
     return from(
       firstValueFrom(this.content.loadHtml(this.page))
-        .then((entry) => this.safe(entry.html))
+        .then((entry) => {
+          const safe = this.safe(entry.html);
+          // RN-011 âncoras — o browser não rola para o fragmento antes do
+          // fetch; re-rola quando o conteúdo da página chega.
+          const hash = decodeURIComponent(location.hash.slice(1));
+          if (hash) {
+            document.getElementById(hash)?.scrollIntoView({ block: 'start' });
+          }
+          return safe;
+        })
         .catch(() => null),
     );
   }

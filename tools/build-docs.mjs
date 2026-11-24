@@ -84,10 +84,29 @@ function ingest() {
   const source = SOURCES[0];
   const manifest = JSON.parse(readFileSync(join(source.dir, 'manifest.json'), 'utf8'));
 
+  // RN-011 âncoras — ids GFM nos headings (lowercase, sem pontuação,
+  // espaços → hífen; duplicatas ganham -1/-2) para links com # rolar.
+  const headingIds = (html) => {
+    const used = new Map();
+    return html.replace(/<h([1-6])>([\s\S]*?)<\/h\1>/g, (match, level, inner) => {
+      const text = inner.replace(/<[^>]+>/g, '').trim();
+      let slug = text
+        .toLowerCase()
+        .replace(/<[^>]+>/g, '')
+        .replace(/[^\p{L}\p{N}\s-]/gu, '')
+        .replace(/\s+/g, '-');
+      if (!slug) slug = 'secao';
+      const count = used.get(slug) ?? 0;
+      used.set(slug, count + 1);
+      const id = count === 0 ? slug : `${slug}-${count}`;
+      return `<h${level} id="${id}">${inner}</h${level}>`;
+    });
+  };
+
   const readMd = (rel) => {
     const md = readFileSync(join(source.dir, rel), 'utf8');
     failures.push(...validatePage(md, rel));
-    return { md, html: marked.parse(md), title: titleOf(md, rel), text: stripMd(md) };
+    return { md, html: headingIds(marked.parse(md)), title: titleOf(md, rel), text: stripMd(md) };
   };
 
   // Página EN (fonte) + rota PT (traduzida ou shadow EN + banner — RN-011-4).

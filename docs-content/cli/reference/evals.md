@@ -63,4 +63,4 @@ Severity is `error` (blocks) or `warning` (records).
 `evals/golden-human/` holds **human-maintained** cases collected from real
 incidents — the protection against circularity (agents grading their own
 homework). Agents never write there; see its
-[README](/docs/golden-human/readme).
+[README](https://github.com/Golmet/golmet-cli/blob/main/docs/golden-human/README.md).

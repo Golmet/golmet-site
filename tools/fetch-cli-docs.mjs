@@ -141,11 +141,12 @@ function resolveMdTarget(rawTarget, relSubpath) {
   }
 
   const inside = candidates.filter((candidate) => candidate && !candidate.startsWith('..'));
-  if (inside.length === 1) {
+  if (inside.length === 1 && baseSet.has(inside[0])) {
     const base = inside[0];
     return isPt ? `/docs/pt-br/${base}` : `/docs/${base}`;
   }
-  const leafMatches = leaf ? sortedBases.filter((base) => base.endsWith(`/${leaf}`)) : [];
+  const leafMatches =
+    leaf && !leaf.startsWith('..') ? sortedBases.filter((base) => base.endsWith(`/${leaf}`)) : [];
   if (leafMatches.length === 1) {
     const base = leafMatches[0];
     return isPt ? `/docs/pt-br/${base}` : `/docs/${base}`;
@@ -178,33 +179,45 @@ const repoRootBlobs = /^(ROADMAP|CONTRIBUTING)(\.pt-br)?\.md$/i;
  * Aplica a markdown links ](target), html href="target" e diretórios.
  */
 function rewriteLinks(md, relSubpath) {
+  // Âncoras (fragmento após #) são PRESERVADAS na rota resolvida — o HTML
+  // renderizado ganha ids GFM nos headings (build-docs) para o scroll funcionar.
+  // Os branches testam o CLEAN (sem fragmento) — targets com # não terminam
+  // em .md e cairiam fora de todas as regras.
+  const fragmentOf = (target) => {
+    const hash = target.split('#').slice(1).join('#');
+    return hash ? `#${hash}` : '';
+  };
   let out = md.replace(/\]\(([^)]+)\)/g, (match, target) => {
-    if (/CHANGELOG\.md$/i.test(target)) return '](/docs/releases)';
-    if (repoRootBlobs.test(target)) {
-      return `](https://github.com/Golmet/golmet-cli/blob/main/${target})`;
+    const fragment = fragmentOf(target);
+    const clean = stripFragment(target);
+    if (/CHANGELOG\.md$/i.test(clean)) return `](/docs/releases${fragment})`;
+    if (repoRootBlobs.test(clean)) {
+      return `](https://github.com/Golmet/golmet-cli/blob/main/${clean}${fragment})`;
     }
-    if (/\.md$/i.test(target)) {
-      const resolved = resolveMdTarget(target, relSubpath);
-      return resolved ? `](${resolved})` : match;
+    if (/\.md$/i.test(clean)) {
+      const resolved = resolveMdTarget(clean, relSubpath);
+      return resolved ? `](${resolved}${fragment})` : match;
     }
-    if (/^(docs\/)?[a-z0-9-]+\/?$/i.test(target)) {
-      const resolved = resolveDirTarget(target);
-      return resolved ? `](${resolved})` : match;
+    if (/^(docs\/)?[a-z0-9-]+\/?$/i.test(clean)) {
+      const resolved = resolveDirTarget(clean);
+      return resolved ? `](${resolved}${fragment})` : match;
     }
     return match;
   });
   out = out.replace(/href="([^"\s]+)"/gi, (match, target) => {
-    if (/CHANGELOG\.md$/i.test(target)) return 'href="/docs/releases"';
-    if (repoRootBlobs.test(target)) {
-      return `href="https://github.com/Golmet/golmet-cli/blob/main/${target}"`;
+    const fragment = fragmentOf(target);
+    const clean = stripFragment(target);
+    if (/CHANGELOG\.md$/i.test(clean)) return `href="/docs/releases${fragment}"`;
+    if (repoRootBlobs.test(clean)) {
+      return `href="https://github.com/Golmet/golmet-cli/blob/main/${clean}${fragment}"`;
     }
-    if (/\.md$/i.test(target)) {
-      const resolved = resolveMdTarget(target, relSubpath);
-      return resolved ? `href="${resolved}"` : match;
+    if (/\.md$/i.test(clean)) {
+      const resolved = resolveMdTarget(clean, relSubpath);
+      return resolved ? `href="${resolved}${fragment}"` : match;
     }
-    if (/^(docs\/)?[a-z0-9-]+\/?$/i.test(target)) {
-      const resolved = resolveDirTarget(target);
-      return resolved ? `href="${resolved}"` : match;
+    if (/^(docs\/)?[a-z0-9-]+\/?$/i.test(clean)) {
+      const resolved = resolveDirTarget(clean);
+      return resolved ? `href="${resolved}${fragment}"` : match;
     }
     return match;
   });

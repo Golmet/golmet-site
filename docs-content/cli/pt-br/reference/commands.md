@@ -26,7 +26,7 @@ superfície; quando a IA atua, as tools MCP são - os guardas de mutação
 (confirm, dry-run) são aplicados no caminho da IA.
 
 19 commands, um binário. A tabela curta vive no
-[README](../../README.pt-br.md#comandos); abaixo o contrato por comando
+[README](https://github.com/Golmet/golmet-cli/blob/main/README.md#comandos); abaixo o contrato por comando
 (flags, entradas/saídas, exit codes):
 
 | Command | Contrato |
