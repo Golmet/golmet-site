@@ -234,5 +234,6 @@ export const COPY = {
       npm: 'https://www.npmjs.com/package/golmet-cli',
     },
     license: 'Licença MIT',
+    copyright: '© 2026 GOLMET',
   },
 };

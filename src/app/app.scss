@@ -66,6 +66,7 @@
 }
 
 .gm-footer-grid {
+  align-items: start;
   display: grid;
   gap: var(--gm-space-3);
   grid-template-columns: 1fr;
@@ -75,7 +76,7 @@
 
 @media (min-width: 900px) {
   .gm-footer-grid {
-    grid-template-columns: 2fr 2fr 1fr;
+    grid-template-columns: 1fr auto;
   }
 }
 
@@ -99,6 +100,12 @@
   gap: var(--gm-space-1);
 }
 
+@media (min-width: 900px) {
+  .gm-footer-links {
+    justify-content: flex-end;
+  }
+}
+
 .gm-footer-links a {
   border-radius: 6px;
   color: var(--gm-text-muted);
@@ -109,5 +116,30 @@
 
 .gm-footer-links a:hover {
   background: rgba(233, 230, 223, 0.06);
+  color: var(--gm-amber);
+}
+
+// Barra legal — segundo nível do footer: © + licença, separada por borda
+// fina e sem competir com os links de navegação.
+.gm-footer-legal {
+  border-top: 1px solid var(--gm-border);
+  margin: var(--gm-space-3) auto 0;
+  max-width: 1120px;
+  padding-top: var(--gm-space-2);
+}
+
+.gm-footer-copyright {
+  border-radius: 6px;
+  color: var(--gm-text-muted);
+  font-size: 0.85rem;
+  margin: 0;
+}
+
+.gm-footer-copyright a {
+  color: var(--gm-text-muted);
+  text-decoration: none;
+}
+
+.gm-footer-copyright a:hover {
   color: var(--gm-amber);
 }
