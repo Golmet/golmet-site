@@ -3,6 +3,7 @@ import { provideRouter } from '@angular/router';
 import { RouterTestingHarness } from '@angular/router/testing';
 import { Landing } from './landing';
 import { COPY } from '../shared/copy/copy';
+import { CLI_VERSION } from '../shared/cli-version.generated';
 
 // RN-001-1 — hero com Arki, proposta de valor e quickstart com comandos
 // copiáveis (RN-001, RN-002); narrativa com wizard (CR-003).
@@ -111,7 +112,7 @@ describe('Landing — primeira dobra (RN-001-1)', () => {
     fixture.detectChanges();
     const compiled = fixture.nativeElement as HTMLElement;
 
-    expect(compiled.querySelector('.gm-badge')?.textContent).toContain('v1.1.1');
+    expect(compiled.querySelector('.gm-badge')?.textContent).toContain(`v${CLI_VERSION}`);
     expect(compiled.textContent).not.toContain('Pré-lançamento');
     expect(compiled.textContent).not.toContain('pré-lançamento');
     expect(compiled.textContent).not.toContain('fase F2');
