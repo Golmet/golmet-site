@@ -1,4 +1,3 @@
-<p align="center">English | <a href="/docs/pt-br/concepts/overview"Português (Brasil)</a></p>
 
 # What GOLMET delivers
 

@@ -1,4 +1,3 @@
-<p align="center">English | <a href="/docs/pt-br/getting-started/04-o-ciclo-de-uma-feature"Português (Brasil)</a></p>
 
 # 04 — The cycle of one feature
 

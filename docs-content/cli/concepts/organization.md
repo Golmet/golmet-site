@@ -1,4 +1,3 @@
-<p align="center">English | <a href="/docs/pt-br/concepts/organization"Português (Brasil)</a></p>
 
 # Organization, workspaces and versioning
 

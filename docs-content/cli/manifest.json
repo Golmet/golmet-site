@@ -1,48 +1,65 @@
 {
   "releases": {
     "hasPt": false,
-    "group": "CLI"
+    "group": "CLI",
+    "sourcePath": "CHANGELOG.md"
   },
   "readme": [
     {
       "base": "the-problem-golmet-solves",
       "hasPt": true,
-      "group": "CLI"
+      "group": "CLI",
+      "sourcePath": "README.md",
+      "sourcePathPt": "README.pt-br.md"
     },
     {
       "base": "what-golmet-does-in-practice",
       "hasPt": true,
-      "group": "CLI"
+      "group": "CLI",
+      "sourcePath": "README.md",
+      "sourcePathPt": "README.pt-br.md"
     },
     {
       "base": "the-recommended-mode",
       "hasPt": true,
-      "group": "CLI"
+      "group": "CLI",
+      "sourcePath": "README.md",
+      "sourcePathPt": "README.pt-br.md"
     },
     {
       "base": "getting-started-5-minutes",
       "hasPt": true,
-      "group": "CLI"
+      "group": "CLI",
+      "sourcePath": "README.md",
+      "sourcePathPt": "README.pt-br.md"
     },
     {
       "base": "the-documentation",
       "hasPt": true,
-      "group": "CLI"
+      "group": "CLI",
+      "sourcePath": "README.md",
+      "sourcePathPt": "README.pt-br.md"
     },
     {
       "base": "uninstall",
       "hasPt": true,
-      "group": "CLI"
+      "group": "CLI",
+      "sourcePath": "README.md",
+      "sourcePathPt": "README.pt-br.md"
     },
     {
       "base": "development",
       "hasPt": true,
-      "group": "CLI"
+      "group": "CLI",
+      "sourcePath": "README.md",
+      "sourcePathPt": "README.pt-br.md"
     },
     {
       "base": "roadmap-contributing-license",
       "hasPt": true,
-      "group": "CLI"
+      "group": "CLI",
+      "sourcePath": "README.md",
+      "sourcePathPt": "README.pt-br.md"
     }
   ],
   "docs": [
@@ -206,5 +223,6 @@
       "hasPt": true,
       "group": "Reference"
     }
-  ]
+  ],
+  "capturedAt": "2026-11-24"
 }

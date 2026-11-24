@@ -121,6 +121,11 @@ export interface CopyTree {
     readonly searchPlaceholder: string;
     readonly notTranslated: string;
     readonly indexNote: string;
+    readonly onThisPage: string;
+    readonly prevLabel: string;
+    readonly nextLabel: string;
+    readonly editPage: string;
+    readonly updatedAt: string;
   };
   readonly notFound: {
     readonly title: string;
@@ -301,6 +306,11 @@ const ptBR: CopyTree = {
     searchPlaceholder: 'Buscar na documentação…',
     notTranslated: 'Página não traduzida — exibindo a versão em inglês.',
     indexNote: 'Renderizada direto do repositório golmet-cli — docs, releases e changelog.',
+    onThisPage: 'Nesta página',
+    prevLabel: '← Anterior',
+    nextLabel: 'Próximo →',
+    editPage: '✏️ Edite esta página no GitHub',
+    updatedAt: 'Atualizado em:',
   },
   notFound: {
     title: 'Página não encontrada',
@@ -486,6 +496,11 @@ const en: CopyTree = {
     searchPlaceholder: 'Search the docs…',
     notTranslated: 'Page not translated — showing the English version.',
     indexNote: 'Rendered straight from the golmet-cli repository — docs, releases and changelog.',
+    onThisPage: 'On this page',
+    prevLabel: '← Previous',
+    nextLabel: 'Next →',
+    editPage: '✏️ Edit this page on GitHub',
+    updatedAt: 'Updated:',
   },
   notFound: {
     title: 'Page not found',

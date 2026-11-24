@@ -1,9 +1,45 @@
 <article class="gm-doc-page">
+  @if (showFallbackBanner) {
+    <div class="gm-not-translated" role="status">{{ copy.notTranslated }}</div>
+  }
   @if (contentHtml) {
-    @if (!translated) {
-      <div class="gm-not-translated" role="status">{{ copy.notTranslated }}</div>
-    }
     <div class="gm-doc-content" [innerHTML]="contentHtml"></div>
+
+    @if (nav.prev || nav.next) {
+      <nav class="gm-doc-pager" aria-label="Navegação entre páginas">
+        @if (nav.prev) {
+          <a class="gm-doc-pager-card" [routerLink]="['/docs', nav.prev.slug]">
+            <span class="gm-doc-pager-label">{{ copy.prevLabel }}</span>
+            <span class="gm-doc-pager-title">{{ nav.prev.title }}</span>
+          </a>
+        } @else {
+          <span></span>
+        }
+        @if (nav.next) {
+          <a class="gm-doc-pager-card gm-doc-pager-next" [routerLink]="['/docs', nav.next.slug]">
+            <span class="gm-doc-pager-label">{{ copy.nextLabel }}</span>
+            <span class="gm-doc-pager-title">{{ nav.next.title }}</span>
+          </a>
+        }
+      </nav>
+    }
+
+    @if (nav.sourcePath) {
+      <footer class="gm-doc-footer">
+        <a
+          class="gm-doc-edit"
+          href="https://github.com/Golmet/golmet-cli/blob/main/{{ nav.sourcePath }}"
+          target="_blank"
+          rel="noopener"
+          >{{ copy.editPage }}</a
+        >
+        @if (nav.capturedAt) {
+          <span class="gm-doc-updated">{{ copy.updatedAt }} {{ nav.capturedAt }}</span>
+        }
+      </footer>
+    }
+  } @else if (hasPage) {
+    <div class="gm-doc-content"></div>
   } @else {
     <h2>Page not found</h2>
     <p>The guardian only asserts what it cites — this documentation page does not exist.</p>

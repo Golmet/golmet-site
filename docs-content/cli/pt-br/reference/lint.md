@@ -1,4 +1,3 @@
-<p align="center"><a href="https://github.com/Golmet/golmet-cli/blob/main/README.md"English</a> | <a href="https://github.com/Golmet/golmet-cli/blob/main/README.md"Português (Brasil)</a> | <a href="/docs/reference/lint"versão base deste doc</a></p>
 
 # As camadas do lint (L1-L14)
 

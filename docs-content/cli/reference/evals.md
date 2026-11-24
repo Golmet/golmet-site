@@ -1,4 +1,3 @@
-<p align="center">English | <a href="/docs/pt-br/reference/evals"Português (Brasil)</a></p>
 
 # The eval system (golden set)
 

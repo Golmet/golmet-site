@@ -1,4 +1,3 @@
-<p align="center">English | <a href="/docs/pt-br/getting-started/01-organizacao"Português (Brasil)</a></p>
 
 # 01 — Create the Organization
 

@@ -1,4 +1,3 @@
-<p align="center">English | <a href="/docs/pt-br/reference/commands"Português (Brasil)</a></p>
 
 # Commands reference (`golmet`)
 

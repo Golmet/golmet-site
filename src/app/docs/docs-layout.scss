@@ -1,26 +1,30 @@
-// Container centralizado no mesmo padrão da landing (max-width 1120px,
-// margin auto, padding simétrico) — o portal segue a mesma régua visual.
+// Estilo VitePress — portal com 3 colunas: sidebar esquerda (grupos
+// colapsáveis), conteúdo de leitura centrado, aside direito "Nesta página".
+// Breakpoints: sidebar some < 960px; aside some < 1400px (RN-011).
 .gm-docs {
   display: grid;
-  gap: var(--gm-space-3);
-  grid-template-columns: 1fr;
+  grid-template-columns: minmax(0, 1fr);
+  max-width: 1280px;
   margin: 0 auto;
-  max-width: 1120px;
   padding: var(--gm-space-3);
   width: 100%;
 }
 
-@media (min-width: 900px) {
+@media (min-width: 960px) {
   .gm-docs {
-    grid-template-columns: 260px 1fr;
+    grid-template-columns: 240px minmax(0, 1fr);
+    gap: var(--gm-space-4);
+    padding: var(--gm-space-3) var(--gm-space-3) var(--gm-space-4);
   }
 }
+
+// ── Sidebar esquerda (painel + grupos colapsáveis) ──────────────
 
 .gm-docs-sidebar {
   min-width: 0;
 }
 
-@media (min-width: 900px) {
+@media (min-width: 960px) {
   .gm-docs-sidebar {
     align-self: start;
     background: var(--gm-surface);
@@ -30,32 +34,55 @@
     position: sticky;
     top: var(--gm-space-3);
   }
+
+  // O primeiro grupo não precisa de margem extra após a busca.
+  .gm-docs-sidebar .gm-toc-group:first-of-type {
+    margin-top: 0;
+  }
 }
 
-// A margem vai no ELEMENTO HOST (app-docs-search), não no .gm-docs-search
-// interno: com ViewEncapsulation.Emulated o div interno tem o escopo do
-// DocsSearch e seletores do DocsLayout nunca o alcançam.
-.gm-docs-sidebar app-docs-search {
-  display: block;
+.gm-docs-sidebar .gm-docs-search {
   margin-bottom: 1.25rem;
 }
 
-.gm-docs-sidebar .gm-toc-group:first-of-type {
-  margin-top: 0;
+.gm-toc-group {
+  margin: 0 0 var(--gm-space-1);
 }
 
-.gm-toc-group {
+.gm-toc-group + .gm-toc-group,
+details.gm-toc-group + details.gm-toc-group {
+  margin-top: var(--gm-space-2);
+}
+
+.gm-toc-group-name {
   color: var(--gm-ouro);
+  cursor: pointer;
   font-size: 0.72rem;
   font-weight: 700;
   letter-spacing: 0.1em;
-  margin: 1.5rem 0 6px;
+  list-style: none;
   text-transform: uppercase;
+  user-select: none;
+}
+
+.gm-toc-group-name::-webkit-details-marker {
+  display: none;
+}
+
+.gm-toc-group-name::after {
+  content: '›';
+  display: inline-block;
+  margin-left: 6px;
+  transition: transform 0.15s ease;
+}
+
+details[open] > .gm-toc-group-name::after {
+  transform: rotate(90deg);
 }
 
 .gm-toc {
   list-style: none;
-  margin: 0;
+  margin: var(--gm-space-1) 0 0;
   padding: 0;
 }
 
@@ -69,7 +96,7 @@
   color: var(--gm-text-muted);
   display: block;
   font-size: 0.92rem;
-  padding: 9px 12px;
+  padding: 8px 12px;
   text-decoration: none;
 }
 
@@ -85,6 +112,69 @@
   font-weight: 600;
 }
 
+// ── Conteúdo central (coluna de leitura, estilo VitePress) ──────
+
 .gm-docs-content {
   min-width: 0;
+}
+
+.gm-docs-content .gm-doc-page {
+  max-width: 46rem;
+}
+
+// ── Aside direito "Nesta página" (≥1400px) ──────────────────────
+
+.gm-docs-toc {
+  display: none;
+}
+
+@media (min-width: 1400px) {
+  .gm-docs {
+    grid-template-columns: 240px minmax(0, 1fr) 220px;
+  }
+
+  .gm-docs-toc {
+    align-self: start;
+    display: block;
+    position: sticky;
+    top: var(--gm-space-3);
+  }
+}
+
+.gm-docs-toc-title {
+  color: var(--gm-text);
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  margin: 0 0 var(--gm-space-2);
+}
+
+.gm-docs-toc-list {
+  border-left: 1px solid var(--gm-border);
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.gm-docs-toc-list a {
+  color: var(--gm-text-muted);
+  display: block;
+  font-size: 0.82rem;
+  padding: 4px 0 4px 12px;
+  text-decoration: none;
+}
+
+.gm-docs-toc-list a:hover {
+  color: var(--gm-ouro);
+}
+
+.gm-docs-toc-list li.is-h3 a {
+  padding-left: 24px;
+}
+
+.gm-docs-toc-empty {
+  color: var(--gm-text-muted);
+  font-size: 0.82rem;
+  margin: 0;
+  padding-left: 12px;
 }

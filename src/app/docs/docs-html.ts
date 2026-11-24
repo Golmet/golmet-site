@@ -7,6 +7,7 @@ import { InjectionToken } from '@angular/core';
 export interface DocsHtmlEntry {
   readonly title: string;
   readonly html: string;
+  readonly sourcePath?: string;
 }
 
 export const DOCS_HTML = new InjectionToken<Record<string, DocsHtmlEntry>>('DOCS_HTML', {
