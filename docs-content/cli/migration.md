@@ -1,4 +1,4 @@
-<p align="center"><a href="/docs/pt-br/migration">Português (Brasil) — versão integral</a> | <a href="../../README.md">English README</a></p>
+<p align="center"><a href="/docs/pt-br/migration"Português (Brasil) — versão integral</a> | <a href="../../README.md">English README</a></p>
 
 # MIGRATION — Migrating from the old model
 

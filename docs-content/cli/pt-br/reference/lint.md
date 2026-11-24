@@ -1,4 +1,4 @@
-<p align="center"><a href="https://github.com/Golmet/golmet-cli/blob/main/README.md">English</a> | <a href="https://github.com/Golmet/golmet-cli/blob/main/README.md">Português (Brasil)</a> | <a href="/docs/reference/lint">versão base deste doc</a></p>
+<p align="center"><a href="https://github.com/Golmet/golmet-cli/blob/main/README.md"English</a> | <a href="https://github.com/Golmet/golmet-cli/blob/main/README.md"Português (Brasil)</a> | <a href="/docs/reference/lint"versão base deste doc</a></p>
 
 # As camadas do lint (L1-L14)
 
@@ -206,6 +206,6 @@ código.
 
 ## O contrato normativo
 
-Os checks enforcementam o [FORMAT §9.1](/docs/pt-br/format) — o lint é o
+Os checks enforcementam o [FORMAT §9.1](/docs/pt-br/format#91-golmet-lint-varredura-estrutural-determinística-read-only) — o lint é o
 executor, o FORMAT é o contrato. Referência: [commands](/docs/pt-br/reference/commands)
 (`golmet lint`) e [tools](/docs/pt-br/reference/tools) (`gm_lint`).

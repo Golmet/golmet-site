@@ -1,4 +1,4 @@
-<p align="center"><a href="/docs/recommended">English</a> | Português (Brasil)</p>
+<p align="center"><a href="/docs/recommended"English</a> | Português (Brasil)</p>
 
 # O modo recomendado: Organização + FULL + Opencode
 

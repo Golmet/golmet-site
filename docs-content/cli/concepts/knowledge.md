@@ -1,4 +1,4 @@
-<p align="center">English | <a href="/docs/pt-br/concepts/knowledge">Português (Brasil)</a></p>
+<p align="center">English | <a href="/docs/pt-br/concepts/knowledge"Português (Brasil)</a></p>
 
 # The knowledge ecosystem
 
