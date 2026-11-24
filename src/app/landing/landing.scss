@@ -249,10 +249,7 @@
 }
 
 .gm-how {
-  background: rgba(35, 39, 44, 0.45);
-  border-radius: var(--gm-radius);
   margin-top: var(--gm-space-2);
-  padding: var(--gm-space-3);
 }
 
 .gm-problem-cards {
@@ -303,27 +300,33 @@
 }
 
 .gm-layer {
+  background: var(--gm-surface);
   border: 1px solid var(--gm-border);
   border-radius: var(--gm-radius);
-  padding: var(--gm-space-2);
+  padding: 1.5rem;
 }
 
 .gm-layer-name {
   color: var(--gm-ouro);
+  font-family: ui-monospace, 'Cascadia Code', 'Courier New', monospace;
+  font-size: 0.75rem;
   font-weight: 700;
-  letter-spacing: 0.08em;
+  letter-spacing: 0.12em;
   margin: 0;
+  text-transform: uppercase;
 }
 
 .gm-layer-role {
-  color: var(--gm-ouro);
-  font-size: 0.85rem;
-  margin: 2px 0 var(--gm-space-1);
+  color: var(--gm-text);
+  font-size: 1.05rem;
+  font-weight: 600;
+  margin: 6px 0 var(--gm-space-1);
 }
 
 .gm-layer-text {
-  color: var(--gm-text);
+  color: var(--gm-text-muted);
   font-size: 0.9rem;
+  line-height: 1.6;
   margin: 0;
 }
 
@@ -345,25 +348,32 @@
 }
 
 .gm-how-step {
+  background: var(--gm-surface);
+  border: 1px solid var(--gm-border);
+  border-radius: var(--gm-radius);
   border-top: 2px solid var(--gm-ouro);
-  padding-top: var(--gm-space-1);
+  padding: 1.25rem 1.5rem;
 }
 
 .gm-how-number {
   color: var(--gm-ouro);
-  font-size: 0.8rem;
+  font-family: ui-monospace, 'Cascadia Code', 'Courier New', monospace;
+  font-size: 0.75rem;
   font-weight: 700;
+  letter-spacing: 0.08em;
 }
 
 .gm-how-name {
   color: var(--gm-text);
+  font-size: 1rem;
   font-weight: 600;
-  margin: 2px 0;
+  margin: 4px 0;
 }
 
 .gm-how-text {
   color: var(--gm-text-muted);
   font-size: 0.85rem;
+  line-height: 1.5;
   margin: 0;
 }
 
@@ -440,7 +450,7 @@
   border-radius: var(--gm-radius);
   color: inherit;
   display: block;
-  padding: var(--gm-space-2);
+  padding: 1.5rem;
   text-decoration: none;
   transition: border-color 0.15s ease;
 }
@@ -450,20 +460,22 @@
 }
 
 .gm-path-card h3 {
-  color: var(--gm-ouro);
-  font-size: 1rem;
+  color: var(--gm-text);
+  font-size: 1.05rem;
+  font-weight: 600;
   margin: 0 0 var(--gm-space-1);
 }
 
 .gm-path-card p {
-  color: var(--gm-text);
+  color: var(--gm-text-muted);
   font-size: 0.9rem;
+  line-height: 1.6;
   margin: 0 0 var(--gm-space-2);
 }
 
 .gm-path-link {
-  color: var(--gm-ouro);
-  font-size: 0.85rem;
+  color: var(--gm-amber);
+  font-size: 0.9rem;
 }
 
 // ── Capacidades em destaque (RN-004 / CR-005) ───────────────────
@@ -485,40 +497,57 @@
   border: 1px solid var(--gm-border);
   border-radius: var(--gm-radius);
   display: grid;
-  gap: 6px;
-  padding: var(--gm-space-2);
+  gap: 10px;
+  padding: 1.25rem 1.5rem;
 }
 
 .gm-featured-cap code {
+  background: var(--gm-code-chip);
+  border: 1px solid var(--gm-border);
+  border-radius: 6px;
   color: var(--gm-amber);
-  font-size: 0.88rem;
+  font-size: 0.85rem;
+  justify-self: start;
+  padding: 3px 10px;
 }
 
 .gm-featured-cap span {
   color: var(--gm-text);
-  font-size: 0.85rem;
+  font-size: 0.9rem;
+  line-height: 1.55;
+}
+
+.gm-cap-footer {
+  align-items: center;
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--gm-space-1) var(--gm-space-2);
+  justify-content: space-between;
+  margin-top: var(--gm-space-2);
 }
 
 .gm-cap-note {
   color: var(--gm-text-muted);
   font-size: 0.85rem;
-  margin: var(--gm-space-2) 0 0;
+  margin: 0;
 }
 
 .gm-cap-doc-link {
-  color: var(--gm-ouro);
+  color: var(--gm-amber);
+  font-size: 0.9rem;
 }
 
 // ── CTA final (CR-004) ──────────────────────────────────────────
 
 .gm-final-cta {
+  background: var(--gm-surface);
   border: 1px solid var(--gm-border);
   border-radius: var(--gm-radius);
   display: grid;
   gap: var(--gm-space-2);
   justify-items: center;
-  margin-top: var(--gm-space-2);
-  padding: var(--gm-space-3);
+  margin-top: var(--gm-space-3);
+  padding: var(--gm-space-4) var(--gm-space-3);
   text-align: center;
 }
 
@@ -534,6 +563,8 @@
   border-radius: var(--gm-radius);
   display: flex;
   gap: var(--gm-space-2);
+  justify-content: space-between;
+  min-width: min(24rem, 100%);
   padding: var(--gm-space-1) var(--gm-space-2);
 }
 
