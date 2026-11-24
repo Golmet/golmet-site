@@ -12,7 +12,7 @@
 
 @media (min-width: 960px) {
   .gm-docs {
-    grid-template-columns: 240px minmax(0, 1fr);
+    grid-template-columns: 280px minmax(0, 1fr);
     gap: var(--gm-space-4);
     padding: var(--gm-space-3) var(--gm-space-3) var(--gm-space-4);
   }
@@ -137,7 +137,7 @@ details[open] > .gm-toc-group-name::after {
 
 @media (min-width: 1400px) {
   .gm-docs {
-    grid-template-columns: 240px minmax(0, 1fr) 220px;
+    grid-template-columns: 280px minmax(0, 1fr) 220px;
   }
 
   .gm-docs-toc {
