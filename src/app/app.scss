@@ -4,16 +4,26 @@
   min-height: 100dvh;
 }
 
+// Header no mesmo container centralizado do resto do site (1120px) e com
+// altura/hit-area de navbar real — 10px de padding e links 0.9rem ficavam
+// pequenos demais (feedback do operador).
 .gm-header {
-  align-items: center;
   border-bottom: 1px solid var(--gm-border);
+  padding: var(--gm-space-2) var(--gm-space-3);
+}
+
+.gm-header-inner {
+  align-items: center;
   display: flex;
   gap: var(--gm-space-3);
-  padding: 10px var(--gm-space-3);
+  margin: 0 auto;
+  max-width: 1120px;
+  width: 100%;
 }
 
 .gm-brand {
   color: var(--gm-ouro);
+  font-size: 1.35rem;
   font-weight: 700;
   letter-spacing: 0.08em;
   text-decoration: none;
@@ -21,18 +31,26 @@
 
 .gm-nav {
   display: flex;
-  gap: var(--gm-space-2);
+  gap: var(--gm-space-1);
   margin-left: auto;
 }
 
 .gm-nav a {
+  border-radius: 6px;
   color: var(--gm-text);
-  font-size: 0.9rem;
+  font-size: 1rem;
+  font-weight: 500;
+  padding: 8px 12px;
   text-decoration: none;
 }
 
 .gm-nav a:hover {
+  background: var(--gm-surface);
   color: var(--gm-amber);
+}
+
+.gm-nav a[aria-current='page'] {
+  color: var(--gm-ouro);
 }
 
 .gm-main {
