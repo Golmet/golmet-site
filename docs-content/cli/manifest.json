@@ -1,0 +1,39 @@
+{
+  "releases": {
+    "hasPt": false
+  },
+  "sections": [
+    {
+      "base": "the-problem-golmet-solves",
+      "hasPt": true
+    },
+    {
+      "base": "what-golmet-does-in-practice",
+      "hasPt": true
+    },
+    {
+      "base": "the-recommended-mode",
+      "hasPt": true
+    },
+    {
+      "base": "getting-started-5-minutes",
+      "hasPt": true
+    },
+    {
+      "base": "the-documentation",
+      "hasPt": true
+    },
+    {
+      "base": "uninstall",
+      "hasPt": true
+    },
+    {
+      "base": "development",
+      "hasPt": true
+    },
+    {
+      "base": "roadmap-contributing-license",
+      "hasPt": true
+    }
+  ]
+}

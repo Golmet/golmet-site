@@ -3,6 +3,7 @@ import { DOCUMENT } from '@angular/common';
 import { Meta, Title } from '@angular/platform-browser';
 import { RouterStateSnapshot, TitleStrategy } from '@angular/router';
 
+import { equivalentPath, activeLocaleOfPath } from '../i18n/lang';
 import { LOCALES, OG_IMAGE_PATH, SITE_NAME, SITE_URL, PageMeta } from '../../site.config';
 
 // RN-016-3 — metas por página no prerender: title + canonical + hreflang
@@ -44,10 +45,14 @@ export class GolmetTitleStrategy extends TitleStrategy {
     this.meta.updateTag({ name: 'twitter:card', content: 'summary_large_image' });
 
     upsertLink(this.doc, 'canonical', url);
+    // RN-011-1 — hreflang bidirecional: cada locale aponta a URL equivalente
+    // (shadow routes cobrem páginas não traduzidas — RN-011-4).
     for (const locale of LOCALES) {
-      upsertLink(this.doc, 'alternate', url, locale);
+      upsertLink(this.doc, 'alternate', `${SITE_URL}${equivalentPath(snapshot.url, locale)}`, locale);
     }
     upsertLink(this.doc, 'alternate', url, 'x-default');
+    // lang do documento segue o idioma do PATH (shadow PT = EN — RN-011-4).
+    this.doc.documentElement.lang = activeLocaleOfPath(snapshot.url) === 'pt-BR' ? 'pt-BR' : 'en';
   }
 
   private pageMetaOf(snapshot: RouterStateSnapshot): PageMeta | undefined {

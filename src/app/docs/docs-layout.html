@@ -1,7 +1,7 @@
 <div class="gm-docs">
   <aside class="gm-docs-sidebar">
     <app-docs-search />
-    @for (group of toc; track group.group) {
+    @for (group of toc(); track group.group) {
       <p class="gm-toc-group">{{ group.group }}</p>
       <ul class="gm-toc">
         @for (item of group.items; track item.slug) {

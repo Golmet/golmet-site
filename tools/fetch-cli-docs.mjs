@@ -1,21 +1,23 @@
-// RN-007-8/9 — fonte das docs do portal = repositório PÚBLICO golmet-cli.
-// O repo abriu (private: false) — o padrão CR-002 do tarball foi substituído
-// pela fonte canônica: raw.githubusercontent na main + GitHub Releases API.
+// RN-011-1/5 (ADR-009) — fonte das docs do portal = repositório PÚBLICO
+// Golmet/golmet-cli (raw na main + GitHub Releases API).
 //
 // Gera em docs-content/cli/:
-//   releases.md                — notas das GitHub Releases (a "aba Releases")
-//   <section>.md               — README.md EN dividido por H2 (sidebar estruturada)
-//   <section>.pt-br.md         — README.pt-br.md dividido por H2 (lang pt-br)
+//   releases.md            — notas das GitHub Releases (aba "Releases"; EN,
+//                            CHANGELOG não tem variante PT)
+//   <base>.md              — README.md EN dividido por H2 (fonte, RN-013)
+//   pt-br/<base>.md        — README.pt-br.md dividido por H2 (derivado)
+//   manifest.json          — pares EN↔PT por base slug + flags de tradução
 //
+// Os READMEs EN/PT têm a MESMA sequência de H2 — o pareamento para a sidebar
+// é por ÍNDICE; contagens divergentes = fonte inconsistente = exit 1.
 // Strict: qualquer fonte sem resposta = exit 1, nada publica.
-// Pré-ambulo do README (H1, badges, language links) é descartado — o título
-// vem do H1 de cada página e a troca de idioma vive nos grupos da sidebar.
 import { mkdirSync, readdirSync, rmSync, writeFileSync } from 'node:fs';
 import { join } from 'node:path';
 
 const RAW = 'https://raw.githubusercontent.com/Golmet/golmet-cli/main';
 const RELEASES_API = 'https://api.github.com/repos/Golmet/golmet-cli/releases?per_page=10';
 const OUT_DIR = 'docs-content/cli';
+const PT_DIR = join(OUT_DIR, 'pt-br');
 
 const get = async (url) => {
   const res = await fetch(url, { signal: AbortSignal.timeout(15000) });
@@ -24,7 +26,8 @@ const get = async (url) => {
 };
 
 // Divide o README por H2 FORA de code fences — cada seção vira página da
-// sidebar com H1 próprio (RN-008). Pré-ambulo (antes do 1º H2) é descartado.
+// sidebar com H1 próprio (RN-008). Pré-ambulo (antes do 1º H2) é descartado:
+// título vem do H1 da página e o seletor de idioma vive no header (RN-011-3).
 function splitByH2(md) {
   const lines = md.split('\n');
   const sections = [];
@@ -58,8 +61,9 @@ const slugOf = (title) =>
 // Limpa antes: seções que sumiram do README não podem ficar órfãs na sidebar.
 rmSync(OUT_DIR, { recursive: true, force: true });
 mkdirSync(OUT_DIR, { recursive: true });
+mkdirSync(PT_DIR, { recursive: true });
 
-// 1) Releases — somente o CHANGELOG/notas das releases (pedido do operador).
+// 1) Releases — somente as notas das GitHub Releases (pedido do operador).
 const releasesRaw = await get(RELEASES_API);
 const releases = JSON.parse(releasesRaw);
 if (!Array.isArray(releases) || releases.length === 0) {
@@ -82,22 +86,37 @@ const releasesMd = releases
   .join('\n\n');
 writeFileSync(join(OUT_DIR, 'releases.md'), `# Releases\n\n${releasesMd}\n`, 'utf8');
 
-// 2) README EN + PT-BR divididos por H2.
-for (const [file, lang] of [
-  ['README.md', 'en'],
-  ['README.pt-br.md', 'pt-br'],
-]) {
-  const md = await get(`${RAW}/${file}`);
-  const sections = splitByH2(md);
-  if (sections.length === 0) throw new Error(`${file} sem seções H2 — nada publica`);
-  for (const section of sections) {
-    const suffix = lang === 'pt-br' ? '.pt-br' : '';
-    const name = `${slugOf(section.title)}${suffix}.md`;
-    const body = section.lines.join('\n').trim();
-    if (body.length < 40) continue; // seção mínima — vira ruído de sidebar
-    writeFileSync(join(OUT_DIR, name), `# ${section.title}\n\n${body}\n`, 'utf8');
-  }
+// 2) READMEs EN/PT divididos e pareados por índice (fonte consistente).
+const sectionsEn = splitByH2(await get(`${RAW}/README.md`));
+const sectionsPt = splitByH2(await get(`${RAW}/README.pt-br.md`));
+if (sectionsEn.length !== sectionsPt.length) {
+  rmSync(OUT_DIR, { recursive: true, force: true });
+  throw new Error(
+    `READMEs inconsistentes: EN tem ${sectionsEn.length} seções H2, PT-BR tem ${sectionsPt.length} — nada publica`,
+  );
 }
 
-const written = readdirSync(OUT_DIR);
-console.log(`cli-docs: ${written.length} arquivo(s) da doc do CLI gerados — ${written.slice(0, 6).join(', ')}…`);
+const manifest = [];
+sectionsEn.forEach((sectionEn, i) => {
+  const base = slugOf(sectionEn.title);
+  const bodyEn = sectionEn.lines.join('\n').trim();
+  const sectionPt = sectionsPt[i];
+  const bodyPt = sectionPt.lines.join('\n').trim();
+  if (bodyEn.length < 40) return; // seção mínima — vira ruído de sidebar
+  writeFileSync(join(OUT_DIR, `${base}.md`), `# ${sectionEn.title}\n\n${bodyEn}\n`, 'utf8');
+  const hasPt = bodyPt.length >= 40;
+  if (hasPt) {
+    writeFileSync(join(PT_DIR, `${base}.md`), `# ${sectionPt.title}\n\n${bodyPt}\n`, 'utf8');
+  }
+  manifest.push({ base, hasPt });
+});
+
+// Releases não tem variante PT (CHANGELOG do kit é EN) — fallback cobre.
+writeFileSync(
+  join(OUT_DIR, 'manifest.json'),
+  JSON.stringify({ releases: { hasPt: false }, sections: manifest }, null, 2),
+  'utf8',
+);
+
+const written = readdirSync(OUT_DIR, { recursive: true }).filter((f) => String(f).endsWith('.md'));
+console.log(`cli-docs: ${written.length} arquivo(s) da doc do CLI gerados (EN/PT pareados + releases).`);

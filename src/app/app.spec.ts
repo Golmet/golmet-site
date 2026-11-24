@@ -33,6 +33,6 @@ describe('App (RN-016-2 — rotas da única app)', () => {
     await harness.navigateByUrl('/docs');
     const compiled = harness.fixture.nativeElement as HTMLElement;
     expect(compiled.querySelector('app-docs-layout')).toBeTruthy();
-    expect(compiled.querySelector('app-docs-index h2')?.textContent).toContain('Documentação');
+    expect(compiled.querySelector('app-docs-index h2')?.textContent).toContain('Documentation');
   });
 });

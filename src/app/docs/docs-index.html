@@ -1,13 +1,11 @@
-<h2>{{ copy.sidebarTitle }}</h2>
-<p class="gm-docs-index-note">{{ copy.indexNote }}</p>
-@if (toc.length > 0) {
+@if (state().pages.length > 0) {
+  <h2>{{ state().copy.sidebarTitle }}</h2>
+  <p class="gm-docs-index-note">{{ state().copy.indexNote }}</p>
   <ul class="gm-docs-index-list">
-    @for (group of toc; track group.group) {
-      @for (item of group.items; track item.slug) {
-        <li>
-          <a [routerLink]="['/docs', item.slug]">{{ item.title }}</a>
-        </li>
-      }
+    @for (item of state().pages; track item.slug) {
+      <li>
+        <a [routerLink]="['/docs', item.slug]">{{ item.title }}</a>
+      </li>
     }
   </ul>
 }

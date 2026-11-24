@@ -1,10 +1,14 @@
 import { Component, inject } from '@angular/core';
-import { RouterLink } from '@angular/router';
+import { toSignal } from '@angular/core/rxjs-interop';
+import { NavigationEnd, Router, RouterLink } from '@angular/router';
+import { filter, map, startWith } from 'rxjs';
 
 import { COPY } from '../shared/copy/copy';
 import { DocsContentService } from './docs-content.service';
+import { LangService } from '../shared/i18n/lang';
 
-// Índice do portal: lista as páginas geradas dos .md canônicos (RN-007).
+// Índice do portal: páginas do locale ativo, geradas dos .md do CLI (RN-007).
+// RN-011 — índice reativo ao locale da rota.
 @Component({
   imports: [RouterLink],
   selector: 'app-docs-index',
@@ -12,6 +16,34 @@ import { DocsContentService } from './docs-content.service';
   templateUrl: './docs-index.html',
 })
 export class DocsIndex {
-  protected readonly copy = COPY.portal;
-  protected readonly toc = inject(DocsContentService).toc;
+  private readonly router = inject(Router);
+  private readonly lang = inject(LangService);
+  private readonly content = inject(DocsContentService);
+
+  protected readonly state = toSignal(
+    this.router.events.pipe(
+      filter((event) => event instanceof NavigationEnd),
+      startWith(null),
+      map(() => {
+        const locale = this.lang.activeLocale();
+        return {
+          copy: COPY[locale].portal,
+          pages: this.content
+            .byLocale(locale)
+            .map((page) => ({ slug: page.slug, title: page.title })),
+        };
+      }),
+    ),
+    {
+      initialValue: (() => {
+        const locale = this.lang.activeLocale();
+        return {
+          copy: COPY[locale].portal,
+          pages: this.content
+            .byLocale(locale)
+            .map((page) => ({ slug: page.slug, title: page.title })),
+        };
+      })(),
+    },
+  );
 }

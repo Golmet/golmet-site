@@ -53,6 +53,36 @@
   color: var(--gm-ouro);
 }
 
+// Seletor de idioma (RN-011-3) — par EN | PT-BR no header.
+.gm-lang {
+  align-items: center;
+  display: flex;
+  gap: 2px;
+  margin-left: var(--gm-space-2);
+}
+
+.gm-lang-btn {
+  background: transparent;
+  border: 1px solid transparent;
+  border-radius: 6px;
+  color: var(--gm-text-muted);
+  cursor: pointer;
+  font-family: ui-monospace, 'Cascadia Code', 'Courier New', monospace;
+  font-size: 0.78rem;
+  letter-spacing: 0.06em;
+  padding: 5px 8px;
+}
+
+.gm-lang-btn:hover {
+  color: var(--gm-ouro);
+}
+
+.gm-lang-btn.active {
+  background: rgba(232, 180, 74, 0.12);
+  color: var(--gm-ouro);
+  font-weight: 700;
+}
+
 .gm-main {
   display: flex;
   flex: 1;

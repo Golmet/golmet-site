@@ -1,12 +1,14 @@
 import { TestBed } from '@angular/core/testing';
+import { ActivatedRoute } from '@angular/router';
 import { provideRouter } from '@angular/router';
-import { RouterTestingHarness } from '@angular/router/testing';
+
 import { Landing } from './landing';
 import { COPY } from '../shared/copy/copy';
 import { CLI_VERSION } from '../shared/cli-version.generated';
 
 // RN-001-1 — hero com Arki, proposta de valor e quickstart com comandos
 // copiáveis (RN-001, RN-002); narrativa com wizard (CR-003).
+// RN-011 — locale da rota: default EN (raiz); PT-BR via route data.
 describe('Landing — primeira dobra (RN-001-1)', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
@@ -27,17 +29,37 @@ describe('Landing — primeira dobra (RN-001-1)', () => {
     expect(img!.getAttribute('alt')).toContain('Arki');
   });
 
-  it('renderiza proposta de valor e quickstart narrado do deck (4 passos)', () => {
+  it('renderiza proposta de valor e quickstart narrado do deck (4 passos) — EN na raiz', () => {
     const fixture = TestBed.createComponent(Landing);
     fixture.detectChanges();
 
     const compiled = fixture.nativeElement as HTMLElement;
-    expect(compiled.querySelector('.gm-kicker')?.textContent).toContain('REQUISITOS');
-    expect(compiled.querySelector('.gm-value')?.textContent).toContain('Seu contrato');
-    expect(compiled.querySelector('.gm-quickstart h2')?.textContent).toContain(COPY.landing.quickstart.heading);
-    expect(compiled.querySelectorAll('.gm-step').length).toBe(COPY.landing.quickstart.steps.length);
+    expect(compiled.querySelector('.gm-kicker')?.textContent).toContain('REQUIREMENTS');
+    expect(compiled.querySelector('.gm-value')?.textContent).toContain('Your agreement');
+    expect(compiled.querySelector('.gm-quickstart h2')?.textContent).toContain(COPY.en.landing.quickstart.heading);
+    expect(compiled.querySelectorAll('.gm-step').length).toBe(COPY.en.landing.quickstart.steps.length);
     // 3 botões no quickstart (npm, install, init) + 1 no CTA final
     expect(compiled.querySelectorAll('.gm-copy').length).toBe(4);
+  });
+
+  it('RN-011: locale pt-BR pela rota — fonte PT-BR da landing (ADR-009)', () => {
+    TestBed.resetTestingModule();
+    TestBed.configureTestingModule({
+      imports: [Landing],
+      providers: [
+        provideRouter([]),
+        { provide: ActivatedRoute, useValue: { snapshot: { data: { locale: 'pt-BR' } } } },
+      ],
+    }).compileComponents();
+
+    const fixture = TestBed.createComponent(Landing);
+    fixture.detectChanges();
+    const compiled = fixture.nativeElement as HTMLElement;
+
+    expect(compiled.querySelector('.gm-kicker')?.textContent).toContain('REQUISITOS');
+    expect(compiled.querySelector('.gm-tagline')?.textContent).toContain('Requisitos versionados');
+    expect(compiled.querySelector('.gm-value')?.textContent).toContain('Seu contrato');
+    expect(compiled.querySelector('.gm-quickstart h2')?.textContent).toContain('Comece pelo combinado');
   });
 
   it('copia o comando com feedback "Copiado" (RN-002)', async () => {
@@ -52,7 +74,7 @@ describe('Landing — primeira dobra (RN-001-1)', () => {
     (compiled.querySelector<HTMLButtonElement>('.gm-copy') as HTMLButtonElement).click();
     await fixture.whenStable();
 
-    expect(written).toContain(COPY.landing.quickstart.steps[0].command);
+    expect(written).toContain(COPY.en.landing.quickstart.steps[0].command);
     expect(compiled.querySelector<HTMLButtonElement>('.gm-copy')?.textContent).toContain('Copiado');
   });
 
@@ -67,7 +89,7 @@ describe('Landing — primeira dobra (RN-001-1)', () => {
     for (const link of links) {
       expect(link.getAttribute('href')).toBe('/docs');
     }
-    expect(compiled.querySelector('.gm-path-card h3')?.textContent).toContain('Produto novo');
+    expect(compiled.querySelector('.gm-path-card h3')?.textContent).toContain('New product');
   });
 
   it('RN-004/CR-005: os 18 comandos vivem na documentação, não na landing', () => {
@@ -102,12 +124,12 @@ describe('Landing — primeira dobra (RN-001-1)', () => {
 
     expect(compiled.querySelectorAll('.gm-problem-card').length).toBe(4);
     expect(compiled.querySelectorAll('.gm-layer').length).toBe(3);
-    expect(compiled.querySelector('.gm-layer-name')?.textContent).toContain('FORMATO');
+    expect(compiled.querySelector('.gm-layer-name')?.textContent).toContain('FORMAT');
     expect(compiled.querySelectorAll('.gm-how-step').length).toBe(5);
     expect(compiled.textContent).not.toContain('estrelas');
   });
 
-  it('CR-006: coerência de lançamento — badge v1.1.1, sem pré-lançamento nem jargão de fase', () => {
+  it('CR-006: coerência de lançamento — badge da release vigente, sem pré-lançamento nem jargão de fase', () => {
     const fixture = TestBed.createComponent(Landing);
     fixture.detectChanges();
     const compiled = fixture.nativeElement as HTMLElement;
@@ -138,7 +160,7 @@ describe('Landing — primeira dobra (RN-001-1)', () => {
     expect(compiled.querySelectorAll('.gm-engine-chip').length).toBe(7);
     expect(compiled.querySelector('.gm-engine-chip')?.textContent).toContain('OpenCode');
     expect(compiled.querySelectorAll('.gm-diff-item').length).toBe(3);
-    expect(compiled.querySelector('.gm-diff-item')?.textContent).toContain('Markdown no seu git');
+    expect(compiled.querySelector('.gm-diff-item')?.textContent).toContain('Markdown in your git');
   });
 
   it('RN-004/CR-005: 4 comandos em destaque + link para a documentação', () => {
@@ -148,7 +170,7 @@ describe('Landing — primeira dobra (RN-001-1)', () => {
 
     const featured = compiled.querySelectorAll('.gm-featured-cap');
     expect(featured.length).toBe(4);
-    expect(compiled.querySelector('.gm-cap-doc-link')?.textContent).toContain('todos os 18 comandos');
+    expect(compiled.querySelector('.gm-cap-doc-link')?.textContent).toContain('all 18 commands');
     expect(compiled.textContent).not.toContain('golmet contribute');
   });
 });
