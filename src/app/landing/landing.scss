@@ -7,7 +7,7 @@
   gap: var(--gm-space-2);
   margin: 0 auto;
   max-width: 1120px;
-  padding: var(--gm-space-1) var(--gm-space-3) var(--gm-space-2);
+  padding: var(--gm-space-1) var(--gm-space-3) var(--gm-space-4);
   width: 100%;
 }
 
@@ -95,8 +95,9 @@
   border: 1px solid var(--gm-border);
   border-radius: var(--gm-radius);
   color: var(--gm-text);
-  font-size: 0.9rem;
-  padding: 6px 14px;
+  font-size: 1rem;
+  font-weight: 500;
+  padding: 12px 24px;
   text-decoration: none;
 }
 
@@ -240,7 +241,7 @@
   background: rgba(35, 39, 44, 0.45);
   border-bottom: 1px solid var(--gm-border);
   border-top: 1px solid var(--gm-border);
-  margin-top: var(--gm-space-3);
+  margin-top: var(--gm-space-2);
   padding: var(--gm-space-4) var(--gm-space-3);
 }
 
