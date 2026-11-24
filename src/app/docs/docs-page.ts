@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, DestroyRef, inject } from '@angular/core';
 import { DomSanitizer, Meta, SafeHtml, Title } from '@angular/platform-browser';
 import { ActivatedRoute, RouterLink } from '@angular/router';
 import { isPlatformBrowser } from '@angular/common';
@@ -32,10 +32,22 @@ export class DocsPage {
   private readonly platformId = inject(PLATFORM_ID);
   private readonly docsHtml = inject(DOCS_HTML);
   private readonly navService = inject(DocsPageNavService);
+  private readonly destroyRef = inject(DestroyRef);
 
   private readonly page: GeneratedDocPage | undefined = this.content.bySlug(
     this.route.snapshot.data['slug'] ?? '',
   );
+
+  // RN-011 — ao sair de uma página de docs, o aside "Nesta página" perde o
+  // estado (o índice e as páginas fora do portal não têm sumário).
+  constructor() {
+    this.destroyRef.onDestroy(() => this.navService.setPageToc(null));
+    this.title.setTitle(this.page ? `${this.page.title} — GOLMET` : 'Page not found — GOLMET');
+    this.meta.updateTag({
+      name: 'description',
+      content: this.page?.title ?? 'Documentation page not found',
+    });
+  }
 
   protected readonly translated = this.page?.translated ?? false;
   protected readonly hasPage = !!this.page;

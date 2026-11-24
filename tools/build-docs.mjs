@@ -158,16 +158,6 @@ function ingest() {
 
   const push = (arr, page, group) => arr.push({ ...page, group: page.group ?? group });
 
-  // Releases (CHANGELOG das GitHub Releases — EN, sem variante PT).
-  addPair(
-    'releases',
-    manifest.releases?.hasPt === true,
-    'releases.md',
-    'pt-br/releases.md',
-    manifest.releases?.group ?? 'CLI',
-    manifest.releases?.sourcePath ?? 'CHANGELOG.md',
-  );
-
   // Seções do README (pareadas por índice — READMEs gêmeos).
   for (const entry of manifest.readme ?? []) {
     const file = `${entry.base}.md`;
@@ -185,6 +175,17 @@ function ingest() {
       entry.sourcePathPt ?? 'README.pt-br.md',
     );
   }
+
+  // Releases (CHANGELOG das GitHub Releases) — ÚLTIMA aba do grupo CLI
+  // (pedido do operador: a aba Releases fecha a guia CLI com o changelog).
+  addPair(
+    'releases',
+    manifest.releases?.hasPt === true,
+    'releases.md',
+    'pt-br/releases.md',
+    manifest.releases?.group ?? 'CLI',
+    manifest.releases?.sourcePath ?? 'CHANGELOG.md',
+  );
 
   // Árvore docs/** do repo (FORMAT, concepts, getting-started, reference…).
   for (const entry of manifest.docs ?? []) {
