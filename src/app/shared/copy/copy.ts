@@ -11,6 +11,12 @@
 // CR-005 (17/11/2026): linguagem simples no hero para quem chega frio,
 // coerência de pré-lançamento (sem jargão de fase interno), engines
 // nomeados, diferenciação e terminal com saída real do kit.
+//
+// A versão do kit exibida no site NÃO é hardcoded: tools/fetch-cli-version.mjs
+// captura do registry npm no build (CR — pedido do operador) e gera
+// ../cli-version.generated.ts. Import daqui propaga para badge/notas.
+
+import { CLI_VERSION } from '../cli-version.generated';
 
 export interface QuickstartStep {
   readonly title: string;
@@ -62,7 +68,7 @@ export const COPY = {
         'e avisa quando código e doc divergem.',
       valueHighlight: 'Seu contrato.',
       valueProposal: 'Seu repositório. Uma fonte de verdade que acompanha o código.',
-      statusNote: 'Site em construção — o kit v1.1.1 já está estável no npm.',
+      statusNote: `Site em construção — o kit v${CLI_VERSION} já está estável no npm.`,
     },
     terminal: {
       title: 'Saída real — golmet init · status · validate',
@@ -145,8 +151,8 @@ export const COPY = {
     },
     quickstart: {
       heading: 'Comece pelo combinado',
-      badge: 'v1.1.1',
-      note: 'Release v1.1.1 estável no npm — os comandos acima já funcionam.',
+      badge: `v${CLI_VERSION}`,
+      note: `Release v${CLI_VERSION} estável no npm — os comandos acima já funcionam.`,
       steps: [
         {
           title: 'Instale o binário',
@@ -208,7 +214,7 @@ export const COPY = {
       heading: 'Comece hoje',
       text: 'Um comando. Um workspace. A verdade versionada no seu git.',
       command: 'npm i -g golmet-cli',
-      preLaunch: 'v1.1.1 estável — instalação funcional pelo npm.',
+      preLaunch: `v${CLI_VERSION} estável — instalação funcional pelo npm.`,
     },
   },
   portal: {

@@ -3,6 +3,7 @@ import { RouterLink } from '@angular/router';
 
 import { Terminal } from '../shared/terminal/terminal';
 import { COPY } from '../shared/copy/copy';
+import { CLI_VERSION } from '../shared/cli-version.generated';
 
 // RN-001 — landing promocional, estrutura narrativa (CR-004) + credibilidade
 // de pré-lançamento (CR-005): hero + terminal real (dobra) → problema →
@@ -16,6 +17,7 @@ import { COPY } from '../shared/copy/copy';
   templateUrl: './landing.html',
 })
 export class Landing {
+  protected readonly cliVersion = CLI_VERSION;
   protected readonly copy = COPY.landing.hero;
   protected readonly terminal = COPY.landing.terminal;
   protected readonly quickstart = COPY.landing.quickstart;
