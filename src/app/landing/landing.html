@@ -103,10 +103,11 @@
 
   <section class="gm-how" aria-label="Como funciona">
     <h2>{{ howItWorks.heading }}</h2>
+    <p class="gm-section-note">{{ howItWorks.note }}</p>
     <ol class="gm-how-steps">
       @for (step of howItWorks.steps; track step.name; let i = $index) {
         <li class="gm-how-step">
-          <span class="gm-how-number">{{ i + 1 }}</span>
+          <span class="gm-how-number">{{ i < 9 ? '0' + (i + 1) : i + 1 }}</span>
           <p class="gm-how-name">{{ step.name }}</p>
           <p class="gm-how-text">{{ step.text }}</p>
         </li>
@@ -159,9 +160,10 @@
         </div>
       }
     </div>
-    <p class="gm-cap-note">
-      {{ capabilitiesCopy.note }} <a class="gm-cap-doc-link" href="/docs">{{ capabilitiesCopy.docLink }}</a>
-    </p>
+    <div class="gm-cap-footer">
+      <p class="gm-cap-note">{{ capabilitiesCopy.note }}</p>
+      <a class="gm-cap-doc-link" href="/docs">{{ capabilitiesCopy.docLink }}</a>
+    </div>
   </section>
 
   <section class="gm-final-cta" aria-label="Comece hoje">

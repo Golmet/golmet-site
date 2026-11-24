@@ -112,6 +112,7 @@ export const COPY = {
     },
     howItWorks: {
       heading: 'Como funciona',
+      note: 'Do acordo inicial à verificação contínua em cada commit.',
       steps: [
         { name: 'Charter', text: 'O que vamos construir — confirmado com o cliente.' },
         { name: 'Regras', text: 'RNs numeradas, claras e aprovadas antes do código.' },
