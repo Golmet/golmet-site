@@ -91,13 +91,13 @@ function ingest() {
   };
 
   // Página EN (fonte) + rota PT (traduzida ou shadow EN + banner — RN-011-4).
-  const addPair = (base, hasPt, fileEn) => {
+  const addPair = (base, hasPt, fileEn, filePt, group) => {
     const en = readMd(fileEn);
-    push(pages, { slug: base, base, locale: 'en', lang: 'en', translated: true, ...en }, source.group);
-    const ptRel = join('pt-br', `${base}.md`);
+    push(pages, { slug: base, base, locale: 'en', lang: 'en', translated: true, ...en, group });
+    const ptRel = filePt;
     if (hasPt && existsSync(join(source.dir, ptRel))) {
       const pt = readMd(ptRel.replace(/\\/g, '/'));
-      push(pages, { slug: `pt-br/${base}`, base, locale: 'pt-BR', lang: 'pt-BR', translated: true, ...pt }, source.group);
+      push(pages, { slug: `pt-br/${base}`, base, locale: 'pt-BR', lang: 'pt-BR', translated: true, ...pt, group });
     } else {
       // RN-011-4 — shadow: rota PT existe, conteúdo EN + banner de não traduzida.
       push(
@@ -111,30 +111,54 @@ function ingest() {
           title: en.title,
           html: en.html,
           text: en.text,
+          group,
         },
-        source.group,
       );
     }
   };
 
-  const push = (arr, page, group) => arr.push({ ...page, group });
+  const push = (arr, page, group) => arr.push({ ...page, group: page.group ?? group });
 
-  addPair('releases', manifest.releases?.hasPt === true, 'releases.md');
-  for (const entry of manifest.sections) {
+  // Releases (CHANGELOG das GitHub Releases — EN, sem variante PT).
+  addPair(
+    'releases',
+    manifest.releases?.hasPt === true,
+    'releases.md',
+    'pt-br/releases.md',
+    manifest.releases?.group ?? 'CLI',
+  );
+
+  // Seções do README (pareadas por índice — READMEs gêmeos).
+  for (const entry of manifest.readme ?? []) {
     const file = `${entry.base}.md`;
     if (!existsSync(join(source.dir, file))) {
       failures.push(`${file}: no manifest mas ausente no disco`);
       continue;
     }
-    addPair(entry.base, entry.hasPt === true, file);
+    addPair(entry.base, entry.hasPt === true, file, `pt-br/${entry.base}.md`, entry.group);
   }
 
-  // Arquivos .md órfãos (no disco, fora do manifest, fora de pt-br/) = fonte inconsistente.
+  // Árvore docs/** do repo (FORMAT, concepts, getting-started, reference…).
+  for (const entry of manifest.docs ?? []) {
+    const file = `${entry.base}.md`;
+    if (!existsSync(join(source.dir, file))) {
+      failures.push(`${file}: no manifest mas ausente no disco`);
+      continue;
+    }
+    addPair(entry.base, entry.hasPt === true, file, `pt-br/${entry.base}.md`, entry.group);
+  }
+
+  // Arquivos .md órfãos (no disco, fora do manifest) = fonte inconsistente.
+  const manifestBases = new Set([
+    'releases',
+    ...(manifest.readme ?? []).map((e) => e.base),
+    ...(manifest.docs ?? []).map((e) => e.base),
+  ]);
   for (const file of walkMd(source.dir)) {
     const rel = relative(source.dir, file).replace(/\\/g, '/');
-    if (rel === 'manifest.json' || rel.startsWith('pt-br/')) continue;
-    if (rel === 'releases.md') continue;
-    if (!manifest.sections.some((s) => `${s.base}.md` === rel)) {
+    if (rel === 'manifest.json') continue;
+    const base = rel.replace(/^pt-br\//i, '').replace(/\.md$/i, '').toLowerCase();
+    if (!manifestBases.has(base)) {
       failures.push(`${rel}: órfão — no disco mas ausente no manifest.json`);
     }
   }
@@ -143,6 +167,8 @@ function ingest() {
 }
 
 function emitGenerated(pages) {
+  console.log('DEBUG p0:', JSON.stringify(pages[0]).slice(0, 300));
+  console.log('DEBUG sem group:', pages.filter((p) => p.group === undefined).length, 'de', pages.length);
   const tocByLocale = { en: [], 'pt-BR': [] };
   for (const locale of Object.keys(tocByLocale)) {
     const groups = new Map();
