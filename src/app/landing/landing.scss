@@ -7,7 +7,7 @@
   gap: var(--gm-space-2);
   margin: 0 auto;
   max-width: 1120px;
-  padding: var(--gm-space-1) var(--gm-space-3) var(--gm-space-4);
+  padding: var(--gm-space-3) var(--gm-space-3) var(--gm-space-4);
   width: 100%;
 }
 
@@ -43,32 +43,34 @@
   grid-template-columns: 1fr;
 }
 
+// Pilha do hero: respiro uniforme de 14px entre as linhas (print do
+// operador) — 8px ficou colado demais.
 .gm-hero-copy .gm-kicker {
   color: var(--gm-amber);
   font-family: ui-monospace, 'Cascadia Code', 'Courier New', monospace;
   font-size: 0.75rem;
   letter-spacing: 0.14em;
-  margin: 0 0 var(--gm-space-1);
+  margin: 0 0 14px;
 }
 
 .gm-hero-copy h1 {
   color: var(--gm-ouro);
   font-size: clamp(2.3rem, 5.5vw, 3.1rem);
   letter-spacing: 0.08em;
-  margin: 0 0 var(--gm-space-1);
+  margin: 0 0 14px;
 }
 
 .gm-hero-copy .gm-tagline {
   color: var(--gm-text);
   font-size: clamp(1.15rem, 2.4vw, 1.5rem);
   font-weight: 600;
-  margin: 0 0 var(--gm-space-1);
+  margin: 0 0 14px;
 }
 
 .gm-hero-copy .gm-plain {
   color: var(--gm-text-muted);
   font-size: clamp(1rem, 2vw, 1.15rem);
-  margin: 0 0 var(--gm-space-1);
+  margin: 0 0 14px;
   max-width: 44rem;
 }
 
@@ -102,7 +104,7 @@
   display: flex;
   flex-wrap: wrap;
   gap: var(--gm-space-2);
-  margin-top: var(--gm-space-1);
+  margin-top: 22px;
 }
 
 .gm-cta {
