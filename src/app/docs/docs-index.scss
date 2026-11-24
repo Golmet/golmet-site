@@ -1,21 +1,41 @@
 .gm-docs-index-note {
   color: var(--gm-text-muted);
-  font-size: 0.9rem;
-  margin: 0 0 var(--gm-space-2);
+  font-size: 1rem;
+  margin: 0 0 var(--gm-space-3);
 }
 
+// Índice em cards — mesma linguagem visual das demais páginas do portal
+// (não mais lista crua colada no topo).
 .gm-docs-index-list {
+  display: grid;
+  gap: var(--gm-space-2);
+  grid-template-columns: 1fr;
   list-style: none;
   margin: 0;
   padding: 0;
 }
 
+@media (min-width: 700px) {
+  .gm-docs-index-list {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
 .gm-docs-index-list a {
+  background: var(--gm-surface);
+  border: 1px solid var(--gm-border);
+  border-radius: var(--gm-radius);
   color: var(--gm-text);
+  display: block;
+  font-size: 1rem;
+  font-weight: 600;
+  padding: 1.25rem 1.5rem;
   text-decoration: none;
+  transition: border-color 0.15s ease;
 }
 
 .gm-docs-index-list a:hover {
+  border-color: var(--gm-ouro);
   color: var(--gm-ouro);
 }
 

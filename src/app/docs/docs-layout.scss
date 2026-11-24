@@ -23,9 +23,21 @@
 @media (min-width: 900px) {
   .gm-docs-sidebar {
     align-self: start;
+    background: var(--gm-surface);
+    border: 1px solid var(--gm-border);
+    border-radius: var(--gm-radius);
+    padding: 1.25rem;
     position: sticky;
     top: var(--gm-space-3);
   }
+}
+
+.gm-docs-sidebar .gm-docs-search {
+  margin-bottom: var(--gm-space-2);
+}
+
+.gm-docs-sidebar .gm-toc-group:first-of-type {
+  margin-top: var(--gm-space-2);
 }
 
 .gm-toc-group {
@@ -33,7 +45,7 @@
   font-size: 0.72rem;
   font-weight: 700;
   letter-spacing: 0.1em;
-  margin: var(--gm-space-2) 0 var(--gm-space-1);
+  margin: var(--gm-space-3) 0 var(--gm-space-1);
   text-transform: uppercase;
 }
 
@@ -44,23 +56,25 @@
 }
 
 .gm-toc a {
-  border: 1px solid transparent;
+  border-left: 2px solid transparent;
   border-radius: 6px;
   color: var(--gm-text-muted);
   display: block;
-  font-size: 0.9rem;
-  padding: 6px 12px;
+  font-size: 0.92rem;
+  padding: 8px 12px;
   text-decoration: none;
 }
 
 .gm-toc a:hover {
+  background: rgba(233, 230, 223, 0.05);
   color: var(--gm-ouro);
 }
 
 .gm-toc a.active {
-  background: var(--gm-surface);
-  border-color: var(--gm-ouro);
+  background: rgba(232, 180, 74, 0.08);
+  border-left-color: var(--gm-ouro);
   color: var(--gm-ouro);
+  font-weight: 600;
 }
 
 .gm-docs-content {
