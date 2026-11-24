@@ -2,10 +2,11 @@
   <div class="gm-landing">
   <section class="gm-hero">
     <div class="gm-hero-copy">
+      <p class="gm-kicker">{{ copy.kicker }}</p>
       <h1>{{ copy.title }}</h1>
       <p class="gm-tagline">{{ copy.tagline }}</p>
       <p class="gm-plain">{{ copy.plainLine }}</p>
-      <p class="gm-value">{{ copy.valueProposal }}</p>
+      <p class="gm-value"><strong>{{ copy.valueHighlight }}</strong> {{ copy.valueProposal }}</p>
       <div class="gm-ctas">
         <a
           class="gm-cta gm-cta-primary"

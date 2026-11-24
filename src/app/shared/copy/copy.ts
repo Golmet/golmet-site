@@ -54,14 +54,14 @@ export interface DiffItem {
 export const COPY = {
   landing: {
     hero: {
+      kicker: 'REQUISITOS · EVIDÊNCIAS · VERSIONAMENTO',
       title: 'GOLMET',
       tagline: 'Requisitos versionados. Docs que não apodrecem.',
       plainLine:
         'GOLMET é uma CLI que transforma requisitos em markdown versionado no seu git — ' +
         'e avisa quando código e doc divergem.',
-      valueProposal:
-        'O combinado com o cliente vira requisito versionado. O requisito vira spec. ' +
-        'A spec vira código rastreável — e o documento continua verdadeiro depois do deploy.',
+      valueHighlight: 'Seu contrato.',
+      valueProposal: 'Seu repositório. Uma fonte de verdade que acompanha o código.',
       statusNote: 'Site em construção — o kit v1.1.1 já está estável no npm.',
     },
     terminal: {
