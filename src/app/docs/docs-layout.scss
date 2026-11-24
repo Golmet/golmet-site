@@ -36,17 +36,24 @@
   }
 
   // O primeiro grupo não precisa de margem extra após a busca.
-  .gm-docs-sidebar .gm-toc-group:first-of-type {
+  .gm-docs-sidebar details.gm-toc-group:first-of-type {
     margin-top: 0;
   }
-}
 
-.gm-docs-sidebar .gm-docs-search {
-  margin-bottom: 1.25rem;
+  // A margem vai no ELEMENTO HOST do DocsSearch (display inline por default
+  // colapsa margens do filho interno — mesma técnica do gap anterior).
+  .gm-docs-sidebar app-docs-search {
+    display: block;
+    margin-bottom: 1.5rem;
+  }
 }
 
 .gm-toc-group {
   margin: 0 0 var(--gm-space-1);
+}
+
+.gm-toc-group-name {
+  padding: 2px 0;
 }
 
 .gm-toc-group + .gm-toc-group,
