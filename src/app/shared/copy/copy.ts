@@ -71,7 +71,7 @@ export const COPY = {
       statusNote: `Site em construção — o kit v${CLI_VERSION} já está estável no npm.`,
     },
     terminal: {
-      title: 'Saída real — golmet init · status · validate',
+      title: 'Saída real — install · version · init · status · validate',
     },
     problem: {
       heading: 'Todo mundo de software já viveu',

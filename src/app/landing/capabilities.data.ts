@@ -1,6 +1,6 @@
 // RN-001-3 / CR-004/CR-006 — dados da tabela de capacidades (fonte única
 // versionada, não hardcode no componente — ADR-003). Regra RN-004: somente
-// comandos LANÇADOS no release vigente do golmet-cli (v1.1.1 — 18 comandos),
+// comandos LANÇADOS no release vigente do golmet-cli (18 comandos),
 // agrupados por tema. A lista canônica vive no repo do kit (docs/reference);
 // atualize aqui a cada release novo.
 export interface Capability {
