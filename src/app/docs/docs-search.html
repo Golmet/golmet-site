@@ -11,7 +11,7 @@
     <ul class="gm-docs-search-results">
       @for (result of results(); track result.slug) {
         <li>
-          <a [routerLink]="['/docs', result.slug]">{{ result.title }}</a>
+          <a [routerLink]="'/docs/' + result.slug">{{ result.title }}</a>
         </li>
       }
     </ul>

@@ -19,8 +19,19 @@ const RELEASES_API = 'https://api.github.com/repos/Golmet/golmet-cli/releases?pe
 const OUT_DIR = 'docs-content/cli';
 const PT_DIR = join(OUT_DIR, 'pt-br');
 
+// RN-007-8/9 — GITHUB_TOKEN (quando presente no CI) autentica a API de
+// Releases: rate limit 1.000/h vs 60/h anônimo (runners compartilham IP).
+const githubHeaders = {
+  'User-Agent': 'golmet-site-build',
+  ...(process.env.GITHUB_TOKEN ? { Authorization: `Bearer ${process.env.GITHUB_TOKEN}` } : {}),
+};
+
 const get = async (url) => {
-  const res = await fetch(url, { signal: AbortSignal.timeout(15000) });
+  const isGithubApi = url.startsWith('https://api.github.com/');
+  const res = await fetch(url, {
+    signal: AbortSignal.timeout(15000),
+    headers: isGithubApi ? githubHeaders : undefined,
+  });
   if (!res.ok) throw new Error(`${url} respondeu HTTP ${res.status} — build estrito: nada publica`);
   return res.text();
 };

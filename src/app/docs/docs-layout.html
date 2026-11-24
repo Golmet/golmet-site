@@ -7,7 +7,7 @@
         @for (item of group.items; track item.slug) {
           <li>
             <a
-              [routerLink]="['/docs', item.slug]"
+              [routerLink]="'/docs/' + item.slug"
               routerLinkActive="active"
               >{{ item.title }}</a
             >

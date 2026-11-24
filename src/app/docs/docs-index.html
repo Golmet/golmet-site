@@ -4,7 +4,7 @@
   <ul class="gm-docs-index-list">
     @for (item of state().pages; track item.slug) {
       <li>
-        <a [routerLink]="['/docs', item.slug]">{{ item.title }}</a>
+        <a [routerLink]="'/docs/' + item.slug">{{ item.title }}</a>
       </li>
     }
   </ul>
