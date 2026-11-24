@@ -157,8 +157,10 @@ details[open] > .gm-toc-group-name::after {
 }
 
 @media (min-width: 1400px) {
+  // O container CRESC com o aside — a coluna central não encolhe (RN-011).
   .gm-docs {
-    grid-template-columns: 280px minmax(0, 1fr) 220px;
+    max-width: 1480px;
+    grid-template-columns: 280px minmax(0, 1fr) 280px;
   }
 
   .gm-docs-toc {
@@ -170,6 +172,7 @@ details[open] > .gm-toc-group-name::after {
     overflow-y: auto;
     scrollbar-width: thin;
     scrollbar-color: var(--gm-border) transparent;
+    padding: 0 var(--gm-space-2);
   }
 
   .gm-docs-toc::-webkit-scrollbar {
@@ -190,6 +193,15 @@ details[open] > .gm-toc-group-name::after {
   margin: 0 0 var(--gm-space-2);
 }
 
+.gm-docs-toc-title {
+  color: var(--gm-text);
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  margin: 0 0 var(--gm-space-2);
+  padding: 0 12px;
+}
+
 .gm-docs-toc-list {
   border-left: 1px solid var(--gm-border);
   list-style: none;
@@ -201,7 +213,7 @@ details[open] > .gm-toc-group-name::after {
   color: var(--gm-text-muted);
   display: block;
   font-size: 0.82rem;
-  padding: 4px 0 4px 12px;
+  padding: 4px 12px;
   text-decoration: none;
 }
 
