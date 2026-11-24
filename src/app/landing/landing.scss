@@ -4,7 +4,7 @@
 
 .gm-landing {
   display: grid;
-  gap: var(--gm-space-1);
+  gap: var(--gm-space-2);
   margin: 0 auto;
   max-width: 1120px;
   padding: var(--gm-space-1) var(--gm-space-3) var(--gm-space-2);
@@ -13,6 +13,13 @@
 
 .gm-landing > * {
   min-width: 0;
+}
+
+// Ritmo vertical: hero + quickstart continuam colados (protege a dobra
+// <=720px, M-06); os demais blocos de conteúdo ganham 48px de respiro
+// para as seções não se misturarem.
+.gm-landing > section:not(.gm-hero):not(.gm-quickstart) {
+  margin-top: var(--gm-space-4);
 }
 
 .gm-landing h2 {
