@@ -1,22 +1,21 @@
-// RN-014-3 / CR-005 — copy base no tom "Guardião Estoico" (RN-015).
+// RN-014-3 / RN-011-5 / CR-005 — copy por locale no tom "Guardião Estoico" (RN-015).
 //
-// Fonte da landing = PT-BR (RN-013, ADR-009); fonte da docs técnica = EN.
-// O EN é derivado e revisado na feature RN-011 — este módulo é a única
-// fonte dos textos base (nenhum copy inline em componente).
+// ADR-009/RN-013 — assimetria de fonte por superfície:
+//   landing  → PT-BR é a FONTE canônica (EN derivado e revisado)
+//   docs     → EN é a fonte (derivada do repo golmet-cli via pipeline RN-007)
+// Mudança nessa estratégia exige CR (ADR-009). Consumidores pegam o tree pelo
+// locale da rota (RN-011) — nenhum copy inline em componente.
+//
+// A versão do kit exibida no site NÃO é hardcoded: tools/fetch-cli-version.mjs
+// captura do registry npm no build e gera ../cli-version.generated.ts.
 //
 // Regras da voz: frases curtas, zero hype, sempre cita evidência.
 // Arki NUNCA é retratado criando conteúdo — só diagnostica, cita
 // evidência e bloqueia.
-//
-// CR-005 (17/11/2026): linguagem simples no hero para quem chega frio,
-// coerência de pré-lançamento (sem jargão de fase interno), engines
-// nomeados, diferenciação e terminal com saída real do kit.
-//
-// A versão do kit exibida no site NÃO é hardcoded: tools/fetch-cli-version.mjs
-// captura do registry npm no build (CR — pedido do operador) e gera
-// ../cli-version.generated.ts. Import daqui propaga para badge/notas.
 
 import { CLI_VERSION } from '../cli-version.generated';
+
+export type Locale = 'en' | 'pt-BR';
 
 export interface QuickstartStep {
   readonly title: string;
@@ -57,7 +56,87 @@ export interface DiffItem {
   readonly text: string;
 }
 
-export const COPY = {
+export interface CopyTree {
+  readonly landing: {
+    readonly hero: {
+      readonly kicker: string;
+      readonly title: string;
+      readonly tagline: string;
+      readonly plainLine: string;
+      readonly valueHighlight: string;
+      readonly valueProposal: string;
+      readonly statusNote: string;
+    };
+    readonly terminal: { readonly title: string };
+    readonly problem: {
+      readonly heading: string;
+      readonly note: string;
+      readonly cards: readonly ProblemCard[];
+    };
+    readonly thesis: {
+      readonly heading: string;
+      readonly note: string;
+      readonly layers: readonly ThesisLayer[];
+    };
+    readonly howItWorks: {
+      readonly heading: string;
+      readonly note: string;
+      readonly steps: readonly FlowStep[];
+    };
+    readonly engines: {
+      readonly heading: string;
+      readonly note: string;
+      readonly engines: readonly string[];
+    };
+    readonly differentiation: {
+      readonly heading: string;
+      readonly items: readonly DiffItem[];
+    };
+    readonly quickstart: {
+      readonly heading: string;
+      readonly badge: string;
+      readonly note: string;
+      readonly steps: readonly QuickstartStep[];
+    };
+    readonly paths: {
+      readonly heading: string;
+      readonly items: readonly PathCard[];
+    };
+    readonly capabilities: {
+      readonly heading: string;
+      readonly docLink: string;
+      readonly note: string;
+      readonly featured: readonly FeatureCommand[];
+    };
+    readonly ctas: { readonly github: string; readonly npm: string };
+    readonly finalCta: {
+      readonly heading: string;
+      readonly text: string;
+      readonly command: string;
+      readonly preLaunch: string;
+    };
+  };
+  readonly portal: {
+    readonly sidebarTitle: string;
+    readonly searchPlaceholder: string;
+    readonly notTranslated: string;
+    readonly indexNote: string;
+  };
+  readonly notFound: {
+    readonly title: string;
+    readonly message: string;
+    readonly hint: string;
+  };
+  readonly footer: {
+    readonly links: { readonly docs: string; readonly github: string; readonly npm: string };
+    readonly license: string;
+    readonly copyright: string;
+  };
+}
+
+// ── pt-BR — FONTE da landing (ADR-009/RN-013) ───────────────────
+
+const ptBR: CopyTree = {
   landing: {
     hero: {
       kicker: 'REQUISITOS · EVIDÊNCIAS · VERSIONAMENTO',
@@ -93,7 +172,7 @@ export const COPY = {
           title: 'A doc apodreceu',
           text: 'Mudou o requisito, ninguém atualizou o documento. Doc velha é doc que ninguém confia.',
         },
-      ] as readonly ProblemCard[],
+      ],
     },
     thesis: {
       heading: 'Uma máquina de estados documental',
@@ -114,7 +193,7 @@ export const COPY = {
           role: 'A camada agêntica',
           text: 'O julgamento por capacidades — em qualquer engine dos padrões abertos.',
         },
-      ] as readonly ThesisLayer[],
+      ],
     },
     howItWorks: {
       heading: 'Como funciona',
@@ -125,7 +204,7 @@ export const COPY = {
         { name: 'Specs', text: 'Modelo de dados, contratos e telas derivados das regras.' },
         { name: 'Código', text: 'Tasks com critérios de aceitação e evidência citada.' },
         { name: 'Verdade viva', text: 'Mudou o requisito? O kit aponta exatamente o que ficou desatualizado.' },
-      ] as readonly FlowStep[],
+      ],
     },
     engines: {
       heading: 'Funciona com o seu agente',
@@ -147,7 +226,7 @@ export const COPY = {
           title: 'O kit é o árbitro',
           text: 'Um binário determinístico valida estados e evidência. A verdade não depende só do prompt.',
         },
-      ] as readonly DiffItem[],
+      ],
     },
     quickstart: {
       heading: 'Comece pelo combinado',
@@ -173,7 +252,7 @@ export const COPY = {
           title: 'A verdade fica versionada',
           text: 'Markdown no seu git — sobrevive a engines, kits e releases.',
         },
-      ] as readonly QuickstartStep[],
+      ],
     },
     paths: {
       heading: 'Escolha seu caminho',
@@ -193,7 +272,7 @@ export const COPY = {
           text: 'Onboarding do dev #2: clone, doctor, pack sync — checklist sem manual.',
           docPath: '/docs',
         },
-      ] as readonly PathCard[],
+      ],
     },
     capabilities: {
       heading: 'O que o kit faz',
@@ -204,7 +283,7 @@ export const COPY = {
         { command: 'golmet validate', description: 'Valida o workspace contra o FORMATO v1' },
         { command: 'golmet status', description: 'Dashboard de estados das entidades' },
         { command: 'golmet next', description: 'Recomenda a próxima ação sobre o workspace' },
-      ] as readonly FeatureCommand[],
+      ],
     },
     ctas: {
       github: 'Ver no GitHub',
@@ -239,3 +318,189 @@ export const COPY = {
     copyright: '© 2026 GOLMET',
   },
 };
+
+// ── en — derivado da fonte PT-BR (RN-011-5, revisão seguinte) ───
+
+const en: CopyTree = {
+  landing: {
+    hero: {
+      kicker: 'REQUIREMENTS · EVIDENCE · VERSIONING',
+      title: 'GOLMET',
+      tagline: "Versioned requirements. Docs that don't rot.",
+      plainLine:
+        'GOLMET is a CLI that turns requirements into versioned markdown in your own git — ' +
+        'and warns when code and docs drift.',
+      valueHighlight: 'Your agreement.',
+      valueProposal: 'Your repository. A source of truth that follows the code.',
+      statusNote: `Site under construction — kit v${CLI_VERSION} is already stable on npm.`,
+    },
+    terminal: {
+      title: 'Real output — install · version · init · status · validate',
+    },
+    problem: {
+      heading: 'Every software team has lived this',
+      note: "If any of these scenes feel familiar, the problem isn't the team — it's the absence of a source of truth.",
+      cards: [
+        {
+          title: 'The conversation stayed in the past',
+          text: 'The client asked in a meeting. Nobody wrote it down properly. Three weeks later, everyone remembers it differently.',
+        },
+        {
+          title: 'The code became a mystery',
+          text: 'The feature is live — but the detail (min value, what blocks it, why) lives in the head of whoever wrote it.',
+        },
+        {
+          title: 'Ghost scope',
+          text: `"That's not what I asked for" — and there's no way to prove what was agreed.`,
+        },
+        {
+          title: 'The docs rotted',
+          text: 'The requirement changed, nobody updated the document. Old docs are docs nobody trusts.',
+        },
+      ],
+    },
+    thesis: {
+      heading: 'A documentary state machine',
+      note: "The versioned requirement is the product's normative state. Three layers, split by nature:",
+      layers: [
+        {
+          name: 'FORMAT',
+          role: 'The contract',
+          text: 'Workspace layout, schemas and state transitions — versioned and stable.',
+        },
+        {
+          name: 'KIT',
+          role: 'The deterministic engine',
+          text: 'Validates, indexes, checks evidence. No LLM, no surprises.',
+        },
+        {
+          name: 'RUNTIME',
+          role: 'The agentic layer',
+          text: 'Judgment through capabilities — on any engine from the open standards.',
+        },
+      ],
+    },
+    howItWorks: {
+      heading: 'How it works',
+      note: 'From the initial agreement to continuous verification on every commit.',
+      steps: [
+        { name: 'Charter', text: "What we're building — confirmed with the client." },
+        { name: 'Rules', text: 'Numbered RNs, clear and approved before the code.' },
+        { name: 'Specs', text: 'Data model, contracts and screens derived from the rules.' },
+        { name: 'Code', text: 'Tasks with acceptance criteria and cited evidence.' },
+        { name: 'Living truth', text: 'The requirement changed? The kit points to exactly what became stale.' },
+      ],
+    },
+    engines: {
+      heading: 'Works with your agent',
+      note: "Through the ecosystem's open standards — AGENTS.md, SKILL.md and MCP. No engine lock-in.",
+      engines: ['OpenCode', 'Claude Code', 'Cursor', 'Codex', 'Gemini CLI', 'Copilot CLI', 'VS Code Copilot'],
+    },
+    differentiation: {
+      heading: "Why it isn't just another spec-tool",
+      items: [
+        {
+          title: 'Markdown in your git',
+          text: 'Requirements are plain files any engine can read. No proprietary format, no lock-in.',
+        },
+        {
+          title: 'Parseable evidence',
+          text: 'Every rule cites `[path:line @hash]` — the docs ↔ code connection is machine-verifiable.',
+        },
+        {
+          title: 'The kit is the arbiter',
+          text: "A deterministic binary validates states and evidence. Truth doesn't depend on the prompt alone.",
+        },
+      ],
+    },
+    quickstart: {
+      heading: 'Start from the agreement',
+      badge: `v${CLI_VERSION}`,
+      note: `Release v${CLI_VERSION} stable on npm — the commands above already work.`,
+      steps: [
+        {
+          title: 'Install the binary',
+          command: 'npm i -g golmet-cli',
+          text: 'Native, zero runtime dependency.',
+        },
+        {
+          title: 'Set up the kit',
+          command: 'golmet install',
+          text: 'The wizard configures engine, gm-* skills and kit MCPs.',
+        },
+        {
+          title: 'Initialize the workspace',
+          command: 'golmet init YourProductName',
+          text: 'The wizard creates the workspace: golmet.yaml, charter and FORMAT zones.',
+        },
+        {
+          title: 'The truth gets versioned',
+          text: 'Markdown in your git — survives engines, kits and releases.',
+        },
+      ],
+    },
+    paths: {
+      heading: 'Choose your path',
+      items: [
+        {
+          title: 'New product',
+          text: 'Charter, requirements and specs from scratch — kit and agent in the same folder.',
+          docPath: '/docs',
+        },
+        {
+          title: 'Legacy repo',
+          text: 'The guardian reads the code and proposes rules; you confirm what is true.',
+          docPath: '/docs',
+        },
+        {
+          title: 'Multi-dev org',
+          text: 'Dev #2 onboarding: clone, doctor, pack sync — checklist, no manual.',
+          docPath: '/docs',
+        },
+      ],
+    },
+    capabilities: {
+      heading: 'What the kit does',
+      docLink: 'all 18 commands in the docs →',
+      note: "Only what's released in the current version — the guardian doesn't promise what doesn't exist.",
+      featured: [
+        { command: 'golmet init', description: 'Creates the product workspace (interactive wizard)' },
+        { command: 'golmet validate', description: 'Validates the workspace against FORMAT v1' },
+        { command: 'golmet status', description: 'Dashboard of entity states' },
+        { command: 'golmet next', description: 'Recommends the next action on the workspace' },
+      ],
+    },
+    ctas: {
+      github: 'View on GitHub',
+      npm: 'golmet-cli on npm',
+    },
+    finalCta: {
+      heading: 'Start today',
+      text: 'One command. One workspace. Versioned truth in your git.',
+      command: 'npm i -g golmet-cli',
+      preLaunch: `v${CLI_VERSION} stable — functional install via npm.`,
+    },
+  },
+  portal: {
+    sidebarTitle: 'Documentation',
+    searchPlaceholder: 'Search the docs…',
+    notTranslated: 'Page not translated — showing the English version.',
+    indexNote: 'Rendered straight from the golmet-cli repository — docs, releases and changelog.',
+  },
+  notFound: {
+    title: 'Page not found',
+    message: "This address doesn't exist on the site — the guardian only states what cites evidence.",
+    hint: 'Use the search or go back through the paths below.',
+  },
+  footer: {
+    links: {
+      docs: '/docs',
+      github: 'https://github.com/Golmet',
+      npm: 'https://www.npmjs.com/package/golmet-cli',
+    },
+    license: 'MIT License',
+    copyright: '© 2026 GOLMET',
+  },
+};
+
+export const COPY: Record<Locale, CopyTree> = { 'pt-BR': ptBR, en };

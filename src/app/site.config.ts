@@ -8,7 +8,7 @@ export const SITE_NAME = 'GOLMET';
 export const SITE_URL = 'https://golmet.io';
 
 /** Idiomas publicados na estratégia de rotas (EN na raiz, PT em /pt-BR/ — ADR-007) */
-export const LOCALES = ['en'] as const;
+export const LOCALES = ['en', 'pt-BR'] as const;
 
 /** OG image default — asset da RN-014-2 */
 export const OG_IMAGE_PATH = '/og/og-default.jpg';

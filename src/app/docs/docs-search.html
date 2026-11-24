@@ -4,8 +4,8 @@
     type="search"
     [value]="query()"
     (input)="onInput($any($event.target).value)"
-    placeholder="Buscar na documentação…"
-    aria-label="Buscar na documentação"
+    [placeholder]="placeholder"
+    [attr.aria-label]="placeholder"
   />
   @if (results().length > 0) {
     <ul class="gm-docs-search-results">

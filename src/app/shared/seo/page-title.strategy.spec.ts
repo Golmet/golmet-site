@@ -24,11 +24,24 @@ describe('GolmetTitleStrategy (shared/seo)', () => {
     await harness.navigateByUrl('/');
 
     const head = (harness.fixture.nativeElement as HTMLElement).ownerDocument!.head;
-    expect(document.title).toContain('Requisitos versionados');
+    expect(document.title).toContain("Docs that don't rot");
     expect(head.querySelector('meta[name="description"]')?.getAttribute('content')).toContain('GOLMET');
     expect(head.querySelector<HTMLLinkElement>('link[rel="canonical"]')?.href).toBe(`${SITE_URL}/`);
     expect(head.querySelector<HTMLLinkElement>('link[rel="alternate"][hreflang="en"]')?.href).toBe(`${SITE_URL}/`);
+    // RN-011-1 — hreflang pt-BR aponta a variante equivalente.
+    expect(head.querySelector<HTMLLinkElement>('link[rel="alternate"][hreflang="pt-BR"]')?.href).toBe(
+      `${SITE_URL}/pt-BR`,
+    );
     expect(head.querySelector<HTMLLinkElement>('link[rel="alternate"][hreflang="x-default"]')?.href).toBe(`${SITE_URL}/`);
+  });
+
+  it('landing PT-BR: title da fonte e lang do documento (RN-011-1/5)', async () => {
+    await TestBed.createComponent(App).whenStable();
+    const harness = await RouterTestingHarness.create();
+    await harness.navigateByUrl('/pt-BR');
+
+    expect(document.title).toContain('Requisitos versionados');
+    expect(document.documentElement.getAttribute('lang')).toBe('pt-BR');
   });
 
   it('landing: og:image aponta para o banner do Arki (asset RN-014-2)', async () => {
