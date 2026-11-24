@@ -234,6 +234,5 @@ export const COPY = {
       npm: 'https://www.npmjs.com/package/golmet-cli',
     },
     license: 'Licença MIT',
-    status: 'Kit v1.1.1 estável no npm · site em construção.',
   },
 };
