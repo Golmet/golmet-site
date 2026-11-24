@@ -215,7 +215,8 @@ details[open] > .gm-toc-group-name::after {
   padding: 0;
 }
 
-.gm-docs-toc-list a {
+.gm-docs-toc-list a,
+.gm-docs-toc-list .gm-docs-toc-link {
   color: var(--gm-text-muted);
   display: block;
   font-size: 0.82rem;
@@ -223,11 +224,22 @@ details[open] > .gm-toc-group-name::after {
   text-decoration: none;
 }
 
-.gm-docs-toc-list a:hover {
+.gm-docs-toc-link {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  font-family: inherit;
+  text-align: left;
+  width: 100%;
+}
+
+.gm-docs-toc-list a:hover,
+.gm-docs-toc-link:hover {
   color: var(--gm-ouro);
 }
 
-.gm-docs-toc-list li.is-h3 a {
+.gm-docs-toc-list li.is-h3 a,
+.gm-docs-toc-list li.is-h3 .gm-docs-toc-link {
   padding-left: 24px;
 }
 
