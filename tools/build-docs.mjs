@@ -17,7 +17,11 @@ const SOURCES = [
   // CR-002/RN-007-8/9 — ativa quando o repo do kit abrir (clone shallow da main):
   // { type: 'git', repo: 'https://github.com/Golmet/golmet-cli', branch: 'main',
   //   paths: ['FORMATO.md', 'docs'], prefix: 'kit' },
-  { type: 'local', dir: 'docs-content', group: 'Documentation', lang: 'en' },
+  { type: 'local', dir: 'docs-content', group: 'Documentation', lang: 'en', exclude: ['cli'] },
+  // RN-007-8/9 — docs do release publicado (READMEs extraídos do tarball npm
+  // por tools/fetch-cli-docs.mjs). A variante PT-BR (README.pt-br.md) recebe
+  // lang próprio — ADR-009: fonte EN, PT-BR derivado do próprio kit.
+  { type: 'local', dir: 'docs-content/cli', group: 'CLI release', lang: 'en' },
 ];
 
 const OUT_TS = 'src/app/docs/docs-content.generated.ts';
@@ -44,7 +48,10 @@ const titleOf = (md, rel) => {
 /** RN-008 — validação strict de uma página do portal. Devolve falhas. */
 export function validatePage(md, rel) {
   const errors = [];
-  const h1s = md.match(/^#\s+.+$/gm) ?? [];
+  // H1s contam FORA de blocos de código — `# comentário` em fence shell do
+  // README do kit não é heading (docs reais do release, RN-007-8).
+  const mdNoFences = md.replace(/```[\s\S]*?```/g, ' ');
+  const h1s = mdNoFences.match(/^#\s+.+$/gm) ?? [];
   if (h1s.length !== 1) errors.push(`${rel}: exatamente 1 H1 é obrigatório (achados: ${h1s.length})`);
   if (md.trim().length < 40) errors.push(`${rel}: corpo vazio ou mínimo demais`);
   if (md.trimStart().startsWith('---')) {
@@ -62,13 +69,15 @@ function stripMd(md) {
     .trim();
 }
 
-function walkMd(dir) {
+function walkMd(dir, exclude = []) {
   const out = [];
   if (!existsSync(dir)) return out;
   for (const entry of readdirSync(dir, { withFileTypes: true })) {
     const full = join(dir, entry.name);
-    if (entry.isDirectory()) out.push(...walkMd(full));
-    else if (entry.name.toLowerCase().endsWith('.md')) out.push(full);
+    if (entry.isDirectory()) {
+      if (exclude.includes(entry.name)) continue;
+      out.push(...walkMd(full, exclude));
+    } else if (entry.name.toLowerCase().endsWith('.md')) out.push(full);
   }
   return out;
 }
@@ -78,17 +87,19 @@ function ingest() {
   const failures = [];
   for (const source of SOURCES) {
     if (source.type !== 'local') continue;
-    for (const file of walkMd(source.dir)) {
+    for (const file of walkMd(source.dir, source.exclude ?? [])) {
       const rel = relative(source.dir, file).replace(/\\/g, '/');
       const md = readFileSync(file, 'utf8');
       failures.push(...validatePage(md, rel));
       const slug = slugOf(rel);
+      // Variante PT-BR do release (.pt-br.md) — ADR-009/RN-011.
+      const lang = rel.toLowerCase().endsWith('.pt-br.md') ? 'pt-br' : source.lang;
       const html = marked.parse(md);
       pages.push({
         slug,
         title: titleOf(md, rel),
         html,
-        lang: source.lang,
+        lang,
         group: source.group,
         text: stripMd(md),
       });
