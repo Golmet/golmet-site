@@ -1,78 +1,103 @@
-// RN-007-8/9 (padrão CR-002) — fonte das docs do CLI = release publicado.
-// Enquanto o repo Golmet/golmet-cli é privado, a fonte do portal é o TARBALL
-// da versão publicada no registry npm (a mesma que o usuário instala com
-// `npm i -g golmet-cli`) — zero edição manual, coerente com o release vigente.
+// RN-007-8/9 — fonte das docs do portal = repositório PÚBLICO golmet-cli.
+// O repo abriu (private: false) — o padrão CR-002 do tarball foi substituído
+// pela fonte canônica: raw.githubusercontent na main + GitHub Releases API.
 //
-// Extrai README.md (EN — RN-013) e README.pt-br.md para docs-content/cli/,
-// prefixando o H1 que o portal exige (RN-008: exatamente 1 H1 por página).
-// Strict: registry sem resposta, tarball sem READMEs = exit 1, nada publica.
-import { spawnSync } from 'node:child_process';
-import { mkdirSync, mkdtempSync, readdirSync, readFileSync, rmSync, writeFileSync } from 'node:fs';
-import { tmpdir } from 'node:os';
+// Gera em docs-content/cli/:
+//   releases.md                — notas das GitHub Releases (a "aba Releases")
+//   <section>.md               — README.md EN dividido por H2 (sidebar estruturada)
+//   <section>.pt-br.md         — README.pt-br.md dividido por H2 (lang pt-br)
+//
+// Strict: qualquer fonte sem resposta = exit 1, nada publica.
+// Pré-ambulo do README (H1, badges, language links) é descartado — o título
+// vem do H1 de cada página e a troca de idioma vive nos grupos da sidebar.
+import { mkdirSync, readdirSync, rmSync, writeFileSync } from 'node:fs';
 import { join } from 'node:path';
 
-const REGISTRY = 'https://registry.npmjs.org/golmet-cli/latest';
+const RAW = 'https://raw.githubusercontent.com/Golmet/golmet-cli/main';
+const RELEASES_API = 'https://api.github.com/repos/Golmet/golmet-cli/releases?per_page=10';
 const OUT_DIR = 'docs-content/cli';
-const MEMBERS = ['package/README.md', 'package/README.pt-br.md'];
 
-const registry = await fetch(REGISTRY, { signal: AbortSignal.timeout(10000) });
-if (!registry.ok) {
-  throw new Error(`registry npm respondeu HTTP ${registry.status} — build estrito: nada publica`);
-}
-const meta = await registry.json();
-const version = meta?.version;
-if (typeof version !== 'string' || !/^\d+\.\d+\.\d+/.test(version)) {
-  throw new Error(`versão inválida no registry npm: ${JSON.stringify(version)}`);
-}
-const tarballUrl = meta?.dist?.tarball;
-if (typeof tarballUrl !== 'string' || !tarballUrl.startsWith('https://')) {
-  throw new Error(`tarball inválido no registry npm: ${JSON.stringify(tarballUrl)}`);
-}
+const get = async (url) => {
+  const res = await fetch(url, { signal: AbortSignal.timeout(15000) });
+  if (!res.ok) throw new Error(`${url} respondeu HTTP ${res.status} — build estrito: nada publica`);
+  return res.text();
+};
 
-const tarballRes = await fetch(tarballUrl, { signal: AbortSignal.timeout(30000) });
-if (!tarballRes.ok) throw new Error(`tarball respondeu HTTP ${tarballRes.status}`);
-
-// Adaptação de renderização cross-repo (não é edição de evidência — o texto
-// dos comandos/saídas permanece intocado):
-//  - banner-golmet.png referencia asset do repo, não embarcado no tarball
-//  - href entre READMEs vira rota do portal; LICENSE relativo vira o do site
-function adaptForPortal(md) {
-  return md
-    .replace(/^[ \t]*<img src="banner-golmet\.png"[^\n]*>\r?\n?/m, '')
-    .replace(/href="README\.pt-br\.md"/g, 'href="/docs/readme.pt-br"')
-    .replace(/href="README\.md"/g, 'href="/docs/readme"')
-    .replace(/href="LICENSE"/g, 'href="https://github.com/Golmet/golmet-site/blob/main/LICENSE"');
-}
-const tmp = mkdtempSync(join(tmpdir(), 'golmet-cli-docs-'));
-const tgzPath = join(tmp, 'kit.tgz');
-const extractDir = join(tmp, 'out');
-writeFileSync(tgzPath, Buffer.from(await tarballRes.arrayBuffer()));
-mkdirSync(extractDir, { recursive: true });
-
-const tar = spawnSync('tar', ['-xzf', tgzPath, '-C', extractDir, ...MEMBERS], { stdio: 'pipe' });
-if (tar.status !== 0) {
-  const stderr = tar.stderr?.toString() ?? '';
-  rmSync(tmp, { recursive: true, force: true });
-  throw new Error(`tar falhou (status ${tar.status}): ${stderr.slice(0, 300)}`);
-}
-
-try {
-  mkdirSync(OUT_DIR, { recursive: true });
-  for (const member of MEMBERS) {
-    const extracted = join(extractDir, member);
-    const md = adaptForPortal(readFileSync(extracted, 'utf8'));
-    if (md.trim().length < 200) {
-      throw new Error(`${member} vazio ou mínimo demais no tarball — nada publica`);
+// Divide o README por H2 FORA de code fences — cada seção vira página da
+// sidebar com H1 próprio (RN-008). Pré-ambulo (antes do 1º H2) é descartado.
+function splitByH2(md) {
+  const lines = md.split('\n');
+  const sections = [];
+  let current = null;
+  let inFence = false;
+  for (const line of lines) {
+    if (/^\s*```/.test(line)) inFence = !inFence;
+    if (inFence) {
+      current?.lines.push(line);
+      continue;
     }
-    const h1 =
-      member === 'package/README.pt-br.md'
-        ? `# GOLMET CLI — release v${version} (PT-BR)`
-        : `# GOLMET CLI — release v${version}`;
-    const outName = member.replace('package/', '').toLowerCase();
-    writeFileSync(join(OUT_DIR, outName), `${h1}\n\n${md}`, 'utf8');
+    const h2 = /^##\s+(.+)$/.exec(line);
+    if (h2) {
+      current = { title: h2[1].trim(), lines: [] };
+      sections.push(current);
+      continue;
+    }
+    current?.lines.push(line);
   }
-  const written = readdirSync(OUT_DIR);
-  console.log(`cli-docs: READMEs do release v${version} extraídos — ${written.join(', ')}`);
-} finally {
-  rmSync(tmp, { recursive: true, force: true });
+  return sections;
 }
+
+const slugOf = (title) =>
+  title
+    .toLowerCase()
+    .normalize('NFD')
+    .replace(/[\u0300-\u036f]/g, '')
+    .replace(/[^a-z0-9]+/g, '-')
+    .replace(/^-+|-+$/g, '');
+
+// Limpa antes: seções que sumiram do README não podem ficar órfãs na sidebar.
+rmSync(OUT_DIR, { recursive: true, force: true });
+mkdirSync(OUT_DIR, { recursive: true });
+
+// 1) Releases — somente o CHANGELOG/notas das releases (pedido do operador).
+const releasesRaw = await get(RELEASES_API);
+const releases = JSON.parse(releasesRaw);
+if (!Array.isArray(releases) || releases.length === 0) {
+  throw new Error('GitHub Releases vazio — nada publica');
+}
+const dateOf = (iso) => (iso ?? '').slice(0, 10).split('-').reverse().join('/');
+const releasesMd = releases
+  .map((r) => {
+    // git-cliff embute heading próprio com a tag ("## [1.7.4] - data", SEM o
+    // prefixo v do tag_name) — o heading meu já cobre; soltar qualquer heading
+    // que cite o número da versão.
+    const tagNum = r.tag_name.replace(/^v/, '');
+    const body = (r.body ?? '')
+      .split('\n')
+      .filter((line) => !(/^\s*#{2,4}\s/.test(line) && line.includes(`[${tagNum}]`)))
+      .join('\n')
+      .trim();
+    return `## ${r.tag_name} — ${dateOf(r.published_at)}\n\n${body}`;
+  })
+  .join('\n\n');
+writeFileSync(join(OUT_DIR, 'releases.md'), `# Releases\n\n${releasesMd}\n`, 'utf8');
+
+// 2) README EN + PT-BR divididos por H2.
+for (const [file, lang] of [
+  ['README.md', 'en'],
+  ['README.pt-br.md', 'pt-br'],
+]) {
+  const md = await get(`${RAW}/${file}`);
+  const sections = splitByH2(md);
+  if (sections.length === 0) throw new Error(`${file} sem seções H2 — nada publica`);
+  for (const section of sections) {
+    const suffix = lang === 'pt-br' ? '.pt-br' : '';
+    const name = `${slugOf(section.title)}${suffix}.md`;
+    const body = section.lines.join('\n').trim();
+    if (body.length < 40) continue; // seção mínima — vira ruído de sidebar
+    writeFileSync(join(OUT_DIR, name), `# ${section.title}\n\n${body}\n`, 'utf8');
+  }
+}
+
+const written = readdirSync(OUT_DIR);
+console.log(`cli-docs: ${written.length} arquivo(s) da doc do CLI gerados — ${written.slice(0, 6).join(', ')}…`);

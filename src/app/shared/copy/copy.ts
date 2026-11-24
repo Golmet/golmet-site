@@ -221,7 +221,7 @@ export const COPY = {
     sidebarTitle: 'Documentação',
     searchPlaceholder: 'Buscar na documentação…',
     notTranslated: 'Página não traduzida — exibindo a versão em inglês.',
-    indexNote: 'Documentação em evolução — renderizada da main do repo.',
+    indexNote: 'Renderizada direto do repositório golmet-cli — docs, releases e changelog.',
   },
   notFound: {
     title: 'Página não encontrada',
