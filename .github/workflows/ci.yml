@@ -23,6 +23,10 @@ jobs:
         run: npm ci
       - name: Build (SSG production)
         run: npm run build
+        env:
+          # RN-007-8/9 — autentica a leitura das GitHub Releases do golmet-cli
+          # (repo público; sem token a API anônima estoura rate limit 60/h nos runners)
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - name: Metas check (RN-017 — bloqueia o merge em falha)
         run: npm run check:metas
       - name: Unit tests
