@@ -119,13 +119,13 @@ describe('Landing — primeira dobra (RN-001-1)', () => {
     expect(compiled.querySelector('.gm-final-command code')?.textContent).toContain('npm i -g golmet-cli');
   });
 
-  it('CR-006: terminal com saída real da v1.1.1 (install, init, status, validate)', () => {
+  it('CR-006: terminal com saída real da v1.7.4 (install, version, init, status, validate)', () => {
     const fixture = TestBed.createComponent(Landing);
     fixture.detectChanges();
     const compiled = fixture.nativeElement as HTMLElement;
 
     expect(compiled.querySelector('app-terminal')).toBeTruthy();
-    expect(compiled.textContent).toContain('+ golmet-cli@1.1.1');
+    expect(compiled.textContent).toContain('golmet version v1.7.4');
     expect(compiled.textContent).toContain('Feature ancorada em PEND');
     expect(compiled.textContent).toContain('fix:');
   });
