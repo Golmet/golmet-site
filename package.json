@@ -4,7 +4,8 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
-    "build": "npm run docs:pipeline && ng build && node tools/generate-sitemap.mjs",
+    "build": "npm run version:fetch && npm run docs:pipeline && ng build && node tools/generate-sitemap.mjs",
+    "version:fetch": "node tools/fetch-cli-version.mjs",
     "docs:pipeline": "node tools/build-docs.mjs",
     "check:metas": "node tools/check-metas.mjs",
     "watch": "ng build --watch --configuration development",
