@@ -1,4 +1,3 @@
-<p align="center"><a href="https://github.com/Golmet/golmet-cli/blob/main/README.md"English</a> | <a href="https://github.com/Golmet/golmet-cli/blob/main/README.md"Português (Brasil)</a></p>
 
 # 05 — O que sobra quando o projeto termina: o ciclo do pack
 

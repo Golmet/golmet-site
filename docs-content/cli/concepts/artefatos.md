@@ -1,4 +1,3 @@
-<p align="center">English | <a href="/docs/pt-br/concepts/artefatos"Português (Brasil)</a></p>
 
 # The artifact architecture of Golmet
 

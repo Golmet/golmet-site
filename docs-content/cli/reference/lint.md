@@ -1,4 +1,3 @@
-<p align="center">English | <a href="/docs/pt-br/reference/lint"Português (Brasil)</a></p>
 
 # The lint layers (L1-L13)
 

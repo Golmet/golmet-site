@@ -5,6 +5,8 @@
 // (gate Lighthouse mobile >= 90 — RN-017).
 // RN-011: locale por página; páginas pt-BR com translated:false são shadow
 // (conteúdo EN + banner de não traduzida — RN-011-4).
+// Ordem SEMÂNTICA do manifest (sequência de leitura) — GENERATED_ORDER alimenta
+// prev/next (estilo VitePress).
 export interface GeneratedDocPage {
   slug: string;
   base: string;
@@ -13,6 +15,7 @@ export interface GeneratedDocPage {
   group: string;
   title: string;
   translated: boolean;
+  sourcePath: string;
 }
 export interface GeneratedTocLocale {
   locale: 'en' | 'pt-BR';
@@ -20,526 +23,14 @@ export interface GeneratedTocLocale {
 }
 export const GENERATED_DOCS: readonly GeneratedDocPage[] = [
   {
-    "slug": "concepts/artefatos",
-    "base": "concepts/artefatos",
-    "locale": "en",
-    "lang": "en",
-    "group": "Concepts",
-    "title": "The artifact architecture of Golmet",
-    "translated": true
-  },
-  {
-    "slug": "concepts/context7",
-    "base": "concepts/context7",
-    "locale": "en",
-    "lang": "en",
-    "group": "Concepts",
-    "title": "Context7 in the workflow",
-    "translated": true
-  },
-  {
-    "slug": "concepts/init",
-    "base": "concepts/init",
-    "locale": "en",
-    "lang": "en",
-    "group": "Concepts",
-    "title": "The init wizard — what happens on screen",
-    "translated": true
-  },
-  {
-    "slug": "concepts/knowledge",
-    "base": "concepts/knowledge",
-    "locale": "en",
-    "lang": "en",
-    "group": "Concepts",
-    "title": "The knowledge ecosystem",
-    "translated": true
-  },
-  {
-    "slug": "concepts/layers",
-    "base": "concepts/layers",
-    "locale": "en",
-    "lang": "en",
-    "group": "Concepts",
-    "title": "The content layers",
-    "translated": true
-  },
-  {
-    "slug": "concepts/organization",
-    "base": "concepts/organization",
-    "locale": "en",
-    "lang": "en",
-    "group": "Concepts",
-    "title": "Organization, workspaces and versioning",
-    "translated": true
-  },
-  {
-    "slug": "concepts/overview",
-    "base": "concepts/overview",
-    "locale": "en",
-    "lang": "en",
-    "group": "Concepts",
-    "title": "What GOLMET delivers",
-    "translated": true
-  },
-  {
-    "slug": "concepts/profile",
-    "base": "concepts/profile",
-    "locale": "en",
-    "lang": "en",
-    "group": "Concepts",
-    "title": "The `profile/` shelf and the norms",
-    "translated": true
-  },
-  {
-    "slug": "concepts/reverse",
-    "base": "concepts/reverse",
-    "locale": "en",
-    "lang": "en",
-    "group": "Concepts",
-    "title": "Reverse engineering — the documented truth of what already exists",
-    "translated": true
-  },
-  {
-    "slug": "concepts/self-governing",
-    "base": "concepts/self-governing",
-    "locale": "en",
-    "lang": "en",
-    "group": "Concepts",
-    "title": "Self-governing: the lint carries the state",
-    "translated": true
-  },
-  {
-    "slug": "design/decisions",
-    "base": "design/decisions",
-    "locale": "en",
-    "lang": "en",
-    "group": "Design",
-    "title": "DECISIONS — Platform Design Records (ADRs)",
-    "translated": true
-  },
-  {
-    "slug": "design/workflow-improvements",
-    "base": "design/workflow-improvements",
-    "locale": "en",
-    "lang": "en",
-    "group": "Design",
-    "title": "WORKFLOW_IMPROVEMENTS — The improvement history",
-    "translated": true
-  },
-  {
-    "slug": "development",
-    "base": "development",
+    "slug": "releases",
+    "base": "releases",
     "locale": "en",
     "lang": "en",
     "group": "CLI",
-    "title": "Development",
-    "translated": true
-  },
-  {
-    "slug": "format",
-    "base": "format",
-    "locale": "en",
-    "lang": "en",
-    "group": "Guide",
-    "title": "FORMAT v1 — Normative Specification of the GOLMET Workspace",
-    "translated": true
-  },
-  {
-    "slug": "getting-started-5-minutes",
-    "base": "getting-started-5-minutes",
-    "locale": "en",
-    "lang": "en",
-    "group": "CLI",
-    "title": "Getting started (5 minutes)",
-    "translated": true
-  },
-  {
-    "slug": "getting-started/00-por-que-golmet",
-    "base": "getting-started/00-por-que-golmet",
-    "locale": "en",
-    "lang": "en",
-    "group": "Getting started",
-    "title": "00 — Why Golmet exists",
-    "translated": true
-  },
-  {
-    "slug": "getting-started/01-organizacao",
-    "base": "getting-started/01-organizacao",
-    "locale": "en",
-    "lang": "en",
-    "group": "Getting started",
-    "title": "01 — Create the Organization",
-    "translated": true
-  },
-  {
-    "slug": "getting-started/02-projeto",
-    "base": "getting-started/02-projeto",
-    "locale": "en",
-    "lang": "en",
-    "group": "Getting started",
-    "title": "02 — Create the project inside the Organization",
-    "translated": true
-  },
-  {
-    "slug": "getting-started/03-trabalhando-com-ia",
-    "base": "getting-started/03-trabalhando-com-ia",
-    "locale": "en",
-    "lang": "en",
-    "group": "Getting started",
-    "title": "03 — Working with the AI",
-    "translated": true
-  },
-  {
-    "slug": "getting-started/04-o-ciclo-de-uma-feature",
-    "base": "getting-started/04-o-ciclo-de-uma-feature",
-    "locale": "en",
-    "lang": "en",
-    "group": "Getting started",
-    "title": "04 — The cycle of one feature",
-    "translated": true
-  },
-  {
-    "slug": "getting-started/05-maturity-and-knowledge",
-    "base": "getting-started/05-maturity-and-knowledge",
-    "locale": "en",
-    "lang": "en",
-    "group": "Getting started",
-    "title": "05 — What remains when the project ends: the pack cycle",
-    "translated": true
-  },
-  {
-    "slug": "migration",
-    "base": "migration",
-    "locale": "en",
-    "lang": "en",
-    "group": "Guide",
-    "title": "MIGRATION — Migrating from the old model",
-    "translated": true
-  },
-  {
-    "slug": "patterns/index",
-    "base": "patterns/index",
-    "locale": "en",
-    "lang": "en",
-    "group": "Patterns",
-    "title": "Índice do Hub de Patterns",
-    "translated": true
-  },
-  {
-    "slug": "patterns/template",
-    "base": "patterns/template",
-    "locale": "en",
-    "lang": "en",
-    "group": "Patterns",
-    "title": "<titulo>",
-    "translated": true
-  },
-  {
-    "slug": "pt-br/concepts/artefatos",
-    "base": "concepts/artefatos",
-    "locale": "pt-BR",
-    "lang": "pt-BR",
-    "group": "Concepts",
-    "title": "A arquitetura de artefatos do Golmet",
-    "translated": true
-  },
-  {
-    "slug": "pt-br/concepts/context7",
-    "base": "concepts/context7",
-    "locale": "pt-BR",
-    "lang": "pt-BR",
-    "group": "Concepts",
-    "title": "O Context7 no workflow",
-    "translated": true
-  },
-  {
-    "slug": "pt-br/concepts/init",
-    "base": "concepts/init",
-    "locale": "pt-BR",
-    "lang": "pt-BR",
-    "group": "Concepts",
-    "title": "O wizard do init — o que acontece na tela",
-    "translated": true
-  },
-  {
-    "slug": "pt-br/concepts/knowledge",
-    "base": "concepts/knowledge",
-    "locale": "pt-BR",
-    "lang": "pt-BR",
-    "group": "Concepts",
-    "title": "O ecossistema de conhecimento",
-    "translated": true
-  },
-  {
-    "slug": "pt-br/concepts/layers",
-    "base": "concepts/layers",
-    "locale": "pt-BR",
-    "lang": "pt-BR",
-    "group": "Concepts",
-    "title": "As camadas de conteúdo",
-    "translated": true
-  },
-  {
-    "slug": "pt-br/concepts/organization",
-    "base": "concepts/organization",
-    "locale": "pt-BR",
-    "lang": "pt-BR",
-    "group": "Concepts",
-    "title": "Organização, workspaces e versionamento",
-    "translated": true
-  },
-  {
-    "slug": "pt-br/concepts/overview",
-    "base": "concepts/overview",
-    "locale": "pt-BR",
-    "lang": "pt-BR",
-    "group": "Concepts",
-    "title": "O que o GOLMET entrega",
-    "translated": true
-  },
-  {
-    "slug": "pt-br/concepts/profile",
-    "base": "concepts/profile",
-    "locale": "pt-BR",
-    "lang": "pt-BR",
-    "group": "Concepts",
-    "title": "A prateleira `profile/` e as normas",
-    "translated": true
-  },
-  {
-    "slug": "pt-br/concepts/reverse",
-    "base": "concepts/reverse",
-    "locale": "pt-BR",
-    "lang": "pt-BR",
-    "group": "Concepts",
-    "title": "Engenharia reversa — a verdade documentada do que já existe",
-    "translated": true
-  },
-  {
-    "slug": "pt-br/concepts/self-governing",
-    "base": "concepts/self-governing",
-    "locale": "pt-BR",
-    "lang": "pt-BR",
-    "group": "Concepts",
-    "title": "Self-governing: o lint carrega o estado",
-    "translated": true
-  },
-  {
-    "slug": "pt-br/design/decisions",
-    "base": "design/decisions",
-    "locale": "pt-BR",
-    "lang": "pt-BR",
-    "group": "Design",
-    "title": "DECISIONS — ADRs do Workflow Golmet",
-    "translated": true
-  },
-  {
-    "slug": "pt-br/design/workflow-improvements",
-    "base": "design/workflow-improvements",
-    "locale": "pt-BR",
-    "lang": "pt-BR",
-    "group": "Design",
-    "title": "WORKFLOW_IMPROVEMENTS.md",
-    "translated": true
-  },
-  {
-    "slug": "pt-br/development",
-    "base": "development",
-    "locale": "pt-BR",
-    "lang": "pt-BR",
-    "group": "CLI",
-    "title": "Development",
-    "translated": true
-  },
-  {
-    "slug": "pt-br/format",
-    "base": "format",
-    "locale": "pt-BR",
-    "lang": "pt-BR",
-    "group": "Guide",
-    "title": "FORMAT v1 — Especificação Normativa do Workspace GOLMET",
-    "translated": true
-  },
-  {
-    "slug": "pt-br/getting-started-5-minutes",
-    "base": "getting-started-5-minutes",
-    "locale": "pt-BR",
-    "lang": "pt-BR",
-    "group": "CLI",
-    "title": "Getting started (os 5 minutos)",
-    "translated": true
-  },
-  {
-    "slug": "pt-br/getting-started/00-por-que-golmet",
-    "base": "getting-started/00-por-que-golmet",
-    "locale": "pt-BR",
-    "lang": "pt-BR",
-    "group": "Getting started",
-    "title": "00 — Por que o Golmet existe",
-    "translated": true
-  },
-  {
-    "slug": "pt-br/getting-started/01-organizacao",
-    "base": "getting-started/01-organizacao",
-    "locale": "pt-BR",
-    "lang": "pt-BR",
-    "group": "Getting started",
-    "title": "01 — Criar a Organização",
-    "translated": true
-  },
-  {
-    "slug": "pt-br/getting-started/02-projeto",
-    "base": "getting-started/02-projeto",
-    "locale": "pt-BR",
-    "lang": "pt-BR",
-    "group": "Getting started",
-    "title": "02 — Criar o projeto dentro da Organização",
-    "translated": true
-  },
-  {
-    "slug": "pt-br/getting-started/03-trabalhando-com-ia",
-    "base": "getting-started/03-trabalhando-com-ia",
-    "locale": "pt-BR",
-    "lang": "pt-BR",
-    "group": "Getting started",
-    "title": "03 — Trabalhando com a IA",
-    "translated": true
-  },
-  {
-    "slug": "pt-br/getting-started/04-o-ciclo-de-uma-feature",
-    "base": "getting-started/04-o-ciclo-de-uma-feature",
-    "locale": "pt-BR",
-    "lang": "pt-BR",
-    "group": "Getting started",
-    "title": "04 — O ciclo de uma feature",
-    "translated": true
-  },
-  {
-    "slug": "pt-br/getting-started/05-maturity-and-knowledge",
-    "base": "getting-started/05-maturity-and-knowledge",
-    "locale": "pt-BR",
-    "lang": "pt-BR",
-    "group": "Getting started",
-    "title": "05 — O que sobra quando o projeto termina: o ciclo do pack",
-    "translated": true
-  },
-  {
-    "slug": "pt-br/migration",
-    "base": "migration",
-    "locale": "pt-BR",
-    "lang": "pt-BR",
-    "group": "Guide",
-    "title": "MIGRATION — Migração para a arquitetura open core",
-    "translated": true
-  },
-  {
-    "slug": "pt-br/patterns/index",
-    "base": "patterns/index",
-    "locale": "pt-BR",
-    "lang": "en",
-    "group": "Patterns",
-    "title": "Índice do Hub de Patterns",
-    "translated": false
-  },
-  {
-    "slug": "pt-br/patterns/template",
-    "base": "patterns/template",
-    "locale": "pt-BR",
-    "lang": "en",
-    "group": "Patterns",
-    "title": "<titulo>",
-    "translated": false
-  },
-  {
-    "slug": "pt-br/recommended",
-    "base": "recommended",
-    "locale": "pt-BR",
-    "lang": "pt-BR",
-    "group": "Guide",
-    "title": "O modo recomendado: Organização + FULL + Opencode",
-    "translated": true
-  },
-  {
-    "slug": "pt-br/reference/commands",
-    "base": "reference/commands",
-    "locale": "pt-BR",
-    "lang": "pt-BR",
-    "group": "Reference",
-    "title": "Referência de comandos (`golmet`)",
-    "translated": true
-  },
-  {
-    "slug": "pt-br/reference/compatibility",
-    "base": "reference/compatibility",
-    "locale": "pt-BR",
-    "lang": "pt-BR",
-    "group": "Reference",
-    "title": "INSTALL_COMPATIBILITY — Matriz MCP × Engine (v0.1)",
-    "translated": true
-  },
-  {
-    "slug": "pt-br/reference/evals",
-    "base": "reference/evals",
-    "locale": "pt-BR",
-    "lang": "pt-BR",
-    "group": "Reference",
-    "title": "O sistema de evals (golden set)",
-    "translated": true
-  },
-  {
-    "slug": "pt-br/reference/format",
-    "base": "reference/format",
-    "locale": "pt-BR",
-    "lang": "pt-BR",
-    "group": "Reference",
-    "title": "O FORMAT — a spec normativa",
-    "translated": true
-  },
-  {
-    "slug": "pt-br/reference/glossary",
-    "base": "reference/glossary",
-    "locale": "pt-BR",
-    "lang": "pt-BR",
-    "group": "Reference",
-    "title": "GLOSSARY — Glossário do Workflow Golmet",
-    "translated": true
-  },
-  {
-    "slug": "pt-br/reference/known-errors",
-    "base": "reference/known-errors",
-    "locale": "pt-BR",
-    "lang": "pt-BR",
-    "group": "Reference",
-    "title": "KNOWN_ERRORS — erros conhecidos do workflow Golmet",
-    "translated": true
-  },
-  {
-    "slug": "pt-br/reference/lint",
-    "base": "reference/lint",
-    "locale": "pt-BR",
-    "lang": "pt-BR",
-    "group": "Reference",
-    "title": "As camadas do lint (L1-L14)",
-    "translated": true
-  },
-  {
-    "slug": "pt-br/reference/tools",
-    "base": "reference/tools",
-    "locale": "pt-BR",
-    "lang": "pt-BR",
-    "group": "Reference",
-    "title": "MCP tools reference (`gm_*`)",
-    "translated": true
-  },
-  {
-    "slug": "pt-br/reference/versioning",
-    "base": "reference/versioning",
-    "locale": "pt-BR",
-    "lang": "pt-BR",
-    "group": "Reference",
-    "title": "Versionamento (Conventional Commits → semver)",
-    "translated": true
+    "title": "Releases",
+    "translated": true,
+    "sourcePath": "CHANGELOG.md"
   },
   {
     "slug": "pt-br/releases",
@@ -548,178 +39,8 @@ export const GENERATED_DOCS: readonly GeneratedDocPage[] = [
     "lang": "en",
     "group": "CLI",
     "title": "Releases",
-    "translated": false
-  },
-  {
-    "slug": "pt-br/roadmap-contributing-license",
-    "base": "roadmap-contributing-license",
-    "locale": "pt-BR",
-    "lang": "pt-BR",
-    "group": "CLI",
-    "title": "Roadmap · Contributing · Licença",
-    "translated": true
-  },
-  {
-    "slug": "pt-br/the-documentation",
-    "base": "the-documentation",
-    "locale": "pt-BR",
-    "lang": "pt-BR",
-    "group": "CLI",
-    "title": "A documentação",
-    "translated": true
-  },
-  {
-    "slug": "pt-br/the-problem-golmet-solves",
-    "base": "the-problem-golmet-solves",
-    "locale": "pt-BR",
-    "lang": "pt-BR",
-    "group": "CLI",
-    "title": "O problema que o Golmet resolve",
-    "translated": true
-  },
-  {
-    "slug": "pt-br/the-recommended-mode",
-    "base": "the-recommended-mode",
-    "locale": "pt-BR",
-    "lang": "pt-BR",
-    "group": "CLI",
-    "title": "O modo recomendado",
-    "translated": true
-  },
-  {
-    "slug": "pt-br/uninstall",
-    "base": "uninstall",
-    "locale": "pt-BR",
-    "lang": "pt-BR",
-    "group": "CLI",
-    "title": "Desinstalação",
-    "translated": true
-  },
-  {
-    "slug": "pt-br/what-golmet-does-in-practice",
-    "base": "what-golmet-does-in-practice",
-    "locale": "pt-BR",
-    "lang": "pt-BR",
-    "group": "CLI",
-    "title": "O que o Golmet faz, na prática",
-    "translated": true
-  },
-  {
-    "slug": "recommended",
-    "base": "recommended",
-    "locale": "en",
-    "lang": "en",
-    "group": "Guide",
-    "title": "The recommended mode: Organization + FULL + Opencode",
-    "translated": true
-  },
-  {
-    "slug": "reference/commands",
-    "base": "reference/commands",
-    "locale": "en",
-    "lang": "en",
-    "group": "Reference",
-    "title": "Commands reference (`golmet`)",
-    "translated": true
-  },
-  {
-    "slug": "reference/compatibility",
-    "base": "reference/compatibility",
-    "locale": "en",
-    "lang": "en",
-    "group": "Reference",
-    "title": "INSTALL_COMPATIBILITY - Matriz MCP × Engine (v0.1)",
-    "translated": true
-  },
-  {
-    "slug": "reference/evals",
-    "base": "reference/evals",
-    "locale": "en",
-    "lang": "en",
-    "group": "Reference",
-    "title": "The eval system (golden set)",
-    "translated": true
-  },
-  {
-    "slug": "reference/format",
-    "base": "reference/format",
-    "locale": "en",
-    "lang": "en",
-    "group": "Reference",
-    "title": "The FORMAT — the normative spec",
-    "translated": true
-  },
-  {
-    "slug": "reference/glossary",
-    "base": "reference/glossary",
-    "locale": "en",
-    "lang": "en",
-    "group": "Reference",
-    "title": "GLOSSARY — The workflow glossary",
-    "translated": true
-  },
-  {
-    "slug": "reference/known-errors",
-    "base": "reference/known-errors",
-    "locale": "en",
-    "lang": "en",
-    "group": "Reference",
-    "title": "KNOWN_ERRORS — Known errors of the workflow",
-    "translated": true
-  },
-  {
-    "slug": "reference/lint",
-    "base": "reference/lint",
-    "locale": "en",
-    "lang": "en",
-    "group": "Reference",
-    "title": "The lint layers (L1-L13)",
-    "translated": true
-  },
-  {
-    "slug": "reference/tools",
-    "base": "reference/tools",
-    "locale": "en",
-    "lang": "en",
-    "group": "Reference",
-    "title": "Tools",
-    "translated": true
-  },
-  {
-    "slug": "reference/versioning",
-    "base": "reference/versioning",
-    "locale": "en",
-    "lang": "en",
-    "group": "Reference",
-    "title": "Versioning (Conventional Commits → semver)",
-    "translated": true
-  },
-  {
-    "slug": "releases",
-    "base": "releases",
-    "locale": "en",
-    "lang": "en",
-    "group": "CLI",
-    "title": "Releases",
-    "translated": true
-  },
-  {
-    "slug": "roadmap-contributing-license",
-    "base": "roadmap-contributing-license",
-    "locale": "en",
-    "lang": "en",
-    "group": "CLI",
-    "title": "Roadmap · Contributing · License",
-    "translated": true
-  },
-  {
-    "slug": "the-documentation",
-    "base": "the-documentation",
-    "locale": "en",
-    "lang": "en",
-    "group": "CLI",
-    "title": "The documentation",
-    "translated": true
+    "translated": false,
+    "sourcePath": "CHANGELOG.md"
   },
   {
     "slug": "the-problem-golmet-solves",
@@ -728,25 +49,18 @@ export const GENERATED_DOCS: readonly GeneratedDocPage[] = [
     "lang": "en",
     "group": "CLI",
     "title": "The problem Golmet solves",
-    "translated": true
+    "translated": true,
+    "sourcePath": "README.md"
   },
   {
-    "slug": "the-recommended-mode",
-    "base": "the-recommended-mode",
-    "locale": "en",
-    "lang": "en",
+    "slug": "pt-br/the-problem-golmet-solves",
+    "base": "the-problem-golmet-solves",
+    "locale": "pt-BR",
+    "lang": "pt-BR",
     "group": "CLI",
-    "title": "The recommended mode",
-    "translated": true
-  },
-  {
-    "slug": "uninstall",
-    "base": "uninstall",
-    "locale": "en",
-    "lang": "en",
-    "group": "CLI",
-    "title": "Uninstall",
-    "translated": true
+    "title": "O problema que o Golmet resolve",
+    "translated": true,
+    "sourcePath": "README.pt-br.md"
   },
   {
     "slug": "what-golmet-does-in-practice",
@@ -755,13 +69,930 @@ export const GENERATED_DOCS: readonly GeneratedDocPage[] = [
     "lang": "en",
     "group": "CLI",
     "title": "What Golmet does, in practice",
-    "translated": true
+    "translated": true,
+    "sourcePath": "README.md"
+  },
+  {
+    "slug": "pt-br/what-golmet-does-in-practice",
+    "base": "what-golmet-does-in-practice",
+    "locale": "pt-BR",
+    "lang": "pt-BR",
+    "group": "CLI",
+    "title": "O que o Golmet faz, na prática",
+    "translated": true,
+    "sourcePath": "README.pt-br.md"
+  },
+  {
+    "slug": "the-recommended-mode",
+    "base": "the-recommended-mode",
+    "locale": "en",
+    "lang": "en",
+    "group": "CLI",
+    "title": "The recommended mode",
+    "translated": true,
+    "sourcePath": "README.md"
+  },
+  {
+    "slug": "pt-br/the-recommended-mode",
+    "base": "the-recommended-mode",
+    "locale": "pt-BR",
+    "lang": "pt-BR",
+    "group": "CLI",
+    "title": "O modo recomendado",
+    "translated": true,
+    "sourcePath": "README.pt-br.md"
+  },
+  {
+    "slug": "getting-started-5-minutes",
+    "base": "getting-started-5-minutes",
+    "locale": "en",
+    "lang": "en",
+    "group": "CLI",
+    "title": "Getting started (5 minutes)",
+    "translated": true,
+    "sourcePath": "README.md"
+  },
+  {
+    "slug": "pt-br/getting-started-5-minutes",
+    "base": "getting-started-5-minutes",
+    "locale": "pt-BR",
+    "lang": "pt-BR",
+    "group": "CLI",
+    "title": "Getting started (os 5 minutos)",
+    "translated": true,
+    "sourcePath": "README.pt-br.md"
+  },
+  {
+    "slug": "the-documentation",
+    "base": "the-documentation",
+    "locale": "en",
+    "lang": "en",
+    "group": "CLI",
+    "title": "The documentation",
+    "translated": true,
+    "sourcePath": "README.md"
+  },
+  {
+    "slug": "pt-br/the-documentation",
+    "base": "the-documentation",
+    "locale": "pt-BR",
+    "lang": "pt-BR",
+    "group": "CLI",
+    "title": "A documentação",
+    "translated": true,
+    "sourcePath": "README.pt-br.md"
+  },
+  {
+    "slug": "uninstall",
+    "base": "uninstall",
+    "locale": "en",
+    "lang": "en",
+    "group": "CLI",
+    "title": "Uninstall",
+    "translated": true,
+    "sourcePath": "README.md"
+  },
+  {
+    "slug": "pt-br/uninstall",
+    "base": "uninstall",
+    "locale": "pt-BR",
+    "lang": "pt-BR",
+    "group": "CLI",
+    "title": "Desinstalação",
+    "translated": true,
+    "sourcePath": "README.pt-br.md"
+  },
+  {
+    "slug": "development",
+    "base": "development",
+    "locale": "en",
+    "lang": "en",
+    "group": "CLI",
+    "title": "Development",
+    "translated": true,
+    "sourcePath": "README.md"
+  },
+  {
+    "slug": "pt-br/development",
+    "base": "development",
+    "locale": "pt-BR",
+    "lang": "pt-BR",
+    "group": "CLI",
+    "title": "Development",
+    "translated": true,
+    "sourcePath": "README.pt-br.md"
+  },
+  {
+    "slug": "roadmap-contributing-license",
+    "base": "roadmap-contributing-license",
+    "locale": "en",
+    "lang": "en",
+    "group": "CLI",
+    "title": "Roadmap · Contributing · License",
+    "translated": true,
+    "sourcePath": "README.md"
+  },
+  {
+    "slug": "pt-br/roadmap-contributing-license",
+    "base": "roadmap-contributing-license",
+    "locale": "pt-BR",
+    "lang": "pt-BR",
+    "group": "CLI",
+    "title": "Roadmap · Contributing · Licença",
+    "translated": true,
+    "sourcePath": "README.pt-br.md"
+  },
+  {
+    "slug": "format",
+    "base": "format",
+    "locale": "en",
+    "lang": "en",
+    "group": "Guide",
+    "title": "FORMAT v1 — Normative Specification of the GOLMET Workspace",
+    "translated": true,
+    "sourcePath": "docs/format.md"
+  },
+  {
+    "slug": "pt-br/format",
+    "base": "format",
+    "locale": "pt-BR",
+    "lang": "pt-BR",
+    "group": "Guide",
+    "title": "FORMAT v1 — Especificação Normativa do Workspace GOLMET",
+    "translated": true,
+    "sourcePath": "docs/format.pt-br.md"
+  },
+  {
+    "slug": "concepts/artefatos",
+    "base": "concepts/artefatos",
+    "locale": "en",
+    "lang": "en",
+    "group": "Concepts",
+    "title": "The artifact architecture of Golmet",
+    "translated": true,
+    "sourcePath": "docs/concepts/artefatos.md"
+  },
+  {
+    "slug": "pt-br/concepts/artefatos",
+    "base": "concepts/artefatos",
+    "locale": "pt-BR",
+    "lang": "pt-BR",
+    "group": "Concepts",
+    "title": "A arquitetura de artefatos do Golmet",
+    "translated": true,
+    "sourcePath": "docs/concepts/artefatos.pt-br.md"
+  },
+  {
+    "slug": "concepts/context7",
+    "base": "concepts/context7",
+    "locale": "en",
+    "lang": "en",
+    "group": "Concepts",
+    "title": "Context7 in the workflow",
+    "translated": true,
+    "sourcePath": "docs/concepts/context7.md"
+  },
+  {
+    "slug": "pt-br/concepts/context7",
+    "base": "concepts/context7",
+    "locale": "pt-BR",
+    "lang": "pt-BR",
+    "group": "Concepts",
+    "title": "O Context7 no workflow",
+    "translated": true,
+    "sourcePath": "docs/concepts/context7.pt-br.md"
+  },
+  {
+    "slug": "concepts/init",
+    "base": "concepts/init",
+    "locale": "en",
+    "lang": "en",
+    "group": "Concepts",
+    "title": "The init wizard — what happens on screen",
+    "translated": true,
+    "sourcePath": "docs/concepts/init.md"
+  },
+  {
+    "slug": "pt-br/concepts/init",
+    "base": "concepts/init",
+    "locale": "pt-BR",
+    "lang": "pt-BR",
+    "group": "Concepts",
+    "title": "O wizard do init — o que acontece na tela",
+    "translated": true,
+    "sourcePath": "docs/concepts/init.pt-br.md"
+  },
+  {
+    "slug": "concepts/knowledge",
+    "base": "concepts/knowledge",
+    "locale": "en",
+    "lang": "en",
+    "group": "Concepts",
+    "title": "The knowledge ecosystem",
+    "translated": true,
+    "sourcePath": "docs/concepts/knowledge.md"
+  },
+  {
+    "slug": "pt-br/concepts/knowledge",
+    "base": "concepts/knowledge",
+    "locale": "pt-BR",
+    "lang": "pt-BR",
+    "group": "Concepts",
+    "title": "O ecossistema de conhecimento",
+    "translated": true,
+    "sourcePath": "docs/concepts/knowledge.pt-br.md"
+  },
+  {
+    "slug": "concepts/layers",
+    "base": "concepts/layers",
+    "locale": "en",
+    "lang": "en",
+    "group": "Concepts",
+    "title": "The content layers",
+    "translated": true,
+    "sourcePath": "docs/concepts/layers.md"
+  },
+  {
+    "slug": "pt-br/concepts/layers",
+    "base": "concepts/layers",
+    "locale": "pt-BR",
+    "lang": "pt-BR",
+    "group": "Concepts",
+    "title": "As camadas de conteúdo",
+    "translated": true,
+    "sourcePath": "docs/concepts/layers.pt-br.md"
+  },
+  {
+    "slug": "concepts/organization",
+    "base": "concepts/organization",
+    "locale": "en",
+    "lang": "en",
+    "group": "Concepts",
+    "title": "Organization, workspaces and versioning",
+    "translated": true,
+    "sourcePath": "docs/concepts/organization.md"
+  },
+  {
+    "slug": "pt-br/concepts/organization",
+    "base": "concepts/organization",
+    "locale": "pt-BR",
+    "lang": "pt-BR",
+    "group": "Concepts",
+    "title": "Organização, workspaces e versionamento",
+    "translated": true,
+    "sourcePath": "docs/concepts/organization.pt-br.md"
+  },
+  {
+    "slug": "concepts/overview",
+    "base": "concepts/overview",
+    "locale": "en",
+    "lang": "en",
+    "group": "Concepts",
+    "title": "What GOLMET delivers",
+    "translated": true,
+    "sourcePath": "docs/concepts/overview.md"
+  },
+  {
+    "slug": "pt-br/concepts/overview",
+    "base": "concepts/overview",
+    "locale": "pt-BR",
+    "lang": "pt-BR",
+    "group": "Concepts",
+    "title": "O que o GOLMET entrega",
+    "translated": true,
+    "sourcePath": "docs/concepts/overview.pt-br.md"
+  },
+  {
+    "slug": "concepts/profile",
+    "base": "concepts/profile",
+    "locale": "en",
+    "lang": "en",
+    "group": "Concepts",
+    "title": "The `profile/` shelf and the norms",
+    "translated": true,
+    "sourcePath": "docs/concepts/profile.md"
+  },
+  {
+    "slug": "pt-br/concepts/profile",
+    "base": "concepts/profile",
+    "locale": "pt-BR",
+    "lang": "pt-BR",
+    "group": "Concepts",
+    "title": "A prateleira `profile/` e as normas",
+    "translated": true,
+    "sourcePath": "docs/concepts/profile.pt-br.md"
+  },
+  {
+    "slug": "concepts/reverse",
+    "base": "concepts/reverse",
+    "locale": "en",
+    "lang": "en",
+    "group": "Concepts",
+    "title": "Reverse engineering — the documented truth of what already exists",
+    "translated": true,
+    "sourcePath": "docs/concepts/reverse.md"
+  },
+  {
+    "slug": "pt-br/concepts/reverse",
+    "base": "concepts/reverse",
+    "locale": "pt-BR",
+    "lang": "pt-BR",
+    "group": "Concepts",
+    "title": "Engenharia reversa — a verdade documentada do que já existe",
+    "translated": true,
+    "sourcePath": "docs/concepts/reverse.pt-br.md"
+  },
+  {
+    "slug": "concepts/self-governing",
+    "base": "concepts/self-governing",
+    "locale": "en",
+    "lang": "en",
+    "group": "Concepts",
+    "title": "Self-governing: the lint carries the state",
+    "translated": true,
+    "sourcePath": "docs/concepts/self-governing.md"
+  },
+  {
+    "slug": "pt-br/concepts/self-governing",
+    "base": "concepts/self-governing",
+    "locale": "pt-BR",
+    "lang": "pt-BR",
+    "group": "Concepts",
+    "title": "Self-governing: o lint carrega o estado",
+    "translated": true,
+    "sourcePath": "docs/concepts/self-governing.pt-br.md"
+  },
+  {
+    "slug": "design/decisions",
+    "base": "design/decisions",
+    "locale": "en",
+    "lang": "en",
+    "group": "Design",
+    "title": "DECISIONS — Platform Design Records (ADRs)",
+    "translated": true,
+    "sourcePath": "docs/design/decisions.md"
+  },
+  {
+    "slug": "pt-br/design/decisions",
+    "base": "design/decisions",
+    "locale": "pt-BR",
+    "lang": "pt-BR",
+    "group": "Design",
+    "title": "DECISIONS — ADRs do Workflow Golmet",
+    "translated": true,
+    "sourcePath": "docs/design/decisions.pt-br.md"
+  },
+  {
+    "slug": "design/workflow-improvements",
+    "base": "design/workflow-improvements",
+    "locale": "en",
+    "lang": "en",
+    "group": "Design",
+    "title": "WORKFLOW_IMPROVEMENTS — The improvement history",
+    "translated": true,
+    "sourcePath": "docs/design/workflow-improvements.md"
+  },
+  {
+    "slug": "pt-br/design/workflow-improvements",
+    "base": "design/workflow-improvements",
+    "locale": "pt-BR",
+    "lang": "pt-BR",
+    "group": "Design",
+    "title": "WORKFLOW_IMPROVEMENTS.md",
+    "translated": true,
+    "sourcePath": "docs/design/workflow-improvements.pt-br.md"
+  },
+  {
+    "slug": "getting-started/00-por-que-golmet",
+    "base": "getting-started/00-por-que-golmet",
+    "locale": "en",
+    "lang": "en",
+    "group": "Getting started",
+    "title": "00 — Why Golmet exists",
+    "translated": true,
+    "sourcePath": "docs/getting-started/00-por-que-golmet.md"
+  },
+  {
+    "slug": "pt-br/getting-started/00-por-que-golmet",
+    "base": "getting-started/00-por-que-golmet",
+    "locale": "pt-BR",
+    "lang": "pt-BR",
+    "group": "Getting started",
+    "title": "00 — Por que o Golmet existe",
+    "translated": true,
+    "sourcePath": "docs/getting-started/00-por-que-golmet.pt-br.md"
+  },
+  {
+    "slug": "getting-started/01-organizacao",
+    "base": "getting-started/01-organizacao",
+    "locale": "en",
+    "lang": "en",
+    "group": "Getting started",
+    "title": "01 — Create the Organization",
+    "translated": true,
+    "sourcePath": "docs/getting-started/01-organizacao.md"
+  },
+  {
+    "slug": "pt-br/getting-started/01-organizacao",
+    "base": "getting-started/01-organizacao",
+    "locale": "pt-BR",
+    "lang": "pt-BR",
+    "group": "Getting started",
+    "title": "01 — Criar a Organização",
+    "translated": true,
+    "sourcePath": "docs/getting-started/01-organizacao.pt-br.md"
+  },
+  {
+    "slug": "getting-started/02-projeto",
+    "base": "getting-started/02-projeto",
+    "locale": "en",
+    "lang": "en",
+    "group": "Getting started",
+    "title": "02 — Create the project inside the Organization",
+    "translated": true,
+    "sourcePath": "docs/getting-started/02-projeto.md"
+  },
+  {
+    "slug": "pt-br/getting-started/02-projeto",
+    "base": "getting-started/02-projeto",
+    "locale": "pt-BR",
+    "lang": "pt-BR",
+    "group": "Getting started",
+    "title": "02 — Criar o projeto dentro da Organização",
+    "translated": true,
+    "sourcePath": "docs/getting-started/02-projeto.pt-br.md"
+  },
+  {
+    "slug": "getting-started/03-trabalhando-com-ia",
+    "base": "getting-started/03-trabalhando-com-ia",
+    "locale": "en",
+    "lang": "en",
+    "group": "Getting started",
+    "title": "03 — Working with the AI",
+    "translated": true,
+    "sourcePath": "docs/getting-started/03-trabalhando-com-ia.md"
+  },
+  {
+    "slug": "pt-br/getting-started/03-trabalhando-com-ia",
+    "base": "getting-started/03-trabalhando-com-ia",
+    "locale": "pt-BR",
+    "lang": "pt-BR",
+    "group": "Getting started",
+    "title": "03 — Trabalhando com a IA",
+    "translated": true,
+    "sourcePath": "docs/getting-started/03-trabalhando-com-ia.pt-br.md"
+  },
+  {
+    "slug": "getting-started/04-o-ciclo-de-uma-feature",
+    "base": "getting-started/04-o-ciclo-de-uma-feature",
+    "locale": "en",
+    "lang": "en",
+    "group": "Getting started",
+    "title": "04 — The cycle of one feature",
+    "translated": true,
+    "sourcePath": "docs/getting-started/04-o-ciclo-de-uma-feature.md"
+  },
+  {
+    "slug": "pt-br/getting-started/04-o-ciclo-de-uma-feature",
+    "base": "getting-started/04-o-ciclo-de-uma-feature",
+    "locale": "pt-BR",
+    "lang": "pt-BR",
+    "group": "Getting started",
+    "title": "04 — O ciclo de uma feature",
+    "translated": true,
+    "sourcePath": "docs/getting-started/04-o-ciclo-de-uma-feature.pt-br.md"
+  },
+  {
+    "slug": "getting-started/05-maturity-and-knowledge",
+    "base": "getting-started/05-maturity-and-knowledge",
+    "locale": "en",
+    "lang": "en",
+    "group": "Getting started",
+    "title": "05 — What remains when the project ends: the pack cycle",
+    "translated": true,
+    "sourcePath": "docs/getting-started/05-maturity-and-knowledge.md"
+  },
+  {
+    "slug": "pt-br/getting-started/05-maturity-and-knowledge",
+    "base": "getting-started/05-maturity-and-knowledge",
+    "locale": "pt-BR",
+    "lang": "pt-BR",
+    "group": "Getting started",
+    "title": "05 — O que sobra quando o projeto termina: o ciclo do pack",
+    "translated": true,
+    "sourcePath": "docs/getting-started/05-maturity-and-knowledge.pt-br.md"
+  },
+  {
+    "slug": "migration",
+    "base": "migration",
+    "locale": "en",
+    "lang": "en",
+    "group": "Guide",
+    "title": "MIGRATION — Migrating from the old model",
+    "translated": true,
+    "sourcePath": "docs/migration.md"
+  },
+  {
+    "slug": "pt-br/migration",
+    "base": "migration",
+    "locale": "pt-BR",
+    "lang": "pt-BR",
+    "group": "Guide",
+    "title": "MIGRATION — Migração para a arquitetura open core",
+    "translated": true,
+    "sourcePath": "docs/migration.pt-br.md"
+  },
+  {
+    "slug": "patterns/index",
+    "base": "patterns/index",
+    "locale": "en",
+    "lang": "en",
+    "group": "Patterns",
+    "title": "Índice do Hub de Patterns",
+    "translated": true,
+    "sourcePath": "docs/patterns/index.md"
+  },
+  {
+    "slug": "pt-br/patterns/index",
+    "base": "patterns/index",
+    "locale": "pt-BR",
+    "lang": "en",
+    "group": "Patterns",
+    "title": "Índice do Hub de Patterns",
+    "translated": false,
+    "sourcePath": "docs/patterns/index.md"
+  },
+  {
+    "slug": "patterns/template",
+    "base": "patterns/template",
+    "locale": "en",
+    "lang": "en",
+    "group": "Patterns",
+    "title": "<titulo>",
+    "translated": true,
+    "sourcePath": "docs/patterns/template.md"
+  },
+  {
+    "slug": "pt-br/patterns/template",
+    "base": "patterns/template",
+    "locale": "pt-BR",
+    "lang": "en",
+    "group": "Patterns",
+    "title": "<titulo>",
+    "translated": false,
+    "sourcePath": "docs/patterns/template.md"
+  },
+  {
+    "slug": "recommended",
+    "base": "recommended",
+    "locale": "en",
+    "lang": "en",
+    "group": "Guide",
+    "title": "The recommended mode: Organization + FULL + Opencode",
+    "translated": true,
+    "sourcePath": "docs/recommended.md"
+  },
+  {
+    "slug": "pt-br/recommended",
+    "base": "recommended",
+    "locale": "pt-BR",
+    "lang": "pt-BR",
+    "group": "Guide",
+    "title": "O modo recomendado: Organização + FULL + Opencode",
+    "translated": true,
+    "sourcePath": "docs/recommended.pt-br.md"
+  },
+  {
+    "slug": "reference/commands",
+    "base": "reference/commands",
+    "locale": "en",
+    "lang": "en",
+    "group": "Reference",
+    "title": "Commands reference (`golmet`)",
+    "translated": true,
+    "sourcePath": "docs/reference/commands.md"
+  },
+  {
+    "slug": "pt-br/reference/commands",
+    "base": "reference/commands",
+    "locale": "pt-BR",
+    "lang": "pt-BR",
+    "group": "Reference",
+    "title": "Referência de comandos (`golmet`)",
+    "translated": true,
+    "sourcePath": "docs/reference/commands.pt-br.md"
+  },
+  {
+    "slug": "reference/compatibility",
+    "base": "reference/compatibility",
+    "locale": "en",
+    "lang": "en",
+    "group": "Reference",
+    "title": "INSTALL_COMPATIBILITY - Matriz MCP × Engine (v0.1)",
+    "translated": true,
+    "sourcePath": "docs/reference/compatibility.md"
+  },
+  {
+    "slug": "pt-br/reference/compatibility",
+    "base": "reference/compatibility",
+    "locale": "pt-BR",
+    "lang": "pt-BR",
+    "group": "Reference",
+    "title": "INSTALL_COMPATIBILITY — Matriz MCP × Engine (v0.1)",
+    "translated": true,
+    "sourcePath": "docs/reference/compatibility.pt-br.md"
+  },
+  {
+    "slug": "reference/evals",
+    "base": "reference/evals",
+    "locale": "en",
+    "lang": "en",
+    "group": "Reference",
+    "title": "The eval system (golden set)",
+    "translated": true,
+    "sourcePath": "docs/reference/evals.md"
+  },
+  {
+    "slug": "pt-br/reference/evals",
+    "base": "reference/evals",
+    "locale": "pt-BR",
+    "lang": "pt-BR",
+    "group": "Reference",
+    "title": "O sistema de evals (golden set)",
+    "translated": true,
+    "sourcePath": "docs/reference/evals.pt-br.md"
+  },
+  {
+    "slug": "reference/format",
+    "base": "reference/format",
+    "locale": "en",
+    "lang": "en",
+    "group": "Reference",
+    "title": "The FORMAT — the normative spec",
+    "translated": true,
+    "sourcePath": "docs/reference/format.md"
+  },
+  {
+    "slug": "pt-br/reference/format",
+    "base": "reference/format",
+    "locale": "pt-BR",
+    "lang": "pt-BR",
+    "group": "Reference",
+    "title": "O FORMAT — a spec normativa",
+    "translated": true,
+    "sourcePath": "docs/reference/format.pt-br.md"
+  },
+  {
+    "slug": "reference/glossary",
+    "base": "reference/glossary",
+    "locale": "en",
+    "lang": "en",
+    "group": "Reference",
+    "title": "GLOSSARY — The workflow glossary",
+    "translated": true,
+    "sourcePath": "docs/reference/glossary.md"
+  },
+  {
+    "slug": "pt-br/reference/glossary",
+    "base": "reference/glossary",
+    "locale": "pt-BR",
+    "lang": "pt-BR",
+    "group": "Reference",
+    "title": "GLOSSARY — Glossário do Workflow Golmet",
+    "translated": true,
+    "sourcePath": "docs/reference/glossary.pt-br.md"
+  },
+  {
+    "slug": "reference/known-errors",
+    "base": "reference/known-errors",
+    "locale": "en",
+    "lang": "en",
+    "group": "Reference",
+    "title": "KNOWN_ERRORS — Known errors of the workflow",
+    "translated": true,
+    "sourcePath": "docs/reference/known-errors.md"
+  },
+  {
+    "slug": "pt-br/reference/known-errors",
+    "base": "reference/known-errors",
+    "locale": "pt-BR",
+    "lang": "pt-BR",
+    "group": "Reference",
+    "title": "KNOWN_ERRORS — erros conhecidos do workflow Golmet",
+    "translated": true,
+    "sourcePath": "docs/reference/known-errors.pt-br.md"
+  },
+  {
+    "slug": "reference/lint",
+    "base": "reference/lint",
+    "locale": "en",
+    "lang": "en",
+    "group": "Reference",
+    "title": "The lint layers (L1-L13)",
+    "translated": true,
+    "sourcePath": "docs/reference/lint.md"
+  },
+  {
+    "slug": "pt-br/reference/lint",
+    "base": "reference/lint",
+    "locale": "pt-BR",
+    "lang": "pt-BR",
+    "group": "Reference",
+    "title": "As camadas do lint (L1-L14)",
+    "translated": true,
+    "sourcePath": "docs/reference/lint.pt-br.md"
+  },
+  {
+    "slug": "reference/tools",
+    "base": "reference/tools",
+    "locale": "en",
+    "lang": "en",
+    "group": "Reference",
+    "title": "Tools",
+    "translated": true,
+    "sourcePath": "docs/reference/tools.md"
+  },
+  {
+    "slug": "pt-br/reference/tools",
+    "base": "reference/tools",
+    "locale": "pt-BR",
+    "lang": "pt-BR",
+    "group": "Reference",
+    "title": "MCP tools reference (`gm_*`)",
+    "translated": true,
+    "sourcePath": "docs/reference/tools.pt-br.md"
+  },
+  {
+    "slug": "reference/versioning",
+    "base": "reference/versioning",
+    "locale": "en",
+    "lang": "en",
+    "group": "Reference",
+    "title": "Versioning (Conventional Commits → semver)",
+    "translated": true,
+    "sourcePath": "docs/reference/versioning.md"
+  },
+  {
+    "slug": "pt-br/reference/versioning",
+    "base": "reference/versioning",
+    "locale": "pt-BR",
+    "lang": "pt-BR",
+    "group": "Reference",
+    "title": "Versionamento (Conventional Commits → semver)",
+    "translated": true,
+    "sourcePath": "docs/reference/versioning.pt-br.md"
   }
 ];
+export const GENERATED_ORDER: Record<'en' | 'pt-BR', readonly string[]> = {
+  "en": [
+    "releases",
+    "the-problem-golmet-solves",
+    "what-golmet-does-in-practice",
+    "the-recommended-mode",
+    "getting-started-5-minutes",
+    "the-documentation",
+    "uninstall",
+    "development",
+    "roadmap-contributing-license",
+    "format",
+    "concepts/artefatos",
+    "concepts/context7",
+    "concepts/init",
+    "concepts/knowledge",
+    "concepts/layers",
+    "concepts/organization",
+    "concepts/overview",
+    "concepts/profile",
+    "concepts/reverse",
+    "concepts/self-governing",
+    "design/decisions",
+    "design/workflow-improvements",
+    "getting-started/00-por-que-golmet",
+    "getting-started/01-organizacao",
+    "getting-started/02-projeto",
+    "getting-started/03-trabalhando-com-ia",
+    "getting-started/04-o-ciclo-de-uma-feature",
+    "getting-started/05-maturity-and-knowledge",
+    "migration",
+    "patterns/index",
+    "patterns/template",
+    "recommended",
+    "reference/commands",
+    "reference/compatibility",
+    "reference/evals",
+    "reference/format",
+    "reference/glossary",
+    "reference/known-errors",
+    "reference/lint",
+    "reference/tools",
+    "reference/versioning"
+  ],
+  "pt-BR": [
+    "pt-br/releases",
+    "pt-br/the-problem-golmet-solves",
+    "pt-br/what-golmet-does-in-practice",
+    "pt-br/the-recommended-mode",
+    "pt-br/getting-started-5-minutes",
+    "pt-br/the-documentation",
+    "pt-br/uninstall",
+    "pt-br/development",
+    "pt-br/roadmap-contributing-license",
+    "pt-br/format",
+    "pt-br/concepts/artefatos",
+    "pt-br/concepts/context7",
+    "pt-br/concepts/init",
+    "pt-br/concepts/knowledge",
+    "pt-br/concepts/layers",
+    "pt-br/concepts/organization",
+    "pt-br/concepts/overview",
+    "pt-br/concepts/profile",
+    "pt-br/concepts/reverse",
+    "pt-br/concepts/self-governing",
+    "pt-br/design/decisions",
+    "pt-br/design/workflow-improvements",
+    "pt-br/getting-started/00-por-que-golmet",
+    "pt-br/getting-started/01-organizacao",
+    "pt-br/getting-started/02-projeto",
+    "pt-br/getting-started/03-trabalhando-com-ia",
+    "pt-br/getting-started/04-o-ciclo-de-uma-feature",
+    "pt-br/getting-started/05-maturity-and-knowledge",
+    "pt-br/migration",
+    "pt-br/patterns/index",
+    "pt-br/patterns/template",
+    "pt-br/recommended",
+    "pt-br/reference/commands",
+    "pt-br/reference/compatibility",
+    "pt-br/reference/evals",
+    "pt-br/reference/format",
+    "pt-br/reference/glossary",
+    "pt-br/reference/known-errors",
+    "pt-br/reference/lint",
+    "pt-br/reference/tools",
+    "pt-br/reference/versioning"
+  ]
+};
 export const GENERATED_TOC: readonly GeneratedTocLocale[] = [
   {
     "locale": "en",
     "groups": [
+      {
+        "group": "CLI",
+        "items": [
+          {
+            "slug": "releases",
+            "title": "Releases"
+          },
+          {
+            "slug": "the-problem-golmet-solves",
+            "title": "The problem Golmet solves"
+          },
+          {
+            "slug": "what-golmet-does-in-practice",
+            "title": "What Golmet does, in practice"
+          },
+          {
+            "slug": "the-recommended-mode",
+            "title": "The recommended mode"
+          },
+          {
+            "slug": "getting-started-5-minutes",
+            "title": "Getting started (5 minutes)"
+          },
+          {
+            "slug": "the-documentation",
+            "title": "The documentation"
+          },
+          {
+            "slug": "uninstall",
+            "title": "Uninstall"
+          },
+          {
+            "slug": "development",
+            "title": "Development"
+          },
+          {
+            "slug": "roadmap-contributing-license",
+            "title": "Roadmap · Contributing · License"
+          }
+        ]
+      },
+      {
+        "group": "Guide",
+        "items": [
+          {
+            "slug": "format",
+            "title": "FORMAT v1 — Normative Specification of the GOLMET Workspace"
+          },
+          {
+            "slug": "migration",
+            "title": "MIGRATION — Migrating from the old model"
+          },
+          {
+            "slug": "recommended",
+            "title": "The recommended mode: Organization + FULL + Opencode"
+          }
+        ]
+      },
       {
         "group": "Concepts",
         "items": [
@@ -817,64 +1048,6 @@ export const GENERATED_TOC: readonly GeneratedTocLocale[] = [
           {
             "slug": "design/workflow-improvements",
             "title": "WORKFLOW_IMPROVEMENTS — The improvement history"
-          }
-        ]
-      },
-      {
-        "group": "CLI",
-        "items": [
-          {
-            "slug": "development",
-            "title": "Development"
-          },
-          {
-            "slug": "getting-started-5-minutes",
-            "title": "Getting started (5 minutes)"
-          },
-          {
-            "slug": "releases",
-            "title": "Releases"
-          },
-          {
-            "slug": "roadmap-contributing-license",
-            "title": "Roadmap · Contributing · License"
-          },
-          {
-            "slug": "the-documentation",
-            "title": "The documentation"
-          },
-          {
-            "slug": "the-problem-golmet-solves",
-            "title": "The problem Golmet solves"
-          },
-          {
-            "slug": "the-recommended-mode",
-            "title": "The recommended mode"
-          },
-          {
-            "slug": "uninstall",
-            "title": "Uninstall"
-          },
-          {
-            "slug": "what-golmet-does-in-practice",
-            "title": "What Golmet does, in practice"
-          }
-        ]
-      },
-      {
-        "group": "Guide",
-        "items": [
-          {
-            "slug": "format",
-            "title": "FORMAT v1 — Normative Specification of the GOLMET Workspace"
-          },
-          {
-            "slug": "migration",
-            "title": "MIGRATION — Migrating from the old model"
-          },
-          {
-            "slug": "recommended",
-            "title": "The recommended mode: Organization + FULL + Opencode"
           }
         ]
       },
@@ -967,6 +1140,64 @@ export const GENERATED_TOC: readonly GeneratedTocLocale[] = [
     "locale": "pt-BR",
     "groups": [
       {
+        "group": "CLI",
+        "items": [
+          {
+            "slug": "pt-br/releases",
+            "title": "Releases"
+          },
+          {
+            "slug": "pt-br/the-problem-golmet-solves",
+            "title": "O problema que o Golmet resolve"
+          },
+          {
+            "slug": "pt-br/what-golmet-does-in-practice",
+            "title": "O que o Golmet faz, na prática"
+          },
+          {
+            "slug": "pt-br/the-recommended-mode",
+            "title": "O modo recomendado"
+          },
+          {
+            "slug": "pt-br/getting-started-5-minutes",
+            "title": "Getting started (os 5 minutos)"
+          },
+          {
+            "slug": "pt-br/the-documentation",
+            "title": "A documentação"
+          },
+          {
+            "slug": "pt-br/uninstall",
+            "title": "Desinstalação"
+          },
+          {
+            "slug": "pt-br/development",
+            "title": "Development"
+          },
+          {
+            "slug": "pt-br/roadmap-contributing-license",
+            "title": "Roadmap · Contributing · Licença"
+          }
+        ]
+      },
+      {
+        "group": "Guide",
+        "items": [
+          {
+            "slug": "pt-br/format",
+            "title": "FORMAT v1 — Especificação Normativa do Workspace GOLMET"
+          },
+          {
+            "slug": "pt-br/migration",
+            "title": "MIGRATION — Migração para a arquitetura open core"
+          },
+          {
+            "slug": "pt-br/recommended",
+            "title": "O modo recomendado: Organização + FULL + Opencode"
+          }
+        ]
+      },
+      {
         "group": "Concepts",
         "items": [
           {
@@ -1021,64 +1252,6 @@ export const GENERATED_TOC: readonly GeneratedTocLocale[] = [
           {
             "slug": "pt-br/design/workflow-improvements",
             "title": "WORKFLOW_IMPROVEMENTS.md"
-          }
-        ]
-      },
-      {
-        "group": "CLI",
-        "items": [
-          {
-            "slug": "pt-br/development",
-            "title": "Development"
-          },
-          {
-            "slug": "pt-br/getting-started-5-minutes",
-            "title": "Getting started (os 5 minutos)"
-          },
-          {
-            "slug": "pt-br/releases",
-            "title": "Releases"
-          },
-          {
-            "slug": "pt-br/roadmap-contributing-license",
-            "title": "Roadmap · Contributing · Licença"
-          },
-          {
-            "slug": "pt-br/the-documentation",
-            "title": "A documentação"
-          },
-          {
-            "slug": "pt-br/the-problem-golmet-solves",
-            "title": "O problema que o Golmet resolve"
-          },
-          {
-            "slug": "pt-br/the-recommended-mode",
-            "title": "O modo recomendado"
-          },
-          {
-            "slug": "pt-br/uninstall",
-            "title": "Desinstalação"
-          },
-          {
-            "slug": "pt-br/what-golmet-does-in-practice",
-            "title": "O que o Golmet faz, na prática"
-          }
-        ]
-      },
-      {
-        "group": "Guide",
-        "items": [
-          {
-            "slug": "pt-br/format",
-            "title": "FORMAT v1 — Especificação Normativa do Workspace GOLMET"
-          },
-          {
-            "slug": "pt-br/migration",
-            "title": "MIGRATION — Migração para a arquitetura open core"
-          },
-          {
-            "slug": "pt-br/recommended",
-            "title": "O modo recomendado: Organização + FULL + Opencode"
           }
         ]
       },
@@ -1168,3 +1341,4 @@ export const GENERATED_TOC: readonly GeneratedTocLocale[] = [
     ]
   }
 ];
+export const CAPTURED_AT = "2026-11-24";

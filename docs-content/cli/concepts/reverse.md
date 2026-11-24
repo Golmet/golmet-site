@@ -1,4 +1,3 @@
-<p align="center">English | <a href="/docs/pt-br/concepts/reverse"Português (Brasil)</a></p>
 
 # Reverse engineering — the documented truth of what already exists
 

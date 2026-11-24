@@ -1,4 +1,3 @@
-<p align="center"><a href="../../README.md">English</a> | <a href="../../README.pt-br.md">Português (Brasil)</a> | <a href="/docs/migration"English (pointer)</a></p>
 
 # MIGRATION — Migração para a arquitetura open core
 

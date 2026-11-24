@@ -1,4 +1,3 @@
-<p align="center">English | <a href="/docs/pt-br/concepts/init"Português (Brasil)</a></p>
 
 # The init wizard — what happens on screen
 

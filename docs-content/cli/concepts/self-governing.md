@@ -1,4 +1,3 @@
-<p align="center">English | <a href="/docs/pt-br/concepts/self-governing"Português (Brasil)</a></p>
 
 # Self-governing: the lint carries the state
 

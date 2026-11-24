@@ -213,6 +213,19 @@ const repoRootBlobs = /^(ROADMAP|CONTRIBUTING)(\.pt-br)?\.md$/i;
  */
 function rewriteLinks(md, relSubpath, lang) {
   const sourceLocale = lang === 'pt-BR' ? 'pt' : 'en';
+  // O language switcher do kit (English | Português .md) é ruído no portal —
+  // o site tem seletor próprio no header (RN-011-3). Remove a linha dele.
+  const cleanedMd = md
+    .split('\n')
+    .filter(
+      (line) =>
+        !(
+          /align="center"/.test(line) &&
+          /\.md/.test(line) &&
+          /(English|Português)/i.test(line)
+        ),
+    )
+    .join('\n');
   // Âncoras (fragmento após #) são PRESERVADAS na rota resolvida — o HTML
   // renderizado ganha ids GFM nos headings (build-docs) para o scroll funcionar.
   // Os branches testam o CLEAN (sem fragmento) — targets com # não terminam
@@ -234,7 +247,7 @@ function rewriteLinks(md, relSubpath, lang) {
     return match ? `#${match.slug}` : '';
   };
 
-  let out = md.replace(/\[([^\]]*)\]\(([^)]+)\)/g, (match, linkText, target) => {
+  let out = cleanedMd.replace(/\[([^\]]*)\]\(([^)]+)\)/g, (match, linkText, target) => {
     const fragment = fragmentOf(target);
     const clean = stripFragment(target);
     const applyFragment = (route) =>
@@ -259,7 +272,7 @@ function rewriteLinks(md, relSubpath, lang) {
     }
     return match;
   });
-  out = out.replace(/href="([^"\s]+)"[^>]*>?/gi, (match, target) => {
+  out = out.replace(/href="([^"\s]+)"/gi, (match, target) => {
     const fragment = fragmentOf(target);
     const clean = stripFragment(target);
     if (/CHANGELOG\.md$/i.test(clean)) return `href="/docs/releases${fragment}"`;
@@ -345,7 +358,7 @@ sectionsEn.forEach((sectionEn, i) => {
     const ptFile = rewriteLinks(`# ${sectionPt.title}\n\n${bodyPt}\n`, base, 'pt-BR');
     writeFileSync(join(PT_DIR, `${base}.md`), ptFile, 'utf8');
   }
-  readmeManifest.push({ base, hasPt, group: 'CLI' });
+  readmeManifest.push({ base, hasPt, group: 'CLI', sourcePath: 'README.md', sourcePathPt: 'README.pt-br.md' });
 });
 
 // ── 4) Releases — notas das GitHub Releases (aba Releases) ────
@@ -372,13 +385,17 @@ const releasesMd = releases
 writeFileSync(join(OUT_DIR, 'releases.md'), `# Releases\n\n${releasesMd}\n`, 'utf8');
 
 // ── 5) manifest ────────────────────────────────────────────────
+// capturedAt: data da sincronização com o repo (exibida como "Atualizado em"
+// no rodapé das páginas — honesto: é quando o portal espelhou a doc).
+const capturedAt = new Date().toISOString().slice(0, 10);
 writeFileSync(
   join(OUT_DIR, 'manifest.json'),
   JSON.stringify(
     {
-      releases: { hasPt: false, group: 'CLI' },
+      releases: { hasPt: false, group: 'CLI', sourcePath: 'CHANGELOG.md' },
       readme: readmeManifest,
       docs: docsManifest,
+      capturedAt,
     },
     null,
     2,

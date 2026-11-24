@@ -1,22 +1,38 @@
 <div class="gm-docs">
   <aside class="gm-docs-sidebar">
     <app-docs-search />
-    @for (group of toc(); track group.group) {
-      <p class="gm-toc-group">{{ group.group }}</p>
-      <ul class="gm-toc">
-        @for (item of group.items; track item.slug) {
-          <li>
-            <a
-              [routerLink]="'/docs/' + item.slug"
-              routerLinkActive="active"
-              >{{ item.title }}</a
-            >
-          </li>
-        }
-      </ul>
-      }
+    @for (group of state().toc; track group.group) {
+      <details class="gm-toc-group" open>
+        <summary class="gm-toc-group-name">{{ group.group }}</summary>
+        <ul class="gm-toc">
+          @for (item of group.items; track item.slug) {
+            <li>
+              <a
+                [routerLink]="'/docs/' + item.slug"
+                routerLinkActive="active"
+                >{{ item.title }}</a
+              >
+            </li>
+          }
+        </ul>
+      </details>
+    }
   </aside>
   <main class="gm-docs-content">
     <router-outlet />
   </main>
+  <aside class="gm-docs-toc" aria-label="Nesta página">
+    <p class="gm-docs-toc-title">{{ state().copy.onThisPage }}</p>
+    @if (pageToc(); as items) {
+      <ul class="gm-docs-toc-list">
+        @for (item of items; track item.id) {
+          <li [class.is-h3]="item.level === 3">
+            <a [href]="'#' + item.id">{{ item.text }}</a>
+          </li>
+        }
+      </ul>
+    } @else {
+      <p class="gm-docs-toc-empty">…</p>
+    }
+  </aside>
 </div>

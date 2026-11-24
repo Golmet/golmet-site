@@ -1,4 +1,3 @@
-<p align="center"><a href="https://github.com/Golmet/golmet-cli/blob/main/README.md"English</a> | <a href="https://github.com/Golmet/golmet-cli/blob/main/README.md"Português (Brasil)</a> | <a href="/docs/concepts/reverse"versão base deste doc</a></p>
 
 # Engenharia reversa — a verdade documentada do que já existe
 

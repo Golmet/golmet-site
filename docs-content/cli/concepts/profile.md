@@ -1,4 +1,3 @@
-<p align="center">English | <a href="/docs/pt-br/concepts/profile"Português (Brasil)</a></p>
 
 # The `profile/` shelf and the norms
 

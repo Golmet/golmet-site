@@ -2,6 +2,78 @@
   min-width: 0;
 }
 
+// ── Rodapé estilo VitePress: pager Prev/Next + edit link + atualizado ──
+
+.gm-doc-pager {
+  display: grid;
+  gap: var(--gm-space-2);
+  grid-template-columns: 1fr;
+  margin: var(--gm-space-4) 0 var(--gm-space-3);
+}
+
+@media (min-width: 640px) {
+  .gm-doc-pager {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+.gm-doc-pager-card {
+  background: var(--gm-surface);
+  border: 1px solid var(--gm-border);
+  border-radius: var(--gm-radius);
+  color: inherit;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding: var(--gm-space-2) var(--gm-space-3);
+  text-decoration: none;
+  transition: border-color 0.15s ease;
+}
+
+.gm-doc-pager-card:hover {
+  border-color: var(--gm-ouro);
+}
+
+.gm-doc-pager-next {
+  text-align: right;
+}
+
+.gm-doc-pager-label {
+  color: var(--gm-text-muted);
+  font-size: 0.8rem;
+}
+
+.gm-doc-pager-title {
+  color: var(--gm-ouro);
+  font-size: 0.95rem;
+  font-weight: 600;
+}
+
+.gm-doc-footer {
+  border-top: 1px solid var(--gm-border);
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--gm-space-1) var(--gm-space-3);
+  justify-content: space-between;
+  margin-top: var(--gm-space-3);
+  padding-top: var(--gm-space-2);
+}
+
+.gm-doc-edit {
+  color: var(--gm-text-muted);
+  font-size: 0.85rem;
+  text-decoration: none;
+}
+
+.gm-doc-edit:hover {
+  color: var(--gm-ouro);
+}
+
+.gm-doc-updated {
+  color: var(--gm-text-muted);
+  font-size: 0.85rem;
+}
+
 // Banner de não-traduzida (RN-012) — estilo pronto; liga com o build por
 // locale da RN-011 (exibido quando a página ativa não tem variante PT).
 .gm-not-translated {
@@ -18,7 +90,9 @@
   color: var(--gm-text);
   font-size: 1rem;
   line-height: 1.7;
-  max-width: 62rem;
+  // Coluna de leitura estilo VitePress — centrada na área do meio.
+  margin: 0 auto;
+  max-width: 44rem;
   // Palavras longas (código inline, URLs) não empurram a largura da página.
   overflow-wrap: anywhere;
   // A largura é a da COLUNA — tables/pres largos (docs do kit) rolam dentro

@@ -1,4 +1,3 @@
-<p align="center">English | <a href="/docs/pt-br/concepts/layers"Português (Brasil)</a></p>
 
 # The content layers
 
