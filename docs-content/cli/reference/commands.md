@@ -23,7 +23,7 @@ Never mix audiences: when the operator runs a command, the CLI is the surface; w
 > living contract, run `golmet <command> --help`.
 
 19 commands, one binary. The short table lives in the
-[README](../../README.md#commands); below, the per-command contract
+[README](https://github.com/Golmet/golmet-cli/blob/main/README.md#commands); below, the per-command contract
 (flags, inputs/outputs, exit codes):
 
 | Command | Contract |
