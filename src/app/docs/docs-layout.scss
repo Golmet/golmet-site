@@ -1,11 +1,14 @@
 // Estilo VitePress — portal com 3 colunas: sidebar esquerda (grupos
 // colapsáveis), conteúdo de leitura centrado, aside direito "Nesta página".
 // Breakpoints: sidebar some < 960px; aside some < 1400px (RN-011).
-// A sidebar cresce para a ESQUERDA (o container não limita a largura —
-// o conteúdo fica centrado no espaço restante, sem ser comprimido).
+// CONJUNTO CENTRADO na viewport (max-width 1280 + margin auto) — o aumento
+// da sidebar não desloca nem comprime o conteúdo central (RN-011-3).
 .gm-docs {
   display: grid;
   grid-template-columns: minmax(0, 1fr);
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: var(--gm-space-3);
   width: 100%;
 }
 
