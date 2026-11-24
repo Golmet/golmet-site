@@ -1,8 +1,8 @@
 // RN-007 — pipeline de conteúdo (docs-as-code, RN-008 strict).
 //
-// Ingestão: `docs-content/**.md` do próprio repo (fonte EN — RN-013).
-// A fonte do KIT (repo Golmet/golmet-cli — FORMATO.md + docs/) ativa quando
-// o repo abrir (CR-002/RN-007-8/9 — config comentada em SOURCES).
+// Ingestão: docs-content/cli/**.md — gerado por tools/fetch-cli-docs.mjs a
+// partir do repo PÚBLICO Golmet/golmet-cli (raw + GitHub Releases API).
+// Nenhuma página hand-written no front: tudo vem da doc do CLI (RN-007-8/9).
 //
 // Gera:
 //   src/app/docs/docs-content.generated.ts  — páginas + TOC (para prerender)
@@ -14,14 +14,9 @@ import { join, relative } from 'node:path';
 import { Marked } from 'marked';
 
 const SOURCES = [
-  // CR-002/RN-007-8/9 — ativa quando o repo do kit abrir (clone shallow da main):
-  // { type: 'git', repo: 'https://github.com/Golmet/golmet-cli', branch: 'main',
-  //   paths: ['FORMATO.md', 'docs'], prefix: 'kit' },
-  { type: 'local', dir: 'docs-content', group: 'Documentation', lang: 'en', exclude: ['cli'] },
-  // RN-007-8/9 — docs do release publicado (READMEs extraídos do tarball npm
-  // por tools/fetch-cli-docs.mjs). A variante PT-BR (README.pt-br.md) recebe
-  // lang próprio — ADR-009: fonte EN, PT-BR derivado do próprio kit.
-  { type: 'local', dir: 'docs-content/cli', group: 'CLI release', lang: 'en' },
+  // Grupo por idioma: EN em "CLI", variante .pt-br.md em "CLI (PT-BR)" —
+  // ADR-009 (fonte EN, PT-BR derivado do próprio kit).
+  { type: 'local', dir: 'docs-content/cli', group: 'CLI', lang: 'en' },
 ];
 
 const OUT_TS = 'src/app/docs/docs-content.generated.ts';
@@ -92,15 +87,16 @@ function ingest() {
       const md = readFileSync(file, 'utf8');
       failures.push(...validatePage(md, rel));
       const slug = slugOf(rel);
-      // Variante PT-BR do release (.pt-br.md) — ADR-009/RN-011.
+      // Variante PT-BR (.pt-br.md) ganha grupo próprio na sidebar — ADR-009/RN-011.
       const lang = rel.toLowerCase().endsWith('.pt-br.md') ? 'pt-br' : source.lang;
+      const group = lang === 'pt-br' ? `${source.group} (PT-BR)` : source.group;
       const html = marked.parse(md);
       pages.push({
         slug,
         title: titleOf(md, rel),
         html,
         lang,
-        group: source.group,
+        group,
         text: stripMd(md),
       });
     }
