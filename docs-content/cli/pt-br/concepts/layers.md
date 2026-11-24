@@ -1,4 +1,4 @@
-<p align="center"><a href="../../README.md">English</a> | <a href="../../README.pt-br.md">Português (Brasil)</a></p>
+<p align="center"><a href="https://github.com/Golmet/golmet-cli/blob/main/README.md">English</a> | <a href="https://github.com/Golmet/golmet-cli/blob/main/README.md">Português (Brasil)</a></p>
 
 
 # As camadas de conteúdo
@@ -15,7 +15,7 @@ embutido perde.
 ## Os dois perfis — e a escolha do operador
 
 Quando o operador rodou `golmet install --engine opencode` (tutorial
-[00](../getting-started/00-por-que-golmet.pt-br.md)), o wizard perguntou o
+[00](/docs/pt-br/getting-started/00-por-que-golmet)), o wizard perguntou o
 **perfil**. O `essencial` instala L0+BASE na zona `.golmet/` do workspace —
 o kit fica versionado no repositório e a equipe herda ao clonar; funciona
 em qualquer engine agentic. O `completo` materializa o L1 FULL no engine —
@@ -42,4 +42,4 @@ O que isso significa na prática do MeuApp: o produto não carrega zona
 própria — a zona é da MinhaOrganizacao. Se amanhã a org migrasse para
 `produtos-repo`, cada produto ganharia a sua (o `init --into` entrega o
 modelo declarado — ver o detail em
-[docs/reference/commands.pt-br.md](../reference/commands.pt-br.md)).
+[docs/reference/commands.pt-br.md](/docs/pt-br/reference/commands)).

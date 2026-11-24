@@ -13,7 +13,7 @@ congela o código-fonte e transforma em verdade documentada (modelos,
 contratos, regras de negócio - toda afirmação com o arquivo, a linha e o
 hash), semeia a fila de candidatos e entrega ao humano a leitura guiada do
 legado. O workflow novo é planejado sobre a verdade documentada, não sobre a
-memória do modelo. Veja [engenharia reversa](docs/concepts/reverse.pt-br.md).
+memória do modelo. Veja [engenharia reversa](/docs/pt-br/concepts/reverse).
 
 Quando o cliente pede a feature "agendamento com confirmação de vaga", o
 requisito entra no REQUIREMENTS como uma seção `## RN-001 — ...` — e cada

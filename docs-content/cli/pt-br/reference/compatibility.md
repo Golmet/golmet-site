@@ -1,4 +1,4 @@
-<p align="center"><a href="../../README.md">English</a> | <a href="../../README.pt-br.md">Português (Brasil)</a></p>
+<p align="center"><a href="https://github.com/Golmet/golmet-cli/blob/main/README.md">English</a> | <a href="https://github.com/Golmet/golmet-cli/blob/main/README.md">Português (Brasil)</a></p>
 
 # INSTALL_COMPATIBILITY — Matriz MCP × Engine (v0.1)
 

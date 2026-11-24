@@ -1,4 +1,4 @@
-<p align="center">English | <a href="evals.pt-br.md">Português (Brasil)</a></p>
+<p align="center">English | <a href="/docs/pt-br/reference/evals">Português (Brasil)</a></p>
 
 # The eval system (golden set)
 
@@ -63,4 +63,4 @@ Severity is `error` (blocks) or `warning` (records).
 `evals/golden-human/` holds **human-maintained** cases collected from real
 incidents — the protection against circularity (agents grading their own
 homework). Agents never write there; see its
-[README](../golden-human/README.md).
+[README](/docs/golden-human/readme).

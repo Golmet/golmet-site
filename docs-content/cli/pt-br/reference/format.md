@@ -1,9 +1,9 @@
-<p align="center"><a href="../../README.md">English</a> | <a href="../../README.pt-br.md">Português (Brasil)</a></p>
+<p align="center"><a href="https://github.com/Golmet/golmet-cli/blob/main/README.md">English</a> | <a href="https://github.com/Golmet/golmet-cli/blob/main/README.md">Português (Brasil)</a></p>
 
 
 # O FORMAT — a spec normativa
 
-O contrato completo do kit é o [FORMAT.md](../../FORMAT.md) (v1) — a
+O contrato completo do kit é o [FORMAT.md](/docs/format) (v1) — a
 fonte única da verdade: toda regra que os checks enforçam, o grammar das
 entidades, os dois níveis de enforcement (hard/soft) e as estruturas
 canônicas. **Esta página não duplica** — ela aponta.

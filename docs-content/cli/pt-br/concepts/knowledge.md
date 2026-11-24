@@ -1,9 +1,9 @@
-<p align="center"><a href="../../README.md">English</a> | <a href="../../README.pt-br.md">Português (Brasil)</a></p>
+<p align="center"><a href="https://github.com/Golmet/golmet-cli/blob/main/README.md">English</a> | <a href="https://github.com/Golmet/golmet-cli/blob/main/README.md">Português (Brasil)</a></p>
 
 
 # O ecossistema de conhecimento
 
-O tutorial [05](../getting-started/05-maturity-and-knowledge.pt-br.md)
+O tutorial [05](/docs/pt-br/getting-started/05-maturity-and-knowledge)
 contou o que sobra quando o projeto termina. Esta página abre o ecossistema:
 onde o conhecimento mora, quem escreve nele e como um artefato acha o seu
 lugar.
@@ -19,7 +19,7 @@ em fontes primárias, com URL e data de acesso, escrito pelo
 **`accumulation/`** (o aprendizado — patterns extraídos pelo
 `gm-pattern-extractor`, métricas pelo `gm-metrics-collector`, nuances pelo
 `gm-nuance-collector`) e **`rules/`** (as normas com gatilho, escritas pelo
-`gm-rule-keeper` — ver [profile.md](profile.pt-br.md)).
+`gm-rule-keeper` — ver [profile.md](/docs/pt-br/concepts/profile)).
 
 A separação não é burocrática — cada prateleira tem um ciclo de vida
 diferente: a fundação muda devagar (o domínio não muda toda semana), o

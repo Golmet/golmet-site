@@ -5,8 +5,8 @@
 O Golmet funciona em muitas combinações — e por isso mesmo vale cravar qual
 é a **testada de ponta a ponta**: **Organização + perfil FULL + Opencode**.
 A jornada dos tutoriais
-([00](getting-started/00-por-que-golmet.pt-br.md) a
-[05](getting-started/05-maturity-and-knowledge.pt-br.md)) segue
+([00](/docs/pt-br/getting-started/00-por-que-golmet) a
+[05](/docs/pt-br/getting-started/05-maturity-and-knowledge)) segue
 exatamente este modo, e é nele que nada falta.
 
 ## O que cada escolha te dá

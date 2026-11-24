@@ -1,4 +1,4 @@
-<p align="center">English | <a href="artefatos.pt-br.md">Português (Brasil)</a></p>
+<p align="center">English | <a href="/docs/pt-br/concepts/artefatos">Português (Brasil)</a></p>
 
 # The artifact architecture of Golmet
 
@@ -75,10 +75,10 @@ delivery, it ends by becoming an organizational asset.
 
 ## The rules that sustain the chain
 
-The chain is only worth it if it's verified. The [FORMAT v1](../../docs/FORMAT.md)
+The chain is only worth it if it's verified. The [FORMAT v1](/docs/format)
 defines the checks that keep it from rotting: H1 (PEND never anchors a
 Feature), H3 (a ready Feature requires an active RN), H4 (an active RN
 requires evidence), H7 (the evidence resolves in the code), H10
 (cross-references resolve), H8 (the state in the index is the history — an
 accepted ADR doesn't change). The soft (S1–S5) and the lint (L1–L10) watch
-the rest — the full discipline in [FORMAT §9](../../docs/FORMAT.md).
+the rest — the full discipline in [FORMAT §9](/docs/format).

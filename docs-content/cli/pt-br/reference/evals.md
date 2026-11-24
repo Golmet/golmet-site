@@ -1,4 +1,4 @@
-<p align="center"><a href="../../README.md">English</a> | <a href="../../README.pt-br.md">Português (Brasil)</a> | <a href="/docs/reference/evals">versão base deste doc</a></p>
+<p align="center"><a href="https://github.com/Golmet/golmet-cli/blob/main/README.md">English</a> | <a href="https://github.com/Golmet/golmet-cli/blob/main/README.md">Português (Brasil)</a> | <a href="/docs/reference/evals">versão base deste doc</a></p>
 
 # O sistema de evals (golden set)
 
@@ -64,4 +64,4 @@ Severidade é `error` (bloqueia) ou `warning` (registra).
 O `evals/golden-human/` guarda casos **mantidos por humanos**, coletados de
 incidentes reais — a proteção contra circularidade (agent dando nota para o
 próprio dever de casa). Agents nunca escrevem lá; veja o
-[README](../../evals/golden-human/README.md).
+[README](https://github.com/Golmet/golmet-cli/blob/main/evals/golden-human/README.md).

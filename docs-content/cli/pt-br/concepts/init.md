@@ -1,9 +1,9 @@
-<p align="center"><a href="../../README.md">English</a> | <a href="../../README.pt-br.md">Português (Brasil)</a></p>
+<p align="center"><a href="https://github.com/Golmet/golmet-cli/blob/main/README.md">English</a> | <a href="https://github.com/Golmet/golmet-cli/blob/main/README.md">Português (Brasil)</a></p>
 
 
 # O wizard do init — o que acontece na tela
 
-O tutorial [01](../getting-started/01-organizacao.pt-br.md) mostrou o
+O tutorial [01](/docs/pt-br/getting-started/01-organizacao) mostrou o
 wizard em ação. Esta página documenta o mecanismo — as garantias que o
 wizard dá e as que você pode exigir dele.
 
@@ -35,5 +35,5 @@ comando: `golmet init --org` (declara a org, cria o `.gitignore`, registra
 no catálogo global) e `golmet init <produto> --into <container>` (entrega o
 produto no modelo de versionamento declarado pela org). O `--yes` pula a
 confirmação nos flags explícitos. A declaração completa dos caminhos está
-em [FORMAT §2](../../docs/FORMAT.pt-br.md) e na referência
-([commands.pt-br.md](../reference/commands.pt-br.md)).
+em [FORMAT §2](/docs/pt-br/format) e na referência
+([commands.pt-br.md](/docs/pt-br/reference/commands)).

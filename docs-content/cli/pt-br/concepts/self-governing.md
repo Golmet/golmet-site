@@ -1,9 +1,9 @@
-<p align="center"><a href="../../README.md">English</a> | <a href="../../README.pt-br.md">Português (Brasil)</a></p>
+<p align="center"><a href="https://github.com/Golmet/golmet-cli/blob/main/README.md">English</a> | <a href="https://github.com/Golmet/golmet-cli/blob/main/README.md">Português (Brasil)</a></p>
 
 
 # Self-governing: o lint carrega o estado
 
-No tutorial [04](../getting-started/04-o-ciclo-de-uma-feature.pt-br.md), o
+No tutorial [04](/docs/pt-br/getting-started/04-o-ciclo-de-uma-feature), o
 `golmet validate` conferiu o ciclo inteiro da RN-001 e saiu verde. Esta
 página explica a filosofia por trás desses checks — e por que o Golmet
 funciona quando os processos tradicionais apodrecem.

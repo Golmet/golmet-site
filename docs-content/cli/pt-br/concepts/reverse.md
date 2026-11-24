@@ -1,4 +1,4 @@
-<p align="center"><a href="../../README.md">English</a> | <a href="../../README.pt-br.md">Português (Brasil)</a> | <a href="/docs/concepts/reverse">versão base deste doc</a></p>
+<p align="center"><a href="https://github.com/Golmet/golmet-cli/blob/main/README.md">English</a> | <a href="https://github.com/Golmet/golmet-cli/blob/main/README.md">Português (Brasil)</a> | <a href="/docs/concepts/reverse">versão base deste doc</a></p>
 
 # Engenharia reversa — a verdade documentada do que já existe
 
@@ -17,7 +17,7 @@ confiar em si mesmo.
 **`reverse/CANDIDATES.md`** — a fila de conhecimento candidato (`CAND-NNN`):
 o que foi descoberto do legado entra no workflow novo como candidato, não
 como suposição. Esta é a ponte entre o que existe e o que vai ser
-construído (veja [artefatos.md](artefatos.pt-br.md)).
+construído (veja [artefatos.md](/docs/pt-br/concepts/artefatos)).
 
 **A camada humana do legado** (`gm-legacy-guide`) — `reverse/guide/`:
 OVERVIEW, IMPACT_MAP, GUIDES/<domínio>, FORMS/<domínio> — a leitura guiada
@@ -41,7 +41,7 @@ vira o fundamento sobre o qual o sistema novo é construído.
 Projetos brownfield começam aqui: analise o código-fonte congelado
 primeiro, semeie a fila de candidatos, entregue ao humano a leitura guiada
 — e só então planeje o workflow novo sobre a verdade documentada. Veja
-[02-projeto.md](../getting-started/02-projeto.pt-br.md) (a fila de
+[02-projeto.md](/docs/pt-br/getting-started/02-projeto) (a fila de
 candidatos em projetos brownfield) e
-[05-maturity-and-knowledge.md](../getting-started/05-maturity-and-knowledge.pt-br.md)
+[05-maturity-and-knowledge.md](/docs/pt-br/getting-started/05-maturity-and-knowledge)
 (o que sobra quando o projeto termina).

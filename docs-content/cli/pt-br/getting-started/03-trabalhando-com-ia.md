@@ -1,4 +1,4 @@
-<p align="center"><a href="../../README.md">English</a> | <a href="../../README.pt-br.md">Português (Brasil)</a></p>
+<p align="center"><a href="https://github.com/Golmet/golmet-cli/blob/main/README.md">English</a> | <a href="https://github.com/Golmet/golmet-cli/blob/main/README.md">Português (Brasil)</a></p>
 
 
 # 03 — Trabalhando com a IA
@@ -70,7 +70,7 @@ A partir daí a jornada segue sozinha — e é o próximo tutorial:
 feature inteira (requisito → spec → task → código → validação → entrega)
 com cada documento aparecendo no momento em que ele é criado. O mapa
 completo de quem nasce de quem está em
-[docs/concepts/artefatos.md](../concepts/artefatos.pt-br.md).
+[docs/concepts/artefatos.md](/docs/pt-br/concepts/artefatos).
 
 O que importa aqui: **a IA não inventa o processo — ela o executa**. As
 skills têm contrato (FORMAT §10): elas sabem o que podem escrever, o que

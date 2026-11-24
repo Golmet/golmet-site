@@ -1,4 +1,4 @@
-<p align="center">English | <a href="05-maturity-and-knowledge.pt-br.md">Português (Brasil)</a></p>
+<p align="center">English | <a href="/docs/pt-br/getting-started/05-maturity-and-knowledge">Português (Brasil)</a></p>
 
 # 05 — What remains when the project ends: the pack cycle
 
@@ -140,7 +140,7 @@ foundation researched — the team's AI inherits the house way on day one.
 [02 — the project](/docs/getting-started/02-projeto) ·
 [03 — the AI in the cycle](/docs/getting-started/03-trabalhando-com-ia) ·
 [04 — the cycle of one feature](/docs/getting-started/04-o-ciclo-de-uma-feature) ·
-[05 — maturity](05-maturity-and-knowledge.pt-br.md).
+[05 — maturity](/docs/pt-br/getting-started/05-maturity-and-knowledge).
 
 For the concepts in depth: the whole knowledge ecosystem in
 [docs/concepts/knowledge.md](/docs/concepts/knowledge).

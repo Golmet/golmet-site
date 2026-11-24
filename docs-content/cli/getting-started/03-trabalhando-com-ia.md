@@ -1,4 +1,4 @@
-<p align="center">English | <a href="03-trabalhando-com-ia.pt-br.md">Português (Brasil)</a></p>
+<p align="center">English | <a href="/docs/pt-br/getting-started/03-trabalhando-com-ia">Português (Brasil)</a></p>
 
 # 03 — Working with the AI
 

@@ -1,4 +1,4 @@
-<p align="center">English | <a href="lint.pt-br.md">Português (Brasil)</a></p>
+<p align="center">English | <a href="/docs/pt-br/reference/lint">Português (Brasil)</a></p>
 
 # The lint layers (L1-L13)
 
@@ -206,6 +206,6 @@ allowlists and per-check heuristics live in the FORMAT §9.1 and in code.
 
 ## The normative contract
 
-The checks enforce [FORMAT §9.1](../FORMAT.pt-br.md) — the lint is the
-executor, the FORMAT is the contract. Reference: [commands](commands.pt-br.md)
-(`golmet lint`) and [tools](tools.pt-br.md) (`gm_lint`).
+The checks enforce [FORMAT §9.1](/docs/pt-br/format) — the lint is the
+executor, the FORMAT is the contract. Reference: [commands](/docs/pt-br/reference/commands)
+(`golmet lint`) and [tools](/docs/pt-br/reference/tools) (`gm_lint`).

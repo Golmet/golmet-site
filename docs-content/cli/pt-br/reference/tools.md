@@ -1,4 +1,4 @@
-<p align="center"><a href="../../README.md">English</a> | <a href="../../README.pt-br.md">Português (Brasil)</a></p>
+<p align="center"><a href="https://github.com/Golmet/golmet-cli/blob/main/README.md">English</a> | <a href="https://github.com/Golmet/golmet-cli/blob/main/README.md">Português (Brasil)</a></p>
 
 # MCP tools reference (`gm_*`)
 
@@ -14,7 +14,7 @@ Estas 15 tools são o **caminho da IA**: dentro do Opencode (com `golmet mcp`
 registrado), os agentes atuam sobre o kit **por meio dessas tools** - os
 guardas (confirm, dry-run) são aplicados nesse caminho. O **caminho humano**
 é o CLI no terminal
-([commands.pt-br.md](commands.pt-br.md)) - as mesmas operações, desenhadas
+([commands.pt-br.md](/docs/pt-br/reference/commands)) - as mesmas operações, desenhadas
 para gestão direta.
 
 O servidor MCP (`golmet mcp`) expõe **15 tools** `gm_*` - o mesmo kit que as

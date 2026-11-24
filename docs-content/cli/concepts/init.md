@@ -1,4 +1,4 @@
-<p align="center">English | <a href="init.pt-br.md">Português (Brasil)</a></p>
+<p align="center">English | <a href="/docs/pt-br/concepts/init">Português (Brasil)</a></p>
 
 # The init wizard — what happens on screen
 
@@ -35,5 +35,5 @@ For those who prefer the fast path, the flags are the wizard as a command:
 in the global catalog) and `golmet init <produto> --into <container>`
 (delivers the product in the org's declared versioning model). `--yes`
 skips confirmation with explicit flags. The full declaration of the paths
-is in [FORMAT §2](../../docs/FORMAT.md) and in the reference
+is in [FORMAT §2](/docs/format) and in the reference
 ([commands.md](/docs/reference/commands)).

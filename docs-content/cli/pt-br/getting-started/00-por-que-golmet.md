@@ -1,4 +1,4 @@
-<p align="center"><a href="../../README.md">English</a> | <a href="../../README.pt-br.md">Português (Brasil)</a></p>
+<p align="center"><a href="https://github.com/Golmet/golmet-cli/blob/main/README.md">English</a> | <a href="https://github.com/Golmet/golmet-cli/blob/main/README.md">Português (Brasil)</a></p>
 
 # 00 — Por que o Golmet existe
 
@@ -57,8 +57,8 @@ confirma a cada validação.
 ## Por onde começar
 
 A jornada continua nos próximos tutoriais:
-[01 — criar a Organização](01-organizacao.pt-br.md) ·
-[02 — criar o projeto](02-projeto.pt-br.md) ·
-[03 — trabalhando com IA](03-trabalhando-com-ia.pt-br.md) ·
-[04 — o ciclo de uma feature](04-o-ciclo-de-uma-feature.pt-br.md) ·
-[05 — o que sobra no fim](05-maturidade-e-conhecimento.pt-br.md).
+[01 — criar a Organização](/docs/pt-br/getting-started/01-organizacao) ·
+[02 — criar o projeto](/docs/pt-br/getting-started/02-projeto) ·
+[03 — trabalhando com IA](/docs/pt-br/getting-started/03-trabalhando-com-ia) ·
+[04 — o ciclo de uma feature](/docs/pt-br/getting-started/04-o-ciclo-de-uma-feature) ·
+[05 — o que sobra no fim](https://github.com/Golmet/golmet-cli/blob/main/docs/getting-started/05-maturidade-e-conhecimento.md).

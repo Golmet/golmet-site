@@ -1,4 +1,4 @@
-<p align="center">English | <a href="compatibility.pt-br.md">Português (Brasil)</a></p>
+<p align="center">English | <a href="/docs/pt-br/reference/compatibility">Português (Brasil)</a></p>
 
 # INSTALL_COMPATIBILITY - Matriz MCP × Engine (v0.1)
 

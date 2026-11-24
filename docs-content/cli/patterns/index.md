@@ -1,4 +1,4 @@
-<p align="center"><a href="/docs/reference/glossary">English</a> | <a href="../../README.pt-br.md">Português (Brasil)</a></p>
+<p align="center"><a href="/docs/reference/glossary">English</a> | <a href="https://github.com/Golmet/golmet-cli/blob/main/README.md">Português (Brasil)</a></p>
 
 # Índice do Hub de Patterns
 

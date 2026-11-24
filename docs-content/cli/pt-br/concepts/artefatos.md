@@ -1,4 +1,4 @@
-<p align="center"><a href="../../README.md">English</a> | <a href="../../README.pt-br.md">Português (Brasil)</a></p>
+<p align="center"><a href="https://github.com/Golmet/golmet-cli/blob/main/README.md">English</a> | <a href="https://github.com/Golmet/golmet-cli/blob/main/README.md">Português (Brasil)</a></p>
 
 
 # A arquitetura de artefatos do Golmet
@@ -7,7 +7,7 @@ Toda a estrutura do Golmet — os diretórios, os formatos, as validações —
 existe para sustentar uma cadeia de documentos onde **cada um nasce de um
 outro e alimenta os seguintes**. Esta página conta essa cadeia como
 história (a mesma jornada dos
-[tutoriais](../getting-started/00-por-que-golmet.pt-br.md), vista de cima)
+[tutoriais](/docs/pt-br/getting-started/00-por-que-golmet), vista de cima)
 e fecha com a tabela de referência completa.
 
 ## A história: a semente e a descendência
@@ -76,10 +76,10 @@ entrega, termina virando ativo da organização.
 
 ## As regras que sustentam a cadeia
 
-A cadeia só vale se for verificada. O [FORMAT v1](../../docs/FORMAT.pt-br.md) define os
+A cadeia só vale se for verificada. O [FORMAT v1](/docs/pt-br/format) define os
 checks que a impedem de apodrecer: H1 (PEND nunca ancora Feature), H3
 (Feature pronta exige RN ativa), H4 (RN ativa exige evidência), H7 (a
 evidência resolve no código), H10 (as referências cruzadas resolvem), H8 (o
 estado no índice é a história — ADR aceito não muda). O soft (S1–S5) e o
 lint (L1–L10) vigiam o resto — a disciplina completa em
-[FORMAT §9](../../docs/FORMAT.pt-br.md).
+[FORMAT §9](/docs/pt-br/format).
