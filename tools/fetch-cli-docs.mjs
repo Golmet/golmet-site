@@ -1,26 +1,32 @@
-// RN-011-1/5 (ADR-009) — fonte das docs do portal = repositório PÚBLICO
-// Golmet/golmet-cli (raw na main + GitHub Releases API).
+// RN-007-8/9 — fonte das docs do portal = repositório PÚBLICO golmet-cli
+// (raw na main + GitHub Releases API + git trees).
 //
 // Gera em docs-content/cli/:
-//   releases.md            — notas das GitHub Releases (aba "Releases"; EN,
-//                            CHANGELOG não tem variante PT)
-//   <base>.md              — README.md EN dividido por H2 (fonte, RN-013)
-//   pt-br/<base>.md        — README.pt-br.md dividido por H2 (derivado)
-//   manifest.json          — pares EN↔PT por base slug + flags de tradução
+//   releases.md                 — notas das GitHub Releases (aba "Releases"; EN)
+//   <base>.md                   — README.md EN dividido por H2 (fonte, RN-013)
+//   pt-br/<base>.md             — README.pt-br.md dividido por H2 (derivado)
+//   <subpath>.md                — árvore docs/**.md do repo (FORMAT, concepts/,
+//                                 getting-started, reference, design, patterns,
+//                                 migration, recommended) — EN é a fonte
+//                                 técnica (ADR-009/RN-013)
+//   pt-br/<subpath>.md          — variante PT da árvore (pareada por sufixo
+//                                 .pt-br.md — convenção do repo do kit)
+//   manifest.json               — pares EN↔PT + grupo da sidebar por página
 //
-// Os READMEs EN/PT têm a MESMA sequência de H2 — o pareamento para a sidebar
-// é por ÍNDICE; contagens divergentes = fonte inconsistente = exit 1.
-// Strict: qualquer fonte sem resposta = exit 1, nada publica.
+// Links entre markdowns são REESCRITOS para rotas do portal (resolver
+// relativo por arquivo); links para assets inexistentes fora do repo são
+// removidos. Strict: qualquer fonte sem resposta = exit 1, nada publica.
 import { mkdirSync, readdirSync, rmSync, writeFileSync } from 'node:fs';
-import { join } from 'node:path';
+import { join, posix } from 'node:path';
 
 const RAW = 'https://raw.githubusercontent.com/Golmet/golmet-cli/main';
+const TREE_API = 'https://api.github.com/repos/Golmet/golmet-cli/git/trees/main?recursive=1';
 const RELEASES_API = 'https://api.github.com/repos/Golmet/golmet-cli/releases?per_page=10';
 const OUT_DIR = 'docs-content/cli';
 const PT_DIR = join(OUT_DIR, 'pt-br');
 
-// RN-007-8/9 — GITHUB_TOKEN (quando presente no CI) autentica a API de
-// Releases: rate limit 1.000/h vs 60/h anônimo (runners compartilham IP).
+// RN-007-8/9 — GITHUB_TOKEN (quando presente no CI) autentica a API GitHub:
+// rate limit 1.000/h vs 60/h anônimo (runners compartilham IP).
 const githubHeaders = {
   'User-Agent': 'golmet-site-build',
   ...(process.env.GITHUB_TOKEN ? { Authorization: `Bearer ${process.env.GITHUB_TOKEN}` } : {}),
@@ -29,7 +35,7 @@ const githubHeaders = {
 const get = async (url) => {
   const isGithubApi = url.startsWith('https://api.github.com/');
   const res = await fetch(url, {
-    signal: AbortSignal.timeout(15000),
+    signal: AbortSignal.timeout(20000),
     headers: isGithubApi ? githubHeaders : undefined,
   });
   if (!res.ok) throw new Error(`${url} respondeu HTTP ${res.status} — build estrito: nada publica`);
@@ -37,8 +43,8 @@ const get = async (url) => {
 };
 
 // Divide o README por H2 FORA de code fences — cada seção vira página da
-// sidebar com H1 próprio (RN-008). Pré-ambulo (antes do 1º H2) é descartado:
-// título vem do H1 da página e o seletor de idioma vive no header (RN-011-3).
+// sidebar com H1 próprio (RN-008). Pré-ambulo é descartado: o título vem do
+// H1 da página e o seletor de idioma vive no header (RN-011-3).
 function splitByH2(md) {
   const lines = md.split('\n');
   const sections = [];
@@ -69,12 +75,141 @@ const slugOf = (title) =>
     .replace(/[^a-z0-9]+/g, '-')
     .replace(/^-+|-+$/g, '');
 
-// Limpa antes: seções que sumiram do README não podem ficar órfãs na sidebar.
+/** Grupo da sidebar pelo primeiro segmento do caminho na árvore docs/. */
+const groupOf = (subpath) => {
+  const first = subpath.includes('/') ? subpath.split('/')[0] : '';
+  const groups = {
+    concepts: 'Concepts',
+    'getting-started': 'Getting started',
+    reference: 'Reference',
+    design: 'Design',
+    patterns: 'Patterns',
+  };
+  return groups[first] ?? 'Guide';
+};
+
+// Limpa antes: seções/arquivos que sumiram do repo não podem ficar órfãos.
 rmSync(OUT_DIR, { recursive: true, force: true });
 mkdirSync(OUT_DIR, { recursive: true });
 mkdirSync(PT_DIR, { recursive: true });
 
-// 1) Releases — somente as notas das GitHub Releases (pedido do operador).
+// ── 1) Árvore docs/**.md do repo ────────────────────────────────
+const treeRaw = await get(TREE_API);
+const tree = JSON.parse(treeRaw).tree ?? [];
+const docsFiles = tree
+  .map((entry) => entry.path)
+  .filter((path) => path.startsWith('docs/') && path.endsWith('.md'));
+if (docsFiles.length === 0) throw new Error('árvore sem docs/**.md — nada publica');
+
+// Pares EN↔PT: X.md ↔ X.pt-br.md (convenção do repo do kit).
+const enFiles = docsFiles.filter((path) => !path.endsWith('.pt-br.md'));
+const pairs = enFiles.map((enPath) => {
+  const subpath = enPath.replace(/^docs\//, '');
+  const ptPath = `docs/${subpath.replace(/\.md$/i, '.pt-br.md')}`;
+  return { subpath, enPath, ptPath, hasPt: docsFiles.includes(ptPath) };
+});
+
+// Bases existentes (para o resolver de links): 'concepts/overview', 'FORMAT'…
+const baseSet = new Set(pairs.map((pair) => pair.subpath.replace(/\.md$/i, '').toLowerCase()));
+
+/**
+ * Reescreve links entre markdowns para rotas do portal (não é edição de
+ * evidência — é a conexão do grafo de docs no contexto do site):
+ *   docs/x.md, x.md, ../y.md  →  /docs/<base resolvido>
+ *   x.pt-br.md                →  /docs/pt-br/<base>
+ *   CHANGELOG.md              →  /docs/releases (aba Releases)
+ *   LICENSE                   →  blob do repo
+ */
+function rewriteLinks(md, relSubpath) {
+  const dir = relSubpath.includes('/') ? relSubpath.slice(0, relSubpath.lastIndexOf('/')) : '';
+  const resolveTarget = (target) => {
+    if (/^(https?:|\/|#|mailto:)/i.test(target)) return null;
+    const joined = posix.normalize(posix.join(dir, target).replace(/^docs\//, ''));
+    const clean = joined.replace(/\.md$/i, '').toLowerCase();
+    if (baseSet.has(clean)) return { href: `/docs/${clean}` };
+    return null;
+  };
+  let out = md;
+  // markdown links ](target.md) e html href="target.md"
+  out = out.replace(/\]\(([^)\s]+\.md)\)/gi, (match, target) => {
+    if (/CHANGELOG\.md$/i.test(target)) return '](/docs/releases)';
+    const resolved = resolveTarget(target);
+    return resolved ? `](${resolved.href})` : match;
+  });
+  out = out.replace(/href="([^"\s]+\.md)"/gi, (match, target) => {
+    if (/CHANGELOG\.md$/i.test(target)) return 'href="/docs/releases"';
+    const resolved = resolveTarget(target);
+    return resolved ? `href="${resolved.href}"` : match;
+  });
+  out = out.replace(/href="LICENSE"/gi, 'href="https://github.com/Golmet/golmet-cli/blob/main/LICENSE"');
+  return out;
+}
+
+// ── 2) Baixa a árvore docs/ (EN + PT) com links resolvidos ─────
+const docsManifest = [];
+for (const pair of pairs) {
+  const group = groupOf(pair.subpath);
+  const base = pair.subpath.replace(/\.md$/i, '').toLowerCase();
+  let enMd = rewriteLinks(await get(`${RAW}/${pair.enPath}`), pair.subpath);
+  // RN-008 — exatamente 1 H1 por página: se o arquivo do kit não o tiver
+  // (começa direto em H2), injeta o H1 humanizado do nome do arquivo.
+  const h1Count = (text) => (text.replace(/```[\s\S]*?```/g, ' ').match(/^#\s+.+$/gm) ?? []).length;
+  if (h1Count(enMd) === 0) {
+    const humanized = base
+      .slice(base.lastIndexOf('/') + 1)
+      .replace(/[-_]/g, ' ')
+      .replace(/\b\w/g, (c) => c.toUpperCase());
+    enMd = `# ${humanized}\n\n${enMd}`;
+  }
+  const enOut = join(OUT_DIR, `${base}.md`);
+  mkdirSync(join(enOut, '..'), { recursive: true });
+  writeFileSync(enOut, enMd, 'utf8');
+
+  let hasPt = false;
+  if (pair.hasPt) {
+    const ptRel = `pt-br/${base}.md`;
+    let ptMd = rewriteLinks(await get(`${RAW}/${pair.ptPath}`), pair.subpath.replace(/\.md$/i, '.pt-br.md'));
+    if (h1Count(ptMd) === 0) {
+      const humanized = base
+        .slice(base.lastIndexOf('/') + 1)
+        .replace(/[-_]/g, ' ')
+        .replace(/\b\w/g, (c) => c.toUpperCase());
+      ptMd = `# ${humanized}\n\n${ptMd}`;
+    }
+    const ptOut = join(PT_DIR, `${base}.md`);
+    mkdirSync(join(ptOut, '..'), { recursive: true });
+    writeFileSync(ptOut, ptMd, 'utf8');
+    hasPt = true;
+  }
+  docsManifest.push({ base, hasPt, group });
+}
+
+// ── 3) READMEs EN/PT divididos por H2 (pareados por índice) ────
+const sectionsEn = splitByH2(await get(`${RAW}/README.md`));
+const sectionsPt = splitByH2(await get(`${RAW}/README.pt-br.md`));
+if (sectionsEn.length !== sectionsPt.length) {
+  rmSync(OUT_DIR, { recursive: true, force: true });
+  throw new Error(
+    `READMEs inconsistentes: EN tem ${sectionsEn.length} seções H2, PT-BR tem ${sectionsPt.length} — nada publica`,
+  );
+}
+
+const readmeManifest = [];
+sectionsEn.forEach((sectionEn, i) => {
+  const base = slugOf(sectionEn.title);
+  const bodyEn = sectionEn.lines.join('\n').trim();
+  const sectionPt = sectionsPt[i];
+  const bodyPt = sectionPt.lines.join('\n').trim();
+  if (bodyEn.length < 40) return; // seção mínima — vira ruído de sidebar
+  writeFileSync(join(OUT_DIR, `${base}.md`), `# ${sectionEn.title}\n\n${bodyEn}\n`, 'utf8');
+  const hasPt = bodyPt.length >= 40;
+  if (hasPt) {
+    writeFileSync(join(PT_DIR, `${base}.md`), `# ${sectionPt.title}\n\n${bodyPt}\n`, 'utf8');
+  }
+  readmeManifest.push({ base, hasPt, group: 'CLI' });
+});
+
+// ── 4) Releases — notas das GitHub Releases (aba Releases) ────
 const releasesRaw = await get(RELEASES_API);
 const releases = JSON.parse(releasesRaw);
 if (!Array.isArray(releases) || releases.length === 0) {
@@ -97,35 +232,18 @@ const releasesMd = releases
   .join('\n\n');
 writeFileSync(join(OUT_DIR, 'releases.md'), `# Releases\n\n${releasesMd}\n`, 'utf8');
 
-// 2) READMEs EN/PT divididos e pareados por índice (fonte consistente).
-const sectionsEn = splitByH2(await get(`${RAW}/README.md`));
-const sectionsPt = splitByH2(await get(`${RAW}/README.pt-br.md`));
-if (sectionsEn.length !== sectionsPt.length) {
-  rmSync(OUT_DIR, { recursive: true, force: true });
-  throw new Error(
-    `READMEs inconsistentes: EN tem ${sectionsEn.length} seções H2, PT-BR tem ${sectionsPt.length} — nada publica`,
-  );
-}
-
-const manifest = [];
-sectionsEn.forEach((sectionEn, i) => {
-  const base = slugOf(sectionEn.title);
-  const bodyEn = sectionEn.lines.join('\n').trim();
-  const sectionPt = sectionsPt[i];
-  const bodyPt = sectionPt.lines.join('\n').trim();
-  if (bodyEn.length < 40) return; // seção mínima — vira ruído de sidebar
-  writeFileSync(join(OUT_DIR, `${base}.md`), `# ${sectionEn.title}\n\n${bodyEn}\n`, 'utf8');
-  const hasPt = bodyPt.length >= 40;
-  if (hasPt) {
-    writeFileSync(join(PT_DIR, `${base}.md`), `# ${sectionPt.title}\n\n${bodyPt}\n`, 'utf8');
-  }
-  manifest.push({ base, hasPt });
-});
-
-// Releases não tem variante PT (CHANGELOG do kit é EN) — fallback cobre.
+// ── 5) manifest ────────────────────────────────────────────────
 writeFileSync(
   join(OUT_DIR, 'manifest.json'),
-  JSON.stringify({ releases: { hasPt: false }, sections: manifest }, null, 2),
+  JSON.stringify(
+    {
+      releases: { hasPt: false, group: 'CLI' },
+      readme: readmeManifest,
+      docs: docsManifest,
+    },
+    null,
+    2,
+  ),
   'utf8',
 );
 

@@ -1,39 +1,210 @@
 {
   "releases": {
-    "hasPt": false
+    "hasPt": false,
+    "group": "CLI"
   },
-  "sections": [
+  "readme": [
     {
       "base": "the-problem-golmet-solves",
-      "hasPt": true
+      "hasPt": true,
+      "group": "CLI"
     },
     {
       "base": "what-golmet-does-in-practice",
-      "hasPt": true
+      "hasPt": true,
+      "group": "CLI"
     },
     {
       "base": "the-recommended-mode",
-      "hasPt": true
+      "hasPt": true,
+      "group": "CLI"
     },
     {
       "base": "getting-started-5-minutes",
-      "hasPt": true
+      "hasPt": true,
+      "group": "CLI"
     },
     {
       "base": "the-documentation",
-      "hasPt": true
+      "hasPt": true,
+      "group": "CLI"
     },
     {
       "base": "uninstall",
-      "hasPt": true
+      "hasPt": true,
+      "group": "CLI"
     },
     {
       "base": "development",
-      "hasPt": true
+      "hasPt": true,
+      "group": "CLI"
     },
     {
       "base": "roadmap-contributing-license",
-      "hasPt": true
+      "hasPt": true,
+      "group": "CLI"
+    }
+  ],
+  "docs": [
+    {
+      "base": "format",
+      "hasPt": true,
+      "group": "Guide"
+    },
+    {
+      "base": "concepts/artefatos",
+      "hasPt": true,
+      "group": "Concepts"
+    },
+    {
+      "base": "concepts/context7",
+      "hasPt": true,
+      "group": "Concepts"
+    },
+    {
+      "base": "concepts/init",
+      "hasPt": true,
+      "group": "Concepts"
+    },
+    {
+      "base": "concepts/knowledge",
+      "hasPt": true,
+      "group": "Concepts"
+    },
+    {
+      "base": "concepts/layers",
+      "hasPt": true,
+      "group": "Concepts"
+    },
+    {
+      "base": "concepts/organization",
+      "hasPt": true,
+      "group": "Concepts"
+    },
+    {
+      "base": "concepts/overview",
+      "hasPt": true,
+      "group": "Concepts"
+    },
+    {
+      "base": "concepts/profile",
+      "hasPt": true,
+      "group": "Concepts"
+    },
+    {
+      "base": "concepts/reverse",
+      "hasPt": true,
+      "group": "Concepts"
+    },
+    {
+      "base": "concepts/self-governing",
+      "hasPt": true,
+      "group": "Concepts"
+    },
+    {
+      "base": "design/decisions",
+      "hasPt": true,
+      "group": "Design"
+    },
+    {
+      "base": "design/workflow-improvements",
+      "hasPt": true,
+      "group": "Design"
+    },
+    {
+      "base": "getting-started/00-por-que-golmet",
+      "hasPt": true,
+      "group": "Getting started"
+    },
+    {
+      "base": "getting-started/01-organizacao",
+      "hasPt": true,
+      "group": "Getting started"
+    },
+    {
+      "base": "getting-started/02-projeto",
+      "hasPt": true,
+      "group": "Getting started"
+    },
+    {
+      "base": "getting-started/03-trabalhando-com-ia",
+      "hasPt": true,
+      "group": "Getting started"
+    },
+    {
+      "base": "getting-started/04-o-ciclo-de-uma-feature",
+      "hasPt": true,
+      "group": "Getting started"
+    },
+    {
+      "base": "getting-started/05-maturity-and-knowledge",
+      "hasPt": true,
+      "group": "Getting started"
+    },
+    {
+      "base": "migration",
+      "hasPt": true,
+      "group": "Guide"
+    },
+    {
+      "base": "patterns/index",
+      "hasPt": false,
+      "group": "Patterns"
+    },
+    {
+      "base": "patterns/template",
+      "hasPt": false,
+      "group": "Patterns"
+    },
+    {
+      "base": "recommended",
+      "hasPt": true,
+      "group": "Guide"
+    },
+    {
+      "base": "reference/commands",
+      "hasPt": true,
+      "group": "Reference"
+    },
+    {
+      "base": "reference/compatibility",
+      "hasPt": true,
+      "group": "Reference"
+    },
+    {
+      "base": "reference/evals",
+      "hasPt": true,
+      "group": "Reference"
+    },
+    {
+      "base": "reference/format",
+      "hasPt": true,
+      "group": "Reference"
+    },
+    {
+      "base": "reference/glossary",
+      "hasPt": true,
+      "group": "Reference"
+    },
+    {
+      "base": "reference/known-errors",
+      "hasPt": true,
+      "group": "Reference"
+    },
+    {
+      "base": "reference/lint",
+      "hasPt": true,
+      "group": "Reference"
+    },
+    {
+      "base": "reference/tools",
+      "hasPt": true,
+      "group": "Reference"
+    },
+    {
+      "base": "reference/versioning",
+      "hasPt": true,
+      "group": "Reference"
     }
   ]
 }
