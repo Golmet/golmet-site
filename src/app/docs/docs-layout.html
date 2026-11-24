@@ -6,11 +6,15 @@
       <ul class="gm-toc">
         @for (item of group.items; track item.slug) {
           <li>
-            <a [routerLink]="['/docs', item.slug]">{{ item.title }}</a>
+            <a
+              [routerLink]="['/docs', item.slug]"
+              routerLinkActive="active"
+              >{{ item.title }}</a
+            >
           </li>
         }
       </ul>
-    }
+      }
   </aside>
   <main class="gm-docs-content">
     <router-outlet />
