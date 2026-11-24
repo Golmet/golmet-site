@@ -27,7 +27,13 @@
       <ul class="gm-docs-toc-list">
         @for (item of items; track item.id) {
           <li [class.is-h3]="item.level === 3">
-            <a [href]="'#' + item.id">{{ item.text }}</a>
+            <button
+              type="button"
+              class="gm-docs-toc-link"
+              (click)="scrollToAnchor(item.id)"
+            >
+              {{ item.text }}
+            </button>
           </li>
         }
       </ul>

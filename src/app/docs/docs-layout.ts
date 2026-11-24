@@ -46,4 +46,12 @@ export class DocsLayout {
   );
 
   protected readonly pageToc = this.navService.pageToc;
+
+  /** RN-011 âncoras — rola SEM navegar: o <a href="#id"> plano dentro do app
+   * Angular disparava navegação do Router para a raiz (base href "/"), e o
+   * history.replaceState mutava o URL da mesma forma. Button + scroll puro:
+   * nenhuma mutação de URL, nenhuma navegação. */
+  protected scrollToAnchor(id: string): void {
+    document.getElementById(id)?.scrollIntoView({ block: 'start' });
+  }
 }
