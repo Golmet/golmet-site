@@ -1,14 +1,18 @@
+// Container centralizado no mesmo padrão da landing (max-width 1120px,
+// margin auto, padding simétrico) — o portal segue a mesma régua visual.
 .gm-docs {
   display: grid;
   gap: var(--gm-space-3);
   grid-template-columns: 1fr;
-  padding: var(--gm-space-3) var(--gm-space-3) var(--gm-space-3) 0;
+  margin: 0 auto;
+  max-width: 1120px;
+  padding: var(--gm-space-3);
+  width: 100%;
 }
 
 @media (min-width: 900px) {
   .gm-docs {
     grid-template-columns: 260px 1fr;
-    padding-left: 0;
   }
 }
 
