@@ -23,26 +23,6 @@ export interface GeneratedTocLocale {
 }
 export const GENERATED_DOCS: readonly GeneratedDocPage[] = [
   {
-    "slug": "releases",
-    "base": "releases",
-    "locale": "en",
-    "lang": "en",
-    "group": "CLI",
-    "title": "Releases",
-    "translated": true,
-    "sourcePath": "CHANGELOG.md"
-  },
-  {
-    "slug": "pt-br/releases",
-    "base": "releases",
-    "locale": "pt-BR",
-    "lang": "en",
-    "group": "CLI",
-    "title": "Releases",
-    "translated": false,
-    "sourcePath": "CHANGELOG.md"
-  },
-  {
     "slug": "the-problem-golmet-solves",
     "base": "the-problem-golmet-solves",
     "locale": "en",
@@ -201,6 +181,26 @@ export const GENERATED_DOCS: readonly GeneratedDocPage[] = [
     "title": "Roadmap · Contributing · Licença",
     "translated": true,
     "sourcePath": "README.pt-br.md"
+  },
+  {
+    "slug": "releases",
+    "base": "releases",
+    "locale": "en",
+    "lang": "en",
+    "group": "CLI",
+    "title": "Releases",
+    "translated": true,
+    "sourcePath": "CHANGELOG.md"
+  },
+  {
+    "slug": "pt-br/releases",
+    "base": "releases",
+    "locale": "pt-BR",
+    "lang": "en",
+    "group": "CLI",
+    "title": "Releases",
+    "translated": false,
+    "sourcePath": "CHANGELOG.md"
   },
   {
     "slug": "format",
@@ -845,7 +845,6 @@ export const GENERATED_DOCS: readonly GeneratedDocPage[] = [
 ];
 export const GENERATED_ORDER: Record<'en' | 'pt-BR', readonly string[]> = {
   "en": [
-    "releases",
     "the-problem-golmet-solves",
     "what-golmet-does-in-practice",
     "the-recommended-mode",
@@ -854,6 +853,7 @@ export const GENERATED_ORDER: Record<'en' | 'pt-BR', readonly string[]> = {
     "uninstall",
     "development",
     "roadmap-contributing-license",
+    "releases",
     "format",
     "concepts/artefatos",
     "concepts/context7",
@@ -888,7 +888,6 @@ export const GENERATED_ORDER: Record<'en' | 'pt-BR', readonly string[]> = {
     "reference/versioning"
   ],
   "pt-BR": [
-    "pt-br/releases",
     "pt-br/the-problem-golmet-solves",
     "pt-br/what-golmet-does-in-practice",
     "pt-br/the-recommended-mode",
@@ -897,6 +896,7 @@ export const GENERATED_ORDER: Record<'en' | 'pt-BR', readonly string[]> = {
     "pt-br/uninstall",
     "pt-br/development",
     "pt-br/roadmap-contributing-license",
+    "pt-br/releases",
     "pt-br/format",
     "pt-br/concepts/artefatos",
     "pt-br/concepts/context7",
@@ -939,10 +939,6 @@ export const GENERATED_TOC: readonly GeneratedTocLocale[] = [
         "group": "CLI",
         "items": [
           {
-            "slug": "releases",
-            "title": "Releases"
-          },
-          {
             "slug": "the-problem-golmet-solves",
             "title": "The problem Golmet solves"
           },
@@ -973,6 +969,10 @@ export const GENERATED_TOC: readonly GeneratedTocLocale[] = [
           {
             "slug": "roadmap-contributing-license",
             "title": "Roadmap · Contributing · License"
+          },
+          {
+            "slug": "releases",
+            "title": "Releases"
           }
         ]
       },
@@ -1143,10 +1143,6 @@ export const GENERATED_TOC: readonly GeneratedTocLocale[] = [
         "group": "CLI",
         "items": [
           {
-            "slug": "pt-br/releases",
-            "title": "Releases"
-          },
-          {
             "slug": "pt-br/the-problem-golmet-solves",
             "title": "O problema que o Golmet resolve"
           },
@@ -1177,6 +1173,10 @@ export const GENERATED_TOC: readonly GeneratedTocLocale[] = [
           {
             "slug": "pt-br/roadmap-contributing-license",
             "title": "Roadmap · Contributing · Licença"
+          },
+          {
+            "slug": "pt-br/releases",
+            "title": "Releases"
           }
         ]
       },

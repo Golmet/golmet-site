@@ -178,7 +178,6 @@ details[open] > .gm-toc-group-name::after {
     overflow-x: hidden;
     scrollbar-width: thin;
     scrollbar-color: var(--gm-border) transparent;
-    padding: 0 var(--gm-space-2);
   }
 
   .gm-docs-toc::-webkit-scrollbar {
@@ -212,16 +211,20 @@ details[open] > .gm-toc-group-name::after {
   border-left: 1px solid var(--gm-border);
   list-style: none;
   margin: 0;
-  padding: 0;
+  padding: 0 16px;
 }
 
 .gm-docs-toc-list a,
-.gm-docs-toc-list .gm-docs-toc-link {
+.gm-docs-toc-link {
+  border-radius: 6px;
   color: var(--gm-text-muted);
   display: block;
   font-size: 0.82rem;
   padding: 4px 12px;
   text-decoration: none;
+  transition:
+    color 0.15s ease,
+    background-color 0.15s ease;
 }
 
 .gm-docs-toc-link {
@@ -235,6 +238,7 @@ details[open] > .gm-toc-group-name::after {
 
 .gm-docs-toc-list a:hover,
 .gm-docs-toc-link:hover {
+  background: rgba(233, 230, 223, 0.05);
   color: var(--gm-ouro);
 }
 
