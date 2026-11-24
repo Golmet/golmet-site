@@ -3,18 +3,22 @@
 }
 
 .gm-docs-search-input {
-  background: var(--gm-obsidiana);
+  background: var(--gm-code-bg);
   border: 1px solid var(--gm-border);
-  border-radius: 6px;
+  border-radius: 8px;
   color: var(--gm-text);
-  font-size: 0.88rem;
-  padding: 6px 10px;
+  font-size: 0.92rem;
+  padding: 10px 12px;
   width: 100%;
 }
 
 .gm-docs-search-input:focus {
   border-color: var(--gm-ouro);
   outline: none;
+}
+
+.gm-docs-search-input::placeholder {
+  color: var(--gm-text-muted);
 }
 
 .gm-docs-search-results {
