@@ -164,11 +164,6 @@ export const COPY = {
           text: 'Wizard cria o workspace: golmet.yaml, charter e zonas do FORMATO.',
         },
         {
-          title: 'Abra o agente na pasta',
-          command: 'opencode',
-          text: 'Ou o engine que você escolheu no install — o MCP do kit já está configurado.',
-        },
-        {
           title: 'A verdade fica versionada',
           text: 'Markdown no seu git — sobrevive a engines, kits e releases.',
         },

@@ -26,7 +26,7 @@ describe('Landing — primeira dobra (RN-001-1)', () => {
     expect(img!.getAttribute('alt')).toContain('Arki');
   });
 
-  it('renderiza proposta de valor e quickstart narrado do deck (5 passos)', () => {
+  it('renderiza proposta de valor e quickstart narrado do deck (4 passos)', () => {
     const fixture = TestBed.createComponent(Landing);
     fixture.detectChanges();
 
@@ -34,8 +34,8 @@ describe('Landing — primeira dobra (RN-001-1)', () => {
     expect(compiled.querySelector('.gm-value')?.textContent).toContain('requisito versionado');
     expect(compiled.querySelector('.gm-quickstart h2')?.textContent).toContain(COPY.landing.quickstart.heading);
     expect(compiled.querySelectorAll('.gm-step').length).toBe(COPY.landing.quickstart.steps.length);
-    // 4 botões no quickstart (npm, install, init, agente) + 1 no CTA final
-    expect(compiled.querySelectorAll('.gm-copy').length).toBe(5);
+    // 3 botões no quickstart (npm, install, init) + 1 no CTA final
+    expect(compiled.querySelectorAll('.gm-copy').length).toBe(4);
   });
 
   it('copia o comando com feedback "Copiado" (RN-002)', async () => {
@@ -148,16 +148,5 @@ describe('Landing — primeira dobra (RN-001-1)', () => {
     expect(featured.length).toBe(4);
     expect(compiled.querySelector('.gm-cap-doc-link')?.textContent).toContain('todos os 18 comandos');
     expect(compiled.textContent).not.toContain('golmet contribute');
-  });
-
-  it('RN-004/CR-005: passo do agente com comando concreto', () => {
-    const fixture = TestBed.createComponent(Landing);
-    fixture.detectChanges();
-    const compiled = fixture.nativeElement as HTMLElement;
-
-    const agentStep = Array.from(compiled.querySelectorAll('.gm-step')).find((step) =>
-      step.textContent?.includes('Abra o agente'),
-    );
-    expect(agentStep?.querySelector('code')?.textContent).toContain('opencode');
   });
 });
