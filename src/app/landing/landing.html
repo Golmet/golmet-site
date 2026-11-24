@@ -35,8 +35,7 @@
     />
   </section>
 
-  <section class="gm-quickstart" aria-label="Quickstart">
-    <div class="gm-quickstart-head">
+  <section class="gm-quickstart" aria-label="Quickstart">    <div class="gm-quickstart-head">
       <h2>{{ quickstart.heading }}</h2>
       <span class="gm-badge">{{ quickstart.badge }}</span>
     </div>
@@ -68,20 +67,26 @@
     <app-terminal />
     <p class="gm-terminal-note">{{ terminal.title }} — golmet-cli v1.1.1, capturado em 20/11/2026.</p>
   </section>
+  </div>
 
+  <!-- Banda full-width (padrão do design alvo): sai do container e vira
+       faixa borda a borda com conteúdo centralizado em .gm-problem-inner -->
   <section class="gm-problem" aria-label="O problema">
-    <h2>{{ problem.heading }}</h2>
-    <p class="gm-section-note">{{ problem.note }}</p>
-    <div class="gm-problem-cards">
-      @for (card of problem.cards; track card.title) {
-        <article class="gm-problem-card">
-          <h3>{{ card.title }}</h3>
-          <p>{{ card.text }}</p>
-        </article>
-      }
+    <div class="gm-problem-inner">
+      <h2>{{ problem.heading }}</h2>
+      <p class="gm-section-note">{{ problem.note }}</p>
+      <div class="gm-problem-cards">
+        @for (card of problem.cards; track card.title) {
+          <article class="gm-problem-card">
+            <h3>{{ card.title }}</h3>
+            <p>{{ card.text }}</p>
+          </article>
+        }
+      </div>
     </div>
   </section>
 
+  <div class="gm-landing">
   <section class="gm-thesis" aria-label="A tese">
     <h2>{{ thesis.heading }}</h2>
     <p class="gm-section-note">{{ thesis.note }}</p>

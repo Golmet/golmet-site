@@ -225,9 +225,29 @@
   margin: 0;
 }
 
-// ── Problema (CR-004) ───────────────────────────────────────────
+// ── Problema (CR-004 + design alvo do operador) ────────────────
 
-.gm-problem,
+// Banda full-width: faixa borda a borda com hairlines topo/base e
+// conteúdo centralizado — mesmo container 1120px do resto do site.
+.gm-problem {
+  background: rgba(35, 39, 44, 0.45);
+  border-bottom: 1px solid var(--gm-border);
+  border-top: 1px solid var(--gm-border);
+  margin-top: var(--gm-space-3);
+  padding: var(--gm-space-4) var(--gm-space-3);
+}
+
+.gm-problem-inner {
+  margin: 0 auto;
+  max-width: 1120px;
+}
+
+.gm-problem h2 {
+  color: var(--gm-text);
+  font-size: var(--gm-h2);
+  margin: 0 0 var(--gm-space-2);
+}
+
 .gm-how {
   background: rgba(35, 39, 44, 0.45);
   border-radius: var(--gm-radius);
@@ -251,18 +271,20 @@
   background: var(--gm-obsidiana);
   border: 1px solid var(--gm-border);
   border-radius: var(--gm-radius);
-  padding: var(--gm-space-2);
+  padding: 1.5rem;
 }
 
 .gm-problem-card h3 {
-  color: var(--gm-ouro);
-  font-size: 0.95rem;
+  color: var(--gm-amber);
+  font-size: 1rem;
+  line-height: 1.35;
   margin: 0 0 var(--gm-space-1);
 }
 
 .gm-problem-card p {
   color: var(--gm-text);
-  font-size: 0.88rem;
+  font-size: 0.9rem;
+  line-height: 1.6;
   margin: 0;
 }
 
