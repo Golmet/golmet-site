@@ -39,6 +39,8 @@
     // kit são longas). Barra fina discreta no tema escuro.
     max-height: calc(100dvh - 7rem);
     overflow-y: auto;
+    // Sem barra horizontal — o eixo X nunca rola na sidebar (RN-011).
+    overflow-x: hidden;
     scrollbar-width: thin;
     scrollbar-color: var(--gm-border) transparent;
   }
@@ -120,6 +122,9 @@ details[open] > .gm-toc-group-name::after {
   color: var(--gm-text-muted);
   display: block;
   font-size: 0.92rem;
+  // Quebra palavras longas (títulos do kit com underscores) — nada transborda
+  // o eixo X da sidebar.
+  overflow-wrap: anywhere;
   padding: 8px 12px;
   text-decoration: none;
 }
@@ -170,6 +175,7 @@ details[open] > .gm-toc-group-name::after {
     top: var(--gm-space-3);
     max-height: calc(100dvh - 7rem);
     overflow-y: auto;
+    overflow-x: hidden;
     scrollbar-width: thin;
     scrollbar-color: var(--gm-border) transparent;
     padding: 0 var(--gm-space-2);
