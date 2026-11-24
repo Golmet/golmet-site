@@ -1,4 +1,4 @@
-<p align="center">English | <a href="context7.pt-br.md">Português (Brasil)</a></p>
+<p align="center">English | <a href="/docs/pt-br/concepts/context7">Português (Brasil)</a></p>
 
 # Context7 in the workflow
 

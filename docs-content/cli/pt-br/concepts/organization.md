@@ -1,10 +1,10 @@
-<p align="center"><a href="../../README.md">English</a> | <a href="../../README.pt-br.md">Português (Brasil)</a></p>
+<p align="center"><a href="https://github.com/Golmet/golmet-cli/blob/main/README.md">English</a> | <a href="https://github.com/Golmet/golmet-cli/blob/main/README.md">Português (Brasil)</a></p>
 
 
 # Organização, workspaces e versionamento
 
 Quando o operador criou a MinhaOrganizacao no tutorial
-[01](../getting-started/01-organizacao.pt-br.md), o Golmet perguntou "o que
+[01](/docs/pt-br/getting-started/01-organizacao), o Golmet perguntou "o que
 inicializar?" — e a primeira escolha da jornada define a estrutura de tudo:
 **a Organização é a raiz que agrupa os workspaces**, guarda os princípios
 (`CONSTITUTION.md`), a navegação (`INDEX.md`) e o manifesto dos produtos

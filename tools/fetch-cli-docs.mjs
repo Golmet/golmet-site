@@ -111,35 +111,102 @@ const pairs = enFiles.map((enPath) => {
 
 // Bases existentes (para o resolver de links): 'concepts/overview', 'FORMAT'…
 const baseSet = new Set(pairs.map((pair) => pair.subpath.replace(/\.md$/i, '').toLowerCase()));
+const sortedBases = [...baseSet].sort();
+
+const stripFragment = (target) => target.split('#')[0];
+
+/**
+ * Resolve um target relativo/absoluto do repo para a rota do portal.
+ * Candidatos: caminho relativo normalizado, caminho root-relativo com e sem
+ * o prefixo docs/, e fallback pelo segmento final (leaf único na árvore).
+ * Retorna null quando não resolve (link externo/âncora — fica como está).
+ */
+function resolveMdTarget(rawTarget, relSubpath) {
+  const target = stripFragment(rawTarget);
+  if (!target || /^(https?:|\/|#|mailto:)/i.test(target)) return null;
+  const isPt = /\.pt-br\.md$/i.test(target);
+  const withoutPt = target.replace(/\.pt-br\.md$/i, '.md');
+  const dir = relSubpath.includes('/') ? relSubpath.slice(0, relSubpath.lastIndexOf('/')) : '';
+  const candidates = [
+    posix.normalize(posix.join(dir, withoutPt)),
+    posix.normalize(withoutPt.replace(/^docs\//, '')),
+    posix.normalize(withoutPt),
+  ].map((candidate) => candidate.replace(/\.md$/i, '').toLowerCase());
+
+  // Leaf do PRIMEIRO candidato (o pop do último segmento funciona mesmo com
+  // '..' no meio do caminho — '../docs/FORMAT.md' → leaf 'format').
+  const leaf = (candidates[0] ?? '').split('/').pop();
+  if (leaf && baseSet.has(leaf)) {
+    return isPt ? `/docs/pt-br/${leaf}` : `/docs/${leaf}`;
+  }
+
+  const inside = candidates.filter((candidate) => candidate && !candidate.startsWith('..'));
+  if (inside.length === 1) {
+    const base = inside[0];
+    return isPt ? `/docs/pt-br/${base}` : `/docs/${base}`;
+  }
+  const leafMatches = leaf ? sortedBases.filter((base) => base.endsWith(`/${leaf}`)) : [];
+  if (leafMatches.length === 1) {
+    const base = leafMatches[0];
+    return isPt ? `/docs/pt-br/${base}` : `/docs/${base}`;
+  }
+
+  // Target que ESCAPA da árvore docs/ (ex.: ../../evals/x.md) → blob no repo.
+  const repoPath = posix.normalize(posix.join('docs', dir, withoutPt));
+  if (!repoPath.startsWith('..')) {
+    return `https://github.com/Golmet/golmet-cli/blob/main/${repoPath}`;
+  }
+  return null;
+}
+
+/** Diretório da árvore (ex.: 'docs/concepts/') → primeira página do grupo. */
+function resolveDirTarget(rawTarget) {
+  const target = stripFragment(rawTarget).replace(/\/+$/, '');
+  if (!target || /^(https?:|\/|#|mailto:)/i.test(target)) return null;
+  const prefix = target.replace(/^docs\//, '').toLowerCase();
+  if (!prefix) return null;
+  const child = sortedBases.find((base) => base.startsWith(`${prefix}/`));
+  return child ? `/docs/${child}` : null;
+}
+
+/** Arquivos da raiz do repo FORA da árvore docs/ → blob no GitHub (PT incluso). */
+const repoRootBlobs = /^(ROADMAP|CONTRIBUTING)(\.pt-br)?\.md$/i;
 
 /**
  * Reescreve links entre markdowns para rotas do portal (não é edição de
- * evidência — é a conexão do grafo de docs no contexto do site):
- *   docs/x.md, x.md, ../y.md  →  /docs/<base resolvido>
- *   x.pt-br.md                →  /docs/pt-br/<base>
- *   CHANGELOG.md              →  /docs/releases (aba Releases)
- *   LICENSE                   →  blob do repo
+ * evidência — é a conexão do grafo de docs no contexto do site).
+ * Aplica a markdown links ](target), html href="target" e diretórios.
  */
 function rewriteLinks(md, relSubpath) {
-  const dir = relSubpath.includes('/') ? relSubpath.slice(0, relSubpath.lastIndexOf('/')) : '';
-  const resolveTarget = (target) => {
-    if (/^(https?:|\/|#|mailto:)/i.test(target)) return null;
-    const joined = posix.normalize(posix.join(dir, target).replace(/^docs\//, ''));
-    const clean = joined.replace(/\.md$/i, '').toLowerCase();
-    if (baseSet.has(clean)) return { href: `/docs/${clean}` };
-    return null;
-  };
-  let out = md;
-  // markdown links ](target.md) e html href="target.md"
-  out = out.replace(/\]\(([^)\s]+\.md)\)/gi, (match, target) => {
+  let out = md.replace(/\]\(([^)]+)\)/g, (match, target) => {
     if (/CHANGELOG\.md$/i.test(target)) return '](/docs/releases)';
-    const resolved = resolveTarget(target);
-    return resolved ? `](${resolved.href})` : match;
+    if (repoRootBlobs.test(target)) {
+      return `](https://github.com/Golmet/golmet-cli/blob/main/${target})`;
+    }
+    if (/\.md$/i.test(target)) {
+      const resolved = resolveMdTarget(target, relSubpath);
+      return resolved ? `](${resolved})` : match;
+    }
+    if (/^(docs\/)?[a-z0-9-]+\/?$/i.test(target)) {
+      const resolved = resolveDirTarget(target);
+      return resolved ? `](${resolved})` : match;
+    }
+    return match;
   });
-  out = out.replace(/href="([^"\s]+\.md)"/gi, (match, target) => {
+  out = out.replace(/href="([^"\s]+)"/gi, (match, target) => {
     if (/CHANGELOG\.md$/i.test(target)) return 'href="/docs/releases"';
-    const resolved = resolveTarget(target);
-    return resolved ? `href="${resolved.href}"` : match;
+    if (repoRootBlobs.test(target)) {
+      return `href="https://github.com/Golmet/golmet-cli/blob/main/${target}"`;
+    }
+    if (/\.md$/i.test(target)) {
+      const resolved = resolveMdTarget(target, relSubpath);
+      return resolved ? `href="${resolved}"` : match;
+    }
+    if (/^(docs\/)?[a-z0-9-]+\/?$/i.test(target)) {
+      const resolved = resolveDirTarget(target);
+      return resolved ? `href="${resolved}"` : match;
+    }
+    return match;
   });
   out = out.replace(/href="LICENSE"/gi, 'href="https://github.com/Golmet/golmet-cli/blob/main/LICENSE"');
   return out;
@@ -201,10 +268,14 @@ sectionsEn.forEach((sectionEn, i) => {
   const sectionPt = sectionsPt[i];
   const bodyPt = sectionPt.lines.join('\n').trim();
   if (bodyEn.length < 40) return; // seção mínima — vira ruído de sidebar
-  writeFileSync(join(OUT_DIR, `${base}.md`), `# ${sectionEn.title}\n\n${bodyEn}\n`, 'utf8');
+  // As seções do README linkam a árvore docs/ — mesmas reescritas das páginas
+  // da árvore (relSubpath = raiz de docs/, onde o README vive).
+  const enFile = rewriteLinks(`# ${sectionEn.title}\n\n${bodyEn}\n`, base);
+  writeFileSync(join(OUT_DIR, `${base}.md`), enFile, 'utf8');
   const hasPt = bodyPt.length >= 40;
   if (hasPt) {
-    writeFileSync(join(PT_DIR, `${base}.md`), `# ${sectionPt.title}\n\n${bodyPt}\n`, 'utf8');
+    const ptFile = rewriteLinks(`# ${sectionPt.title}\n\n${bodyPt}\n`, base);
+    writeFileSync(join(PT_DIR, `${base}.md`), ptFile, 'utf8');
   }
   readmeManifest.push({ base, hasPt, group: 'CLI' });
 });

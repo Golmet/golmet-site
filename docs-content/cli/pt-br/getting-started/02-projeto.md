@@ -1,4 +1,4 @@
-<p align="center"><a href="../../README.md">English</a> | <a href="../../README.pt-br.md">Português (Brasil)</a></p>
+<p align="center"><a href="https://github.com/Golmet/golmet-cli/blob/main/README.md">English</a> | <a href="https://github.com/Golmet/golmet-cli/blob/main/README.md">Português (Brasil)</a></p>
 
 
 # 02 — Criar o projeto dentro da Organização
@@ -6,7 +6,7 @@
 Com a Organização criada, o operador cria o workspace do **MeuApp** — o produto
 de agendamento. Um workspace-produto é a unidade onde o workflow acontece:
 é nele que os requisitos vivem, as specs descem e o delivery anda. O
-conceito completo: [docs/concepts/organization.md](../concepts/organization.pt-br.md).
+conceito completo: [docs/concepts/organization.md](/docs/pt-br/concepts/organization).
 
 ## O wizard de novo — agora dentro da org
 
@@ -52,13 +52,13 @@ o filho. O "modelo de versionamento: org-repo" diz que a ORG é o
 repositório — o MeuApp é uma pasta versionada nela, sem `.gitignore`
 próprio. E o produto nasceu **sem zona de kit própria**: a zona `.golmet/`
 é a da organização, compartilhada — o conceito completo em
-[docs/concepts/layers.md](../concepts/layers.pt-br.md).
+[docs/concepts/layers.md](/docs/pt-br/concepts/layers).
 
 ## O que nasceu no MeuApp — e o papel de cada documento
 
 Cinco documentos e três pastas. Cada um é um personagem da história que vem
 pela frente (o mapa completo dos artefatos está em
-[docs/concepts/artefatos.md](../concepts/artefatos.pt-br.md)):
+[docs/concepts/artefatos.md](/docs/pt-br/concepts/artefatos)):
 
 - **`golmet.yaml`** — o manifesto do workspace. O kit lê daqui que aquilo é
   um workspace (não uma org) e o formato é 1.

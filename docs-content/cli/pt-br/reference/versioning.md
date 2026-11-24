@@ -1,4 +1,4 @@
-<p align="center"><a href="../../README.md">English</a> | <a href="../../README.pt-br.md">Português (Brasil)</a> | <a href="/docs/reference/versioning">versão base deste doc</a></p>
+<p align="center"><a href="https://github.com/Golmet/golmet-cli/blob/main/README.md">English</a> | <a href="https://github.com/Golmet/golmet-cli/blob/main/README.md">Português (Brasil)</a> | <a href="/docs/reference/versioning">versão base deste doc</a></p>
 
 # Versionamento (Conventional Commits → semver)
 

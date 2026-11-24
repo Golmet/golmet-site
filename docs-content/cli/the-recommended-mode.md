@@ -7,4 +7,4 @@
 > the kit's capabilities run without reduction. Other engines work (with the
 > essential profile, the kit lives versioned in the repo) — but it is this
 > mode where nothing is missing. Details in
-> [docs/recommended.md](docs/recommended.md).
+> [docs/recommended.md](/docs/recommended).

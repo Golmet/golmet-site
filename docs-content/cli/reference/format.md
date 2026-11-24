@@ -1,8 +1,8 @@
-<p align="center">English | <a href="format.pt-br.md">Português (Brasil)</a></p>
+<p align="center">English | <a href="/docs/pt-br/format">Português (Brasil)</a></p>
 
 # The FORMAT — the normative spec
 
-The kit's complete contract is [FORMAT.md](../../FORMAT.md) (v1) — the
+The kit's complete contract is [FORMAT.md](/docs/format) (v1) — the
 single source of truth: every rule the checks enforce, the entity grammar,
 the two enforcement levels (hard/soft) and the canonical structures. **This
 page does not duplicate** — it points.

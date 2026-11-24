@@ -1,4 +1,4 @@
-<p align="center"><a href="../../README.md">English</a> | <a href="../../README.pt-br.md">Português (Brasil)</a></p>
+<p align="center"><a href="https://github.com/Golmet/golmet-cli/blob/main/README.md">English</a> | <a href="https://github.com/Golmet/golmet-cli/blob/main/README.md">Português (Brasil)</a></p>
 
 # Referência de comandos (`golmet`)
 
@@ -41,7 +41,7 @@ superfície; quando a IA atua, as tools MCP são - os guardas de mutação
 | `golmet adopt [workspace]` | Adoção do FORMAT v1 em workspace existente: dry-run classificado primeiro, depois `--apply` determinístico preservando layouts legados. Flags: `--apply` · `--charter-status draft|confirmed` · `--json` |
 | `golmet eval` | Verificador determinístico de evals: pontua fixtures (`criteria.yaml`) contra o workspace; escreve o relatório markdown por fixture em `~/.golmet/eval-reports` (retenção de 50). `--json` |
 | `golmet tools` | Instalação de ferramentas nativas do kit com verificação de supply-chain (SHA-256 + attestation): `tools install codegraph` (o grafo de código - DR-016) |
-| `golmet mcp` | Serve o kit como servidor MCP over stdio - as 15 tools `gm_*` (ver [tools.md](tools.pt-br.md)). Sem flags |
+| `golmet mcp` | Serve o kit como servidor MCP over stdio - as 15 tools `gm_*` (ver [tools.md](/docs/pt-br/reference/tools)). Sem flags |
 | `golmet index [workspace]` | Recompõe o `golmet.index.json` a partir da prosa (a prosa é canônica; o índice é cache - pós-merge/corrupção) |
 | `golmet pack add <repo>` | Packs L2: `pack add` (clone + overlay) · `pack update <repo>` (sync + overlay, engine obrigatório, nunca descarta acumulação) · `pack publish <origem>` (state packs: commit + push) · `pack list`. Flags por subcomando (ex.: `--engine`, `--yes`) |
 | `golmet db drift [workspace]` | A camada de banco (`gm-dba`): compara as entidades do DATA_MODEL contra o snapshot de migrations - drift determinístico |

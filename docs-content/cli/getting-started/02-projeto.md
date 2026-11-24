@@ -1,4 +1,4 @@
-<p align="center">English | <a href="02-projeto.pt-br.md">Português (Brasil)</a></p>
+<p align="center">English | <a href="/docs/pt-br/getting-started/02-projeto">Português (Brasil)</a></p>
 
 # 02 — Create the project inside the Organization
 

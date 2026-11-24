@@ -1,10 +1,10 @@
-<p align="center">English | <a href="FORMAT.pt-br.md">Português (Brasil)</a></p>
+<p align="center">English | <a href="/docs/pt-br/format">Português (Brasil)</a></p>
 
 
 # FORMAT v1 — Normative Specification of the GOLMET Workspace
 
 > **Status:** the normative spec v1 lives in
-> [FORMAT.pt-br.md](FORMAT.pt-br.md) (Portuguese — 825 lines, the single
+> [FORMAT.pt-br.md](/docs/pt-br/format) (Portuguese — 825 lines, the single
 > source of truth). This page is the **English pointer**: the map of
 > sections and what each one governs. The full English translation is its
 > own wave (the scale of the spec); until it lands, this page is the index.
@@ -47,4 +47,4 @@ by `golmet doctor`, does not block. **MAY** — optional, unchecked.
 
 **The normative contract is enforced by** `golmet validate` (H1-H10),
 `golmet doctor` (S1-S5) and `golmet lint` (L1-L14) — see
-[overview.md](overview.md) §6.
+[overview.md](/docs/concepts/overview) §6.

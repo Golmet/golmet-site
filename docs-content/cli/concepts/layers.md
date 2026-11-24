@@ -1,4 +1,4 @@
-<p align="center">English | <a href="layers.pt-br.md">Português (Brasil)</a></p>
+<p align="center">English | <a href="/docs/pt-br/concepts/layers">Português (Brasil)</a></p>
 
 # The content layers
 

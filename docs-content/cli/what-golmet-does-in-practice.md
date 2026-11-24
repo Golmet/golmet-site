@@ -14,7 +14,7 @@ GOLMET freezes the source and turns it into documented truth (models,
 contracts, business rules - every claim with its file, line and hash),
 seeds the candidate queue and hands the human the guided reading of the
 legacy. The new workflow is planned on documented truth, not on the model's
-memory. See [reverse engineering](docs/concepts/reverse.md).
+memory. See [reverse engineering](/docs/concepts/reverse).
 
 When the client asks for the feature "booking with slot confirmation", the
 requirement enters REQUIREMENTS as a `## RN-001 — ...` section — and each

@@ -1,4 +1,4 @@
-<p align="center"><a href="../../README.md">English</a> | <a href="../../README.pt-br.md">Português (Brasil)</a></p>
+<p align="center"><a href="https://github.com/Golmet/golmet-cli/blob/main/README.md">English</a> | <a href="https://github.com/Golmet/golmet-cli/blob/main/README.md">Português (Brasil)</a></p>
 
 # 01 — Criar a Organização
 
@@ -6,7 +6,7 @@ A Organização é o primeiro passo da jornada — e é ela que faz o Golmet ser
 mais do que um validador solto: os produtos da empresa nascem dentro dela, o
 conhecimento compartilhado mora nela, e as normas de como o time trabalha se
 acumulam nela. O conceito completo está em
-[docs/concepts/organization.md](../concepts/organization.pt-br.md); aqui é o
+[docs/concepts/organization.md](/docs/pt-br/concepts/organization); aqui é o
 passo a passo na tela.
 
 ## O wizard, tela a tela

@@ -1,9 +1,9 @@
-<p align="center"><a href="../../README.md">English</a> | <a href="../../README.pt-br.md">Português (Brasil)</a></p>
+<p align="center"><a href="https://github.com/Golmet/golmet-cli/blob/main/README.md">English</a> | <a href="https://github.com/Golmet/golmet-cli/blob/main/README.md">Português (Brasil)</a></p>
 
 
 # O Context7 no workflow
 
-Durante o tutorial [03](../getting-started/03-trabalhando-com-ia.pt-br.md),
+Durante o tutorial [03](/docs/pt-br/getting-started/03-trabalhando-com-ia),
 quando a IA foi escrever a integração de confirmação de vaga com o gateway
 de pagamento, ela precisava da API atual do gateway — não da API de quando
 o modelo dela foi treinado. É para esse buraco que existe a integração
@@ -12,7 +12,7 @@ Context7.
 ## O gatilho
 
 A regra de operação mora no `profile/context7.md` do config (a prateleira
-do [profile](profile.pt-br.md)): **ANTES de responder sobre
+do [profile](/docs/pt-br/concepts/profile)): **ANTES de responder sobre
 library/framework/SDK/API/CLI/cloud, o agent consulta o Context7** —
 resolve o ID da library e busca a documentação atual pela tool MCP. A
 memória do modelo envelhece; a documentação da fonte, não.

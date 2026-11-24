@@ -1,4 +1,4 @@
-<p align="center">English | <a href="00-por-que-golmet.pt-br.md">Português (Brasil)</a></p>
+<p align="center">English | <a href="/docs/pt-br/getting-started/00-por-que-golmet">Português (Brasil)</a></p>
 
 # 00 — Why Golmet exists
 

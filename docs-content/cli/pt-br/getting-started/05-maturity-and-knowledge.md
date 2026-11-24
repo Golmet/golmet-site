@@ -1,8 +1,8 @@
-<p align="center"><a href="../../README.md">English</a> | <a href="../../README.pt-br.md">Português (Brasil)</a></p>
+<p align="center"><a href="https://github.com/Golmet/golmet-cli/blob/main/README.md">English</a> | <a href="https://github.com/Golmet/golmet-cli/blob/main/README.md">Português (Brasil)</a></p>
 
 # 05 — O que sobra quando o projeto termina: o ciclo do pack
 
-O tutorial [04](04-o-ciclo-de-uma-feature.pt-br.md) fechou a RN-001 do
+O tutorial [04](/docs/pt-br/getting-started/04-o-ciclo-de-uma-feature) fechou a RN-001 do
 MeuApp entregue e validada. O projeto fechou — as features entregues, o
 validate verde, o cliente satisfeito. E agora? O que sobra do MeuApp não é
 só o código: é a **maturidade** — os padrões que funcionaram, as métricas
@@ -85,7 +85,7 @@ pack**:
   data de acesso).
 
 Cada escritor tem formato e gatilho próprios — e o roteador de conhecimento
-([docs/concepts/knowledge.pt-br.md](../concepts/knowledge.pt-br.md)) decide
+([docs/concepts/knowledge.pt-br.md](/docs/pt-br/concepts/knowledge)) decide
 o destino quando o artefato não tem um óbvio.
 
 ## 5. Subir para o repo da org
@@ -137,12 +137,12 @@ domínio pesquisada — a IA da equipe herda o jeito da casa no primeiro dia.
 
 ## A jornada termina — o ciclo continua
 
-[00 — por que o Golmet existe](00-por-que-golmet.pt-br.md) ·
-[01 — a Organização](01-organizacao.pt-br.md) ·
-[02 — o projeto](02-projeto.pt-br.md) ·
-[03 — a IA no ciclo](03-trabalhando-com-ia.pt-br.md) ·
-[04 — o ciclo de uma feature](04-o-ciclo-de-uma-feature.pt-br.md) ·
-[05 — a maturidade](05-maturity-and-knowledge.pt-br.md).
+[00 — por que o Golmet existe](/docs/pt-br/getting-started/00-por-que-golmet) ·
+[01 — a Organização](/docs/pt-br/getting-started/01-organizacao) ·
+[02 — o projeto](/docs/pt-br/getting-started/02-projeto) ·
+[03 — a IA no ciclo](/docs/pt-br/getting-started/03-trabalhando-com-ia) ·
+[04 — o ciclo de uma feature](/docs/pt-br/getting-started/04-o-ciclo-de-uma-feature) ·
+[05 — a maturidade](/docs/pt-br/getting-started/05-maturity-and-knowledge).
 
 Para os conceitos em profundidade: o ecossistema de conhecimento inteiro em
-[docs/concepts/knowledge.pt-br.md](../concepts/knowledge.pt-br.md).
+[docs/concepts/knowledge.pt-br.md](/docs/pt-br/concepts/knowledge).

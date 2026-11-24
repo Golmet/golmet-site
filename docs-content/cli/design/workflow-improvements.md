@@ -1,9 +1,9 @@
-<p align="center"><a href="workflow-improvements.pt-br.md">Português (Brasil) — versão integral</a> | <a href="../../README.md">English README</a></p>
+<p align="center"><a href="/docs/pt-br/design/workflow-improvements">Português (Brasil) — versão integral</a> | <a href="https://github.com/Golmet/golmet-cli/blob/main/README.md">English README</a></p>
 
 # WORKFLOW_IMPROVEMENTS — The improvement history
 
 > **The source of truth is the PT-BR integral version**
-> ([workflow-improvements.pt-br.md](workflow-improvements.pt-br.md) — 2,774
+> ([workflow-improvements.pt-br.md](/docs/pt-br/design/workflow-improvements) — 2,774
 > lines, **142 numbered improvements**, IMP-013 through IMP-153). This page
 > is the **high-level English index**: the eras that shaped the kit and the
 > anchor improvements of each one.

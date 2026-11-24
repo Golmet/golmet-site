@@ -1,4 +1,4 @@
-<p align="center"><a href="../../README.md">English</a> | <a href="../../README.pt-br.md">Português (Brasil)</a></p>
+<p align="center"><a href="https://github.com/Golmet/golmet-cli/blob/main/README.md">English</a> | <a href="https://github.com/Golmet/golmet-cli/blob/main/README.md">Português (Brasil)</a></p>
 
 
 # 04 — O ciclo de uma feature
@@ -8,7 +8,7 @@ vaga do MeuApp (RN-001) — com cada documento aparecendo no momento em que
 ele nasce. É a melhor forma de entender a arquitetura de artefatos do
 Golmet: não como um diagrama, mas como uma sequência de trabalho. (O mapa
 de referência, com a tabela completa de quem alimenta quem, está em
-[docs/concepts/artefatos.md](../concepts/artefatos.pt-br.md).)
+[docs/concepts/artefatos.md](/docs/pt-br/concepts/artefatos).)
 
 ## 1. O requisito já está no REQUIREMENTS
 
@@ -68,7 +68,7 @@ as referências da doc resolvem, os nomes estão no padrão, nada órfão.
 Se algo estivesse divergindo — uma evidência stale, um spec sem a razão de
 mudança — o validate apontaria **com a remediação**: o que corrigir, e qual
 skill é a responsável. A IA corrige o que o lint aponta; o lint carrega o
-estado. ([docs/concepts/self-governing.md](../concepts/self-governing.pt-br.md))
+estado. ([docs/concepts/self-governing.md](/docs/pt-br/concepts/self-governing))
 
 ## 6. A entrega
 
