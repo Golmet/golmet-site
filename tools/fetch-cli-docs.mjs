@@ -113,6 +113,36 @@ const pairs = enFiles.map((enPath) => {
 const baseSet = new Set(pairs.map((pair) => pair.subpath.replace(/\.md$/i, '').toLowerCase()));
 const sortedBases = [...baseSet].sort();
 
+// RN-011 âncoras — índice de headings (H2/H3 fora de fences) por página:
+// base → [{ slug (GFM, igual ao gerado pelo build-docs), num ('9', '10.1') }].
+// Links do kit com §N no TEXTO e sem fragmento no target (ex.: '[FORMAT §9]'
+// → FORMAT.md) resolvem a âncora pelo número da seção.
+const headingIndex = { en: new Map(), pt: new Map() };
+const gfmSlug = (text) =>
+  text
+    .toLowerCase()
+    .replace(/[^\p{L}\p{N}\s-]/gu, '')
+    .replace(/\s+/g, '-')
+    .replace(/-+/g, '-');
+
+function recordHeadings(lang, base, md) {
+  let inFence = false;
+  const list = [];
+  for (const line of md.split('\n')) {
+    if (/^\s*```/.test(line)) {
+      inFence = !inFence;
+      continue;
+    }
+    if (inFence) continue;
+    const heading = /^#{2,3}\s+(.+)$/.exec(line);
+    if (!heading) continue;
+    const text = heading[1].trim();
+    const num = /^(\d+(?:\.\d+)*)/.exec(text);
+    list.push({ slug: gfmSlug(text), num: num ? num[1] : null });
+  }
+  headingIndex[lang].set(base, list);
+}
+
 const stripFragment = (target) => target.split('#')[0];
 
 /**
@@ -177,8 +207,12 @@ const repoRootBlobs = /^(ROADMAP|CONTRIBUTING)(\.pt-br)?\.md$/i;
  * Reescreve links entre markdowns para rotas do portal (não é edição de
  * evidência — é a conexão do grafo de docs no contexto do site).
  * Aplica a markdown links ](target), html href="target" e diretórios.
+ * RN-011 âncoras — o kit escreve "[FORMAT §9](FORMAT.md)" SEM fragmento:
+ * quando o texto cita §N, resolve a âncora no heading numerado do alvo
+ * (índice headingIndex; GFM slug igual ao gerado pelo build-docs).
  */
-function rewriteLinks(md, relSubpath) {
+function rewriteLinks(md, relSubpath, lang) {
+  const sourceLocale = lang === 'pt-BR' ? 'pt' : 'en';
   // Âncoras (fragmento após #) são PRESERVADAS na rota resolvida — o HTML
   // renderizado ganha ids GFM nos headings (build-docs) para o scroll funcionar.
   // Os branches testam o CLEAN (sem fragmento) — targets com # não terminam
@@ -187,24 +221,45 @@ function rewriteLinks(md, relSubpath) {
     const hash = target.split('#').slice(1).join('#');
     return hash ? `#${hash}` : '';
   };
-  let out = md.replace(/\]\(([^)]+)\)/g, (match, target) => {
+
+  /** Âncora por §N do texto: heading do alvo cujo número casa (9, 9.1…). */
+  const anchorFromText = (linkText, targetBase) => {
+    const section = /§(\d+(?:\.\d+)*)/.exec(linkText ?? '');
+    if (!section || !targetBase) return '';
+    const headings = headingIndex[sourceLocale].get(targetBase) ?? headingIndex.en.get(targetBase) ?? [];
+    const num = section[1];
+    const match =
+      headings.find((heading) => heading.num === num) ??
+      headings.find((heading) => heading.num?.startsWith(`${num}.`));
+    return match ? `#${match.slug}` : '';
+  };
+
+  let out = md.replace(/\[([^\]]*)\]\(([^)]+)\)/g, (match, linkText, target) => {
     const fragment = fragmentOf(target);
     const clean = stripFragment(target);
-    if (/CHANGELOG\.md$/i.test(clean)) return `](/docs/releases${fragment})`;
+    const applyFragment = (route) =>
+      route +
+      (fragment ||
+        anchorFromText(linkText, route.replace('/docs/pt-br/', '').replace('/docs/', '')));
+    if (/CHANGELOG\.md$/i.test(clean)) return `[${linkText}](/docs/releases${fragment})`;
     if (repoRootBlobs.test(clean)) {
-      return `](https://github.com/Golmet/golmet-cli/blob/main/${clean}${fragment})`;
+      return `[${linkText}](https://github.com/Golmet/golmet-cli/blob/main/${clean}${fragment})`;
     }
     if (/\.md$/i.test(clean)) {
       const resolved = resolveMdTarget(clean, relSubpath);
-      return resolved ? `](${resolved}${fragment})` : match;
+      if (!resolved) return match;
+      const targetBase = resolved
+        .replace('/docs/pt-br/', '')
+        .replace('/docs/', '');
+      return `[${linkText}](${applyFragment(resolved, targetBase)})`;
     }
     if (/^(docs\/)?[a-z0-9-]+\/?$/i.test(clean)) {
       const resolved = resolveDirTarget(clean);
-      return resolved ? `](${resolved}${fragment})` : match;
+      return resolved ? `[${linkText}](${applyFragment(resolved)})` : match;
     }
     return match;
   });
-  out = out.replace(/href="([^"\s]+)"/gi, (match, target) => {
+  out = out.replace(/href="([^"\s]+)"[^>]*>?/gi, (match, target) => {
     const fragment = fragmentOf(target);
     const clean = stripFragment(target);
     if (/CHANGELOG\.md$/i.test(clean)) return `href="/docs/releases${fragment}"`;
@@ -230,9 +285,7 @@ const docsManifest = [];
 for (const pair of pairs) {
   const group = groupOf(pair.subpath);
   const base = pair.subpath.replace(/\.md$/i, '').toLowerCase();
-  let enMd = rewriteLinks(await get(`${RAW}/${pair.enPath}`), pair.subpath);
-  // RN-008 — exatamente 1 H1 por página: se o arquivo do kit não o tiver
-  // (começa direto em H2), injeta o H1 humanizado do nome do arquivo.
+  let enMd = rewriteLinks(await get(`${RAW}/${pair.enPath}`), pair.subpath, 'en');
   const h1Count = (text) => (text.replace(/```[\s\S]*?```/g, ' ').match(/^#\s+.+$/gm) ?? []).length;
   if (h1Count(enMd) === 0) {
     const humanized = base
@@ -241,6 +294,7 @@ for (const pair of pairs) {
       .replace(/\b\w/g, (c) => c.toUpperCase());
     enMd = `# ${humanized}\n\n${enMd}`;
   }
+  recordHeadings('en', base, enMd);
   const enOut = join(OUT_DIR, `${base}.md`);
   mkdirSync(join(enOut, '..'), { recursive: true });
   writeFileSync(enOut, enMd, 'utf8');
@@ -248,7 +302,7 @@ for (const pair of pairs) {
   let hasPt = false;
   if (pair.hasPt) {
     const ptRel = `pt-br/${base}.md`;
-    let ptMd = rewriteLinks(await get(`${RAW}/${pair.ptPath}`), pair.subpath.replace(/\.md$/i, '.pt-br.md'));
+    let ptMd = rewriteLinks(await get(`${RAW}/${pair.ptPath}`), pair.subpath.replace(/\.md$/i, '.pt-br.md'), 'pt-BR');
     if (h1Count(ptMd) === 0) {
       const humanized = base
         .slice(base.lastIndexOf('/') + 1)
@@ -256,6 +310,7 @@ for (const pair of pairs) {
         .replace(/\b\w/g, (c) => c.toUpperCase());
       ptMd = `# ${humanized}\n\n${ptMd}`;
     }
+    recordHeadings('pt', base, ptMd);
     const ptOut = join(PT_DIR, `${base}.md`);
     mkdirSync(join(ptOut, '..'), { recursive: true });
     writeFileSync(ptOut, ptMd, 'utf8');
@@ -283,11 +338,11 @@ sectionsEn.forEach((sectionEn, i) => {
   if (bodyEn.length < 40) return; // seção mínima — vira ruído de sidebar
   // As seções do README linkam a árvore docs/ — mesmas reescritas das páginas
   // da árvore (relSubpath = raiz de docs/, onde o README vive).
-  const enFile = rewriteLinks(`# ${sectionEn.title}\n\n${bodyEn}\n`, base);
+  const enFile = rewriteLinks(`# ${sectionEn.title}\n\n${bodyEn}\n`, base, 'en');
   writeFileSync(join(OUT_DIR, `${base}.md`), enFile, 'utf8');
   const hasPt = bodyPt.length >= 40;
   if (hasPt) {
-    const ptFile = rewriteLinks(`# ${sectionPt.title}\n\n${bodyPt}\n`, base);
+    const ptFile = rewriteLinks(`# ${sectionPt.title}\n\n${bodyPt}\n`, base, 'pt-BR');
     writeFileSync(join(PT_DIR, `${base}.md`), ptFile, 'utf8');
   }
   readmeManifest.push({ base, hasPt, group: 'CLI' });

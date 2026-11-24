@@ -1,4 +1,4 @@
-<p align="center">English | <a href="/docs/pt-br/reference/versioning">Português (Brasil)</a></p>
+<p align="center">English | <a href="/docs/pt-br/reference/versioning"Português (Brasil)</a></p>
 
 # Versioning (Conventional Commits → semver)
 

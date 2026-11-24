@@ -1,4 +1,4 @@
-<p align="center">English | <a href="/docs/pt-br/getting-started/05-maturity-and-knowledge">Português (Brasil)</a></p>
+<p align="center">English | <a href="/docs/pt-br/getting-started/05-maturity-and-knowledge"Português (Brasil)</a></p>
 
 # 05 — What remains when the project ends: the pack cycle
 

@@ -1,4 +1,4 @@
-<p align="center"><a href="https://github.com/Golmet/golmet-cli/blob/main/README.md">English</a> | <a href="https://github.com/Golmet/golmet-cli/blob/main/README.md">Português (Brasil)</a> | <a href="/docs/design/workflow-improvements">English (pointer)</a></p>
+<p align="center"><a href="https://github.com/Golmet/golmet-cli/blob/main/README.md"English</a> | <a href="https://github.com/Golmet/golmet-cli/blob/main/README.md"Português (Brasil)</a> | <a href="/docs/design/workflow-improvements"English (pointer)</a></p>
 
 # WORKFLOW_IMPROVEMENTS.md
 

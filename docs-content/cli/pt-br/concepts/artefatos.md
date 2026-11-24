@@ -1,4 +1,4 @@
-<p align="center"><a href="https://github.com/Golmet/golmet-cli/blob/main/README.md">English</a> | <a href="https://github.com/Golmet/golmet-cli/blob/main/README.md">Português (Brasil)</a></p>
+<p align="center"><a href="https://github.com/Golmet/golmet-cli/blob/main/README.md"English</a> | <a href="https://github.com/Golmet/golmet-cli/blob/main/README.md"Português (Brasil)</a></p>
 
 
 # A arquitetura de artefatos do Golmet
@@ -82,4 +82,4 @@ checks que a impedem de apodrecer: H1 (PEND nunca ancora Feature), H3
 evidência resolve no código), H10 (as referências cruzadas resolvem), H8 (o
 estado no índice é a história — ADR aceito não muda). O soft (S1–S5) e o
 lint (L1–L10) vigiam o resto — a disciplina completa em
-[FORMAT §9](/docs/pt-br/format).
+[FORMAT §9](/docs/pt-br/format#9-enforcement-d3-dois-níveis).

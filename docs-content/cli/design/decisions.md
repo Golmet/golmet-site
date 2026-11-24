@@ -1,4 +1,4 @@
-<p align="center"><a href="/docs/pt-br/design/decisions">Português (Brasil) — versão integral</a> | <a href="https://github.com/Golmet/golmet-cli/blob/main/README.md">English README</a></p>
+<p align="center"><a href="/docs/pt-br/design/decisions"Português (Brasil) — versão integral</a> | <a href="https://github.com/Golmet/golmet-cli/blob/main/README.md"English README</a></p>
 
 # DECISIONS — Platform Design Records (ADRs)
 

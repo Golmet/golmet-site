@@ -1,4 +1,4 @@
-<p align="center">English | <a href="/docs/pt-br/format">Português (Brasil)</a></p>
+<p align="center">English | <a href="/docs/pt-br/format"Português (Brasil)</a></p>
 
 
 # FORMAT v1 — Normative Specification of the GOLMET Workspace

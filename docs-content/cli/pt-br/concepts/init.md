@@ -1,4 +1,4 @@
-<p align="center"><a href="https://github.com/Golmet/golmet-cli/blob/main/README.md">English</a> | <a href="https://github.com/Golmet/golmet-cli/blob/main/README.md">Português (Brasil)</a></p>
+<p align="center"><a href="https://github.com/Golmet/golmet-cli/blob/main/README.md"English</a> | <a href="https://github.com/Golmet/golmet-cli/blob/main/README.md"Português (Brasil)</a></p>
 
 
 # O wizard do init — o que acontece na tela
@@ -35,5 +35,5 @@ comando: `golmet init --org` (declara a org, cria o `.gitignore`, registra
 no catálogo global) e `golmet init <produto> --into <container>` (entrega o
 produto no modelo de versionamento declarado pela org). O `--yes` pula a
 confirmação nos flags explícitos. A declaração completa dos caminhos está
-em [FORMAT §2](/docs/pt-br/format) e na referência
+em [FORMAT §2](/docs/pt-br/format#2-layout-do-workspace) e na referência
 ([commands.pt-br.md](/docs/pt-br/reference/commands)).
