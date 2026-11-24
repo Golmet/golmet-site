@@ -31,7 +31,8 @@ describe('Landing — primeira dobra (RN-001-1)', () => {
     fixture.detectChanges();
 
     const compiled = fixture.nativeElement as HTMLElement;
-    expect(compiled.querySelector('.gm-value')?.textContent).toContain('requisito versionado');
+    expect(compiled.querySelector('.gm-kicker')?.textContent).toContain('REQUISITOS');
+    expect(compiled.querySelector('.gm-value')?.textContent).toContain('Seu contrato');
     expect(compiled.querySelector('.gm-quickstart h2')?.textContent).toContain(COPY.landing.quickstart.heading);
     expect(compiled.querySelectorAll('.gm-step').length).toBe(COPY.landing.quickstart.steps.length);
     // 3 botões no quickstart (npm, install, init) + 1 no CTA final

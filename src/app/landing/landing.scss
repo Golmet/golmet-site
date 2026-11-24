@@ -43,6 +43,14 @@
   grid-template-columns: 1fr;
 }
 
+.gm-hero-copy .gm-kicker {
+  color: var(--gm-amber);
+  font-family: ui-monospace, 'Cascadia Code', 'Courier New', monospace;
+  font-size: 0.75rem;
+  letter-spacing: 0.14em;
+  margin: 0 0 var(--gm-space-1);
+}
+
 .gm-hero-copy h1 {
   color: var(--gm-ouro);
   font-size: clamp(2.3rem, 5.5vw, 3.1rem);
@@ -52,22 +60,28 @@
 
 .gm-hero-copy .gm-tagline {
   color: var(--gm-text);
-  font-size: clamp(1.05rem, 2.2vw, 1.35rem);
+  font-size: clamp(1.15rem, 2.4vw, 1.5rem);
+  font-weight: 600;
   margin: 0 0 var(--gm-space-1);
 }
 
 .gm-hero-copy .gm-plain {
-  color: var(--gm-text);
+  color: var(--gm-text-muted);
   font-size: clamp(1rem, 2vw, 1.15rem);
   margin: 0 0 var(--gm-space-1);
   max-width: 44rem;
 }
 
 .gm-hero-copy .gm-value {
-  color: var(--gm-text-muted);
-  font-size: 0.92rem;
+  color: var(--gm-text);
+  font-size: 0.95rem;
   margin: 0;
   max-width: 44rem;
+}
+
+.gm-hero-copy .gm-value strong {
+  color: var(--gm-amber);
+  font-weight: 600;
 }
 
 .gm-hero-arki {
