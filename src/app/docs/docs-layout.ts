@@ -30,17 +30,43 @@ export class DocsLayout {
       startWith(null),
       map(() => {
         const locale = this.lang.activeLocale();
+        const url = decodeURIComponent(this.router.url.split('#')[0].split('?')[0]);
+        // Índice do portal não tem sumário de página — limpa o estado do
+        // aside "Nesta página" herdado da navegação anterior (RN-011).
+        if (url === '/docs' || url === '/docs/') this.navService.setPageToc(null);
+        // Slug da página ativa — PT prefixado ('pt-br/<base>'), EN direto.
+        let slug = '';
+        if (url.startsWith('/docs/pt-br/')) slug = 'pt-br/' + url.slice('/docs/pt-br/'.length);
+        else if (url.startsWith('/docs/')) slug = url.slice('/docs/'.length);
+        // Estilo VitePress: somente o grupo da página ativa nasce aberto.
+        const openGroups = new Set(
+          this.content
+            .tocFor(locale)
+            .filter((group) => group.items.some((item) => item.slug === slug))
+            .map((group) => group.group),
+        );
         return {
           locale,
           copy: COPY[locale].portal,
           toc: this.content.tocFor(locale),
+          openGroups,
         };
       }),
     ),
     {
       initialValue: (() => {
         const locale = this.lang.activeLocale();
-        return { locale, copy: COPY[locale].portal, toc: this.content.tocFor(locale) };
+        const url = decodeURIComponent(this.router.url.split('#')[0].split('?')[0]);
+        let slug = '';
+        if (url.startsWith('/docs/pt-br/')) slug = 'pt-br/' + url.slice('/docs/pt-br/'.length);
+        else if (url.startsWith('/docs/')) slug = url.slice('/docs/'.length);
+        const openGroups = new Set<string>(
+          this.content
+            .tocFor(locale)
+            .filter((group) => group.items.some((item) => item.slug === slug))
+            .map((group) => group.group),
+        );
+        return { locale, copy: COPY[locale].portal, toc: this.content.tocFor(locale), openGroups };
       })(),
     },
   );

@@ -25,6 +25,9 @@ export class Landing {
   protected readonly locale: Locale = (this.route.snapshot.data['locale'] ?? 'en') as Locale;
   /** Índice de docs no locale da landing (links "documentação" da página). */
   protected readonly docsIndexRoute = this.locale === 'pt-BR' ? '/docs/pt-br' : '/docs';
+  /** Referência de comandos no locale da landing (link do rodapé de capacidades). */
+  protected readonly capDocRoute =
+    this.locale === 'pt-BR' ? '/docs/pt-br/reference/commands' : '/docs/reference/commands';
   protected readonly copy = COPY[this.locale].landing.hero;
   protected readonly landing = COPY[this.locale].landing;
   protected readonly terminal = COPY[this.locale].landing.terminal;

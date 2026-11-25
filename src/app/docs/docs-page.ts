@@ -12,11 +12,10 @@ import { GeneratedDocPage } from './docs-content.generated';
 import { DOCS_HTML } from './docs-html';
 import { DocsPageNavService, PageNav, PageTocItem } from './docs-page-nav.service';
 
-// RN-007 — página de documentação: conteúdo por página (fetch client-side,
-// RN-011/RN-017 — bundle leve) e embutido no HTML estático pelo prerender
-// via DOCS_HTML (app.config.server — SEO/LCP).
+// RN-007 — página de documentação: conteúdo embutido no HTML estático
+// (prerender via DOCS_HTML — SEO/LCP) e re-sincronizado por fetch no cliente
+// (RN-011/RN-017 — metadados leves no bundle).
 // RN-011-4 — fallback: página PT sem tradução renderiza EN + banner discreto.
-// Estilo VitePress — rodapé da página: edit link + "Atualizado em" + Prev/Next.
 @Component({
   imports: [RouterLink],
   selector: 'app-docs-page',
@@ -71,8 +70,8 @@ export class DocsPage {
 
   /**
    * Conteúdo da página: no prerender lê do DOCS_HTML (disco — app.config.server,
-   * o HTML estático sai com o conteúdo embutido); no cliente faz fetch do JSON
-   * por página (public/docs-html — leve, gate Lighthouse RN-017).
+   * o HTML estático sai com o conteúdo embutido); no cliente re-sincroniza por
+   * fetch do JSON por página (public/docs-html — leve, gate Lighthouse RN-017).
    */
   private loadHtml() {
     if (!this.page) {
@@ -81,9 +80,7 @@ export class DocsPage {
     }
     const prerenderEntry = this.docsHtml[this.page.slug];
     if (prerenderEntry) {
-      return from(
-        Promise.resolve(this.setPage(prerenderEntry.html)),
-      );
+      return from(Promise.resolve(this.setPage(prerenderEntry.html)));
     }
     if (!isPlatformBrowser(this.platformId)) {
       return from(Promise.resolve(null));
