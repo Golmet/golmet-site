@@ -87,6 +87,13 @@ body {
   overflow-wrap: anywhere;
   overflow-x: clip;
 
+  // Páginas gigantes (FORMAT) — o browser pula layout/paint dos blocos
+  // off-screen (RN-017: performance mobile >= 90).
+  > * {
+    content-visibility: auto;
+    contain-intrinsic-size: auto none;
+  }
+
   // Intro: primeiro parágrafo após o H1 (visão geral da página)
   > p:first-of-type {
     color: var(--gm-text);
