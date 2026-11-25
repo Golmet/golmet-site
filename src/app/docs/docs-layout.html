@@ -2,7 +2,7 @@
   <aside class="gm-docs-sidebar">
     <app-docs-search />
     @for (group of state().toc; track group.group) {
-      <details class="gm-toc-group" open>
+      <details class="gm-toc-group" [open]="state().openGroups.has(group.group)">
         <summary class="gm-toc-group-name">{{ group.group }}</summary>
         <ul class="gm-toc">
           @for (item of group.items; track item.slug) {
