@@ -169,11 +169,6 @@
       "group": "Patterns"
     },
     {
-      "base": "patterns/template",
-      "hasPt": false,
-      "group": "Patterns"
-    },
-    {
       "base": "recommended",
       "hasPt": true,
       "group": "Guide"
