@@ -44,3 +44,6 @@ __screenshots__/
 Thumbs.db
 
 .kit-cache/
+
+# LHCI local runs (artefatos efemeros)
+.lighthouseci/
