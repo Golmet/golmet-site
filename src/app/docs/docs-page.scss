@@ -3,6 +3,9 @@
 }
 
 // ── Rodapé estilo VitePress: pager Prev/Next + edit link + atualizado ──
+// (elementos ESTÁTICOS do template — a encapsulação emulada aplica ✓.
+// Os estilos do .gm-doc-content são GLOBAIS em styles.scss porque o HTML
+// entra via [innerHTML] sem o atributo de escopo — ver RN-011/RN-007.)
 
 .gm-doc-pager {
   display: grid;
@@ -84,123 +87,4 @@
   font-size: 0.9rem;
   margin: 0 0 var(--gm-space-3);
   padding: var(--gm-space-1) var(--gm-space-2);
-}
-
-.gm-doc-content {
-  color: var(--gm-text);
-  font-size: 1rem;
-  line-height: 1.7;
-  // Coluna de leitura estilo VitePress — centrada na área do meio.
-  margin: 0 auto;
-  max-width: 44rem;
-  // Palavras longas (código inline, URLs) não empurram a largura da página.
-  overflow-wrap: anywhere;
-  // A largura é a da COLUNA — tables/pres largos (docs do kit) rolam dentro
-  // de si mesmos em vez de empurrar a página (RN-017 overflow horizontal).
-  contain: inline-size;
-  // Contém QUALQUER vazamento residual sem criar scrollbar no content
-  // (tables/pres têm overflow-x auto próprio e continuam rolando dentro).
-  overflow-x: clip;
-
-  // Intro: primeiro parágrafo após o H1 (visão geral da página)
-  > p:first-of-type {
-    color: var(--gm-text);
-    font-size: 1.05rem;
-    margin: 0 0 var(--gm-space-3);
-  }
-
-  h1 {
-    color: var(--gm-ouro);
-    font-size: clamp(2rem, 4vw, 2.5rem);
-    letter-spacing: 0.02em;
-    margin: 0 0 var(--gm-space-2);
-  }
-
-  h2 {
-    color: var(--gm-ouro);
-    font-size: 1.3rem;
-    margin: var(--gm-space-3) 0 var(--gm-space-2);
-  }
-
-  h3 {
-    color: var(--gm-text);
-    font-size: 1.05rem;
-    margin: var(--gm-space-2) 0 var(--gm-space-1);
-  }
-
-  p {
-    margin: 0 0 var(--gm-space-2);
-  }
-
-  code {
-    background: var(--gm-code-bg);
-    border: 1px solid var(--gm-border);
-    border-radius: 4px;
-    color: var(--gm-amber);
-    font-size: 0.9em;
-    padding: 2px 7px;
-  }
-
-  pre {
-    background: var(--gm-code-bg);
-    border: 1px solid var(--gm-border);
-    border-radius: 8px;
-    margin: 0 0 var(--gm-space-3);
-    overflow-x: auto;
-    padding: var(--gm-space-2) var(--gm-space-3);
-  }
-
-  pre code {
-    background: transparent;
-    border: none;
-    color: var(--gm-amber);
-    font-size: 0.92rem;
-    padding: 0;
-    white-space: pre;
-  }
-
-  a {
-    color: var(--gm-ouro);
-  }
-
-  ul,
-  ol {
-    color: var(--gm-text);
-    margin: 0 0 var(--gm-space-2);
-    padding-left: var(--gm-space-3);
-  }
-
-  li {
-    margin-bottom: 4px;
-  }
-
-  table {
-    // Tabela larga (docs do kit) rola INTERNAMENTE — não empurra a página.
-    border-collapse: collapse;
-    border-radius: var(--gm-radius);
-    display: block;
-    margin: 0 0 var(--gm-space-3);
-    max-width: 100%;
-    overflow-x: auto;
-    width: 100%;
-  }
-
-  th {
-    background: var(--gm-code-chip);
-    color: var(--gm-ouro);
-    font-size: 0.9rem;
-    padding: 10px 14px;
-    text-align: left;
-  }
-
-  td {
-    border-top: 1px solid var(--gm-border);
-    color: var(--gm-text);
-    font-size: 0.92rem;
-    padding: 10px 14px;
-  }
-
-  td code {
-    font-size: 0.88rem;
-  }
 }
