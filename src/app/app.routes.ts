@@ -30,6 +30,12 @@ const docsMeta: PageMeta = {
     'The GOLMET documentation — FORMAT, kit commands, MCP tools and concepts, rendered from the versioned sources.',
 };
 
+const docsMetaPt: PageMeta = {
+  title: 'Documentação',
+  description:
+    'A documentação GOLMET — FORMAT, comandos do kit, ferramentas MCP e conceitos, renderizada das fontes versionadas.',
+};
+
 export const routes: Routes = [
   { path: '', component: Landing, data: { meta: landingMetaEn, locale: 'en' } },
   { path: 'pt-BR', component: Landing, data: { meta: landingMetaPt, locale: 'pt-BR' } },
@@ -38,7 +44,9 @@ export const routes: Routes = [
     component: DocsLayout,
     data: { meta: docsMeta },
     children: [
-      { path: '', component: DocsIndex, data: { meta: docsMeta } },
+      { path: '', component: DocsIndex, data: { meta: docsMeta, locale: 'en' } },
+      // RN-011 — índice PT-BR próprio (navbar Docs preserva o locale).
+      { path: 'pt-br', component: DocsIndex, data: { meta: docsMetaPt, locale: 'pt-BR' } },
       // RN-007 — página de docs por slug; RN-011 — docs EN na raiz do portal
       // e PT-BR sob pt-br/ (shadow pages cobrem fallback — RN-011-4).
       ...GENERATED_DOCS.map((page) => ({

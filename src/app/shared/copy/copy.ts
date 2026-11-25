@@ -265,17 +265,17 @@ const ptBR: CopyTree = {
         {
           title: 'Produto novo',
           text: 'Charter, requisitos e specs do zero — kit e agente na mesma pasta.',
-          docPath: '/docs',
+          docPath: '/docs/pt-br',
         },
         {
           title: 'Repo legado',
           text: 'O guardião lê o código e propõe as regras; você confirma o que é verdade.',
-          docPath: '/docs',
+          docPath: '/docs/pt-br',
         },
         {
           title: 'Org multi-dev',
           text: 'Onboarding do dev #2: clone, doctor, pack sync — checklist sem manual.',
-          docPath: '/docs',
+          docPath: '/docs/pt-br',
         },
       ],
     },
@@ -320,7 +320,7 @@ const ptBR: CopyTree = {
   },
   footer: {
     links: {
-      docs: '/docs',
+      docs: '/docs/pt-br',
       github: 'https://github.com/Golmet',
       npm: 'https://www.npmjs.com/package/golmet-cli',
     },
