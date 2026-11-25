@@ -8,7 +8,7 @@
     @if (nav.prev || nav.next) {
       <nav class="gm-doc-pager" aria-label="Navegação entre páginas">
         @if (nav.prev) {
-          <a class="gm-doc-pager-card" [routerLink]="['/docs', nav.prev.slug]">
+          <a class="gm-doc-pager-card" [routerLink]="'/docs/' + nav.prev.slug">
             <span class="gm-doc-pager-label">{{ copy.prevLabel }}</span>
             <span class="gm-doc-pager-title">{{ nav.prev.title }}</span>
           </a>
@@ -16,7 +16,7 @@
           <span></span>
         }
         @if (nav.next) {
-          <a class="gm-doc-pager-card gm-doc-pager-next" [routerLink]="['/docs', nav.next.slug]">
+          <a class="gm-doc-pager-card gm-doc-pager-next" [routerLink]="'/docs/' + nav.next.slug">
             <span class="gm-doc-pager-label">{{ copy.nextLabel }}</span>
             <span class="gm-doc-pager-title">{{ nav.next.title }}</span>
           </a>
