@@ -2,7 +2,7 @@
 // Regra: todo diretório com index.html no output SSG é uma rota indexável
 // (auto-escala com o pipeline de conteúdo da feature RN-007). Exclui 404 e
 // fallback CSR. Executado pós-build: `npm run build`.
-import { existsSync, readdirSync, writeFileSync } from 'node:fs';
+import { existsSync, readdirSync, rmSync, writeFileSync } from 'node:fs';
 import { join } from 'node:path';
 
 const BROWSER_DIR = 'dist/golmet-site/browser';
@@ -32,4 +32,10 @@ const urls = routes
 const sitemap = `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${urls}\n</urlset>\n`;
 
 writeFileSync(join(BROWSER_DIR, 'sitemap.xml'), sitemap);
+
+// RN-017 — index.csr.html é o shell CSR interno do Angular (não é página
+// acessível por URL); removê-lo evita o Lighthouse testar um shell vazio
+// (performance 0.82 mobile falhava o gate minScore 0.9).
+const csrShell = join(BROWSER_DIR, 'index.csr.html');
+rmSync(csrShell, { force: true });
 console.log(`sitemap.xml gerado com ${routes.length} rota(s).`);
