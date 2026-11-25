@@ -265,17 +265,17 @@ const ptBR: CopyTree = {
         {
           title: 'Produto novo',
           text: 'Charter, requisitos e specs do zero — kit e agente na mesma pasta.',
-          docPath: '/docs/pt-br',
+          docPath: '/docs/pt-br/getting-started/01-organizacao',
         },
         {
           title: 'Repo legado',
           text: 'O guardião lê o código e propõe as regras; você confirma o que é verdade.',
-          docPath: '/docs/pt-br',
+          docPath: '/docs/pt-br/concepts/reverse',
         },
         {
           title: 'Org multi-dev',
           text: 'Onboarding do dev #2: clone, doctor, pack sync — checklist sem manual.',
-          docPath: '/docs/pt-br',
+          docPath: '/docs/pt-br/concepts/organization',
         },
       ],
     },
@@ -455,17 +455,17 @@ const en: CopyTree = {
         {
           title: 'New product',
           text: 'Charter, requirements and specs from scratch — kit and agent in the same folder.',
-          docPath: '/docs',
+          docPath: '/docs/getting-started/01-organizacao',
         },
         {
           title: 'Legacy repo',
           text: 'The guardian reads the code and proposes rules; you confirm what is true.',
-          docPath: '/docs',
+          docPath: '/docs/concepts/reverse',
         },
         {
           title: 'Multi-dev org',
           text: 'Dev #2 onboarding: clone, doctor, pack sync — checklist, no manual.',
-          docPath: '/docs',
+          docPath: '/docs/concepts/organization',
         },
       ],
     },

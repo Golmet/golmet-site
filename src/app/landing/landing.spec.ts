@@ -86,9 +86,10 @@ describe('Landing — primeira dobra (RN-001-1)', () => {
     const cards = compiled.querySelectorAll('.gm-path-card');
     expect(cards.length).toBe(3);
     const links = compiled.querySelectorAll<HTMLAnchorElement>('.gm-path-card');
-    for (const link of links) {
-      expect(link.getAttribute('href')).toBe('/docs');
-    }
+    const expected = ['/docs/getting-started/01-organizacao', '/docs/concepts/reverse', '/docs/concepts/organization'];
+    links.forEach((link, i) => {
+      expect(link.getAttribute('href')).toBe(expected[i]);
+    });
     expect(compiled.querySelector('.gm-path-card h3')?.textContent).toContain('New product');
   });
 
@@ -99,7 +100,7 @@ describe('Landing — primeira dobra (RN-001-1)', () => {
 
     // a landing mostra 4 em destaque; a lista completa fica na docs (RN-007-9)
     expect(compiled.querySelectorAll('.gm-featured-cap').length).toBe(4);
-    expect(compiled.querySelector('.gm-cap-doc-link')?.getAttribute('href')).toBe('/docs');
+    expect(compiled.querySelector('.gm-cap-doc-link')?.getAttribute('href')).toBe('/docs/reference/commands');
     // comando não lançado não aparece (ex.: golmet contribute — v1+)
     expect(compiled.textContent).not.toContain('golmet contribute');
   });
