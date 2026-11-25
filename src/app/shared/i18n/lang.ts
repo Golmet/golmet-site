@@ -73,22 +73,24 @@ export class LangService {
   }
 
   /**
-   * RN-011-2 — detecção no boot (browser only; o prerender nunca redireciona):
-   * preferência salva sobrepõe o navegador; navegador em PT na raiz vai para
-   * /pt-BR; demais idiomas ficam no EN da raiz.
+   * RN-011-2 — detecção no boot, após a navegação inicial resolver (browser
+   * only; o prerender nunca redireciona).
+   * Regras: URLs com locale EXPLÍCITO (/pt-BR, /docs/pt-br/**) são intenção do
+   * visitante — nunca redirecionam (deep link = idioma preservado). URLs
+   * NEUTRAS (raiz / e /docs/**) seguem a preferência salva; sem preferência,
+   * seguem o idioma do navegador (PT → equivalente PT; demais → EN).
    */
   detectAndRedirect(): void {
     if (typeof window === 'undefined' || typeof navigator === 'undefined') return;
     const url = this.router.url;
-    // Só a raiz NEUTRA '/' negocia idioma (pref/navegador). Qualquer URL
-    // explícita (/pt-BR, /docs/**) é intenção do visitante — nunca redireciona.
-    if (url !== '/' && url !== '') return;
+    const locale = activeLocaleOfPath(url);
+    // URL com locale explícito PT — intenção do visitante, preservada (C1).
+    if (locale === 'pt-BR') return;
     const saved = this.savedPreference();
     const wantsPt = saved ? saved === 'pt-BR' : /^pt\b/i.test(navigator.language ?? '');
-    if (wantsPt && activeLocaleOfPath(url) === 'en') {
-      this.persist('pt-BR');
-      void this.router.navigate(['/pt-BR'], { replaceUrl: true });
-    }
+    if (!wantsPt) return; // quer EN — URLs neutras já são EN
+    const target = equivalentPath(url, 'pt-BR');
+    if (target !== url) void this.router.navigate([target], { replaceUrl: true });
   }
 
   /** RN-011-3 — troca pelo seletor: persiste e navega para o equivalente. */
