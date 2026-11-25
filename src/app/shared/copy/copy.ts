@@ -321,7 +321,7 @@ const ptBR: CopyTree = {
   footer: {
     links: {
       docs: '/docs/pt-br',
-      github: 'https://github.com/Golmet',
+      github: 'https://github.com/Golmet/golmet-cli',
       npm: 'https://www.npmjs.com/package/golmet-cli',
     },
     license: 'Licença MIT',
@@ -510,7 +510,7 @@ const en: CopyTree = {
   footer: {
     links: {
       docs: '/docs',
-      github: 'https://github.com/Golmet',
+      github: 'https://github.com/Golmet/golmet-cli',
       npm: 'https://www.npmjs.com/package/golmet-cli',
     },
     license: 'MIT License',
