@@ -36,6 +36,12 @@ export class App {
       .subscribe(() => this.lang.detectAndRedirect());
   }
 
+  /** RN-011 — o link Docs da navbar preserva o locale ativo
+   * (PT-BR → /docs/pt-br; EN → /docs). */
+  protected docsLink(locale: Locale): string {
+    return locale === 'pt-BR' ? '/docs/pt-br' : '/docs';
+  }
+
   /** Copy do locale ativo — footer/notFound alternam com a rota (RN-011). */
   protected get copy() {
     return COPY[this.activeLocale()];

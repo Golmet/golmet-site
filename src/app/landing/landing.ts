@@ -23,6 +23,8 @@ export class Landing {
 
   /** locale da rota ativa — / e /pt-BR usam o MESMO componente (RN-011-1). */
   protected readonly locale: Locale = (this.route.snapshot.data['locale'] ?? 'en') as Locale;
+  /** Índice de docs no locale da landing (links "documentação" da página). */
+  protected readonly docsIndexRoute = this.locale === 'pt-BR' ? '/docs/pt-br' : '/docs';
   protected readonly copy = COPY[this.locale].landing.hero;
   protected readonly landing = COPY[this.locale].landing;
   protected readonly terminal = COPY[this.locale].landing.terminal;

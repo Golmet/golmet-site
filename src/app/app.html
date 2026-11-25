@@ -2,7 +2,7 @@
   <div class="gm-header-inner">
     <a class="gm-brand" routerLink="/">GOLMET</a>
     <nav class="gm-nav" aria-label="Principal">
-      <a routerLink="/docs">Docs</a>
+      <a [routerLink]="docsLink(activeLocale())">Docs</a>
       <a href="https://github.com/Golmet" target="_blank" rel="noopener">GitHub</a>
       <a href="https://www.npmjs.com/package/golmet-cli" target="_blank" rel="noopener">npm</a>
     </nav>
