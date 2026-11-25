@@ -1341,4 +1341,4 @@ export const GENERATED_TOC: readonly GeneratedTocLocale[] = [
     ]
   }
 ];
-export const CAPTURED_AT = "2026-11-24";
+export const CAPTURED_AT = "2026-11-25";
