@@ -103,10 +103,15 @@ function ingest() {
     });
   };
 
+  // RN-008 — o front matter é VALIDADO mas NÃO renderizado (docs-as-code:
+  // o corpo publicado é o conteúdo após o delimitador de fechamento).
+  const stripFrontMatter = (md) => md.replace(/^---\r?\n[\s\S]*?\r?\n---\r?\n?/, '').trim();
+
   const readMd = (rel) => {
     const md = readFileSync(join(source.dir, rel), 'utf8');
     failures.push(...validatePage(md, rel));
-    return { md, html: headingIds(marked.parse(md)), title: titleOf(md, rel), text: stripMd(md) };
+    const body = stripFrontMatter(md);
+    return { md: body, html: headingIds(marked.parse(body)), title: titleOf(md, rel), text: stripMd(body) };
   };
 
   // Página EN (fonte) + rota PT (traduzida ou shadow EN + banner — RN-011-4).
