@@ -134,6 +134,30 @@
   color: var(--gm-obsidiana);
 }
 
+// Mobile (≤719px): os dois CTAs lado a lado (padding compacto — empilhados
+// desperdiçavam a dobra) e o kicker monospace em 1 linha.
+@media (max-width: 719px) {
+  .gm-landing {
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+
+  .gm-ctas {
+    gap: 10px;
+  }
+
+  .gm-cta {
+    font-size: 0.92rem;
+    padding: 11px 14px;
+    white-space: nowrap;
+  }
+
+  .gm-hero-copy .gm-kicker {
+    font-size: 0.66rem;
+    letter-spacing: 0.08em;
+  }
+}
+
 // ── Quickstart (dobra — painel) ─────────────────────────────────
 
 .gm-quickstart {
@@ -574,6 +598,9 @@
   margin-top: var(--gm-space-3);
   padding: var(--gm-space-4) var(--gm-space-3);
   text-align: center;
+  // Track explícito: o auto fica max-content (o comando com width:100%
+  // é circular) e não estica — os CTAs quebravam numa coluna estreita.
+  grid-template-columns: minmax(0, 1fr);
 }
 
 .gm-final-cta > p {
@@ -598,10 +625,41 @@
   font-size: 1rem;
 }
 
+// O grid pai dá largura fit-content ao .gm-ctas (justify-items: center —
+// width:100% resolve circular no track auto). stretch é o que de fato
+// estica o item na área; center nos filhos mantém a estética centrada.
+.gm-final-cta .gm-ctas {
+  justify-content: center;
+  justify-self: stretch;
+  width: 100%;
+}
+
+// Mobile (≤719px): comando sem quebrar (scroll interno se precisar).
+@media (max-width: 719px) {
+  .gm-final-command {
+    min-width: 0;
+    overflow-x: auto;
+    width: 100%;
+  }
+
+  .gm-final-command code {
+    font-size: 0.88rem;
+    white-space: nowrap;
+  }
+}
+
 .gm-prelaunch {
   color: var(--gm-amber);
   font-size: 0.85rem;
   margin: 0;
+}
+
+// Mobile (≤719px) — DEPOIS da regra base (cascade): padding lateral menor
+// para os CTAs caberem lado a lado dentro do card.
+@media (max-width: 719px) {
+  .gm-final-cta {
+    padding: var(--gm-space-3) 20px;
+  }
 }
 
 // ── Terminal (CR-005/006 — saída real) ──────────────────────────
