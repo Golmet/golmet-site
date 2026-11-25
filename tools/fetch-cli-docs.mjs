@@ -102,7 +102,12 @@ const docsFiles = tree
 if (docsFiles.length === 0) throw new Error('árvore sem docs/**.md — nada publica');
 
 // Pares EN↔PT: X.md ↔ X.pt-br.md (convenção do repo do kit).
-const enFiles = docsFiles.filter((path) => !path.endsWith('.pt-br.md'));
+// RN-007-9 — arquivos de TEMPLATE não são documentação: não viram páginas
+// (pedido do operador — o template de patterns é um placeholder a copiar).
+const HIDDEN_FILES = [/^docs\/patterns\/TEMPLATE\.md$/i];
+const enFiles = docsFiles.filter(
+  (path) => !path.endsWith('.pt-br.md') && !HIDDEN_FILES.some((re) => re.test(path)),
+);
 const pairs = enFiles.map((enPath) => {
   const subpath = enPath.replace(/^docs\//, '');
   const ptPath = `docs/${subpath.replace(/\.md$/i, '.pt-br.md')}`;

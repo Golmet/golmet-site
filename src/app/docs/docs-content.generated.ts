@@ -623,26 +623,6 @@ export const GENERATED_DOCS: readonly GeneratedDocPage[] = [
     "sourcePath": "docs/patterns/index.md"
   },
   {
-    "slug": "patterns/template",
-    "base": "patterns/template",
-    "locale": "en",
-    "lang": "en",
-    "group": "Patterns",
-    "title": "<titulo>",
-    "translated": true,
-    "sourcePath": "docs/patterns/template.md"
-  },
-  {
-    "slug": "pt-br/patterns/template",
-    "base": "patterns/template",
-    "locale": "pt-BR",
-    "lang": "en",
-    "group": "Patterns",
-    "title": "<titulo>",
-    "translated": false,
-    "sourcePath": "docs/patterns/template.md"
-  },
-  {
     "slug": "recommended",
     "base": "recommended",
     "locale": "en",
@@ -875,7 +855,6 @@ export const GENERATED_ORDER: Record<'en' | 'pt-BR', readonly string[]> = {
     "getting-started/05-maturity-and-knowledge",
     "migration",
     "patterns/index",
-    "patterns/template",
     "recommended",
     "reference/commands",
     "reference/compatibility",
@@ -918,7 +897,6 @@ export const GENERATED_ORDER: Record<'en' | 'pt-BR', readonly string[]> = {
     "pt-br/getting-started/05-maturity-and-knowledge",
     "pt-br/migration",
     "pt-br/patterns/index",
-    "pt-br/patterns/template",
     "pt-br/recommended",
     "pt-br/reference/commands",
     "pt-br/reference/compatibility",
@@ -1086,10 +1064,6 @@ export const GENERATED_TOC: readonly GeneratedTocLocale[] = [
           {
             "slug": "patterns/index",
             "title": "Índice do Hub de Patterns"
-          },
-          {
-            "slug": "patterns/template",
-            "title": "<titulo>"
           }
         ]
       },
@@ -1290,10 +1264,6 @@ export const GENERATED_TOC: readonly GeneratedTocLocale[] = [
           {
             "slug": "pt-br/patterns/index",
             "title": "Índice do Hub de Patterns"
-          },
-          {
-            "slug": "pt-br/patterns/template",
-            "title": "<titulo>"
           }
         ]
       },
