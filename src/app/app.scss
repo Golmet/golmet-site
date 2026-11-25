@@ -53,6 +53,46 @@
   color: var(--gm-ouro);
 }
 
+// Mobile (≤719px): o header completo (brand + 3 links + seletor) não cabe na
+// viewport — GitHub/npm saem do header (o footer os tem) e o restante compacta.
+// O seletor EN|PT-BR é essencial: fica sempre visível, sem quebrar (nowrap).
+@media (max-width: 719px) {
+  .gm-header {
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+
+  .gm-brand {
+    font-size: 1.1rem;
+  }
+
+  .gm-header-inner {
+    gap: var(--gm-space-2);
+  }
+
+  .gm-nav {
+    gap: 2px;
+  }
+
+  .gm-nav a {
+    font-size: 0.9rem;
+    padding: 6px 8px;
+  }
+
+  .gm-nav-external {
+    display: none;
+  }
+
+  .gm-lang {
+    margin-left: auto;
+  }
+
+  .gm-lang-btn {
+    font-size: 0.72rem;
+    padding: 5px 6px;
+  }
+}
+
 // Seletor de idioma (RN-011-3) — par EN | PT-BR no header.
 .gm-lang {
   align-items: center;
@@ -71,6 +111,7 @@
   font-size: 0.78rem;
   letter-spacing: 0.06em;
   padding: 5px 8px;
+  white-space: nowrap;
 }
 
 .gm-lang-btn:hover {
