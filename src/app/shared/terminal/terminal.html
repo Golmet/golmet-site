@@ -1,16 +1,40 @@
-<div class="gm-terminal" role="img" aria-label="Terminal mostrando saída real dos comandos golmet init, status e validate">
+<div class="gm-terminal">
   <div class="gm-terminal-bar">
     <span class="gm-dot gm-dot-r"></span>
     <span class="gm-dot gm-dot-y"></span>
     <span class="gm-dot gm-dot-g"></span>
     <span class="gm-terminal-title">golmet — saída real</span>
   </div>
-  <pre class="gm-terminal-body"><code>@for (line of lines; track $index) {<span
+  <pre class="gm-terminal-body" aria-live="polite"><code>@for (line of visibleLines(); track $index) {<span
       [class.gm-t-prompt]="line.kind === 'prompt'"
       [class.gm-t-success]="line.kind === 'success'"
       [class.gm-t-error]="line.kind === 'error'"
       [class.gm-t-fix]="line.kind === 'fix'"
       [class.gm-t-blank]="line.kind === 'blank'"
     >{{ line.text || ' ' }}</span>
+}@if (visibleLines().length === 0) {<span class="gm-t-idle">❯ clique em um comando abaixo para rodar</span>
 }</code></pre>
+  <div class="gm-terminal-steps" role="group" aria-label="Rodar comandos do kit — saída real">
+    @for (step of steps; track step.command; let i = $index) {
+      <button
+        type="button"
+        class="gm-term-step"
+        [class.gm-term-step-done]="i < revealed()"
+        [disabled]="i !== revealed()"
+        (click)="runStep(i)"
+      >
+        <span class="gm-term-step-cmd">{{ step.command }}</span>
+      </button>
+    }
+    @if (revealed() > 0) {
+      <button
+        type="button"
+        class="gm-term-reset"
+        (click)="reset()"
+        aria-label="Limpar terminal e rodar de novo"
+      >
+        ↺
+      </button>
+    }
+  </div>
 </div>

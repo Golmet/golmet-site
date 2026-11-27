@@ -1,13 +1,11 @@
 <main>
   <div class="gm-landing">
+  <!-- HERO: headline com apelo + Arki + stats reais + ação primária -->
   <section class="gm-hero">
     <div class="gm-hero-copy">
-      <p class="gm-kicker">{{ copy.kicker }}</p>
-      <h1>{{ copy.title }}</h1>
-      <p class="gm-tagline">{{ copy.tagline }}</p>
-      <p class="gm-plain">{{ copy.plainLine }}</p>
-      <p class="gm-value"><strong>{{ copy.valueHighlight }}</strong> {{ copy.valueProposal }}</p>
-      <div class="gm-ctas">
+      <h1 class="gm-hl">{{ copy.titleLead }}</h1>
+      <p class="gm-sub">{{ copy.sub }}</p>
+      <div class="gm-hero-actions">
         <a
           class="gm-cta gm-cta-primary"
           href="https://github.com/Golmet/golmet-cli"
@@ -34,9 +32,19 @@
       decoding="async"
       fetchpriority="high"
     />
+    <dl class="gm-stats">
+      @for (stat of copy.stats; track stat.label) {
+        <div class="gm-stat">
+          <dt class="gm-stat-value">{{ stat.value }}</dt>
+          <dd class="gm-stat-label">{{ stat.label }}</dd>
+        </div>
+      }
+    </dl>
   </section>
 
-  <section class="gm-quickstart" aria-label="Quickstart">    <div class="gm-quickstart-head">
+  <!-- Quickstart: os comandos copiáveis na primeira dobra -->
+  <section class="gm-quickstart" aria-label="Quickstart">
+    <div class="gm-quickstart-head">
       <h2>{{ quickstart.heading }}</h2>
       <span class="gm-badge">{{ quickstart.badge }}</span>
     </div>
@@ -52,7 +60,7 @@
                 type="button"
                 class="gm-copy"
                 (click)="copyStep(step)"
-                [attr.aria-label]="'Copiar: ' + step.command"
+                [attr.aria-label]="'Copiar ' + step.command"
               >
                 {{ copiedStep() === step.title ? 'Copiado' : 'Copiar' }}
               </button>
@@ -64,61 +72,37 @@
     </ol>
   </section>
 
-  <section class="gm-terminal-section" aria-label="O produto em ação">
+  <!-- DEMO: o visitante RODA os comandos e vê a saída real -->
+  <section class="gm-demo" id="gm-demo" aria-label="O produto em ação">
+    <h2>{{ demo.heading }}</h2>
     <app-terminal />
-    <p class="gm-terminal-note">{{ terminal.title }} — golmet-cli v{{ cliVersion }}, capturado em 24/11/2026.</p>
-  </section>
-  </div>
-
-  <!-- Banda full-width (padrão do design alvo): sai do container e vira
-       faixa borda a borda com conteúdo centralizado em .gm-problem-inner -->
-  <section class="gm-problem" aria-label="O problema">
-    <div class="gm-problem-inner">
-      <h2>{{ problem.heading }}</h2>
-      <p class="gm-section-note">{{ problem.note }}</p>
-      <div class="gm-problem-cards">
-        @for (card of problem.cards; track card.title) {
-          <article class="gm-problem-card">
-            <h3>{{ card.title }}</h3>
-            <p>{{ card.text }}</p>
-          </article>
-        }
-      </div>
-    </div>
+    <p class="gm-demo-done">{{ demo.done }}</p>
   </section>
 
-  <div class="gm-landing">
-  <section class="gm-thesis" aria-label="A tese">
-    <h2>{{ thesis.heading }}</h2>
-    <p class="gm-section-note">{{ thesis.note }}</p>
-    <div class="gm-thesis-layers">
-      @for (layer of thesis.layers; track layer.name) {
-        <article class="gm-layer">
-          <p class="gm-layer-name">{{ layer.name }}</p>
-          <p class="gm-layer-role">{{ layer.role }}</p>
-          <p class="gm-layer-text">{{ layer.text }}</p>
+  <!-- CENAS: dor conhecida → comando real que resolve -->
+  <section class="gm-scenes" aria-label="Cenas e comandos">
+    <h2>{{ scenes.heading }}</h2>
+    <p class="gm-section-note">{{ scenes.note }}</p>
+    <div class="gm-scene-grid">
+      @for (scene of scenes.items; track scene.pain) {
+        <article class="gm-scene">
+          <p class="gm-scene-pain">{{ scene.pain }}</p>
+          <p class="gm-scene-outcome">{{ scene.outcome }}</p>
+          <code class="gm-scene-command">{{ scene.command }}</code>
+          <div class="gm-scene-chips">
+            @for (chip of scene.chips; track chip) {
+              <span class="gm-scene-chip">{{ chip }}</span>
+            }
+          </div>
         </article>
       }
     </div>
+    <a class="gm-scenes-doc-link" [routerLink]="scenes.docPath">{{ scenes.docLink }}</a>
   </section>
 
-  <section class="gm-how" aria-label="Como funciona">
-    <h2>{{ howItWorks.heading }}</h2>
-    <p class="gm-section-note">{{ howItWorks.note }}</p>
-    <ol class="gm-how-steps">
-      @for (step of howItWorks.steps; track step.name; let i = $index) {
-        <li class="gm-how-step">
-          <span class="gm-how-number">{{ i < 9 ? '0' + (i + 1) : i + 1 }}</span>
-          <p class="gm-how-name">{{ step.name }}</p>
-          <p class="gm-how-text">{{ step.text }}</p>
-        </li>
-      }
-    </ol>
-  </section>
-
+  <!-- ENGINES: credibilidade no meio da página -->
   <section class="gm-engines" aria-label="Engines suportados">
-    <h2>{{ engines.heading }}</h2>
-    <p class="gm-section-note">{{ engines.note }}</p>
+    <p class="gm-engines-label">{{ engines.label }}</p>
     <div class="gm-engine-chips">
       @for (engine of engines.engines; track engine) {
         <span class="gm-engine-chip">{{ engine }}</span>
@@ -126,6 +110,7 @@
     </div>
   </section>
 
+  <!-- DIFERENCIAÇÃO -->
   <section class="gm-differentiation" aria-label="Diferenciação">
     <h2>{{ differentiation.heading }}</h2>
     <div class="gm-diff-items">
@@ -136,37 +121,43 @@
         </article>
       }
     </div>
+    <p class="gm-under-the-hood">{{ differentiation.underTheHood }}</p>
   </section>
 
-  <section class="gm-paths" aria-label="Escolha seu caminho">
-    <h2>{{ paths.heading }}</h2>
-    <div class="gm-path-cards">
-      @for (item of paths.items; track item.title) {
-        <a class="gm-path-card" [routerLink]="item.docPath">
-          <h3>{{ item.title }}</h3>
-          <p>{{ item.text }}</p>
-          <span class="gm-path-link">Ver na documentação →</span>
-        </a>
+  <!-- JORNADA: 3 trilhas de adoção -->
+  <section class="gm-journey" id="gm-jornada" aria-label="Jornada de adoção">
+    <h2>{{ journey.heading }}</h2>
+    <p class="gm-section-note">{{ journey.note }}</p>
+    <div class="gm-track-grid">
+      @for (track of journey.tracks; track track.title) {
+        <article class="gm-track">
+          <h3>{{ track.title }}</h3>
+          <p class="gm-track-tagline">{{ track.tagline }}</p>
+          <ol class="gm-track-steps">
+            @for (step of track.steps; track step) {
+              <li>{{ step }}</li>
+            }
+          </ol>
+          <a class="gm-track-link" [routerLink]="track.docPath">{{ track.docLabel }}</a>
+        </article>
       }
     </div>
   </section>
 
-  <section class="gm-capabilities" aria-label="Capacidades do kit">
-    <h2>{{ capabilitiesCopy.heading }}</h2>
-    <div class="gm-featured-caps">
-      @for (cap of capabilitiesCopy.featured; track cap.command) {
-        <div class="gm-featured-cap">
-          <code>{{ cap.command }}</code>
-          <span>{{ cap.description }}</span>
-        </div>
+  <!-- FAQ -->
+  <section class="gm-faq" aria-label="Perguntas frequentes">
+    <h2>{{ faq.heading }}</h2>
+    <div class="gm-faq-list">
+      @for (item of faq.items; track item.question) {
+        <details class="gm-faq-item">
+          <summary>{{ item.question }}</summary>
+          <p>{{ item.answer }}</p>
+        </details>
       }
-    </div>
-    <div class="gm-cap-footer">
-      <p class="gm-cap-note">{{ capabilitiesCopy.note }}</p>
-      <a class="gm-cap-doc-link" [routerLink]="capDocRoute">{{ capabilitiesCopy.docLink }}</a>
     </div>
   </section>
 
+  <!-- CTA FINAL como pergunta -->
   <section class="gm-final-cta" aria-label="Comece hoje">
     <h2>{{ finalCta.heading }}</h2>
     <p>{{ finalCta.text }}</p>
@@ -184,4 +175,3 @@
   </section>
 </div>
 </main>
-

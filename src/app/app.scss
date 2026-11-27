@@ -9,15 +9,19 @@
 // pequenos demais (feedback do operador).
 .gm-header {
   border-bottom: 1px solid var(--gm-border);
-  padding: var(--gm-space-2) var(--gm-space-3);
+  padding: var(--gm-space-2) 0;
 }
 
+// O padding horizontal vive no inner (border-box 1120px), assim a marca
+// alinha exatamente com o conteúdo do site (que também paddinga 2rem dentro
+// do mesmo max-width) — antes o header ficava 2rem mais à esquerda.
 .gm-header-inner {
   align-items: center;
   display: flex;
   gap: var(--gm-space-3);
   margin: 0 auto;
   max-width: 1120px;
+  padding: 0 var(--gm-space-3);
   width: 100%;
 }
 
@@ -57,7 +61,7 @@
 // viewport — GitHub/npm saem do header (o footer os tem) e o restante compacta.
 // O seletor EN|PT-BR é essencial: fica sempre visível, sem quebrar (nowrap).
 @media (max-width: 719px) {
-  .gm-header {
+  .gm-header-inner {
     padding-left: 20px;
     padding-right: 20px;
   }
@@ -133,9 +137,11 @@
 .gm-footer {
   background: var(--gm-surface);
   border-top: 1px solid var(--gm-border);
-  padding: var(--gm-space-4) var(--gm-space-3);
+  padding: var(--gm-space-4) 0;
 }
 
+// Mesmo container do header e da landing (1120px com padding interno
+// border-box) — marca do footer alinha com o conteúdo da página.
 .gm-footer-grid {
   align-items: start;
   display: grid;
@@ -143,6 +149,7 @@
   grid-template-columns: 1fr;
   margin: 0 auto;
   max-width: 1120px;
+  padding: 0 var(--gm-space-3);
 }
 
 @media (min-width: 900px) {
@@ -196,7 +203,7 @@
   border-top: 1px solid var(--gm-border);
   margin: var(--gm-space-3) auto 0;
   max-width: 1120px;
-  padding-top: var(--gm-space-2);
+  padding: var(--gm-space-2) var(--gm-space-3) 0;
 }
 
 .gm-footer-copyright {
@@ -213,4 +220,17 @@
 
 .gm-footer-copyright a:hover {
   color: var(--gm-amber);
+}
+
+// Mobile (≤719px): mesmo recuo de 20px da landing no footer.
+@media (max-width: 719px) {
+  .gm-footer-grid {
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+
+  .gm-footer-legal {
+    padding-left: 20px;
+    padding-right: 20px;
+  }
 }

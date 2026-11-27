@@ -29,84 +29,66 @@ export interface ProblemCard {
   readonly text: string;
 }
 
-export interface ThesisLayer {
-  readonly name: string;
-  readonly role: string;
-  readonly text: string;
-}
-
-export interface FlowStep {
-  readonly name: string;
-  readonly text: string;
-}
-
-export interface PathCard {
-  readonly title: string;
-  readonly text: string;
-  readonly docPath: string;
-}
-
-export interface FeatureCommand {
-  readonly command: string;
-  readonly description: string;
-}
-
-export interface DiffItem {
-  readonly title: string;
-  readonly text: string;
+export interface FaqItem {
+  readonly question: string;
+  readonly answer: string;
 }
 
 export interface CopyTree {
   readonly landing: {
     readonly hero: {
-      readonly kicker: string;
-      readonly title: string;
-      readonly tagline: string;
-      readonly plainLine: string;
-      readonly valueHighlight: string;
-      readonly valueProposal: string;
-      readonly statusNote: string;
+      readonly titleLead: string;
+      readonly sub: string;
+      readonly quickstart: {
+        readonly heading: string;
+        readonly badge: string;
+        readonly steps: readonly {
+          readonly title: string;
+          readonly command?: string;
+          readonly text: string;
+        }[];
+      };
+      readonly stats: readonly { readonly value: string; readonly label: string }[];
     };
-    readonly terminal: { readonly title: string };
-    readonly problem: {
+    readonly demo: {
+      readonly heading: string;
+      readonly done: string;
+    };
+    readonly scenes: {
       readonly heading: string;
       readonly note: string;
-      readonly cards: readonly ProblemCard[];
-    };
-    readonly thesis: {
-      readonly heading: string;
-      readonly note: string;
-      readonly layers: readonly ThesisLayer[];
-    };
-    readonly howItWorks: {
-      readonly heading: string;
-      readonly note: string;
-      readonly steps: readonly FlowStep[];
+      readonly docLink: string;
+      readonly docPath: string;
+      readonly items: readonly {
+        readonly pain: string;
+        readonly outcome: string;
+        readonly command: string;
+        readonly chips: readonly string[];
+      }[];
     };
     readonly engines: {
-      readonly heading: string;
-      readonly note: string;
+      readonly label: string;
       readonly engines: readonly string[];
     };
     readonly differentiation: {
       readonly heading: string;
-      readonly items: readonly DiffItem[];
+      readonly items: readonly { readonly title: string; readonly text: string }[];
+      readonly underTheHood: string;
     };
-    readonly quickstart: {
+    readonly journey: {
       readonly heading: string;
-      readonly badge: string;
       readonly note: string;
-      readonly steps: readonly QuickstartStep[];
+      readonly tracks: readonly {
+        readonly title: string;
+        readonly tagline: string;
+        readonly steps: readonly string[];
+        readonly docPath: string;
+        readonly docLabel: string;
+      }[];
     };
-    readonly paths: {
+    readonly faq: {
       readonly heading: string;
-      readonly items: readonly PathCard[];
-    };
-    readonly capabilities: {
-      readonly heading: string;
-      readonly docLink: string;
-      readonly note: string;
-      readonly featured: readonly FeatureCommand[];
+      readonly items: readonly FaqItem[];
     };
     readonly ctas: { readonly github: string; readonly npm: string };
     readonly finalCta: {
@@ -144,80 +126,86 @@ export interface CopyTree {
 const ptBR: CopyTree = {
   landing: {
     hero: {
-      kicker: 'REQUISITOS · EVIDÊNCIAS · VERSIONAMENTO',
-      title: 'GOLMET',
-      tagline: 'Requisitos versionados. Docs que não apodrecem.',
-      plainLine:
-        'GOLMET é uma CLI que transforma requisitos em markdown versionado no seu git — ' +
-        'e avisa quando código e doc divergem.',
-      valueHighlight: 'Seu contrato.',
-      valueProposal: 'Seu repositório. Uma fonte de verdade que acompanha o código.',
-      statusNote: `Site em construção — o kit v${CLI_VERSION} já está estável no npm.`,
-    },
-    terminal: {
-      title: 'Saída real — install · version · init · status · validate',
-    },
-    problem: {
-      heading: 'Todo mundo de software já viveu',
-      note: 'Se alguma dessas cenas é familiar, o problema não é o time — é a ausência de uma fonte de verdade.',
-      cards: [
-        {
-          title: 'A conversa ficou no passado',
-          text: 'O cliente pediu numa reunião. Ninguém registrou direito. Três semanas depois, cada um lembra de um jeito.',
-        },
-        {
-          title: 'O código virou mistério',
-          text: 'A funcionalidade está no ar — mas o detalhe (valor mínimo, o que bloqueia, por quê) mora na cabeça de quem escreveu.',
-        },
-        {
-          title: 'Escopo fantasma',
-          text: '"Não foi isso que eu pedi" — e não há como provar o que foi pedido.',
-        },
-        {
-          title: 'A doc apodreceu',
-          text: 'Mudou o requisito, ninguém atualizou o documento. Doc velha é doc que ninguém confia.',
-        },
+      titleLead: 'Chega de documentação velha.',
+      sub:
+        'Uma regra de negócio sem evidência é opinião. No Golmet, cada regra aponta o arquivo, a ' +
+        'linha e o hash do código que a implementa. Se o código muda e a regra fica para trás, o ' +
+        'validate acusa antes do merge. Documentação deixa de ser memória e vira fato verificável.',
+      quickstart: {
+        heading: 'Como começar',
+        badge: `v${CLI_VERSION}`,
+        steps: [
+          {
+            title: 'Instale o Golmet',
+            command: 'npm i -g golmet-cli',
+            text: 'Baixa e instala o programa no seu computador, direto do npm.',
+          },
+          {
+            title: 'Crie o espaço do projeto',
+            command: 'golmet init nome-produto',
+            text: 'Cria a pasta do seu produto com os arquivos de requisitos e decisões já estruturados. O conteúdo você preenche depois.',
+          },
+          {
+            title: 'Veja o resumo',
+            command: 'golmet status',
+            text: 'Mostra o que já existe no projeto e o estado de cada parte.',
+          },
+          {
+            title: 'Confira se está tudo certo',
+            command: 'golmet validate',
+            text: 'Compara o que está escrito na documentação com o que o código faz e avisa se algo ficou para trás.',
+          },
+        ],
+      },
+      stats: [
+        { value: '18', label: 'comandos lançados' },
+        { value: '7', label: 'engines suportados' },
+        { value: '0', label: 'dependências de runtime' },
+        { value: 'MIT', label: 'custo zero' },
       ],
     },
-    thesis: {
-      heading: 'Uma máquina de estados documental',
-      note: 'O requisito versionado é o estado normativo do produto. Três camadas, divididas por natureza:',
-      layers: [
-        {
-          name: 'FORMATO',
-          role: 'O contrato',
-          text: 'Layout do workspace, schemas e transições de estado — versionado e estável.',
-        },
-        {
-          name: 'KIT',
-          role: 'O motor determinístico',
-          text: 'Valida, indexa, checa evidência. Sem LLM, sem surpresa.',
-        },
-        {
-          name: 'RUNTIME',
-          role: 'A camada agêntica',
-          text: 'O julgamento por capacidades — em qualquer engine dos padrões abertos.',
-        },
-      ],
+    demo: {
+      heading: 'O que você vai ver no terminal',
+      done: 'Entre o status e o validate, alguém criou a primeira feature com o anchor errado. O kit pegou na hora. Na sua máquina, os comandos respondem igual.',
     },
-    howItWorks: {
-      heading: 'Como funciona',
-      note: 'Do acordo inicial à verificação contínua em cada commit.',
-      steps: [
-        { name: 'Charter', text: 'O que vamos construir — confirmado com o cliente.' },
-        { name: 'Regras', text: 'RNs numeradas, claras e aprovadas antes do código.' },
-        { name: 'Specs', text: 'Modelo de dados, contratos e telas derivados das regras.' },
-        { name: 'Código', text: 'Tasks com critérios de aceitação e evidência citada.' },
-        { name: 'Verdade viva', text: 'Mudou o requisito? O kit aponta exatamente o que ficou desatualizado.' },
+    scenes: {
+      heading: 'A cena que você conhece e o comando que resolve',
+      note: 'Cada cena termina com um comando real do kit. Sem promessa que não roda.',
+      docLink: 'todos os 18 comandos na documentação →',
+      docPath: '/docs/pt-br/reference/commands',
+      items: [
+        {
+          pain: 'A conversa ficou no passado',
+          outcome: 'O combinado confirmado com o cliente fica versionado, com charter, RNs e specs num workspace.',
+          command: 'golmet init NomeDoProduto',
+          chips: ['charter', 'RNs', 'workspace'],
+        },
+        {
+          pain: 'A doc apodreceu',
+          outcome: 'Mudou o código e a doc ficou para trás? O dashboard de estados aponta o que ficou stale.',
+          command: 'golmet status',
+          chips: ['drift', 'estados', 'evidência'],
+        },
+        {
+          pain: 'Escopo que ninguém consegue provar',
+          outcome: 'Cada regra cita o trecho que a implementa, verificável por máquina no formato `[caminho:linha @hash]`.',
+          command: 'golmet validate',
+          chips: ['H1–H10', 'fix sugerido'],
+        },
+        {
+          pain: 'E agora, o que falta?',
+          outcome: 'Nada de adivinhar. O kit recomenda a próxima ação sobre o workspace.',
+          command: 'golmet next',
+          chips: ['recomendação', 'estado real'],
+        },
       ],
     },
     engines: {
-      heading: 'Funciona com o seu agente',
-      note: 'Via os padrões abertos do ecossistema — AGENTS.md, SKILL.md e MCP. Sem lock-in de engine.',
+      label: 'Funciona com o seu agente',
       engines: ['OpenCode', 'Claude Code', 'Cursor', 'Codex', 'Gemini CLI', 'Copilot CLI', 'VS Code Copilot'],
     },
     differentiation: {
-      heading: 'Por que não é só mais um spec-tool',
+      heading: 'Por que a doc não apodrece',
       items: [
         {
           title: 'Markdown no seu git',
@@ -225,69 +213,62 @@ const ptBR: CopyTree = {
         },
         {
           title: 'Evidência parseável',
-          text: 'Cada regra cita `[caminho:linha @hash]` — a conexão docs ↔ código é verificável por máquina.',
+          text: 'Cada regra cita `[caminho:linha @hash]` e a conexão docs ↔ código é verificável por máquina.',
         },
         {
           title: 'O kit é o árbitro',
           text: 'Um binário determinístico valida estados e evidência. A verdade não depende só do prompt.',
         },
       ],
+      underTheHood:
+        'Sob o capô vivem o FORMATO (o contrato), o KIT (o motor determinístico) e o RUNTIME (a camada agêntica). Detalhes na documentação.',
     },
-    quickstart: {
-      heading: 'Comece pelo combinado',
-      badge: `v${CLI_VERSION}`,
-      note: `Release v${CLI_VERSION} estável no npm — os comandos acima já funcionam.`,
-      steps: [
+    journey: {
+      heading: 'Sua jornada com o GOLMET',
+      note: 'Três trilhas. Todas começam com o mesmo comando.',
+      tracks: [
         {
-          title: 'Instale o binário',
-          command: 'npm i -g golmet-cli',
-          text: 'Nativo, zero dependência de runtime.',
+          title: 'Testar hoje',
+          tagline: 'De zero a workspace rodando em 5 minutos.',
+          steps: ['npm i -g golmet-cli', 'golmet init nome-produto', 'golmet status'],
+          docPath: '/docs/pt-br/getting-started-5-minutes',
+          docLabel: 'Guia de 5 minutos →',
         },
         {
-          title: 'Configure o kit',
-          command: 'golmet install',
-          text: 'Wizard configura engine, skills gm-* e MCPs do kit.',
+          title: 'Adotar no produto',
+          tagline: 'Repo existente? O guardião lê o código e propõe as regras, e você confirma o que é verdade.',
+          steps: ['golmet doctor', 'golmet adopt .', 'golmet validate'],
+          docPath: '/docs/pt-br/concepts/reverse',
+          docLabel: 'Do legado ao FORMATO →',
         },
         {
-          title: 'Inicie o workspace',
-          command: 'golmet init NomeDoProduto',
-          text: 'Wizard cria o workspace: golmet.yaml, charter e zonas do FORMATO.',
-        },
-        {
-          title: 'A verdade fica versionada',
-          text: 'Markdown no seu git — sobrevive a engines, kits e releases.',
+          title: 'Escala para o time',
+          tagline: 'Onboarding do dev #2 sem manual, com clone, doctor e pack.',
+          steps: ['golmet pack', 'golmet doctor', 'clone + sync'],
+          docPath: '/docs/pt-br/concepts/organization',
+          docLabel: 'Checklist do time →',
         },
       ],
     },
-    paths: {
-      heading: 'Escolha seu caminho',
+    faq: {
+      heading: 'Perguntas diretas',
       items: [
         {
-          title: 'Produto novo',
-          text: 'Charter, requisitos e specs do zero — kit e agente na mesma pasta.',
-          docPath: '/docs/pt-br/getting-started/01-organizacao',
+          question: 'Precisa de LLM ou API paga?',
+          answer:
+            'Não. O kit é um binário determinístico que valida, indexa e confere evidência sem LLM. ' +
+            'O julgamento agêntico usa o engine que você já tem.',
         },
         {
-          title: 'Repo legado',
-          text: 'O guardião lê o código e propõe as regras; você confirma o que é verdade.',
-          docPath: '/docs/pt-br/concepts/reverse',
+          question: 'E se eu trocar de engine?',
+          answer:
+            'A verdade vive em markdown no seu git, não no engine. OpenCode, Claude Code, Cursor ' +
+            'e os outros apenas leem os mesmos arquivos.',
         },
         {
-          title: 'Org multi-dev',
-          text: 'Onboarding do dev #2: clone, doctor, pack sync — checklist sem manual.',
-          docPath: '/docs/pt-br/concepts/organization',
+          question: 'Quanto custa?',
+          answer: 'Nada. Licença MIT no GitHub, binário nativo no npm. Sem plano e sem cadastro.',
         },
-      ],
-    },
-    capabilities: {
-      heading: 'O que o kit faz',
-      docLink: 'todos os 18 comandos na documentação →',
-      note: 'Somente o que está lançado no release vigente — o guardião não promete o que não existe.',
-      featured: [
-        { command: 'golmet init', description: 'Cria o workspace do produto (wizard interativo)' },
-        { command: 'golmet validate', description: 'Valida o workspace contra o FORMATO v1' },
-        { command: 'golmet status', description: 'Dashboard de estados das entidades' },
-        { command: 'golmet next', description: 'Recomenda a próxima ação sobre o workspace' },
       ],
     },
     ctas: {
@@ -295,17 +276,17 @@ const ptBR: CopyTree = {
       npm: 'golmet-cli no npm',
     },
     finalCta: {
-      heading: 'Comece hoje',
+      heading: 'Cansado de doc que ninguém confia?',
       text: 'Um comando. Um workspace. A verdade versionada no seu git.',
       command: 'npm i -g golmet-cli',
-      preLaunch: `v${CLI_VERSION} estável — instalação funcional pelo npm.`,
+      preLaunch: `Release v${CLI_VERSION} estável, com instalação funcional pelo npm.`,
     },
   },
   portal: {
     sidebarTitle: 'Documentação',
     searchPlaceholder: 'Buscar na documentação…',
-    notTranslated: 'Página não traduzida — exibindo a versão em inglês.',
-    indexNote: 'Renderizada direto do repositório golmet-cli — docs, releases e changelog.',
+    notTranslated: 'Página não traduzida, exibindo a versão em inglês.',
+    indexNote: 'Renderizada direto do repositório golmet-cli. Docs, releases e changelog.',
     onThisPage: 'Nesta página',
     prevLabel: '← Anterior',
     nextLabel: 'Próximo →',
@@ -315,7 +296,7 @@ const ptBR: CopyTree = {
   notFound: {
     title: 'Página não encontrada',
     message:
-      'Este endereço não existe no site — o guardião só afirma o que cita evidência.',
+      'Este endereço não existe no site. O guardião só afirma o que cita evidência.',
     hint: 'Use a busca ou volte pelos caminhos abaixo.',
   },
   footer: {
@@ -334,80 +315,87 @@ const ptBR: CopyTree = {
 const en: CopyTree = {
   landing: {
     hero: {
-      kicker: 'REQUIREMENTS · EVIDENCE · VERSIONING',
-      title: 'GOLMET',
-      tagline: "Versioned requirements. Docs that don't rot.",
-      plainLine:
-        'GOLMET is a CLI that turns requirements into versioned markdown in your own git — ' +
-        'and warns when code and docs drift.',
-      valueHighlight: 'Your agreement.',
-      valueProposal: 'Your repository. A source of truth that follows the code.',
-      statusNote: `Site under construction — kit v${CLI_VERSION} is already stable on npm.`,
-    },
-    terminal: {
-      title: 'Real output — install · version · init · status · validate',
-    },
-    problem: {
-      heading: 'Every software team has lived this',
-      note: "If any of these scenes feel familiar, the problem isn't the team — it's the absence of a source of truth.",
-      cards: [
-        {
-          title: 'The conversation stayed in the past',
-          text: 'The client asked in a meeting. Nobody wrote it down properly. Three weeks later, everyone remembers it differently.',
-        },
-        {
-          title: 'The code became a mystery',
-          text: 'The feature is live — but the detail (min value, what blocks it, why) lives in the head of whoever wrote it.',
-        },
-        {
-          title: 'Ghost scope',
-          text: `"That's not what I asked for" — and there's no way to prove what was agreed.`,
-        },
-        {
-          title: 'The docs rotted',
-          text: 'The requirement changed, nobody updated the document. Old docs are docs nobody trusts.',
-        },
+      titleLead: 'No more stale documentation.',
+      sub:
+        'A business rule without evidence is an opinion. In GOLMET, every rule points to the file, ' +
+        'the line and the hash of the code that implements it. If the code moves and the rule falls ' +
+        'behind, validate flags it before merge. Documentation stops being memory and becomes ' +
+        'verifiable fact.',
+      quickstart: {
+        heading: 'How to start',
+        badge: `v${CLI_VERSION}`,
+        steps: [
+          {
+            title: 'Install GOLMET',
+            command: 'npm i -g golmet-cli',
+            text: 'Downloads and installs the program on your computer, straight from npm.',
+          },
+          {
+            title: 'Create your project space',
+            command: 'golmet init nome-produto',
+            text: 'Creates your product folder with the requirements and decisions files already structured. You fill in the content afterwards.',
+          },
+          {
+            title: 'See the summary',
+            command: 'golmet status',
+            text: 'Shows what already exists in the project and the state of each part.',
+          },
+          {
+            title: 'Check that everything matches',
+            command: 'golmet validate',
+            text: 'Compares what the documentation says with what the code does and warns you if anything fell behind.',
+          },
+        ],
+      },
+      stats: [
+        { value: '18', label: 'commands shipped' },
+        { value: '7', label: 'engines supported' },
+        { value: '0', label: 'runtime dependencies' },
+        { value: 'MIT', label: 'zero cost' },
       ],
     },
-    thesis: {
-      heading: 'A documentary state machine',
-      note: "The versioned requirement is the product's normative state. Three layers, split by nature:",
-      layers: [
-        {
-          name: 'FORMAT',
-          role: 'The contract',
-          text: 'Workspace layout, schemas and state transitions — versioned and stable.',
-        },
-        {
-          name: 'KIT',
-          role: 'The deterministic engine',
-          text: 'Validates, indexes, checks evidence. No LLM, no surprises.',
-        },
-        {
-          name: 'RUNTIME',
-          role: 'The agentic layer',
-          text: 'Judgment through capabilities — on any engine from the open standards.',
-        },
-      ],
+    demo: {
+      heading: "What you'll see in your terminal",
+      done: 'Between status and validate, someone created the first feature with the wrong anchor. The kit caught it instantly. On your machine, the commands behave the same.',
     },
-    howItWorks: {
-      heading: 'How it works',
-      note: 'From the initial agreement to continuous verification on every commit.',
-      steps: [
-        { name: 'Charter', text: "What we're building — confirmed with the client." },
-        { name: 'Rules', text: 'Numbered RNs, clear and approved before the code.' },
-        { name: 'Specs', text: 'Data model, contracts and screens derived from the rules.' },
-        { name: 'Code', text: 'Tasks with acceptance criteria and cited evidence.' },
-        { name: 'Living truth', text: 'The requirement changed? The kit points to exactly what became stale.' },
+    scenes: {
+      heading: 'The scene you know and the command that fixes it',
+      note: 'Every scene ends with a real kit command. No promises that don\'t run.',
+      docLink: 'all 18 commands in the docs →',
+      docPath: '/docs/reference/commands',
+      items: [
+        {
+          pain: 'The conversation stayed in the past',
+          outcome: 'The confirmed agreement stays versioned, with charter, RNs and specs in one workspace.',
+          command: 'golmet init YourProductName',
+          chips: ['charter', 'RNs', 'workspace'],
+        },
+        {
+          pain: 'The docs rotted',
+          outcome: 'Code moved and docs fell behind? The state dashboard points to what went stale.',
+          command: 'golmet status',
+          chips: ['drift', 'states', 'evidence'],
+        },
+        {
+          pain: 'Scope nobody can prove',
+          outcome: 'Every rule cites the snippet that implements it, machine-verifiable in `[path:line @hash]` format.',
+          command: 'golmet validate',
+          chips: ['H1–H10', 'suggested fix'],
+        },
+        {
+          pain: 'So what\'s missing now?',
+          outcome: 'No guessing. The kit recommends the next action on the workspace.',
+          command: 'golmet next',
+          chips: ['recommendation', 'real state'],
+        },
       ],
     },
     engines: {
-      heading: 'Works with your agent',
-      note: "Through the ecosystem's open standards — AGENTS.md, SKILL.md and MCP. No engine lock-in.",
+      label: 'Works with your agent',
       engines: ['OpenCode', 'Claude Code', 'Cursor', 'Codex', 'Gemini CLI', 'Copilot CLI', 'VS Code Copilot'],
     },
     differentiation: {
-      heading: "Why it isn't just another spec-tool",
+      heading: "Why the docs don't rot",
       items: [
         {
           title: 'Markdown in your git',
@@ -415,69 +403,62 @@ const en: CopyTree = {
         },
         {
           title: 'Parseable evidence',
-          text: 'Every rule cites `[path:line @hash]` — the docs ↔ code connection is machine-verifiable.',
+          text: 'Every rule cites `[path:line @hash]`, so the docs ↔ code connection is machine-verifiable.',
         },
         {
           title: 'The kit is the arbiter',
           text: "A deterministic binary validates states and evidence. Truth doesn't depend on the prompt alone.",
         },
       ],
+      underTheHood:
+        'Under the hood live the FORMAT (the contract), the KIT (the deterministic engine) and the RUNTIME (the agentic layer). Details in the docs.',
     },
-    quickstart: {
-      heading: 'Start from the agreement',
-      badge: `v${CLI_VERSION}`,
-      note: `Release v${CLI_VERSION} stable on npm — the commands above already work.`,
-      steps: [
+    journey: {
+      heading: 'Your GOLMET journey',
+      note: 'Three tracks. All of them start with the same command.',
+      tracks: [
         {
-          title: 'Install the binary',
-          command: 'npm i -g golmet-cli',
-          text: 'Native, zero runtime dependency.',
+          title: 'Try it today',
+          tagline: 'From zero to a running workspace in 5 minutes.',
+          steps: ['npm i -g golmet-cli', 'golmet init nome-produto', 'golmet status'],
+          docPath: '/docs/getting-started-5-minutes',
+          docLabel: '5-minute guide →',
         },
         {
-          title: 'Set up the kit',
-          command: 'golmet install',
-          text: 'The wizard configures engine, gm-* skills and kit MCPs.',
+          title: 'Adopt it on your product',
+          tagline: 'Existing repo? The guardian reads the code and proposes the rules, and you confirm what is true.',
+          steps: ['golmet doctor', 'golmet adopt .', 'golmet validate'],
+          docPath: '/docs/concepts/reverse',
+          docLabel: 'From legacy to FORMAT →',
         },
         {
-          title: 'Initialize the workspace',
-          command: 'golmet init YourProductName',
-          text: 'The wizard creates the workspace: golmet.yaml, charter and FORMAT zones.',
-        },
-        {
-          title: 'The truth gets versioned',
-          text: 'Markdown in your git — survives engines, kits and releases.',
+          title: 'Scale to the team',
+          tagline: 'Dev #2 onboarding without a manual, with clone, doctor and pack.',
+          steps: ['golmet pack', 'golmet doctor', 'clone + sync'],
+          docPath: '/docs/concepts/organization',
+          docLabel: 'Team checklist →',
         },
       ],
     },
-    paths: {
-      heading: 'Choose your path',
+    faq: {
+      heading: 'Straight answers',
       items: [
         {
-          title: 'New product',
-          text: 'Charter, requirements and specs from scratch — kit and agent in the same folder.',
-          docPath: '/docs/getting-started/01-organizacao',
+          question: 'Does it need an LLM or a paid API?',
+          answer:
+            'No. The kit is a deterministic binary that validates, indexes and checks evidence without an LLM. ' +
+            'The agentic judgment uses the engine you already have.',
         },
         {
-          title: 'Legacy repo',
-          text: 'The guardian reads the code and proposes rules; you confirm what is true.',
-          docPath: '/docs/concepts/reverse',
+          question: 'What if I switch engines?',
+          answer:
+            'The truth lives in markdown in your git, not in the engine. OpenCode, Claude Code, Cursor ' +
+            'and the rest just read the same files.',
         },
         {
-          title: 'Multi-dev org',
-          text: 'Dev #2 onboarding: clone, doctor, pack sync — checklist, no manual.',
-          docPath: '/docs/concepts/organization',
+          question: 'How much does it cost?',
+          answer: 'Nothing. MIT license on GitHub, native binary on npm. No plan and no signup.',
         },
-      ],
-    },
-    capabilities: {
-      heading: 'What the kit does',
-      docLink: 'all 18 commands in the docs →',
-      note: "Only what's released in the current version — the guardian doesn't promise what doesn't exist.",
-      featured: [
-        { command: 'golmet init', description: 'Creates the product workspace (interactive wizard)' },
-        { command: 'golmet validate', description: 'Validates the workspace against FORMAT v1' },
-        { command: 'golmet status', description: 'Dashboard of entity states' },
-        { command: 'golmet next', description: 'Recommends the next action on the workspace' },
       ],
     },
     ctas: {
@@ -485,17 +466,17 @@ const en: CopyTree = {
       npm: 'golmet-cli on npm',
     },
     finalCta: {
-      heading: 'Start today',
+      heading: 'Tired of docs nobody trusts?',
       text: 'One command. One workspace. Versioned truth in your git.',
       command: 'npm i -g golmet-cli',
-      preLaunch: `v${CLI_VERSION} stable — functional install via npm.`,
+      preLaunch: `Release v${CLI_VERSION} stable, with a functional install via npm.`,
     },
   },
   portal: {
     sidebarTitle: 'Documentation',
     searchPlaceholder: 'Search the docs…',
-    notTranslated: 'Page not translated — showing the English version.',
-    indexNote: 'Rendered straight from the golmet-cli repository — docs, releases and changelog.',
+    notTranslated: 'Page not translated, showing the English version.',
+    indexNote: 'Rendered straight from the golmet-cli repository. Docs, releases and changelog.',
     onThisPage: 'On this page',
     prevLabel: '← Previous',
     nextLabel: 'Next →',
@@ -504,7 +485,7 @@ const en: CopyTree = {
   },
   notFound: {
     title: 'Page not found',
-    message: "This address doesn't exist on the site — the guardian only states what cites evidence.",
+    message: "This address doesn't exist on the site. The guardian only states what cites evidence.",
     hint: 'Use the search or go back through the paths below.',
   },
   footer: {

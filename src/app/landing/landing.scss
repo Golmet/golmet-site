@@ -1,5 +1,5 @@
-// Landing — estilo consolidado (CR-004 narrativa + CR-005/006 pré-lançamento
-// + auditoria visual rodada 1: tokens de cor/escala h2/foco visível).
+// Landing — conceito "mostra, não conta" (CR-004 v2): hero centrado com
+// stats reais, demo interativa, cenas dor→comando, jornada em 3 trilhas.
 // Tokens da marca: src/styles.scss
 
 .gm-landing {
@@ -15,9 +15,8 @@
   min-width: 0;
 }
 
-// Ritmo vertical: hero + quickstart continuam colados (protege a dobra
-// <=720px, M-06); os demais blocos de conteúdo ganham 48px de respiro
-// para as seções não se misturarem.
+// Ritmo vertical: hero + quickstart colados (protege a dobra <=720px, M-06);
+// os demais blocos ganham 48px de respiro.
 .gm-landing > section:not(.gm-hero):not(.gm-quickstart) {
   margin-top: var(--gm-space-4);
 }
@@ -37,68 +36,140 @@
 // ── Hero (primeira dobra — RN-001) ──────────────────────────────
 
 .gm-hero {
-  align-items: center;
   display: grid;
-  gap: var(--gm-space-1);
-  grid-template-columns: 1fr;
+  gap: var(--gm-space-3);
+  justify-items: center;
+  text-align: center;
 }
 
-// Pilha do hero: respiro uniforme de 14px entre as linhas (print do
-// operador) — 8px ficou colado demais.
-.gm-hero-copy .gm-kicker {
+.gm-hero-copy {
+  display: grid;
+  justify-items: center;
+}
+
+.gm-hero-badge {
+  background: rgba(255, 107, 53, 0.12);
+  border: 1px solid var(--gm-amber);
+  border-radius: 999px;
   color: var(--gm-amber);
-  font-family: ui-monospace, 'Cascadia Code', 'Courier New', monospace;
-  font-size: 0.75rem;
-  letter-spacing: 0.14em;
-  margin: 0 0 14px;
+  font-size: 0.72rem;
+  letter-spacing: 0.05em;
+  padding: 3px 12px;
+  text-transform: uppercase;
 }
 
-.gm-hero-copy h1 {
+.gm-hero h1 {
+  font-size: clamp(2.4rem, 6vw, 3.6rem);
+  letter-spacing: 0.02em;
+  line-height: 1.12;
+  margin: 18px 0 0;
+}
+
+.gm-hl {
   color: var(--gm-ouro);
-  font-size: clamp(2.3rem, 5.5vw, 3.1rem);
-  letter-spacing: 0.08em;
-  margin: 0 0 14px;
 }
 
-.gm-hero-copy .gm-tagline {
-  color: var(--gm-text);
-  font-size: clamp(1.15rem, 2.4vw, 1.5rem);
-  font-weight: 600;
-  margin: 0 0 14px;
-}
-
-.gm-hero-copy .gm-plain {
+.gm-sub {
   color: var(--gm-text-muted);
   font-size: clamp(1rem, 2vw, 1.15rem);
-  margin: 0 0 14px;
-  max-width: 44rem;
+  line-height: 1.6;
+  margin: 16px 0 0;
+  max-width: 42rem;
 }
 
-.gm-hero-copy .gm-value {
-  color: var(--gm-text);
-  font-size: 0.95rem;
-  margin: 0;
-  max-width: 44rem;
-}
-
-.gm-hero-copy .gm-value strong {
-  color: var(--gm-amber);
-  font-weight: 600;
+.gm-hero-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--gm-space-2);
+  justify-content: center;
+  margin-top: 24px;
 }
 
 .gm-hero-arki {
   border-radius: var(--gm-radius);
   filter: drop-shadow(0 16px 36px rgba(255, 107, 53, 0.22));
   height: auto;
-  justify-self: center;
-  width: clamp(180px, 20vw, 250px);
+  width: clamp(200px, 26vw, 300px);
+}
+
+// Desktop (≥900px): texto à esquerda, Arki à direita, stats banda larga.
+@media (min-width: 900px) {
+  .gm-hero {
+    align-items: center;
+    grid-template-columns: 1.25fr 0.75fr;
+    justify-items: start;
+    text-align: left;
+  }
+
+  .gm-hero-copy {
+    justify-items: start;
+  }
+
+  .gm-hero-actions {
+    justify-content: flex-start;
+  }
+
+  .gm-hero-arki {
+    justify-self: center;
+  }
+}
+
+// Stats reais na dobra (fatos verificáveis, não ROI inventado).
+// Banda full-width: 4 colunas iguais ocupando todo o conteúdo.
+.gm-stats {
+  display: grid;
+  gap: var(--gm-space-2);
+  grid-template-columns: repeat(2, 1fr);
+  margin: 0;
+  width: 100%;
 }
 
 @media (min-width: 900px) {
-  .gm-hero {
-    grid-template-columns: 1.4fr 1fr;
+  .gm-stats {
+    grid-column: 1 / -1;
+    grid-template-columns: repeat(4, 1fr);
+  }
+
+  .gm-stat + .gm-stat {
+    border-left: 1px solid var(--gm-border);
   }
 }
+
+.gm-stat {
+  display: grid;
+  justify-items: center;
+  padding: 6px 0;
+  text-align: center;
+}
+
+.gm-stat-value {
+  color: var(--gm-ouro);
+  font-family: ui-monospace, 'Cascadia Code', 'Courier New', monospace;
+  font-size: 1.7rem;
+  font-weight: 700;
+  margin: 0;
+}
+
+.gm-stat-label {
+  color: var(--gm-text-muted);
+  font-size: 0.78rem;
+  margin: 2px 0 0;
+}
+
+// Mobile (≤719px): hero respira, stats em 2×2, CTAs lado a lado.
+@media (max-width: 719px) {
+  .gm-landing {
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+
+  .gm-hero-actions .gm-cta {
+    font-size: 0.92rem;
+    padding: 11px 16px;
+  }
+}
+
+// ── CTAs ────────────────────────────────────────────────────────
 
 .gm-ctas {
   display: flex;
@@ -134,31 +205,23 @@
   color: var(--gm-obsidiana);
 }
 
-// Mobile (≤719px): os dois CTAs lado a lado (padding compacto — empilhados
-// desperdiçavam a dobra) e o kicker monospace em 1 linha.
-@media (max-width: 719px) {
-  .gm-landing {
-    padding-left: 20px;
-    padding-right: 20px;
-  }
-
-  .gm-ctas {
-    gap: 10px;
-  }
-
-  .gm-cta {
-    font-size: 0.92rem;
-    padding: 11px 14px;
-    white-space: nowrap;
-  }
-
-  .gm-hero-copy .gm-kicker {
-    font-size: 0.66rem;
-    letter-spacing: 0.08em;
-  }
+.gm-copy {
+  background: var(--gm-code-chip);
+  border: 1px solid var(--gm-border);
+  border-left: none;
+  border-radius: 0 6px 6px 0;
+  color: var(--gm-text);
+  cursor: pointer;
+  font-size: 0.8rem;
+  padding: 0 12px;
+  white-space: nowrap;
 }
 
-// ── Quickstart (dobra — painel) ─────────────────────────────────
+.gm-copy:hover {
+  color: var(--gm-ouro);
+}
+
+// ── Quickstart (painel de comandos copiáveis) ───────────────────
 
 .gm-quickstart {
   background: var(--gm-surface);
@@ -252,186 +315,90 @@
   white-space: nowrap;
 }
 
-.gm-copy {
-  background: var(--gm-code-chip);
-  border: 1px solid var(--gm-border);
-  border-left: none;
-  border-radius: 0 6px 6px 0;
-  color: var(--gm-text);
-  cursor: pointer;
-  font-size: 0.8rem;
-  padding: 0 12px;
-  white-space: nowrap;
-}
-
-.gm-copy:hover {
-  color: var(--gm-ouro);
-}
-
 .gm-step-text {
   color: var(--gm-text-muted);
   font-size: 0.88rem;
   margin: 0;
 }
 
-// ── Problema (CR-004 + design alvo do operador) ────────────────
+// ── Demo (terminal interativo) ──────────────────────────────────
 
-// Banda full-width: faixa borda a borda com hairlines topo/base e
-// conteúdo centralizado — mesmo container 1120px do resto do site.
-.gm-problem {
-  background: rgba(35, 39, 44, 0.45);
-  border-bottom: 1px solid var(--gm-border);
-  border-top: 1px solid var(--gm-border);
-  margin-top: var(--gm-space-2);
-  padding: var(--gm-space-4) var(--gm-space-3);
-}
-
-.gm-problem-inner {
-  margin: 0 auto;
-  max-width: 1120px;
-}
-
-.gm-problem h2 {
-  color: var(--gm-text);
-  font-size: var(--gm-h2);
-  margin: 0 0 var(--gm-space-2);
-}
-
-.gm-how {
-  margin-top: var(--gm-space-2);
-}
-
-.gm-problem-cards {
-  display: grid;
-  gap: var(--gm-space-2);
-  grid-template-columns: 1fr;
-}
-
-@media (min-width: 900px) {
-  .gm-problem-cards {
-    grid-template-columns: repeat(4, 1fr);
-  }
-}
-
-.gm-problem-card {
-  background: var(--gm-obsidiana);
-  border: 1px solid var(--gm-border);
-  border-radius: var(--gm-radius);
-  padding: 1.5rem;
-}
-
-.gm-problem-card h3 {
-  color: var(--gm-amber);
-  font-size: 1rem;
-  line-height: 1.35;
-  margin: 0 0 var(--gm-space-1);
-}
-
-.gm-problem-card p {
-  color: var(--gm-text);
-  font-size: 0.9rem;
-  line-height: 1.6;
-  margin: 0;
-}
-
-// ── Tese: 3 camadas (CR-004) ────────────────────────────────────
-
-.gm-thesis-layers {
-  display: grid;
-  gap: var(--gm-space-2);
-  grid-template-columns: 1fr;
-}
-
-@media (min-width: 900px) {
-  .gm-thesis-layers {
-    grid-template-columns: repeat(3, 1fr);
-  }
-}
-
-.gm-layer {
-  background: var(--gm-surface);
-  border: 1px solid var(--gm-border);
-  border-radius: var(--gm-radius);
-  padding: 1.5rem;
-}
-
-.gm-layer-name {
-  color: var(--gm-ouro);
-  font-family: ui-monospace, 'Cascadia Code', 'Courier New', monospace;
-  font-size: 0.75rem;
-  font-weight: 700;
-  letter-spacing: 0.12em;
-  margin: 0;
-  text-transform: uppercase;
-}
-
-.gm-layer-role {
-  color: var(--gm-text);
-  font-size: 1.05rem;
-  font-weight: 600;
-  margin: 6px 0 var(--gm-space-1);
-}
-
-.gm-layer-text {
-  color: var(--gm-text-muted);
-  font-size: 0.9rem;
-  line-height: 1.6;
-  margin: 0;
-}
-
-// ── Como funciona (stepper CR-004) ──────────────────────────────
-
-.gm-how-steps {
-  display: grid;
-  gap: var(--gm-space-2);
-  grid-template-columns: 1fr;
-  list-style: none;
-  margin: 0;
-  padding: 0;
-}
-
-@media (min-width: 900px) {
-  .gm-how-steps {
-    grid-template-columns: repeat(5, 1fr);
-  }
-}
-
-.gm-how-step {
-  background: var(--gm-surface);
-  border: 1px solid var(--gm-border);
-  border-radius: var(--gm-radius);
-  border-top: 2px solid var(--gm-ouro);
-  padding: 1.25rem 1.5rem;
-}
-
-.gm-how-number {
-  color: var(--gm-ouro);
-  font-family: ui-monospace, 'Cascadia Code', 'Courier New', monospace;
-  font-size: 0.75rem;
-  font-weight: 700;
-  letter-spacing: 0.08em;
-}
-
-.gm-how-name {
-  color: var(--gm-text);
-  font-size: 1rem;
-  font-weight: 600;
-  margin: 4px 0;
-}
-
-.gm-how-text {
+.gm-demo-done {
   color: var(--gm-text-muted);
   font-size: 0.85rem;
-  line-height: 1.5;
+  margin: 12px 0 0;
+}
+
+// ── Cenas: dor → comando ────────────────────────────────────────
+
+.gm-scene-grid {
+  display: grid;
+  gap: var(--gm-space-2);
+  grid-template-columns: 1fr;
+}
+
+@media (min-width: 900px) {
+  .gm-scene-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+.gm-scene {
+  background: var(--gm-surface);
+  border: 1px solid var(--gm-border);
+  border-radius: var(--gm-radius);
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 1.5rem;
+}
+
+.gm-scene-pain {
+  color: var(--gm-amber);
+  font-size: 1rem;
+  font-weight: 600;
+  line-height: 1.35;
   margin: 0;
 }
 
-// ── Engines (CR-005) ────────────────────────────────────────────
+.gm-scene-outcome {
+  color: var(--gm-text);
+  font-size: 0.9rem;
+  line-height: 1.6;
+  margin: 0;
+}
 
-.gm-engines,
-.gm-differentiation {
+.gm-scene-command {
+  align-self: flex-start;
+  background: var(--gm-code-bg);
+  border: 1px solid var(--gm-border);
+  border-radius: 6px;
+  color: var(--gm-amber);
+  font-size: 0.85rem;
+  padding: 5px 12px;
+}
+
+.gm-scene-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.gm-scene-chip {
+  border: 1px solid var(--gm-border);
+  border-radius: 999px;
+  color: var(--gm-text-muted);
+  font-size: 0.72rem;
+  padding: 2px 10px;
+}
+
+.gm-scenes-doc-link {
+  color: var(--gm-amber);
+  font-size: 0.9rem;
   margin-top: var(--gm-space-2);
 }
+
+// ── Engines ─────────────────────────────────────────────────────
 
 .gm-engine-chips {
   display: flex;
@@ -447,7 +414,13 @@
   padding: 4px 14px;
 }
 
-// ── Diferenciação (CR-005) ──────────────────────────────────────
+.gm-engines-label {
+  color: var(--gm-text-muted);
+  font-size: 0.95rem;
+  margin: 0 0 var(--gm-space-2);
+}
+
+// ── Diferenciação ───────────────────────────────────────────────
 
 .gm-diff-items {
   display: grid;
@@ -479,114 +452,136 @@
   margin: 0;
 }
 
-// ── Caminhos (RN-003) ───────────────────────────────────────────
+.gm-under-the-hood {
+  border-top: 1px solid var(--gm-border);
+  color: var(--gm-text-muted);
+  font-size: 0.85rem;
+  line-height: 1.6;
+  margin: var(--gm-space-2) 0 0;
+  padding-top: var(--gm-space-2);
+}
 
-.gm-path-cards {
+// ── Jornada: 3 trilhas de adoção ────────────────────────────────
+
+.gm-track-grid {
   display: grid;
   gap: var(--gm-space-2);
   grid-template-columns: 1fr;
 }
 
 @media (min-width: 900px) {
-  .gm-path-cards {
+  .gm-track-grid {
     grid-template-columns: repeat(3, 1fr);
   }
 }
 
-.gm-path-card {
+.gm-track {
   background: var(--gm-surface);
   border: 1px solid var(--gm-border);
   border-radius: var(--gm-radius);
-  color: inherit;
-  display: block;
+  border-top: 2px solid var(--gm-ouro);
+  display: flex;
+  flex-direction: column;
+  gap: var(--gm-space-1);
   padding: 1.5rem;
-  text-decoration: none;
-  transition: border-color 0.15s ease;
 }
 
-.gm-path-card:hover {
-  border-color: var(--gm-ouro);
-}
-
-.gm-path-card h3 {
+.gm-track h3 {
   color: var(--gm-text);
   font-size: 1.05rem;
   font-weight: 600;
-  margin: 0 0 var(--gm-space-1);
-}
-
-.gm-path-card p {
-  color: var(--gm-text-muted);
-  font-size: 0.9rem;
-  line-height: 1.6;
-  margin: 0 0 var(--gm-space-2);
-}
-
-.gm-path-link {
-  color: var(--gm-amber);
-  font-size: 0.9rem;
-}
-
-// ── Capacidades em destaque (RN-004 / CR-005) ───────────────────
-
-.gm-featured-caps {
-  display: grid;
-  gap: var(--gm-space-2);
-  grid-template-columns: 1fr;
-}
-
-@media (min-width: 900px) {
-  .gm-featured-caps {
-    grid-template-columns: repeat(4, 1fr);
-  }
-}
-
-.gm-featured-cap {
-  background: var(--gm-surface);
-  border: 1px solid var(--gm-border);
-  border-radius: var(--gm-radius);
-  display: grid;
-  gap: 10px;
-  padding: 1.25rem 1.5rem;
-}
-
-.gm-featured-cap code {
-  background: var(--gm-code-chip);
-  border: 1px solid var(--gm-border);
-  border-radius: 6px;
-  color: var(--gm-amber);
-  font-size: 0.85rem;
-  justify-self: start;
-  padding: 3px 10px;
-}
-
-.gm-featured-cap span {
-  color: var(--gm-text);
-  font-size: 0.9rem;
-  line-height: 1.55;
-}
-
-.gm-cap-footer {
-  align-items: center;
-  display: flex;
-  flex-wrap: wrap;
-  gap: var(--gm-space-1) var(--gm-space-2);
-  justify-content: space-between;
-  margin-top: var(--gm-space-2);
-}
-
-.gm-cap-note {
-  color: var(--gm-text-muted);
-  font-size: 0.85rem;
   margin: 0;
 }
 
-.gm-cap-doc-link {
-  color: var(--gm-amber);
-  font-size: 0.9rem;
+.gm-track-tagline {
+  color: var(--gm-text-muted);
+  font-size: 0.88rem;
+  line-height: 1.55;
+  margin: 0;
 }
 
-// ── CTA final (CR-004) ──────────────────────────────────────────
+.gm-track-steps {
+  color: var(--gm-text);
+  display: grid;
+  gap: 6px;
+  font-size: 0.88rem;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.gm-track-steps li {
+  background: var(--gm-code-bg);
+  border: 1px solid var(--gm-border);
+  border-radius: 6px;
+  font-family: ui-monospace, 'Cascadia Code', 'Courier New', monospace;
+  overflow-x: auto;
+  padding: 6px 12px;
+  white-space: nowrap;
+}
+
+.gm-track-steps li::before {
+  color: var(--gm-ouro);
+  content: '❯ ';
+}
+
+.gm-track-link {
+  color: var(--gm-amber);
+  font-size: 0.9rem;
+  margin-top: auto;
+}
+
+// ── FAQ ─────────────────────────────────────────────────────────
+
+.gm-faq-list {
+  display: grid;
+  gap: var(--gm-space-1);
+  margin-top: var(--gm-space-2);
+}
+
+.gm-faq-item {
+  background: var(--gm-surface);
+  border: 1px solid var(--gm-border);
+  border-radius: var(--gm-radius);
+}
+
+.gm-faq-item summary {
+  color: var(--gm-text);
+  cursor: pointer;
+  font-size: 0.95rem;
+  font-weight: 600;
+  list-style: none;
+  padding: 14px 16px;
+}
+
+.gm-faq-item summary::-webkit-details-marker {
+  display: none;
+}
+
+.gm-faq-item summary::after {
+  color: var(--gm-ouro);
+  content: '+';
+  float: right;
+  font-weight: 700;
+}
+
+.gm-faq-item[open] summary::after {
+  content: '−';
+}
+
+.gm-faq-item summary:hover {
+  color: var(--gm-ouro);
+}
+
+.gm-faq-item p {
+  color: var(--gm-text-muted);
+  font-size: 0.9rem;
+  line-height: 1.6;
+  margin: 0;
+  padding: 0 16px 14px;
+}
+
+// ── CTA final ───────────────────────────────────────────────────
 
 .gm-final-cta {
   background: var(--gm-surface);
@@ -646,31 +641,14 @@
     font-size: 0.88rem;
     white-space: nowrap;
   }
+
+  .gm-final-cta {
+    padding: var(--gm-space-3) 20px;
+  }
 }
 
 .gm-prelaunch {
   color: var(--gm-amber);
   font-size: 0.85rem;
   margin: 0;
-}
-
-// Mobile (≤719px) — DEPOIS da regra base (cascade): padding lateral menor
-// para os CTAs caberem lado a lado dentro do card.
-@media (max-width: 719px) {
-  .gm-final-cta {
-    padding: var(--gm-space-3) 20px;
-  }
-}
-
-// ── Terminal (CR-005/006 — saída real) ──────────────────────────
-
-.gm-terminal-section {
-  margin-top: var(--gm-space-2);
-  min-width: 0;
-}
-
-.gm-terminal-note {
-  color: var(--gm-text-muted);
-  font-size: 0.78rem;
-  margin: 6px 0 0;
 }

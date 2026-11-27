@@ -15,25 +15,25 @@ import { PageMeta } from './site.config';
 const landingMetaEn: PageMeta = {
   title: "Versioned requirements. Docs that don't rot.",
   description:
-    'GOLMET is the spec-driven workflow that keeps client agreements as versioned requirements — and keeps documentation true after the code ships.',
+    'Scope creep, stale docs, AI agents coding the wrong thing. Every gap becomes rework. GOLMET keeps client agreements versioned in your git and flags the exact code that diverged.',
 };
 
 const landingMetaPt: PageMeta = {
   title: 'Requisitos versionados. Docs que não apodrecem.',
   description:
-    'GOLMET é o workflow spec-driven que guarda o combinado com o cliente em requisitos versionados — e mantém a documentação verdadeira depois do código pronto.',
+    'Escopo que cresce escondido, doc velha, agente de IA codando errado. Cada brecha vira retrabalho. O GOLMET guarda o combinado com o cliente versionado no seu git e aponta o código que divergiu.',
 };
 
 const docsMeta: PageMeta = {
   title: 'Documentation',
   description:
-    'The GOLMET documentation — FORMAT, kit commands, MCP tools and concepts, rendered from the versioned sources.',
+    'The GOLMET documentation. FORMAT, kit commands, MCP tools and concepts, rendered from the versioned sources.',
 };
 
 const docsMetaPt: PageMeta = {
   title: 'Documentação',
   description:
-    'A documentação GOLMET — FORMAT, comandos do kit, ferramentas MCP e conceitos, renderizada das fontes versionadas.',
+    'A documentação GOLMET. FORMAT, comandos do kit, ferramentas MCP e conceitos, renderizada das fontes versionadas.',
 };
 
 export const routes: Routes = [
