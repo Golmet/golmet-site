@@ -26,11 +26,20 @@
 }
 
 .gm-brand {
+  align-items: center;
   color: var(--gm-ouro);
+  display: flex;
   font-size: 1.35rem;
   font-weight: 700;
+  gap: 10px;
   letter-spacing: 0.08em;
   text-decoration: none;
+}
+
+.gm-brand-icon {
+  border-radius: 6px;
+  height: 26px;
+  width: 26px;
 }
 
 .gm-nav {
@@ -68,6 +77,11 @@
 
   .gm-brand {
     font-size: 1.1rem;
+  }
+
+  .gm-brand-icon {
+    height: 22px;
+    width: 22px;
   }
 
   .gm-header-inner {
