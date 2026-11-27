@@ -33,21 +33,10 @@
   --gm-dot-y: #ffbd2e;
   --gm-dot-g: #27c93f;
 
-  // Container — largura fluida por tela (1366 mantém 1120px; monitores
-  // grandes ocupam mais área, feedback do operador)
+  // Container — largura padrão única (1120px) em todas as telas: conteúdo,
+  // header e footer centralizados dentro do mesmo limite horizontal
+  // (feedback do operador — overrides fluidos 1440/1560 removidos)
   --gm-container-max: 1120px;
-}
-
-@media (min-width: 1600px) {
-  :root {
-    --gm-container-max: 1440px;
-  }
-}
-
-@media (min-width: 1920px) {
-  :root {
-    --gm-container-max: 1560px;
-  }
 }
 
 // Acessibilidade — foco visível da marca (auditoria M-05)
