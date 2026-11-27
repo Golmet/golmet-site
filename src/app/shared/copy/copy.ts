@@ -38,6 +38,7 @@ export interface CopyTree {
   readonly landing: {
     readonly hero: {
       readonly titleLead: string;
+      readonly titleFollow: string;
       readonly sub: string;
       readonly quickstart: {
         readonly heading: string;
@@ -54,17 +55,13 @@ export interface CopyTree {
       readonly heading: string;
       readonly done: string;
     };
-    readonly scenes: {
+    readonly tech: {
       readonly heading: string;
-      readonly note: string;
-      readonly docLink: string;
-      readonly docPath: string;
-      readonly items: readonly {
-        readonly pain: string;
-        readonly outcome: string;
-        readonly command: string;
-        readonly chips: readonly string[];
-      }[];
+      readonly text: readonly string[];
+    };
+    readonly benefits: {
+      readonly heading: string;
+      readonly items: readonly { readonly title: string; readonly text: string }[];
     };
     readonly engines: {
       readonly label: string;
@@ -127,10 +124,13 @@ const ptBR: CopyTree = {
   landing: {
     hero: {
       titleLead: 'Chega de documentação velha.',
+      titleFollow: 'Tudo o que o seu projeto precisa, em um só lugar.',
       sub:
-        'Uma regra de negócio sem evidência é opinião. No Golmet, cada regra aponta o arquivo, a ' +
-        'linha e o hash do código que a implementa. Se o código muda e a regra fica para trás, o ' +
-        'validate acusa antes do merge. Documentação deixa de ser memória e vira fato verificável.',
+        'O Golmet reúne o desenvolvimento inteiro do seu produto em um único lugar. A inteligência ' +
+        'artificial levanta os requisitos do projeto, escreve análises que as pessoas ' +
+        'entendem, cria as tarefas e programa sob as regras do projeto. A cada mudança, confere ' +
+        'cada regra contra o código antes de ir para produção. Outras ferramentas ajudam a ' +
+        'escrever código. O Golmet garante o que foi escrito.',
       quickstart: {
         heading: 'Como começar',
         badge: `v${CLI_VERSION}`,
@@ -166,37 +166,60 @@ const ptBR: CopyTree = {
     },
     demo: {
       heading: 'O que você vai ver no terminal',
-      done: 'Entre o status e o validate, alguém criou a primeira feature com o anchor errado. O kit pegou na hora. Na sua máquina, os comandos respondem igual.',
+      done: 'Entre o status e o validate, alguém criou a primeira feature com o anchor errado. O Golmet pegou na hora. Na sua máquina, os comandos respondem igual.',
     },
-    scenes: {
-      heading: 'A cena que você conhece e o comando que resolve',
-      note: 'Cada cena termina com um comando real do kit. Sem promessa que não roda.',
-      docLink: 'todos os 18 comandos na documentação →',
-      docPath: '/docs/pt-br/reference/commands',
+    tech: {
+      heading: 'Como o Golmet faz tudo isso?',
+      text: [
+        'O Golmet é um programa nativo que roda na sua máquina, junto com o seu código. Dentro dela convivem três camadas. O FORMATO v1 é a especificação criada pelo Golmet que define como o projeto deve ser organizado, em arquivos de markdown, com estados e transições para cada documento e os portões de qualidade que tudo precisa passar. O KIT é o motor determinístico que valida essa especificação. E o RUNTIME é onde a inteligência artificial executa o processo.',
+        'A escrita segue princípios de linguística aplicada e neurociência da leitura. Cada documento controla a carga cognitiva, progride do simples ao complexo e mantém os termos consistentes. Por isso, tudo é claro na primeira leitura, para qualquer pessoa do time.',
+        'Cada regra de negócio carrega a evidência do código que a implementa, com arquivo, linha e hash criptográfico. A cada validação, o Golmet compara essa impressão digital com o código atual. Se divergir, o problema aparece antes de entrar no projeto, nunca depois.',
+        'As habilidades gm-* foram construídas estudando o fluxo de empresas de referência e as melhores práticas do mercado, e refinadas versão após versão. Elas guiam o seu agente de IA, passo a passo, do levantamento de requisitos à revisão do código, por padrões abertos como AGENTS.md e MCP.',
+        'E os portões de qualidade H1 a H10 são as regras dessa conferência. O conceito vem da prática de DevOps, onde um portão de qualidade é uma verificação automática que precisa passar antes do código avançar. O Golmet aplicou a mesma ideia à documentação. Cada portão examina um tipo de inconsistência entre documentação e código, como uma regra sem responsável ou uma referência quebrada. A falha bloqueia o avanço. O que antes era descoberto em produção, agora aparece na tela do analista. E o projeto cresce sem perder o controle, com tudo rodando offline na sua máquina.',
+      ],
+    },
+    benefits: {
+      heading: 'Veja tudo que o Golmet oferece',
       items: [
         {
-          pain: 'A conversa ficou no passado',
-          outcome: 'O combinado confirmado com o cliente fica versionado, com charter, RNs e specs num workspace.',
-          command: 'golmet init NomeDoProduto',
-          chips: ['charter', 'RNs', 'workspace'],
+          title: 'Requisitos organizados e versionados',
+          text: 'Cada requisito do produto fica documentado no projeto, com responsável, situação atual e o histórico completo de mudanças. Nada entra no desenvolvimento sem aprovação.',
         },
         {
-          pain: 'A doc apodreceu',
-          outcome: 'Mudou o código e a doc ficou para trás? O dashboard de estados aponta o que ficou stale.',
-          command: 'golmet status',
-          chips: ['drift', 'estados', 'evidência'],
+          title: 'Da ideia à especificação técnica em minutos',
+          text: 'Descreva o que precisa ser feito em linguagem simples. A IA transforma em análise funcional, análise técnica, modelo de dados e tarefas detalhadas. O time revisa e aprova tudo antes de programar.',
         },
         {
-          pain: 'Escopo que ninguém consegue provar',
-          outcome: 'Cada regra cita o trecho que a implementa, verificável por máquina no formato `[caminho:linha @hash]`.',
-          command: 'golmet validate',
-          chips: ['H1–H10', 'fix sugerido'],
+          title: 'A IA programa dentro das regras do projeto',
+          text: 'Antes de escrever qualquer código, o agente lê as regras versionadas do negócio. O resultado é o que foi combinado, não o que ele achou.',
         },
         {
-          pain: 'E agora, o que falta?',
-          outcome: 'Nada de adivinhar. O kit recomenda a próxima ação sobre o workspace.',
-          command: 'golmet next',
-          chips: ['recomendação', 'estado real'],
+          title: 'Todo código é conferido antes de entrar no projeto',
+          text: 'Quando o código fica pronto, o Golmet compara com a especificação aprovada e mostra qualquer divergência. Erro de interpretação não chega ao time.',
+        },
+        {
+          title: 'Documentos para a IA e documentos para pessoas',
+          text: 'O Golmet separa os dois mundos. Os documentos de trabalho ficam no formato que a máquina entende, e os documentos de leitura são escritos para pessoas, com uma camada de linguística que estuda como humanos leem e compreendem. O resultado é leitura fluida, fácil, clara e sem excesso.',
+        },
+        {
+          title: 'O conhecimento não fica preso em quem escreveu',
+          text: 'Cada regra e cada decisão do produto fica documentada junto ao código. Quem chega depois entende o que foi feito e por quê, sem precisar procurar a pessoa que fez.',
+        },
+        {
+          title: 'Desenvolvedor novo produzindo em minutos',
+          text: 'Quem chega clona o projeto e roda o doctor, o comando que confere se o Golmet está instalado e configurado corretamente, aponta o que falta e mostra como resolver.',
+        },
+        {
+          title: 'O próximo passo sempre claro',
+          text: 'Sem saber por onde começar? O Golmet analisa o projeto inteiro e mostra o que precisa ser feito primeiro, por ordem de prioridade.',
+        },
+        {
+          title: 'Banco de dados sem surpresas',
+          text: 'Mudou o banco? Essa mudança fica registrada em arquivos chamados migrations. O Golmet compara com o modelo documentado e aponta diferenças antes de virar incidente em produção.',
+        },
+        {
+          title: 'Sistema legado deixa de ser uma caixa preta',
+          text: 'O Golmet lê o código que já existe e mostra as regras de negócio escondidas nele, cada uma com o arquivo e a linha. Você confirma o que é verdade, e o time segue com uma base que todo mundo entende.',
         },
       ],
     },
@@ -216,12 +239,12 @@ const ptBR: CopyTree = {
           text: 'Cada regra cita `[caminho:linha @hash]` e a conexão docs ↔ código é verificável por máquina.',
         },
         {
-          title: 'O kit é o árbitro',
+          title: 'O Golmet é o árbitro',
           text: 'Um binário determinístico valida estados e evidência. A verdade não depende só do prompt.',
         },
       ],
       underTheHood:
-        'Sob o capô vivem o FORMATO (o contrato), o KIT (o motor determinístico) e o RUNTIME (a camada agêntica). Detalhes na documentação.',
+        'Sob o capô vivem o FORMATO, o contrato que define o projeto, o programa determinístico que confere tudo e a camada de inteligência artificial que executa o processo. Detalhes na documentação.',
     },
     journey: {
       heading: 'Sua jornada com o GOLMET',
@@ -256,7 +279,7 @@ const ptBR: CopyTree = {
         {
           question: 'Precisa de LLM ou API paga?',
           answer:
-            'Não. O kit é um binário determinístico que valida, indexa e confere evidência sem LLM. ' +
+            'Não. O Golmet é um programa determinístico que valida o projeto e confere a documentação contra o código. O julgamento é da máquina, não de um modelo de linguagem. ' +
             'O julgamento agêntico usa o engine que você já tem.',
         },
         {
@@ -316,11 +339,13 @@ const en: CopyTree = {
   landing: {
     hero: {
       titleLead: 'No more stale documentation.',
+      titleFollow: 'Everything your project needs, in one place.',
       sub:
-        'A business rule without evidence is an opinion. In GOLMET, every rule points to the file, ' +
-        'the line and the hash of the code that implements it. If the code moves and the rule falls ' +
-        'behind, validate flags it before merge. Documentation stops being memory and becomes ' +
-        'verifiable fact.',
+        'GOLMET brings your product\'s entire development into a single flow. The artificial ' +
+        'intelligence gathers requirements directly with the client, writes analysis people ' +
+        'actually understand, creates the tasks and programs under the project rules. On every ' +
+        'change, it checks each rule against the code before it reaches production. Other tools ' +
+        'help you write code. GOLMET guarantees what was written.',
       quickstart: {
         heading: 'How to start',
         badge: `v${CLI_VERSION}`,
@@ -356,37 +381,60 @@ const en: CopyTree = {
     },
     demo: {
       heading: "What you'll see in your terminal",
-      done: 'Between status and validate, someone created the first feature with the wrong anchor. The kit caught it instantly. On your machine, the commands behave the same.',
+      done: 'Between status and validate, someone created the first feature with the wrong anchor. GOLMET caught it instantly. On your machine, the commands behave the same.',
     },
-    scenes: {
-      heading: 'The scene you know and the command that fixes it',
-      note: 'Every scene ends with a real kit command. No promises that don\'t run.',
-      docLink: 'all 18 commands in the docs →',
-      docPath: '/docs/reference/commands',
+    tech: {
+      heading: 'How does GOLMET do all of this?',
+      text: [
+        'GOLMET is a native program that runs on your machine, right next to your code. Inside it live three layers. FORMAT v1 is the GOLMET specification that defines how the project must be organized, in markdown files, with states and transitions for every document and the quality gates everything must pass. The KIT is the deterministic engine that validates this specification. And the RUNTIME is where the artificial intelligence executes the process.',
+        'The writing follows principles of applied linguistics and reading neuroscience. Every document controls cognitive load, progresses from simple to complex and keeps terminology consistent. Everything is clear on the first read, for anyone on the team.',
+        'Every business rule carries the evidence of the code implementing it, with file, line and cryptographic hash. On every validation, GOLMET compares that fingerprint with the current code. If it drifts, the problem shows up before entering the project, never after.',
+        'The gm-* skills were built studying the workflows of reference companies and the best practices in the market, refined version after version. They guide your AI agent, step by step, from gathering requirements to reviewing code, through open standards like AGENTS.md and MCP.',
+        'And the quality gates H1 through H10 are the rules of that check. The concept comes from DevOps practice, where a quality gate is an automated check that must pass before the code moves forward. GOLMET applied the same idea to documentation. Each gate examines one type of inconsistency between documentation and code, like a rule without an owner or a broken reference. A failure blocks progress. What used to be discovered in production now shows up on the analyst screen. And the project grows without losing control, everything running offline on your machine.',
+      ],
+    },
+    benefits: {
+      heading: 'See everything GOLMET offers',
       items: [
         {
-          pain: 'The conversation stayed in the past',
-          outcome: 'The confirmed agreement stays versioned, with charter, RNs and specs in one workspace.',
-          command: 'golmet init YourProductName',
-          chips: ['charter', 'RNs', 'workspace'],
+          title: 'Requirements organized and versioned',
+          text: 'Every product requirement is documented in the project, with an owner, its current state and the full change history. Nothing enters development without approval.',
         },
         {
-          pain: 'The docs rotted',
-          outcome: 'Code moved and docs fell behind? The state dashboard points to what went stale.',
-          command: 'golmet status',
-          chips: ['drift', 'states', 'evidence'],
+          title: 'Functional analysis, technical analysis and tasks generated by the AI',
+          text: 'The AI turns every approved requirement into functional analysis, technical analysis, data model, API contracts and tasks with clear acceptance criteria. The team reviews and approves.',
         },
         {
-          pain: 'Scope nobody can prove',
-          outcome: 'Every rule cites the snippet that implements it, machine-verifiable in `[path:line @hash]` format.',
-          command: 'golmet validate',
-          chips: ['H1–H10', 'suggested fix'],
+          title: 'The AI programs within the project rules',
+          text: 'Before writing any code, the agent reads the versioned business rules. The result is what was agreed, not what it guessed.',
         },
         {
-          pain: 'So what\'s missing now?',
-          outcome: 'No guessing. The kit recommends the next action on the workspace.',
-          command: 'golmet next',
-          chips: ['recommendation', 'real state'],
+          title: 'Nothing enters the project unchecked',
+          text: 'When the code is done, GOLMET checks that every requirement was fulfilled. Whatever diverges is flagged before entering the project.',
+        },
+        {
+          title: 'Documents for the AI and documents for people',
+          text: 'GOLMET keeps the two worlds apart. Working documents stay in the format the machine understands, and reading documents are written for people, with a linguistics layer that studies how humans read and comprehend. The result is fluid, easy, clear reading with no information overload.',
+        },
+        {
+          title: 'Knowledge is not trapped in whoever wrote it',
+          text: 'Every rule and every decision of the product is documented next to the code. Whoever comes later understands what was done and why, without having to find the person who did it.',
+        },
+        {
+          title: 'New developer productive in minutes',
+          text: 'Whoever arrives clones the project and runs doctor. The command checks whether GOLMET is installed and configured correctly, points out what is missing and shows how to fix it.',
+        },
+        {
+          title: 'The next action always by priority',
+          text: 'When nobody knows where to start, the command analyzes every project document and shows, in priority order, what needs to be done first.',
+        },
+        {
+          title: 'Database aligned with the project',
+          text: 'When someone changes the database, that change is recorded in files called migrations. GOLMET compares those migrations with the data model documented in the project and points out any difference before it becomes a production incident.',
+        },
+        {
+          title: 'Legacy systems stop being a black box',
+          text: 'GOLMET reads the existing code and surfaces the business rules hidden in it, each one with its file and line. You confirm what is true, and the team moves forward on a base everyone understands.',
         },
       ],
     },
@@ -406,12 +454,12 @@ const en: CopyTree = {
           text: 'Every rule cites `[path:line @hash]`, so the docs ↔ code connection is machine-verifiable.',
         },
         {
-          title: 'The kit is the arbiter',
+          title: 'GOLMET is the arbiter',
           text: "A deterministic binary validates states and evidence. Truth doesn't depend on the prompt alone.",
         },
       ],
       underTheHood:
-        'Under the hood live the FORMAT (the contract), the KIT (the deterministic engine) and the RUNTIME (the agentic layer). Details in the docs.',
+        'Under the hood live the FORMAT, the contract that defines the project, the deterministic program that checks everything and the artificial intelligence layer that runs the process. Details in the docs.',
     },
     journey: {
       heading: 'Your GOLMET journey',
@@ -446,7 +494,7 @@ const en: CopyTree = {
         {
           question: 'Does it need an LLM or a paid API?',
           answer:
-            'No. The kit is a deterministic binary that validates, indexes and checks evidence without an LLM. ' +
+            'No. GOLMET is a deterministic program that validates the project and checks documentation against the code. The judgment is made by the machine, not by a language model. ' +
             'The agentic judgment uses the engine you already have.',
         },
         {

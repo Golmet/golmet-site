@@ -6,7 +6,7 @@
   display: grid;
   gap: var(--gm-space-2);
   margin: 0 auto;
-  max-width: 1120px;
+  max-width: var(--gm-container-max);
   padding: var(--gm-space-4) var(--gm-space-3) var(--gm-space-4);
   width: 100%;
 }
@@ -59,6 +59,7 @@
 }
 
 .gm-hero h1 {
+  color: var(--gm-text);
   font-size: clamp(2.4rem, 6vw, 3.6rem);
   letter-spacing: 0.02em;
   line-height: 1.12;
@@ -89,7 +90,10 @@
   border-radius: var(--gm-radius);
   filter: drop-shadow(0 16px 36px rgba(255, 107, 53, 0.22));
   height: auto;
-  width: clamp(200px, 26vw, 300px);
+  justify-self: center;
+  max-height: 320px;
+  object-fit: contain;
+  width: auto;
 }
 
 // Desktop (≥900px): texto à esquerda, Arki à direita, stats banda larga.
@@ -109,8 +113,13 @@
     justify-content: flex-start;
   }
 
+  // O mascote acompanha a altura do bloco de texto (título + descrição),
+  // com teto para não crescer demais em monitores grandes.
   .gm-hero-arki {
-    justify-self: center;
+    align-self: stretch;
+    height: 100%;
+    max-height: 440px;
+    padding: 12px 0;
   }
 }
 
@@ -329,73 +338,63 @@
   margin: 12px 0 0;
 }
 
-// ── Cenas: dor → comando ────────────────────────────────────────
+// ── Benefícios: simples, direto, limpo ──────────────────────────
 
-.gm-scene-grid {
+.gm-landing .gm-benefits-title {
+  color: var(--gm-text);
+  font-size: clamp(1.7rem, 3.5vw, 2.3rem);
+  line-height: 1.25;
+  margin: 0 auto var(--gm-space-3);
+  max-width: 50rem;
+  text-align: center;
+}
+
+.gm-benefit-grid {
   display: grid;
-  gap: var(--gm-space-2);
+  gap: var(--gm-space-3) var(--gm-space-3);
   grid-template-columns: 1fr;
 }
 
 @media (min-width: 900px) {
-  .gm-scene-grid {
+  .gm-benefit-grid {
     grid-template-columns: repeat(2, 1fr);
   }
 }
 
-.gm-scene {
-  background: var(--gm-surface);
-  border: 1px solid var(--gm-border);
-  border-radius: var(--gm-radius);
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-  padding: 1.5rem;
+.gm-benefit {
+  padding-left: 34px;
+  position: relative;
 }
 
-.gm-scene-pain {
-  color: var(--gm-amber);
-  font-size: 1rem;
+.gm-benefit::before {
+  color: var(--gm-success);
+  content: '✓';
+  font-weight: 700;
+  left: 0;
+  position: absolute;
+}
+
+.gm-benefit-title {
+  color: var(--gm-text);
+  font-size: 1.05rem;
   font-weight: 600;
-  line-height: 1.35;
   margin: 0;
 }
 
-.gm-scene-outcome {
-  color: var(--gm-text);
+.gm-benefit-text {
+  color: var(--gm-text-muted);
   font-size: 0.9rem;
   line-height: 1.6;
-  margin: 0;
+  margin: 4px 0 0;
 }
 
-.gm-scene-command {
-  align-self: flex-start;
-  background: var(--gm-code-bg);
-  border: 1px solid var(--gm-border);
-  border-radius: 6px;
-  color: var(--gm-amber);
-  font-size: 0.85rem;
-  padding: 5px 12px;
-}
+// ── Tecnico: título + texto corrido ─────────────────────────────
 
-.gm-scene-chips {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 6px;
-}
-
-.gm-scene-chip {
-  border: 1px solid var(--gm-border);
-  border-radius: 999px;
+.gm-tech-text {
   color: var(--gm-text-muted);
-  font-size: 0.72rem;
-  padding: 2px 10px;
-}
-
-.gm-scenes-doc-link {
-  color: var(--gm-amber);
-  font-size: 0.9rem;
-  margin-top: var(--gm-space-2);
+  font-size: 1rem;
+  line-height: 1.8;
+  margin: 0 0 var(--gm-space-2);
 }
 
 // ── Engines ─────────────────────────────────────────────────────

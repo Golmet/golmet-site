@@ -3,7 +3,7 @@
   <!-- HERO: headline com apelo + Arki + stats reais + ação primária -->
   <section class="gm-hero">
     <div class="gm-hero-copy">
-      <h1 class="gm-hl">{{ copy.titleLead }}</h1>
+      <h1><span class="gm-hl">{{ copy.titleLead }}</span> {{ copy.titleFollow }}</h1>
       <p class="gm-sub">{{ copy.sub }}</p>
       <div class="gm-hero-actions">
         <a
@@ -42,6 +42,27 @@
     </dl>
   </section>
 
+  <!-- BENEFÍCIOS: simples, direto, limpo -->
+  <section class="gm-benefits" aria-label="O que o Golmet resolve">
+    <h2 class="gm-benefits-title">{{ benefits.heading }}</h2>
+    <div class="gm-benefit-grid">
+      @for (item of benefits.items; track item.title) {
+        <div class="gm-benefit">
+          <p class="gm-benefit-title">{{ item.title }}</p>
+          <p class="gm-benefit-text">{{ item.text }}</p>
+        </div>
+      }
+    </div>
+  </section>
+
+  <!-- TECNICO: como funciona por dentro, para quem já se convenceu -->
+  <section class="gm-tech" aria-label="Como o Golmet funciona por dentro">
+    <h2 class="gm-benefits-title">{{ tech.heading }}</h2>
+    @for (paragraph of tech.text; track $index) {
+      <p class="gm-tech-text">{{ paragraph }}</p>
+    }
+  </section>
+
   <!-- Quickstart: os comandos copiáveis na primeira dobra -->
   <section class="gm-quickstart" aria-label="Quickstart">
     <div class="gm-quickstart-head">
@@ -77,27 +98,6 @@
     <h2>{{ demo.heading }}</h2>
     <app-terminal />
     <p class="gm-demo-done">{{ demo.done }}</p>
-  </section>
-
-  <!-- CENAS: dor conhecida → comando real que resolve -->
-  <section class="gm-scenes" aria-label="Cenas e comandos">
-    <h2>{{ scenes.heading }}</h2>
-    <p class="gm-section-note">{{ scenes.note }}</p>
-    <div class="gm-scene-grid">
-      @for (scene of scenes.items; track scene.pain) {
-        <article class="gm-scene">
-          <p class="gm-scene-pain">{{ scene.pain }}</p>
-          <p class="gm-scene-outcome">{{ scene.outcome }}</p>
-          <code class="gm-scene-command">{{ scene.command }}</code>
-          <div class="gm-scene-chips">
-            @for (chip of scene.chips; track chip) {
-              <span class="gm-scene-chip">{{ chip }}</span>
-            }
-          </div>
-        </article>
-      }
-    </div>
-    <a class="gm-scenes-doc-link" [routerLink]="scenes.docPath">{{ scenes.docLink }}</a>
   </section>
 
   <!-- ENGINES: credibilidade no meio da página -->

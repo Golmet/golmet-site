@@ -111,19 +111,44 @@ describe('Landing — conceito mostra, não conta (RN-001-1)', () => {
     expect(compiled.textContent).not.toContain('golmet version v1.7.4');
   });
 
-  it('cenas dor→comando: 4 cards, só comandos lançados + link para os 18', () => {
+  it('tecnico: título + texto corrido explicando as camadas', () => {
     const fixture = TestBed.createComponent(Landing);
     fixture.detectChanges();
     const compiled = fixture.nativeElement as HTMLElement;
 
-    const scenes = compiled.querySelectorAll('.gm-scene');
-    expect(scenes.length).toBe(4);
-    expect(compiled.querySelectorAll('.gm-scene-command').length).toBe(4);
+    const text = Array.from(compiled.querySelectorAll('.gm-tech-text'))
+      .map((el) => el.textContent)
+      .join(' ');
+    expect(text).toContain('three layers');
+    expect(text).toContain('controls cognitive load');
+    expect(text).toContain('cryptographic hash');
+    expect(text).toContain('AGENTS.md and MCP');
+    expect(text).toContain('grows without losing control');
+    // técnico vem DEPOIS dos benefícios (convence primeiro, explica depois)
+    const order = compiled
+      .querySelector('.gm-benefits')!
+      .compareDocumentPosition(compiled.querySelector('.gm-tech')!);
+    expect(!!(order & Node.DOCUMENT_POSITION_FOLLOWING)).toBeTruthy();
+  });
+
+  it('benefícios: simples, direto, limpo, antes do Como começar', () => {
+    const fixture = TestBed.createComponent(Landing);
+    fixture.detectChanges();
+    const compiled = fixture.nativeElement as HTMLElement;
+
+    // 10 motivos, cada um com título e uma linha de explicação
+    expect(compiled.querySelectorAll('.gm-benefit').length).toBe(10);
+    expect(compiled.querySelectorAll('.gm-benefit-title').length).toBe(10);
+    expect(compiled.textContent).toContain('See everything GOLMET offers');
+    expect(compiled.textContent).toContain('Requirements organized and versioned');
+    expect(compiled.textContent).toContain('Legacy systems stop being a black box');
+    // a transformação vem ANTES do guia — o visitante sabe o que ganha antes de agir
+    const order = compiled
+      .querySelector('.gm-benefits')!
+      .compareDocumentPosition(compiled.querySelector('.gm-quickstart')!);
+    expect(!!(order & Node.DOCUMENT_POSITION_FOLLOWING)).toBeTruthy();
     // comando não lançado não aparece (ex.: golmet contribute — v1+)
     expect(compiled.textContent).not.toContain('golmet contribute');
-    const docLink = compiled.querySelector<HTMLAnchorElement>('.gm-scenes-doc-link');
-    expect(docLink?.getAttribute('href')).toBe('/docs/reference/commands');
-    expect(docLink?.textContent).toContain('all 18 commands');
   });
 
   it('engines nomeados no meio da página (7 chips) + diferenciação com 3 itens', () => {

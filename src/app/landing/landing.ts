@@ -24,7 +24,8 @@ export class Landing {
   protected readonly copy = COPY[this.locale].landing.hero;
   protected readonly quickstart = COPY[this.locale].landing.hero.quickstart;
   protected readonly demo = COPY[this.locale].landing.demo;
-  protected readonly scenes = COPY[this.locale].landing.scenes;
+  protected readonly benefits = COPY[this.locale].landing.benefits;
+  protected readonly tech = COPY[this.locale].landing.tech;
   protected readonly engines = COPY[this.locale].landing.engines;
   protected readonly differentiation = COPY[this.locale].landing.differentiation;
   protected readonly journey = COPY[this.locale].landing.journey;
