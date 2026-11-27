@@ -16,9 +16,11 @@
 }
 
 // Ritmo vertical: hero + quickstart colados (protege a dobra <=720px, M-06);
-// os demais blocos ganham 48px de respiro.
+// os demais blocos ganham respiro médio (decisão do operador 27/11/2026):
+// clamp(56px..80px) de margem + 16px de gap do grid = ~72px mobile / ~96px
+// desktop entre seções.
 .gm-landing > section:not(.gm-hero):not(.gm-quickstart) {
-  margin-top: var(--gm-space-4);
+  margin-top: clamp(3.5rem, 5vw, 5rem);
 }
 
 .gm-landing h2 {
