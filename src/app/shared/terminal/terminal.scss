@@ -79,3 +79,67 @@
   display: block;
   height: 0.6em;
 }
+
+.gm-t-idle {
+  color: var(--gm-text-muted);
+}
+
+// ── Passos clicáveis (saída real, revelada em ordem) ────────────
+
+.gm-terminal-steps {
+  align-items: center;
+  border-top: 1px solid var(--gm-border);
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  padding: 10px 12px;
+}
+
+.gm-term-step {
+  background: var(--gm-code-chip);
+  border: 1px solid var(--gm-border);
+  border-radius: 6px;
+  color: var(--gm-text);
+  cursor: pointer;
+  font-size: 0.8rem;
+  padding: 6px 12px;
+}
+
+.gm-term-step:hover:not(:disabled) {
+  border-color: var(--gm-ouro);
+  color: var(--gm-ouro);
+}
+
+.gm-term-step-done {
+  border-color: rgba(232, 180, 74, 0.4);
+  color: var(--gm-ouro);
+}
+
+.gm-term-step-done .gm-term-step-cmd::before {
+  color: var(--gm-success);
+  content: '✓ ';
+}
+
+.gm-term-step:disabled {
+  cursor: default;
+  opacity: 0.45;
+}
+
+.gm-term-step:not(:disabled):not(.gm-term-step-done) {
+  border-color: var(--gm-amber);
+  color: var(--gm-amber);
+}
+
+.gm-term-reset {
+  background: none;
+  border: 1px solid var(--gm-border);
+  border-radius: 6px;
+  color: var(--gm-text-muted);
+  cursor: pointer;
+  font-size: 0.9rem;
+  padding: 5px 10px;
+}
+
+.gm-term-reset:hover {
+  color: var(--gm-text);
+}
