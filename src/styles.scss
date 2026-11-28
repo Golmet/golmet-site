@@ -22,7 +22,9 @@
   --gm-radius: 8px;
 
   // Tipografia — escala única de h2 (auditoria M-03)
-  --gm-h2: clamp(1.15rem, 2.4vw, 1.35rem);
+  // Escala tipográfica equilibrada (feedback do operador 27/11/2026):
+  // H2 sobe para fechar o salto vs H1 (2.7× → 1.9×)
+  --gm-h2: clamp(1.3rem, 2.6vw, 1.55rem);
 
   // Código e terminal (auditoria M-04 — cores fora de tokens)
   --gm-code-bg: #0f1114;

@@ -6,20 +6,18 @@
       <h1><span class="gm-hl">{{ copy.titleLead }}</span> {{ copy.titleFollow }}</h1>
       <p class="gm-sub">{{ copy.sub }}</p>
       <div class="gm-hero-actions">
-        <a
-          class="gm-cta gm-cta-primary"
-          href="https://github.com/Golmet/golmet-cli"
-          target="_blank"
-          rel="noopener"
-          >{{ ctas.github }}</a
-        >
-        <a
-          class="gm-cta"
-          href="https://www.npmjs.com/package/golmet-cli"
-          target="_blank"
-          rel="noopener"
-          >{{ ctas.npm }}</a
-        >
+        <div class="gm-install-block">
+          <code class="gm-install-command">{{ copy.install.command }}</code>
+          <button
+            type="button"
+            class="gm-install-copy"
+            (click)="copyStep({ title: 'hero', command: copy.install.command })"
+            [attr.aria-label]="'Copiar ' + copy.install.command"
+          >
+            {{ copiedStep() === 'hero' ? ctas.copied : ctas.copy }}
+          </button>
+        </div>
+        <a class="gm-cta" href="https://github.com/Golmet/golmet-cli" target="_blank" rel="noopener">{{ ctas.github }}</a>
       </div>
     </div>
     <img
@@ -56,41 +54,42 @@
   </section>
 
   <!-- TECNICO: como funciona por dentro, para quem já se convenceu -->
+  <!-- Grid plano: [card | texto] e [seta | vazio] alternados — a seta é uma
+       linha própria de altura fixa, centrada no vão entre os cards. -->
   <section class="gm-tech" aria-label="Como o Golmet funciona por dentro">
-    <h2 class="gm-benefits-title">{{ tech.heading }}</h2>
-    @for (paragraph of tech.text; track $index) {
-      <p class="gm-tech-text">{{ paragraph }}</p>
-    }
-  </section>
-
-  <!-- Quickstart: os comandos copiáveis na primeira dobra -->
-  <section class="gm-quickstart" aria-label="Quickstart">
-    <div class="gm-quickstart-head">
-      <h2>{{ quickstart.heading }}</h2>
-      <span class="gm-badge">{{ quickstart.badge }}</span>
-    </div>
-    <ol class="gm-steps">
-      @for (step of quickstart.steps; track step.title; let i = $index) {
-        <li class="gm-step">
-          <span class="gm-step-number">0{{ i + 1 }}</span>
-          <p class="gm-step-title">{{ step.title }}</p>
-          @if (step.command) {
-            <div class="gm-command-row">
-              <code class="gm-step-command">{{ step.command }}</code>
-              <button
-                type="button"
-                class="gm-copy"
-                (click)="copyStep(step)"
-                [attr.aria-label]="'Copiar ' + step.command"
-              >
-                {{ copiedStep() === step.title ? 'Copiado' : 'Copiar' }}
-              </button>
-            </div>
-          }
-          <p class="gm-step-text">{{ step.text }}</p>
-        </li>
+    <h2 class="gm-tech-heading">{{ tech.heading }}</h2>
+    <div class="gm-tech-stack">
+      @for (layer of tech.layers; track layer.name; let i = $index) {
+        <div class="gm-tech-layer">
+          <span class="gm-tech-layer-name">{{ layer.name }}</span>
+          <span class="gm-tech-layer-role">{{ layer.role }}</span>
+        </div>
+        <p class="gm-tech-text">{{ layer.text }}</p>
+        @if (i < tech.arrows.length) {
+          <div class="gm-tech-arrow" aria-hidden="true">
+            <span class="gm-tech-arrow-glyph">▼</span>
+            <span class="gm-tech-arrow-label">{{ tech.arrows[i].text }}</span>
+            @if (tech.arrows[i].code) {
+              <span class="gm-tech-arrow-sep">·</span>
+              <code class="gm-tech-arrow-code">{{ tech.arrows[i].code }}</code>
+            }
+          </div>
+        }
       }
-    </ol>
+    </div>
+    <p class="gm-tech-evidence-tag">{{ tech.evidence.tag }}</p>
+    <div class="gm-tech-evidence">
+      <code class="gm-tech-evidence-line">{{ tech.evidence.line }}</code>
+      <p class="gm-tech-evidence-drift">
+        <span class="gm-tech-evidence-drift-path">{{ tech.evidence.drift }}</span>
+        <span class="gm-tech-evidence-drift-verdict">{{ tech.evidence.verdict }}</span>
+      </p>
+      <p class="gm-tech-evidence-caption">
+        {{ tech.evidence.caption }}
+        <code class="gm-tech-evidence-code">{{ tech.evidence.captionCode }}</code>
+        {{ tech.evidence.captionTail }}
+      </p>
+    </div>
   </section>
 
   <!-- DEMO: o visitante RODA os comandos e vê a saída real -->
@@ -129,13 +128,23 @@
     <h2>{{ journey.heading }}</h2>
     <p class="gm-section-note">{{ journey.note }}</p>
     <div class="gm-track-grid">
-      @for (track of journey.tracks; track track.title) {
+      @for (track of journey.tracks; track track.title; let i = $index) {
         <article class="gm-track">
-          <h3>{{ track.title }}</h3>
+          <div class="gm-track-head">
+            <h3>{{ track.title }}</h3>
+            @if (i === 0) {
+              <span class="gm-badge">{{ journey.badge }}</span>
+            }
+          </div>
           <p class="gm-track-tagline">{{ track.tagline }}</p>
           <ol class="gm-track-steps">
-            @for (step of track.steps; track step) {
-              <li>{{ step }}</li>
+            @for (step of track.steps; track step.command) {
+              <li>
+                <code class="gm-track-cmd">{{ step.command }}</code>
+                @if (step.desc) {
+                  <span class="gm-track-step-desc">{{ step.desc }}</span>
+                }
+              </li>
             }
           </ol>
           <a class="gm-track-link" [routerLink]="track.docPath">{{ track.docLabel }}</a>
@@ -161,17 +170,16 @@
   <section class="gm-final-cta" aria-label="Comece hoje">
     <h2>{{ finalCta.heading }}</h2>
     <p>{{ finalCta.text }}</p>
-    <div class="gm-final-command">
-      <code>{{ finalCta.command }}</code>
-      <button type="button" class="gm-copy" (click)="copyStep({ title: 'final', command: finalCta.command })" aria-label="Copiar comando de instalação">
-        {{ copiedStep() === 'final' ? 'Copiado' : 'Copiar' }}
-      </button>
+    <div class="gm-final-actions">
+      <div class="gm-install-block">
+        <code class="gm-install-command">{{ finalCta.command }}</code>
+        <button type="button" class="gm-install-copy" (click)="copyStep({ title: 'final', command: finalCta.command })" aria-label="Copiar comando de instalação">
+          {{ copiedStep() === 'final' ? ctas.copied : ctas.copy }}
+        </button>
+      </div>
+      <a class="gm-cta" href="https://github.com/Golmet/golmet-cli" target="_blank" rel="noopener">{{ ctas.github }}</a>
     </div>
-    <p class="gm-prelaunch">{{ finalCta.preLaunch }}</p>
-    <div class="gm-ctas">
-      <a class="gm-cta gm-cta-primary" href="https://github.com/Golmet/golmet-cli" target="_blank" rel="noopener">{{ ctas.github }}</a>
-      <a class="gm-cta" href="https://www.npmjs.com/package/golmet-cli" target="_blank" rel="noopener">{{ ctas.npm }}</a>
-    </div>
+    <p class="gm-prelaunch">{{ finalCta.release }}</p>
   </section>
 </div>
 </main>

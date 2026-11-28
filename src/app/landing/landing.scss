@@ -23,6 +23,16 @@
   margin-top: clamp(3.5rem, 5vw, 5rem);
 }
 
+// A lista de funcionalidades aparece mais cedo na dobra em desktop:
+// margem 72→48px (+ 16px de gap do grid = ~64px depois da faixa de números).
+// Mobile mantém o ritmo clamp (feedback do operador 28/11/2026).
+@media (min-width: 900px) {
+  // Especificidade ≥ da regra genérica (:not dupla = 0,3,0)
+  .gm-landing > section:not(.gm-hero):not(.gm-quickstart).gm-benefits {
+    margin-top: 48px;
+  }
+}
+
 .gm-landing h2 {
   color: var(--gm-text);
   font-size: var(--gm-h2);
@@ -62,10 +72,16 @@
 
 .gm-hero h1 {
   color: var(--gm-text);
-  font-size: clamp(2.4rem, 6vw, 3.6rem);
+  // Escala equilibrada (27/11/2026): H1 desce de 57.6px p/ até 48px —
+  // o salto H1→H2 pesava mais que a identidade da marca ganhava.
+  // Escala equilibrada + balance: em ~44px o H1 fecha em 2 linhas exatas
+  // na coluna do hero ("Requisitos versionados." / "Docs que não apodrecem.")
+  font-size: clamp(2.2rem, 4.2vw, 2.75rem);
   letter-spacing: 0.02em;
   line-height: 1.12;
   margin: 18px 0 0;
+  // Sem palavra órfã (feedback do operador 28/11/2026)
+  text-wrap: balance;
 }
 
 .gm-hl {
@@ -74,10 +90,11 @@
 
 .gm-sub {
   color: var(--gm-text-muted);
-  font-size: clamp(1rem, 2vw, 1.15rem);
+  // Um passo abaixo do anterior + ~60 chars/linha (≤3 linhas em 1440px)
+  font-size: clamp(1rem, 1.6vw, 1.1rem);
   line-height: 1.6;
   margin: 16px 0 0;
-  max-width: 42rem;
+  max-width: 34rem;
 }
 
 .gm-hero-actions {
@@ -86,6 +103,13 @@
   gap: var(--gm-space-2);
   justify-content: center;
   margin-top: 24px;
+}
+
+// "Ver no GitHub" na mesma altura do bloco de instalação (46px)
+.gm-hero-actions .gm-cta {
+  display: inline-flex;
+  align-items: center;
+  height: 46px;
 }
 
 .gm-hero-arki {
@@ -116,7 +140,9 @@
   }
 
   // O mascote acompanha a altura do bloco de texto (título + descrição),
-  // com teto para não crescer demais em monitores grandes.
+  // com teto para não crescer demais em monitores grandes. 440px = presença
+  // máxima (decisão do operador 28/11/2026 — o vão pós-ações volta a ~109px,
+  // tradeoff aceito: ela é o melhor ativo visual da página).
   .gm-hero-arki {
     align-self: stretch;
     height: 100%;
@@ -163,7 +189,7 @@
 
 .gm-stat-label {
   color: var(--gm-text-muted);
-  font-size: 0.78rem;
+  font-size: 0.85rem;
   margin: 2px 0 0;
 }
 
@@ -174,9 +200,14 @@
     padding-right: 20px;
   }
 
+  .gm-install-block {
+    width: 100%;
+  }
+
   .gm-hero-actions .gm-cta {
-    font-size: 0.92rem;
-    padding: 11px 16px;
+    display: flex;
+    justify-content: center;
+    width: 100%;
   }
 }
 
@@ -232,30 +263,79 @@
   color: var(--gm-ouro);
 }
 
-// ── Quickstart (painel de comandos copiáveis) ───────────────────
+// ── Bloco de comando copiável (hero + CTA final) ────────────────
+// O comando com botão Copiar existe SÓ aqui; nas trilhas e no terminal
+// ele é conteúdo, não botão (consolidação de CTAs, 27/11/2026).
 
-.gm-quickstart {
-  background: var(--gm-surface);
+// ── Bloco de instalação (HERO + CTA FINAL — mesmo componente visual) ──
+// Contêiner único: borda + raio + overflow aqui; filhos esticam na altura
+// fixa de 46px (igual ao .gm-cta ao lado). Nada de absoluto/margem negativa.
+
+.gm-install-block {
+  align-items: stretch;
+  background: var(--gm-code-bg);
   border: 1px solid var(--gm-border);
-  border-left: 3px solid var(--gm-ouro);
   border-radius: var(--gm-radius);
-  margin-top: 40px;
-  padding: 20px;
-}
-
-.gm-quickstart-head {
-  align-items: center;
   display: flex;
-  gap: var(--gm-space-2);
-  margin-bottom: var(--gm-space-1);
+  height: 46px;
+  min-width: 0;
+  overflow: hidden;
 }
 
-.gm-quickstart-head h2 {
-  color: var(--gm-ouro);
-  font-size: 1rem;
-  letter-spacing: 0.06em;
-  margin: 0;
-  text-transform: uppercase;
+.gm-install-command {
+  align-items: center;
+  background: none;
+  border: none;
+  border-radius: 0;
+  color: var(--gm-amber);
+  display: flex;
+  flex: 1;
+  font-size: 0.92rem;
+  min-width: 0;
+  overflow-x: auto;
+  padding: 0 16px;
+  white-space: nowrap;
+}
+
+// Copiar = CTA PRIMÁRIO: dourado preenchido, esticado na altura do contêiner
+// (sem pílula), sem borda própria — o raio vem do overflow hidden.
+// min-width reserva "Copiado" para o layout não pular na troca do rótulo.
+.gm-install-copy {
+  background: var(--gm-ouro);
+  border: none;
+  border-radius: 0;
+  color: var(--gm-obsidiana);
+  font-size: 15px; // peso de CTA primário (feedback 28/11/2026)
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 600;
+  min-width: 96px;
+  padding: 0 18px;
+}
+
+.gm-install-copy:hover {
+  background: #f0c262;
+  color: var(--gm-obsidiana);
+}
+
+// Foco por teclado: dourado some sobre o botão dourado — usa o claro do tema.
+.gm-install-copy:focus-visible {
+  outline: 2px solid var(--gm-text);
+  outline-offset: 2px;
+}
+
+.gm-step-command {
+  background: var(--gm-code-bg);
+  border: 1px solid var(--gm-border);
+  border-radius: 6px 0 0 6px;
+  color: var(--gm-amber);
+  flex: 1;
+  font-size: 0.92rem;
+  min-width: 0;
+  overflow-x: auto;
+  padding: 7px 12px;
+  white-space: nowrap;
 }
 
 .gm-badge {
@@ -269,74 +349,11 @@
   text-transform: uppercase;
 }
 
-.gm-steps {
-  display: grid;
-  gap: var(--gm-space-1);
-  grid-template-columns: minmax(0, 1fr);
-  list-style: none;
-  margin: 0;
-  padding: 20px 0 0;
-}
-
-@media (min-width: 900px) {
-  .gm-steps {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-  }
-}
-
-.gm-step {
-  background: var(--gm-obsidiana);
-  border: 1px solid var(--gm-border);
-  border-radius: var(--gm-radius);
-  display: flex;
-  flex-direction: column;
-  gap: 4px;
-  padding: 10px 14px;
-}
-
-.gm-step-number {
-  color: var(--gm-ouro);
-  font-size: 0.75rem;
-  font-weight: 700;
-  letter-spacing: 0.08em;
-}
-
-.gm-step-title {
-  color: var(--gm-text);
-  font-size: 0.9rem;
-  font-weight: 600;
-  margin: 0;
-}
-
-.gm-command-row {
-  align-items: stretch;
-  display: flex;
-}
-
-.gm-step-command {
-  background: var(--gm-code-bg);
-  border: 1px solid var(--gm-border);
-  border-radius: 6px 0 0 6px;
-  color: var(--gm-amber);
-  flex: 1;
-  font-size: 0.88rem;
-  min-width: 0;
-  overflow-x: auto;
-  padding: 7px 12px;
-  white-space: nowrap;
-}
-
-.gm-step-text {
-  color: var(--gm-text-muted);
-  font-size: 0.88rem;
-  margin: 0;
-}
-
 // ── Demo (terminal interativo) ──────────────────────────────────
 
 .gm-demo-done {
   color: var(--gm-text-muted);
-  font-size: 0.85rem;
+  font-size: 0.95rem;
   margin: 12px 0 0;
 }
 
@@ -344,11 +361,12 @@
 
 .gm-landing .gm-benefits-title {
   color: var(--gm-text);
-  font-size: clamp(1.7rem, 3.5vw, 2.3rem);
+  // Um passo abaixo do H1 (44px) para não competir com ele (28/11/2026) —
+  // .gm-tech-heading usa a mesma escala.
+  font-size: clamp(1.5rem, 2.8vw, 2rem);
   line-height: 1.25;
-  margin: 0 auto var(--gm-space-3);
-  max-width: 50rem;
-  text-align: center;
+  margin: 0 0 var(--gm-space-3);
+  text-align: left; // mesma borda das demais seções (27/11/2026)
 }
 
 .gm-benefit-grid {
@@ -369,7 +387,7 @@
 }
 
 .gm-benefit::before {
-  color: var(--gm-success);
+  color: var(--gm-ouro); // checks em dourado — o verde fica só no terminal
   content: '✓';
   font-weight: 700;
   left: 0;
@@ -385,18 +403,161 @@
 
 .gm-benefit-text {
   color: var(--gm-text-muted);
-  font-size: 0.9rem;
+  font-size: 0.95rem;
   line-height: 1.6;
   margin: 4px 0 0;
 }
 
-// ── Tecnico: título + texto corrido ─────────────────────────────
+// ── Tecnico: uma linha por camada (ajuste fino 27/11/2026) ──────
+// Mesmo contêiner das seções vizinhas (sem degrau de borda esquerda).
+// Grid plano [card | texto] + [seta | vazio]: a seta ocupa uma linha própria
+// de altura fixa → espaçamento uniforme entre os cards, seta centrada no vão
+// (a linha do KIT é mais alta e não puxa a seta de FORMATO). Rótulos ≥13px,
+// #b3b9c0 sobre obsidiana = 8.55:1; verdict ✗ em --gm-amber = 5.30:1 sobre
+// surface (medidos). Mobile <768px: coluna única.
+
+.gm-tech-heading {
+  color: var(--gm-text);
+  font-size: clamp(1.5rem, 2.8vw, 2rem); // mesma escala do benefits-title
+  line-height: 1.25;
+  margin: 0 0 var(--gm-space-3);
+  text-align: left;
+}
+
+.gm-tech-stack {
+  align-items: center;
+  display: grid;
+  grid-template-columns: minmax(0, 18rem) minmax(0, 1fr);
+  column-gap: var(--gm-space-3);
+}
+
+@media (max-width: 767px) {
+  .gm-tech-stack {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+.gm-tech-layer {
+  background: var(--gm-surface);
+  border: 1px solid var(--gm-border);
+  border-left: 3px solid var(--gm-ouro);
+  border-radius: var(--gm-radius);
+  display: grid;
+  gap: 2px;
+  padding: 10px 16px;
+}
+
+.gm-tech-layer-name {
+  color: var(--gm-ouro);
+  font-family: ui-monospace, 'Cascadia Code', Consolas, monospace;
+  font-size: 0.95rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+}
+
+.gm-tech-layer-role {
+  color: var(--gm-text-muted);
+  font-size: 0.95rem;
+  line-height: 1.6;
+}
 
 .gm-tech-text {
   color: var(--gm-text-muted);
   font-size: 1rem;
   line-height: 1.8;
-  margin: 0 0 var(--gm-space-2);
+  margin: 0;
+  max-width: 36rem;
+}
+
+// Linha da seta: altura fixa = vão uniforme entre os cards em qualquer
+// altura de texto; alinhamento central no espaço entre os dois cards.
+// Span total (1/-1): o rótulo nunca quebra linha e, no mobile de coluna
+// única, não cria coluna implícita.
+.gm-tech-arrow {
+  align-items: center;
+  column-gap: 8px;
+  display: flex;
+  grid-column: 1 / -1;
+  height: 56px;
+  padding-left: 16px;
+}
+
+.gm-tech-arrow-glyph {
+  color: var(--gm-ouro);
+  font-size: 0.8rem;
+  line-height: 1;
+}
+
+.gm-tech-arrow-label {
+  color: var(--gm-text-muted);
+  font-size: 0.92rem;
+}
+
+.gm-tech-arrow-code {
+  color: var(--gm-ouro);
+  font-family: ui-monospace, 'Cascadia Code', Consolas, monospace;
+  font-size: 0.92rem;
+}
+
+.gm-tech-arrow-sep {
+  color: var(--gm-text-muted);
+  font-size: 0.92rem;
+}
+
+// Evidência: a regra cita o código e o validate pega a divergência —
+// mostrar, não descrever. Mesmo card/borda dos outros blocos, sem animação.
+// Etiqueta liga o bloco ao KIT (é o KIT quem compara o hash) — mono dourado,
+// mesmo tamanho dos rótulos das setas.
+.gm-tech-evidence-tag {
+  color: var(--gm-ouro);
+  font-family: ui-monospace, 'Cascadia Code', Consolas, monospace;
+  font-size: 0.92rem;
+  margin: var(--gm-space-3) 0 6px;
+}
+
+.gm-tech-evidence {
+  background: var(--gm-surface);
+  border: 1px solid var(--gm-border);
+  border-radius: var(--gm-radius);
+  display: grid;
+  gap: 4px;
+  padding: 14px 16px;
+}
+
+.gm-tech-evidence-line {
+  color: var(--gm-ouro);
+  font-family: ui-monospace, 'Cascadia Code', Consolas, monospace;
+  font-size: 0.95rem;
+}
+
+.gm-tech-evidence-drift {
+  display: flex;
+  flex-wrap: wrap;
+  column-gap: 12px;
+  font-family: ui-monospace, 'Cascadia Code', Consolas, monospace;
+  font-size: 0.95rem;
+  margin: 0;
+}
+
+.gm-tech-evidence-drift-path {
+  color: var(--gm-text-muted);
+}
+
+.gm-tech-evidence-drift-verdict {
+  color: var(--gm-amber);
+}
+
+.gm-tech-evidence-caption {
+  color: var(--gm-text-muted);
+  font-size: 0.95rem;
+  line-height: 1.6;
+  margin: 6px 0 0; // + 4px do gap do grid = 10px de respiro pós-código
+}
+
+.gm-tech-evidence-code {
+  color: var(--gm-ouro);
+  font-family: ui-monospace, 'Cascadia Code', Consolas, monospace;
+  font-size: 0.9em; // não passa da altura da linha do texto ao redor
 }
 
 // ── Engines ─────────────────────────────────────────────────────
@@ -449,14 +610,14 @@
 
 .gm-diff-item p {
   color: var(--gm-text);
-  font-size: 0.9rem;
+  font-size: 0.95rem;
   margin: 0;
 }
 
 .gm-under-the-hood {
   border-top: 1px solid var(--gm-border);
   color: var(--gm-text-muted);
-  font-size: 0.85rem;
+  font-size: 0.95rem;
   line-height: 1.6;
   margin: var(--gm-space-2) 0 0;
   padding-top: var(--gm-space-2);
@@ -496,16 +657,22 @@
 
 .gm-track-tagline {
   color: var(--gm-text-muted);
-  font-size: 0.88rem;
+  font-size: 0.95rem;
   line-height: 1.55;
   margin: 0;
+}
+
+.gm-track-head {
+  align-items: center;
+  display: flex;
+  gap: var(--gm-space-2);
 }
 
 .gm-track-steps {
   color: var(--gm-text);
   display: grid;
   gap: 6px;
-  font-size: 0.88rem;
+  font-size: 0.92rem;
   list-style: none;
   margin: 0;
   padding: 0;
@@ -515,20 +682,33 @@
   background: var(--gm-code-bg);
   border: 1px solid var(--gm-border);
   border-radius: 6px;
+  display: grid;
+  padding: 6px 12px;
+}
+
+.gm-track-cmd {
   font-family: ui-monospace, 'Cascadia Code', 'Courier New', monospace;
   overflow-x: auto;
-  padding: 6px 12px;
   white-space: nowrap;
 }
 
-.gm-track-steps li::before {
+.gm-track-cmd::before {
   color: var(--gm-ouro);
   content: '❯ ';
 }
 
+// Descrição de uma linha (trilha "Testar hoje") — texto normal, não código.
+.gm-track-step-desc {
+  color: var(--gm-text-muted);
+  font-family: 'Archivo', system-ui, sans-serif;
+  font-size: 0.9rem;
+  line-height: 1.5;
+  margin-top: 2px;
+}
+
 .gm-track-link {
   color: var(--gm-amber);
-  font-size: 0.9rem;
+  font-size: 0.95rem;
   margin-top: auto;
 }
 
@@ -576,7 +756,7 @@
 
 .gm-faq-item p {
   color: var(--gm-text-muted);
-  font-size: 0.9rem;
+  font-size: 0.95rem;
   line-height: 1.6;
   margin: 0;
   padding: 0 16px 14px;
@@ -592,10 +772,9 @@
   gap: var(--gm-space-2);
   justify-items: center;
   margin-top: var(--gm-space-3);
-  padding: var(--gm-space-4) var(--gm-space-3);
+  // Compacto (~270px de altura total em desktop — feedback 28/11/2026)
+  padding: var(--gm-space-3) var(--gm-space-3);
   text-align: center;
-  // Track explícito: o auto fica max-content (o comando com width:100%
-  // é circular) e não estica — os CTAs quebravam numa coluna estreita.
   grid-template-columns: minmax(0, 1fr);
 }
 
@@ -604,43 +783,27 @@
   margin: 0;
 }
 
-.gm-final-command {
+// Bloco de instalação + GitHub na MESMA linha, mesmas alturas (como no hero).
+.gm-final-actions {
   align-items: center;
-  background: var(--gm-code-bg);
-  border: 1px solid var(--gm-border);
-  border-radius: var(--gm-radius);
   display: flex;
+  flex-wrap: wrap;
   gap: var(--gm-space-2);
-  justify-content: space-between;
-  min-width: min(24rem, 100%);
-  padding: var(--gm-space-1) var(--gm-space-2);
-}
-
-.gm-final-command code {
-  color: var(--gm-amber);
-  font-size: 1rem;
-}
-
-// O grid pai dá largura fit-content ao .gm-ctas (justify-items: center —
-// width:100% resolve circular no track auto). stretch é o que de fato
-// estica o item na área; center nos filhos mantém a estética centrada.
-.gm-final-cta .gm-ctas {
   justify-content: center;
-  justify-self: stretch;
-  width: 100%;
+  justify-self: center;
 }
 
-// Mobile (≤719px): comando sem quebrar (scroll interno se precisar).
+// Mobile (≤719px): bloco e GitHub em largura total; o comando rola
+// horizontalmente dentro da própria área do bloco.
 @media (max-width: 719px) {
-  .gm-final-command {
-    min-width: 0;
-    overflow-x: auto;
+  .gm-final-actions .gm-install-block {
     width: 100%;
   }
 
-  .gm-final-command code {
-    font-size: 0.88rem;
-    white-space: nowrap;
+  .gm-final-actions .gm-cta {
+    display: flex;
+    justify-content: center;
+    width: 100%;
   }
 
   .gm-final-cta {
@@ -650,6 +813,6 @@
 
 .gm-prelaunch {
   color: var(--gm-amber);
-  font-size: 0.85rem;
+  font-size: 0.95rem;
   margin: 0;
 }

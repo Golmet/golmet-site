@@ -40,15 +40,7 @@ export interface CopyTree {
       readonly titleLead: string;
       readonly titleFollow: string;
       readonly sub: string;
-      readonly quickstart: {
-        readonly heading: string;
-        readonly badge: string;
-        readonly steps: readonly {
-          readonly title: string;
-          readonly command?: string;
-          readonly text: string;
-        }[];
-      };
+      readonly install: { readonly command: string };
       readonly stats: readonly { readonly value: string; readonly label: string }[];
     };
     readonly demo: {
@@ -57,7 +49,21 @@ export interface CopyTree {
     };
     readonly tech: {
       readonly heading: string;
-      readonly text: readonly string[];
+      readonly arrows: readonly { readonly text: string; readonly code: string }[];
+      readonly layers: readonly {
+        readonly name: string;
+        readonly role: string;
+        readonly text: string;
+      }[];
+      readonly evidence: {
+        readonly tag: string;
+        readonly line: string;
+        readonly drift: string;
+        readonly verdict: string;
+        readonly caption: string;
+        readonly captionCode: string;
+        readonly captionTail: string;
+      };
     };
     readonly benefits: {
       readonly heading: string;
@@ -75,10 +81,11 @@ export interface CopyTree {
     readonly journey: {
       readonly heading: string;
       readonly note: string;
+      readonly badge: string;
       readonly tracks: readonly {
         readonly title: string;
         readonly tagline: string;
-        readonly steps: readonly string[];
+        readonly steps: readonly { readonly command: string; readonly desc: string }[];
         readonly docPath: string;
         readonly docLabel: string;
       }[];
@@ -87,12 +94,12 @@ export interface CopyTree {
       readonly heading: string;
       readonly items: readonly FaqItem[];
     };
-    readonly ctas: { readonly github: string; readonly npm: string };
+    readonly ctas: { readonly github: string; readonly copy: string; readonly copied: string };
     readonly finalCta: {
       readonly heading: string;
       readonly text: string;
       readonly command: string;
-      readonly preLaunch: string;
+      readonly release: string;
     };
   };
   readonly portal: {
@@ -123,40 +130,13 @@ export interface CopyTree {
 const ptBR: CopyTree = {
   landing: {
     hero: {
-      titleLead: 'Chega de documentação velha.',
-      titleFollow: 'Tudo o que o seu projeto precisa, em um só lugar.',
+      titleLead: 'Toda IA escreve código.',
+      titleFollow: 'Nenhuma responde por ele.',
       sub:
-        'O Golmet reúne o desenvolvimento inteiro do seu produto em um único lugar. A inteligência ' +
-        'artificial levanta os requisitos do projeto, escreve análises que as pessoas ' +
-        'entendem, cria as tarefas e programa sob as regras do projeto. A cada mudança, confere ' +
-        'cada regra contra o código antes de ir para produção. Outras ferramentas ajudam a ' +
-        'escrever código. O Golmet garante o que foi escrito.',
-      quickstart: {
-        heading: 'Como começar',
-        badge: `v${CLI_VERSION}`,
-        steps: [
-          {
-            title: 'Instale o Golmet',
-            command: 'npm i -g golmet-cli',
-            text: 'Baixa e instala o programa no seu computador, direto do npm.',
-          },
-          {
-            title: 'Crie o espaço do projeto',
-            command: 'golmet init nome-produto',
-            text: 'Cria a pasta do seu produto com os arquivos de requisitos e decisões já estruturados. O conteúdo você preenche depois.',
-          },
-          {
-            title: 'Veja o resumo',
-            command: 'golmet status',
-            text: 'Mostra o que já existe no projeto e o estado de cada parte.',
-          },
-          {
-            title: 'Confira se está tudo certo',
-            command: 'golmet validate',
-            text: 'Compara o que está escrito na documentação com o que o código faz e avisa se algo ficou para trás.',
-          },
-        ],
-      },
+        'O Golmet é um workflow agêntico de desenvolvimento de software: requisitos versionados que o ' +
+        'agente é obrigado a seguir, evidência de arquivo e hash em cada regra, e validate bloqueando ' +
+        'divergência antes da produção.',
+      install: { command: 'npm i -g golmet-cli' },
       stats: [
         { value: '18', label: 'comandos lançados' },
         { value: '7', label: 'engines suportados' },
@@ -166,17 +146,43 @@ const ptBR: CopyTree = {
     },
     demo: {
       heading: 'O que você vai ver no terminal',
-      done: 'Entre o status e o validate, alguém criou a primeira feature com o anchor errado. O Golmet pegou na hora. Na sua máquina, os comandos respondem igual.',
+      done: 'Entre o status e o validate, alguém criou a primeira feature com a referência ao código errada. O Golmet pegou na hora. Na sua máquina, os comandos respondem igual.',
     },
     tech: {
       heading: 'Como o Golmet faz tudo isso?',
-      text: [
-        'O Golmet é um programa nativo que roda na sua máquina, junto com o seu código. Dentro dela convivem três camadas. O FORMATO v1 é a especificação criada pelo Golmet que define como o projeto deve ser organizado, em arquivos de markdown, com estados e transições para cada documento e os portões de qualidade que tudo precisa passar. O KIT é o motor determinístico que valida essa especificação. E o RUNTIME é onde a inteligência artificial executa o processo.',
-        'A escrita segue princípios de linguística aplicada e neurociência da leitura. Cada documento controla a carga cognitiva, progride do simples ao complexo e mantém os termos consistentes. Por isso, tudo é claro na primeira leitura, para qualquer pessoa do time.',
-        'Cada regra de negócio carrega a evidência do código que a implementa, com arquivo, linha e hash criptográfico. A cada validação, o Golmet compara essa impressão digital com o código atual. Se divergir, o problema aparece antes de entrar no projeto, nunca depois.',
-        'As habilidades gm-* foram construídas estudando o fluxo de empresas de referência e as melhores práticas do mercado, e refinadas versão após versão. Elas guiam o seu agente de IA, passo a passo, do levantamento de requisitos à revisão do código, por padrões abertos como AGENTS.md e MCP.',
-        'E os portões de qualidade H1 a H10 são as regras dessa conferência. O conceito vem da prática de DevOps, onde um portão de qualidade é uma verificação automática que precisa passar antes do código avançar. O Golmet aplicou a mesma ideia à documentação. Cada portão examina um tipo de inconsistência entre documentação e código, como uma regra sem responsável ou uma referência quebrada. A falha bloqueia o avanço. O que antes era descoberto em produção, agora aparece na tela do analista. E o projeto cresce sem perder o controle, com tudo rodando offline na sua máquina.',
+      arrows: [
+        { text: 'define as regras', code: 'golmet validate' },
+        { text: 'o agente executa sob elas', code: '' },
       ],
+      layers: [
+        {
+          name: 'FORMATO v1',
+          role: 'o contrato',
+          text:
+            'A especificação do projeto: arquivos markdown com estados, transições e responsável por cada regra. Mora no seu git.',
+        },
+        {
+          name: 'KIT',
+          role: 'o árbitro',
+          text:
+            'Um binário determinístico que valida o FORMATO e confere cada regra contra o código. Os portões H1 a H10 bloqueiam o avanço se algo divergir.',
+        },
+        {
+          name: 'RUNTIME',
+          role: 'o agente',
+          text:
+            'O seu agente de IA (Claude Code, Cursor, OpenCode...) escreve e programa sob esse contrato, guiado pelas habilidades gm-*.',
+        },
+      ],
+      evidence: {
+        tag: 'evidência · KIT',
+        line: '[src/pedido.ts:42 @a3f9c1]',
+        drift: '-> código mudou → @7e21b0',
+        verdict: 'x diverge',
+        caption: 'Cada regra cita arquivo, linha e hash do código. Se o hash divergir, o',
+        captionCode: 'golmet validate',
+        captionTail: 'avisa antes de entrar no projeto.',
+      },
     },
     benefits: {
       heading: 'Veja tudo que o Golmet oferece',
@@ -249,25 +255,51 @@ const ptBR: CopyTree = {
     journey: {
       heading: 'Sua jornada com o GOLMET',
       note: 'Três trilhas. Todas começam com o mesmo comando.',
+      badge: `v${CLI_VERSION}`,
       tracks: [
         {
           title: 'Testar hoje',
           tagline: 'De zero a workspace rodando em 5 minutos.',
-          steps: ['npm i -g golmet-cli', 'golmet init nome-produto', 'golmet status'],
+          steps: [
+            {
+              command: 'npm i -g golmet-cli',
+              desc: 'Baixa e instala o programa no seu computador, direto do npm.',
+            },
+            {
+              command: 'golmet init nome-produto',
+              desc: 'Cria a pasta do seu produto com requisitos e decisões já estruturados.',
+            },
+            {
+              command: 'golmet status',
+              desc: 'Mostra o que já existe no projeto e o estado de cada parte.',
+            },
+            {
+              command: 'golmet validate',
+              desc: 'Compara a documentação com o código e avisa se algo ficou para trás.',
+            },
+          ],
           docPath: '/docs/pt-br/getting-started-5-minutes',
           docLabel: 'Guia de 5 minutos →',
         },
         {
           title: 'Adotar no produto',
           tagline: 'Repo existente? O guardião lê o código e propõe as regras, e você confirma o que é verdade.',
-          steps: ['golmet doctor', 'golmet adopt .', 'golmet validate'],
+          steps: [
+            { command: 'golmet doctor', desc: '' },
+            { command: 'golmet adopt .', desc: '' },
+            { command: 'golmet validate', desc: '' },
+          ],
           docPath: '/docs/pt-br/concepts/reverse',
           docLabel: 'Do legado ao FORMATO →',
         },
         {
           title: 'Escala para o time',
           tagline: 'Onboarding do dev #2 sem manual, com clone, doctor e pack.',
-          steps: ['golmet pack', 'golmet doctor', 'clone + sync'],
+          steps: [
+            { command: 'golmet pack', desc: '' },
+            { command: 'golmet doctor', desc: '' },
+            { command: 'clone + sync', desc: '' },
+          ],
           docPath: '/docs/pt-br/concepts/organization',
           docLabel: 'Checklist do time →',
         },
@@ -296,13 +328,14 @@ const ptBR: CopyTree = {
     },
     ctas: {
       github: 'Ver no GitHub',
-      npm: 'golmet-cli no npm',
+      copy: 'Copiar',
+      copied: 'Copiado',
     },
     finalCta: {
-      heading: 'Cansado de doc que ninguém confia?',
+      heading: 'Cansado de doc em que ninguém confia?',
       text: 'Um comando. Um workspace. A verdade versionada no seu git.',
       command: 'npm i -g golmet-cli',
-      preLaunch: `Release v${CLI_VERSION} estável, com instalação funcional pelo npm.`,
+      release: `v${CLI_VERSION} · Licença MIT · sem cadastro`,
     },
   },
   portal: {
@@ -338,40 +371,12 @@ const ptBR: CopyTree = {
 const en: CopyTree = {
   landing: {
     hero: {
-      titleLead: 'No more stale documentation.',
-      titleFollow: 'Everything your project needs, in one place.',
+      titleLead: 'Every AI writes code.',
+      titleFollow: 'None of them answers for it.',
       sub:
-        'GOLMET brings your product\'s entire development into a single flow. The artificial ' +
-        'intelligence gathers requirements directly with the client, writes analysis people ' +
-        'actually understand, creates the tasks and programs under the project rules. On every ' +
-        'change, it checks each rule against the code before it reaches production. Other tools ' +
-        'help you write code. GOLMET guarantees what was written.',
-      quickstart: {
-        heading: 'How to start',
-        badge: `v${CLI_VERSION}`,
-        steps: [
-          {
-            title: 'Install GOLMET',
-            command: 'npm i -g golmet-cli',
-            text: 'Downloads and installs the program on your computer, straight from npm.',
-          },
-          {
-            title: 'Create your project space',
-            command: 'golmet init nome-produto',
-            text: 'Creates your product folder with the requirements and decisions files already structured. You fill in the content afterwards.',
-          },
-          {
-            title: 'See the summary',
-            command: 'golmet status',
-            text: 'Shows what already exists in the project and the state of each part.',
-          },
-          {
-            title: 'Check that everything matches',
-            command: 'golmet validate',
-            text: 'Compares what the documentation says with what the code does and warns you if anything fell behind.',
-          },
-        ],
-      },
+        'GOLMET is an end-to-end agentic development workflow: requirements the agent must follow, file and ' +
+        'hash evidence on every rule, and validate blocking divergence before production.',
+      install: { command: 'npm i -g golmet-cli' },
       stats: [
         { value: '18', label: 'commands shipped' },
         { value: '7', label: 'engines supported' },
@@ -381,17 +386,43 @@ const en: CopyTree = {
     },
     demo: {
       heading: "What you'll see in your terminal",
-      done: 'Between status and validate, someone created the first feature with the wrong anchor. GOLMET caught it instantly. On your machine, the commands behave the same.',
+      done: 'Between status and validate, someone created the first feature with the wrong code reference. GOLMET caught it instantly. On your machine, the commands behave the same.',
     },
     tech: {
       heading: 'How does GOLMET do all of this?',
-      text: [
-        'GOLMET is a native program that runs on your machine, right next to your code. Inside it live three layers. FORMAT v1 is the GOLMET specification that defines how the project must be organized, in markdown files, with states and transitions for every document and the quality gates everything must pass. The KIT is the deterministic engine that validates this specification. And the RUNTIME is where the artificial intelligence executes the process.',
-        'The writing follows principles of applied linguistics and reading neuroscience. Every document controls cognitive load, progresses from simple to complex and keeps terminology consistent. Everything is clear on the first read, for anyone on the team.',
-        'Every business rule carries the evidence of the code implementing it, with file, line and cryptographic hash. On every validation, GOLMET compares that fingerprint with the current code. If it drifts, the problem shows up before entering the project, never after.',
-        'The gm-* skills were built studying the workflows of reference companies and the best practices in the market, refined version after version. They guide your AI agent, step by step, from gathering requirements to reviewing code, through open standards like AGENTS.md and MCP.',
-        'And the quality gates H1 through H10 are the rules of that check. The concept comes from DevOps practice, where a quality gate is an automated check that must pass before the code moves forward. GOLMET applied the same idea to documentation. Each gate examines one type of inconsistency between documentation and code, like a rule without an owner or a broken reference. A failure blocks progress. What used to be discovered in production now shows up on the analyst screen. And the project grows without losing control, everything running offline on your machine.',
+      arrows: [
+        { text: 'defines the rules', code: 'golmet validate' },
+        { text: 'the agent runs under them', code: '' },
       ],
+      layers: [
+        {
+          name: 'FORMAT v1',
+          role: 'the contract',
+          text:
+            "The project's specification: markdown files with states, transitions and an owner for every rule. Lives in your git.",
+        },
+        {
+          name: 'KIT',
+          role: 'the referee',
+          text:
+            'A deterministic binary that validates the FORMAT and checks every rule against the code. Gates H1 through H10 block progress when anything diverges.',
+        },
+        {
+          name: 'RUNTIME',
+          role: 'the agent',
+          text:
+            'Your AI agent (Claude Code, Cursor, OpenCode...) writes code under this contract, guided by the gm-* skills.',
+        },
+      ],
+      evidence: {
+        tag: 'evidence · KIT',
+        line: '[src/pedido.ts:42 @a3f9c1]',
+        drift: '-> code changed → @7e21b0',
+        verdict: 'x diverges',
+        caption: 'Every rule cites the file, line and hash of its code. If the hash diverges,',
+        captionCode: 'golmet validate',
+        captionTail: 'warns you before it enters the project.',
+      },
     },
     benefits: {
       heading: 'See everything GOLMET offers',
@@ -464,25 +495,51 @@ const en: CopyTree = {
     journey: {
       heading: 'Your GOLMET journey',
       note: 'Three tracks. All of them start with the same command.',
+      badge: `v${CLI_VERSION}`,
       tracks: [
         {
           title: 'Try it today',
           tagline: 'From zero to a running workspace in 5 minutes.',
-          steps: ['npm i -g golmet-cli', 'golmet init nome-produto', 'golmet status'],
+          steps: [
+            {
+              command: 'npm i -g golmet-cli',
+              desc: 'Downloads and installs the program on your computer, straight from npm.',
+            },
+            {
+              command: 'golmet init nome-produto',
+              desc: 'Creates your product folder with requirements and decisions already structured.',
+            },
+            {
+              command: 'golmet status',
+              desc: 'Shows what already exists in the project and the state of each part.',
+            },
+            {
+              command: 'golmet validate',
+              desc: 'Compares the documentation with the code and warns you if anything fell behind.',
+            },
+          ],
           docPath: '/docs/getting-started-5-minutes',
           docLabel: '5-minute guide →',
         },
         {
           title: 'Adopt it on your product',
           tagline: 'Existing repo? The guardian reads the code and proposes the rules, and you confirm what is true.',
-          steps: ['golmet doctor', 'golmet adopt .', 'golmet validate'],
+          steps: [
+            { command: 'golmet doctor', desc: '' },
+            { command: 'golmet adopt .', desc: '' },
+            { command: 'golmet validate', desc: '' },
+          ],
           docPath: '/docs/concepts/reverse',
           docLabel: 'From legacy to FORMAT →',
         },
         {
           title: 'Scale to the team',
           tagline: 'Dev #2 onboarding without a manual, with clone, doctor and pack.',
-          steps: ['golmet pack', 'golmet doctor', 'clone + sync'],
+          steps: [
+            { command: 'golmet pack', desc: '' },
+            { command: 'golmet doctor', desc: '' },
+            { command: 'clone + sync', desc: '' },
+          ],
           docPath: '/docs/concepts/organization',
           docLabel: 'Team checklist →',
         },
@@ -511,13 +568,14 @@ const en: CopyTree = {
     },
     ctas: {
       github: 'View on GitHub',
-      npm: 'golmet-cli on npm',
+      copy: 'Copy',
+      copied: 'Copied',
     },
     finalCta: {
       heading: 'Tired of docs nobody trusts?',
       text: 'One command. One workspace. Versioned truth in your git.',
       command: 'npm i -g golmet-cli',
-      preLaunch: `Release v${CLI_VERSION} stable, with a functional install via npm.`,
+      release: `v${CLI_VERSION} · MIT license · no sign-up`,
     },
   },
   portal: {

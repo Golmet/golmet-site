@@ -29,42 +29,48 @@ describe('Landing — conceito mostra, não conta (RN-001-1)', () => {
     expect(img!.getAttribute('loading')).toBe('eager');
     // headline em ouro, sem badge de release na dobra
     expect(compiled.querySelector('.gm-hero-badge')).toBeNull();
-    expect(compiled.querySelector('.gm-hl')?.textContent).toContain('No more stale documentation');
+    expect(compiled.querySelector('.gm-hl')?.textContent).toContain('Every AI writes code');
     // stats reais, nada de ROI inventado
     const stats = compiled.querySelectorAll('.gm-stat');
     expect(stats.length).toBe(4);
     expect(compiled.textContent).toContain('18');
     expect(compiled.textContent).toContain('engines supported');
-    // CTAs externos do hero (GitHub primário, npm secundário)
+    // CTAs do hero: comando copiável primário + GitHub secundário; sem npm
+    const install = compiled.querySelector('.gm-install-block .gm-install-command');
+    expect(install?.textContent).toContain('npm i -g golmet-cli');
+    const heroCopy = compiled.querySelector<HTMLButtonElement>('.gm-install-block .gm-install-copy');
+    expect(heroCopy?.textContent).toContain('Copy');
     const anchors = compiled.querySelectorAll<HTMLAnchorElement>('.gm-hero-actions a');
-    expect(anchors.length).toBe(2);
+    expect(anchors.length).toBe(1);
     expect(anchors[0].href).toContain('github.com/Golmet');
-    expect(anchors[1].href).toContain('npmjs.com/package/golmet-cli');
-    // comando de instalação não duplica no hero (vive no quickstart)
-    expect(compiled.querySelector('.gm-hero-install')).toBeNull();
+    expect(compiled.querySelector('.gm-hero-actions a[href*="npmjs"]')).toBeNull();
   });
 
-  it('quickstart com 4 passos e comandos copiáveis abaixo do hero', () => {
+  it('trilha "Testar hoje" absorve o quickstart: 4 passos com descrição e selo de versão', () => {
     const fixture = TestBed.createComponent(Landing);
     fixture.detectChanges();
     const compiled = fixture.nativeElement as HTMLElement;
 
-    expect(compiled.querySelector('.gm-quickstart h2')?.textContent).toContain(
-      COPY.en.landing.hero.quickstart.heading,
-    );
-    expect(compiled.querySelectorAll('.gm-step').length).toBe(4);
-    // os 4 passos são acionáveis, cada um com comando copiável
-    expect(compiled.querySelectorAll('.gm-quickstart .gm-copy').length).toBe(4);
-    expect(compiled.querySelector('.gm-quickstart .gm-badge')?.textContent).toContain(`v${CLI_VERSION}`);
+    // card isolado "Como começar" não existe mais
+    expect(compiled.querySelector('.gm-quickstart')).toBeNull();
+    // trilha 1: 4 passos (install, init, status, validate) com descrição curta
+    const firstTrackSteps = compiled.querySelectorAll('.gm-track:first-of-type .gm-track-cmd');
+    expect(firstTrackSteps.length).toBe(4);
+    expect(firstTrackSteps[0]?.textContent).toContain('npm i -g golmet-cli');
+    expect(compiled.querySelectorAll('.gm-track:first-of-type .gm-track-step-desc').length).toBe(4);
+    // selo de versão migrou para o cabeçalho da trilha
+    expect(compiled.querySelector('.gm-track .gm-badge')?.textContent).toContain(`v${CLI_VERSION}`);
+    // comandos nas trilhas são conteúdo — sem botão de copiar
+    expect(compiled.querySelectorAll('.gm-track .gm-copy').length).toBe(0);
   });
 
-  it('os comandos do quickstart espelham a demo interativa (mesma sequência)', () => {
+  it('os comandos da trilha 1 espelham a demo interativa (mesma sequência)', () => {
     const fixture = TestBed.createComponent(Landing);
     fixture.detectChanges();
     const compiled = fixture.nativeElement as HTMLElement;
 
-    const guideCommands = Array.from(compiled.querySelectorAll('.gm-quickstart .gm-step-command')).map(
-      (el) => el.textContent?.trim(),
+    const guideCommands = Array.from(compiled.querySelectorAll('.gm-track:first-of-type .gm-track-cmd')).map(
+      (el) => el.textContent?.replace('❯ ', '').trim(),
     );
     const demoButtons = Array.from(compiled.querySelectorAll('.gm-term-step-cmd')).map(
       (el) => el.textContent?.trim(),
@@ -77,7 +83,9 @@ describe('Landing — conceito mostra, não conta (RN-001-1)', () => {
     fixture.detectChanges();
     const compiled = fixture.nativeElement as HTMLElement;
 
-    // 4 comandos reais; só o primeiro habilitado
+    // estado inicial: vazio, aguardando o 1º clique (manual — 27/11/2026)
+    expect(compiled.textContent).not.toContain('golmet version v1.7.4');
+    expect(compiled.querySelector('.gm-t-idle')).not.toBeNull();
     const buttons = compiled.querySelectorAll<HTMLButtonElement>('.gm-term-step');
     expect(buttons.length).toBe(4);
     expect(buttons[0].disabled).toBeFalsy();
@@ -92,7 +100,6 @@ describe('Landing — conceito mostra, não conta (RN-001-1)', () => {
     expect(compiled.textContent).not.toContain('Feature ancorada em PEND');
 
     // roda o restante na ordem — validação com drift e fix aparecem
-    // (aguardando a re-renderização: botão desabilitado não dispara click no jsdom)
     const clickStep = async (i: number) => {
       (fixture.nativeElement.querySelectorAll('.gm-term-step')[i] as HTMLButtonElement).click();
       await fixture.whenStable();
@@ -104,14 +111,15 @@ describe('Landing — conceito mostra, não conta (RN-001-1)', () => {
     expect(compiled.textContent).toContain('Feature ancorada em PEND');
     expect(compiled.textContent).toContain('fix:');
 
-    // reset volta ao estado inicial
+    // reset volta ao estado inicial vazio
     compiled.querySelector<HTMLButtonElement>('.gm-term-reset')?.click();
     await fixture.whenStable();
     fixture.detectChanges();
     expect(compiled.textContent).not.toContain('golmet version v1.7.4');
+    expect(buttons[0].disabled).toBeFalsy();
   });
 
-  it('tecnico: título + texto corrido explicando as camadas', () => {
+  it('tecnico: card por camada com texto ao lado, setas e evidência', () => {
     const fixture = TestBed.createComponent(Landing);
     fixture.detectChanges();
     const compiled = fixture.nativeElement as HTMLElement;
@@ -119,11 +127,22 @@ describe('Landing — conceito mostra, não conta (RN-001-1)', () => {
     const text = Array.from(compiled.querySelectorAll('.gm-tech-text'))
       .map((el) => el.textContent)
       .join(' ');
-    expect(text).toContain('three layers');
-    expect(text).toContain('controls cognitive load');
-    expect(text).toContain('cryptographic hash');
-    expect(text).toContain('AGENTS.md and MCP');
-    expect(text).toContain('grows without losing control');
+    expect(text).toContain('Lives in your git');
+    expect(text).toContain('deterministic binary');
+    expect(text).toContain('guided by the gm-* skills');
+    // conteúdo removido no refactor 27/11 não volta
+    expect(text).not.toContain('cognitive load');
+    expect(text).not.toContain('reference companies');
+    expect(text).not.toContain('automated check');
+
+    // setas com semântica do árbitro + bloco de evidência com divergência
+    const section = compiled.querySelector('.gm-tech')!.textContent ?? '';
+    expect(section).toContain('Gates H1 through H10');
+    expect(section).toContain('the agent runs under them');
+    expect(section).toContain('[src/pedido.ts:42 @a3f9c1]');
+    expect(section).toContain('x diverges');
+    expect(section).toContain('file, line and hash');
+
     // técnico vem DEPOIS dos benefícios (convence primeiro, explica depois)
     const order = compiled
       .querySelector('.gm-benefits')!
@@ -142,10 +161,10 @@ describe('Landing — conceito mostra, não conta (RN-001-1)', () => {
     expect(compiled.textContent).toContain('See everything GOLMET offers');
     expect(compiled.textContent).toContain('Requirements organized and versioned');
     expect(compiled.textContent).toContain('Legacy systems stop being a black box');
-    // a transformação vem ANTES do guia — o visitante sabe o que ganha antes de agir
+    // a transformação vem ANTES da jornada — o visitante sabe o que ganha antes de agir
     const order = compiled
       .querySelector('.gm-benefits')!
-      .compareDocumentPosition(compiled.querySelector('.gm-quickstart')!);
+      .compareDocumentPosition(compiled.querySelector('.gm-journey')!);
     expect(!!(order & Node.DOCUMENT_POSITION_FOLLOWING)).toBeTruthy();
     // comando não lançado não aparece (ex.: golmet contribute — v1+)
     expect(compiled.textContent).not.toContain('golmet contribute');
@@ -178,6 +197,8 @@ describe('Landing — conceito mostra, não conta (RN-001-1)', () => {
     });
     // trilhas começam com o mesmo comando real
     expect(compiled.textContent).toContain('npm i -g golmet-cli');
+    // trilhas 2 e 3 sem botão de copiar (comando é conteúdo)
+    expect(compiled.querySelectorAll('.gm-track:nth-of-type(2) .gm-track-step-desc').length).toBe(0);
   });
 
   it('FAQ com 3 objeções respondidas antes do CTA final', () => {
@@ -191,7 +212,7 @@ describe('Landing — conceito mostra, não conta (RN-001-1)', () => {
     expect(compiled.textContent).toContain(COPY.en.landing.faq.items[2].question);
   });
 
-  it('CTA final como pergunta + 2 links externos + comando copiável', async () => {
+  it('CTA final como pergunta + link externo + comando copiável', async () => {
     const written: string[] = [];
     const clipboard = { writeText: async (text: string) => void written.push(text) };
     Object.defineProperty(navigator, 'clipboard', { value: clipboard, configurable: true });
@@ -201,17 +222,16 @@ describe('Landing — conceito mostra, não conta (RN-001-1)', () => {
     const compiled = fixture.nativeElement as HTMLElement;
 
     expect(compiled.querySelector('.gm-final-cta h2')?.textContent).toContain('Tired of docs');
-    const finalCtas = compiled.querySelectorAll<HTMLAnchorElement>('.gm-final-cta .gm-ctas a');
-    expect(finalCtas.length).toBe(2);
+    const finalCtas = compiled.querySelectorAll<HTMLAnchorElement>('.gm-final-actions .gm-cta');
+    expect(finalCtas.length).toBe(1);
     expect(finalCtas[0].href).toContain('github.com/Golmet');
-    expect(finalCtas[1].href).toContain('npmjs.com/package/golmet-cli');
 
     // copiar o comando do CTA final com feedback "Copiado"
-    const finalCopy = compiled.querySelector<HTMLButtonElement>('.gm-final-command .gm-copy');
+    const finalCopy = compiled.querySelector<HTMLButtonElement>('.gm-install-block .gm-install-copy');
     finalCopy?.click();
     await fixture.whenStable();
     expect(written).toContain('npm i -g golmet-cli');
-    expect(finalCopy?.textContent).toContain('Copiado');
+    expect(finalCopy?.textContent).toContain(COPY.en.landing.ctas.copied);
   });
 
   it('CR-006: coerência de lançamento — sem pré-lançamento, jargão de fase ou prova social inventada', () => {
@@ -223,7 +243,7 @@ describe('Landing — conceito mostra, não conta (RN-001-1)', () => {
     expect(compiled.textContent).not.toContain('pré-lançamento');
     expect(compiled.textContent).not.toContain('fase F2');
     expect(compiled.textContent).not.toContain('estrelas');
-    expect(compiled.querySelector('.gm-final-command code')?.textContent).toContain('npm i -g golmet-cli');
+    expect(compiled.querySelector('.gm-install-command')?.textContent).toContain('npm i -g golmet-cli');
   });
 
   it('RN-011: locale pt-BR pela rota — fonte PT-BR da landing (ADR-009)', () => {
@@ -240,9 +260,9 @@ describe('Landing — conceito mostra, não conta (RN-001-1)', () => {
     fixture.detectChanges();
     const compiled = fixture.nativeElement as HTMLElement;
 
-    expect(compiled.querySelector('.gm-hero h1')?.textContent).toContain('Chega de documentação velha');
+    expect(compiled.querySelector('.gm-hero h1')?.textContent).toContain('Toda IA escreve código');
     expect(compiled.textContent).toContain('comandos lançados');
-    expect(compiled.querySelector('.gm-quickstart .gm-badge')?.textContent).toContain(`v${CLI_VERSION}`);
+    expect(compiled.querySelector('.gm-track .gm-badge')?.textContent).toContain(`v${CLI_VERSION}`);
     // trilha 1 com docs localizadas
     const links = compiled.querySelectorAll<HTMLAnchorElement>('.gm-track-link');
     expect(links[0].getAttribute('href')).toBe('/docs/pt-br/getting-started-5-minutes');

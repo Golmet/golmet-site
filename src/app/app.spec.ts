@@ -24,7 +24,7 @@ describe('App (RN-016-2 — rotas da única app)', () => {
     await harness.navigateByUrl('/');
     const compiled = harness.fixture.nativeElement as HTMLElement;
     // headline = a frase mais cara do software; o nome GOLMET vive no header
-    expect(compiled.querySelector('app-landing h1')?.textContent).toContain('No more stale documentation');
+    expect(compiled.querySelector('app-landing h1')?.textContent).toContain('Every AI writes code');
   });
 
   it('navigates to /docs within the same app (landing → portal)', async () => {

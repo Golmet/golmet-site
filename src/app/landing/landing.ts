@@ -22,7 +22,6 @@ export class Landing {
   /** locale da rota ativa — / e /pt-BR usam o MESMO componente (RN-011-1). */
   protected readonly locale: Locale = (this.route.snapshot.data['locale'] ?? 'en') as Locale;
   protected readonly copy = COPY[this.locale].landing.hero;
-  protected readonly quickstart = COPY[this.locale].landing.hero.quickstart;
   protected readonly demo = COPY[this.locale].landing.demo;
   protected readonly benefits = COPY[this.locale].landing.benefits;
   protected readonly tech = COPY[this.locale].landing.tech;
@@ -43,7 +42,7 @@ export class Landing {
       ?.writeText(step.command)
       .then(() => {
         this.copiedStep.set(step.title);
-        setTimeout(() => this.copiedStep.set(null), 1600);
+        setTimeout(() => this.copiedStep.set(null), 2000);
       })
       .catch(() => {});
   }
