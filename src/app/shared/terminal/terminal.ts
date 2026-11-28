@@ -7,6 +7,12 @@
 // de exemplo foi renomeado para `nome-produto` a pedido do operador (o
 // comportamento exibido permanece o da captura). A versão exibida no site
 // vem do registry npm via tools/fetch-cli-version.mjs.
+//
+// Interação 100% MANUAL (decisão do operador 27/11/2026): o terminal nasce
+// VAZIO (só o placeholder) e o visitante inicia com o 1º clique — cada comando
+// executado libera o próximo; ↺ reseta para o vazio. Estados intermediários
+// (auto-demo, saída completa no carregamento) chegaram a existir e foram
+// revertidos a pedido do operador.
 import { Component, computed, signal } from '@angular/core';
 
 interface TermLine {

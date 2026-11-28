@@ -1,3 +1,8 @@
+// Terminal "protagonista" (feedback do operador 27/11/2026): o bloco devia
+// ser o mais forte da página — corpo maior que não colapsa (min-height),
+// fonte de leitura real e botões-comando em monoespaçada âmbar com
+// contraste alto sobre o chip escuro. Estados: o próximo comando (habilitado)
+// fica destacado em âmbar; já executados ficam esmaecidos com ✓ verde.
 :host {
   display: block;
   max-width: 100%;
@@ -19,7 +24,7 @@
   border-bottom: 1px solid var(--gm-border);
   display: flex;
   gap: 6px;
-  padding: 8px 12px;
+  padding: 10px 14px;
 }
 
 .gm-dot {
@@ -47,11 +52,14 @@
 }
 
 .gm-terminal-body {
-  font-size: 0.82rem;
-  line-height: 1.55;
+  // Corpo protagonista: nunca colapsa (o terminal nasce vazio na auto-demo)
+  // e usa fonte de leitura real — 0.82rem era pequeno para a peça central.
+  font-size: 0.95rem;
+  line-height: 1.6;
   margin: 0;
+  min-height: clamp(16rem, 32vw, 22rem);
   overflow-x: auto;
-  padding: var(--gm-space-2);
+  padding: 1.25rem;
 }
 .gm-t-prompt {
   color: var(--gm-text);
@@ -91,27 +99,26 @@
   border-top: 1px solid var(--gm-border);
   display: flex;
   flex-wrap: wrap;
-  gap: 8px;
-  padding: 10px 12px;
+  gap: 10px;
+  padding: 12px 14px;
 }
 
+// Comando em monoespaçada âmbar sobre chip escuro — as "abas" ficam
+// legíveis de longe (antes: chip e borda quase da cor do fundo, 0.8rem).
 .gm-term-step {
   background: var(--gm-code-chip);
-  border: 1px solid var(--gm-border);
+  border: 1px solid rgba(232, 180, 74, 0.28);
   border-radius: 6px;
-  color: var(--gm-text);
+  color: var(--gm-ouro);
   cursor: pointer;
-  font-size: 0.8rem;
-  padding: 6px 12px;
+  font-family: ui-monospace, 'Cascadia Code', Menlo, Consolas, monospace;
+  font-size: 0.92rem;
+  padding: 8px 14px;
 }
 
 .gm-term-step:hover:not(:disabled) {
+  background: rgba(232, 180, 74, 0.08);
   border-color: var(--gm-ouro);
-  color: var(--gm-ouro);
-}
-
-.gm-term-step-done {
-  border-color: rgba(232, 180, 74, 0.4);
   color: var(--gm-ouro);
 }
 
@@ -125,6 +132,7 @@
   opacity: 0.45;
 }
 
+// Próximo comando (único habilitado) — destaque de convite ao clique.
 .gm-term-step:not(:disabled):not(.gm-term-step-done) {
   border-color: var(--gm-amber);
   color: var(--gm-amber);
