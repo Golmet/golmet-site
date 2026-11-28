@@ -1,13 +1,25 @@
 <header class="gm-header">
   <div class="gm-header-inner">
     <a class="gm-brand" routerLink="/">
-      <img class="gm-brand-icon" src="branding/joia.png" alt="" width="26" height="26" />
+      <img class="gm-brand-icon" src="branding/golmet-logo.png?v=3" alt="" width="28" height="28" />
       GOLMET
     </a>
     <nav class="gm-nav" aria-label="Principal">
       <a [routerLink]="docsLink(activeLocale())">Docs</a>
-      <a class="gm-nav-external" href="https://github.com/Golmet/golmet-cli" target="_blank" rel="noopener">GitHub</a>
-      <a class="gm-nav-external" href="https://www.npmjs.com/package/golmet-cli" target="_blank" rel="noopener">npm</a>
+      <a
+        class="gm-nav-external"
+        href="https://github.com/Golmet/golmet-cli"
+        target="_blank"
+        rel="noopener"
+        >GitHub</a
+      >
+      <a
+        class="gm-nav-external"
+        href="https://www.npmjs.com/package/golmet-cli"
+        target="_blank"
+        rel="noopener"
+        >npm</a
+      >
     </nav>
     <div class="gm-lang" role="group" aria-label="Language">
       @for (l of locales; track l.code) {
@@ -30,6 +42,7 @@
 <footer class="gm-footer">
   <div class="gm-footer-grid">
     <div class="gm-footer-brand">
+      <img class="gm-footer-logo" src="branding/golmet-logo.png?v=3" alt="" width="44" height="44" />
       <p class="gm-footer-title">GOLMET</p>
       <p class="gm-footer-tagline">Requisitos versionados. Docs que não apodrecem.</p>
     </div>
@@ -42,7 +55,12 @@
   <div class="gm-footer-legal">
     <p class="gm-footer-copyright">
       {{ copy.footer.copyright }} ·
-      <a href="https://github.com/Golmet/golmet-site/blob/main/LICENSE" target="_blank" rel="noopener">{{ copy.footer.license }}</a>
+      <a
+        href="https://github.com/Golmet/golmet-site/blob/main/LICENSE"
+        target="_blank"
+        rel="noopener"
+        >{{ copy.footer.license }}</a
+      >
     </p>
   </div>
 </footer>

@@ -37,9 +37,8 @@
 }
 
 .gm-brand-icon {
-  border-radius: 6px;
-  height: 26px;
-  width: 26px;
+  height: 36px;
+  width: 36px;
 }
 
 .gm-nav {
@@ -180,6 +179,13 @@
   margin: 0;
 }
 
+// Logo do rodapé — a mesma marca do header, em tamanho de bloco de marca.
+.gm-footer-logo {
+  display: block;
+  height: 44px;
+  width: 44px;
+}
+
 .gm-footer-tagline {
   color: var(--gm-text-muted);
   font-size: 0.95rem;
@@ -194,7 +200,10 @@
 
 @media (min-width: 900px) {
   .gm-footer-links {
+    // O padding do último link não conta como recuo: o texto fecha na borda
+    // direita do contêiner de conteúdo (feedback do operador 28/11/2026).
     justify-content: flex-end;
+    margin-right: -10px;
   }
 }
 
@@ -212,12 +221,14 @@
 }
 
 // Barra legal — segundo nível do footer: © + licença, separada por borda
-// fina e sem competir com os links de navegação.
+// fina e sem competir com os links de navegação. A divisória tem a MESMA
+// largura das bordas de conteúdo das seções (descontado o padding de 32px
+// que o contêiner de 1120px carrega — feedback do operador 28/11/2026).
 .gm-footer-legal {
   border-top: 1px solid var(--gm-border);
   margin: var(--gm-space-3) auto 0;
-  max-width: var(--gm-container-max);
-  padding: var(--gm-space-2) var(--gm-space-3) 0;
+  max-width: calc(var(--gm-container-max) - 2 * var(--gm-space-3));
+  padding: var(--gm-space-2) 0 0;
 }
 
 .gm-footer-copyright {
